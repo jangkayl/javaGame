@@ -17,9 +17,8 @@ public class Story {
         System.out.println(name + "'s journey has just begun, with battles ahead that go beyond the streets and the ring.");
         GameLogic.pressAnything();
     }
+}
 
-    
 
    
-}
 
