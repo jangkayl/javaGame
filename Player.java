@@ -44,7 +44,6 @@ public class Player extends Boxer {
             }
             else if(input == 2) this.setStamina(50);
         } 
-        System.out.println();
     }
 
     public int getCurrentWorld(){
@@ -53,6 +52,10 @@ public class Player extends Boxer {
 
     public void setCurrentWorld(int currentWorld){
         this.currentWorld = currentWorld;
+    }
+
+    public String[] getWorlds(){
+        return this.worlds;
     }
 
 

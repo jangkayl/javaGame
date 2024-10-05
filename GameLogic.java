@@ -14,7 +14,8 @@ public class GameLogic{
                 input = scan.nextInt();
             } catch(Exception e){
                 input = -1;
-                System.out.println("Please enter an integer!");
+                System.out.println("Please enter a valid number of choice!");
+                scan.next();
             }
         } while(input < 1 || input > choice);
         return input;
@@ -44,6 +45,7 @@ public class GameLogic{
 
     // Press anything to continue
     public static void pressAnything(){
+        System.out.println();
         System.out.print("Enter anything to continue....");
         scan.nextLine();
     }
@@ -56,7 +58,6 @@ public class GameLogic{
         printSeparator(40);
         printHeading("\tFIST OF REDEMPTION\n\t  RPG BY NWORLD");
         printSeparator(40);
-        System.out.println();
         pressAnything();
         do {
             clearConsole();
@@ -101,17 +102,11 @@ public class GameLogic{
         
         if(player.getCurrentWorld() == 0) {
             printSeparator(40);
-            printHeading("   Welcome to the URBAN GYM");
+            String[] worlds = player.getWorlds();
+            printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
             printSeparator(40);
-            System.out.println();
-            System.out.println("A gritty, inner-city gym where local fighters train and compete in underground bouts.");
-            System.out.println();
-            System.out.println("You are training in the streets, fighting to survive and improve your skills.");
-            System.out.println("Train hard with your coach Fred to unlock the next world. Keep pushing forward!");
-            System.out.println();
+            UrbanStory.printUrban();
             printSeparator(50);
-            System.out.println();
-            
             // System.out.println("You have completed your street training. Time to move to the next level.");
             // player.setCurrentWorld(1); 
             // System.out.println("You are now moving to the Training Facility...");
@@ -149,13 +144,24 @@ public class GameLogic{
         System.out.print("\t");
         printSeparator(30);
         System.out.println("\tStamina:\t" + player.getStamina() + " / " + player.getStamina());
-        System.out.println();
         pressAnything();
     }
 
     // Enter gym and train with coach
     public static void gymTraining(){
+        if(player.getCurrentWorld() == 0){
+            clearConsole();
+            UrbanStory.urbanTraining1(player.getName());
+            int choice = readInt("-> ", 2);
+            if(choice == 1){
+                UrbanStory.response(player.getName());
+            } else {
+                UrbanStory.response2(player.getName());
+            }
+            scan.nextLine();
 
+            pressAnything();
+        }
     }
 
     // Enter tournament and fight with your opponents
