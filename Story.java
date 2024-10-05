@@ -18,6 +18,14 @@ public class Story {
         System.out.println();
         GameLogic.pressAnything();
     }
-}
 
+    public static void printUrban(){
+        System.out.println();
+        System.out.println("A gritty, inner-city gym where local fighters train and compete in underground bouts.");
+        System.out.println();
+        System.out.println("You are training in the streets, fighting to survive and improve your skills.");
+        System.out.println("Train hard with your coach Fred to unlock the next world. Keep pushing forward!");
+        System.out.println();
+    }
+}
 

@@ -55,5 +55,9 @@ public class Player extends Boxer {
         this.currentWorld = currentWorld;
     }
 
+    public String[] getWorlds(){
+        return this.worlds;
+    }
+
 
 }

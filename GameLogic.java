@@ -101,14 +101,10 @@ public class GameLogic{
         
         if(player.getCurrentWorld() == 0) {
             printSeparator(40);
-            printHeading("   Welcome to the URBAN GYM");
+            String[] worlds = player.getWorlds();
+            printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
             printSeparator(40);
-            System.out.println();
-            System.out.println("A gritty, inner-city gym where local fighters train and compete in underground bouts.");
-            System.out.println();
-            System.out.println("You are training in the streets, fighting to survive and improve your skills.");
-            System.out.println("Train hard with your coach Fred to unlock the next world. Keep pushing forward!");
-            System.out.println();
+            Story.printUrban();
             printSeparator(50);
             System.out.println();
             
