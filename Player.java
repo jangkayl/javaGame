@@ -1,9 +1,11 @@
 public class Player extends Boxer {
-
-    public String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};
+    private String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};
+    private String[] worlds = {"Urban Gym", "Training Facility", "Champ Arena"};
+    private int currentWorld;
 
     public Player(String name, int hp, int stamina) {
         super(name, hp, stamina);
+        this.currentWorld = 0;
     }
 
     @Override
@@ -36,15 +38,21 @@ public class Player extends Boxer {
         int input = GameLogic.readInt("-> ", 3);
         if(input != -1){
             GameLogic.printHeading("You chose " + traits[input-1] + "!");
-            if(input == 1) this.setMaxHp(100);
+            if(input == 1){
+                this.setHp(100);
+                this.setMaxHp(100);
+            }
             else if(input == 2) this.setStamina(50);
         } 
-        
-        System.out.println("Name: " + this.getName());
-        System.out.println("HP: " + this.getMaxHp());
-        System.out.println("Stamina: " + this.getStamina());
+        System.out.println();
+    }
 
-        GameLogic.pressAnything();
+    public int getCurrentWorld(){
+        return this.currentWorld;
+    }
+
+    public void setCurrentWorld(int currentWorld){
+        this.currentWorld = currentWorld;
     }
 
 
