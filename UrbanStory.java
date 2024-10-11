@@ -1,4 +1,5 @@
 public class UrbanStory {
+    static String[] array = {"Jab", "Block", "Hook", "Uppercut"};
 
     static void reply(String reply){
         System.out.println("Select 1 to " + reply);
@@ -36,7 +37,7 @@ public class UrbanStory {
 
     public static void response(String name){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t( Fred nods with approval. )");
         System.out.println();
         System.out.println("Fred: \t\"That's the spirit. Confidence is good, but remember, pride can get you hurt.\"");
@@ -47,7 +48,7 @@ public class UrbanStory {
 
     public static void response2(String name){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t( Fred claps a hand on your shoulder, his grip firm but reassuring. )");
         System.out.println();
         System.out.println("Fred: \t\"Don't worry. Everyone starts somewhere, kid. You've got the heart for this, and that's what counts.");
@@ -58,7 +59,7 @@ public class UrbanStory {
 
     public static void urbanTraining2(){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t[ Fred leads you inside the gym. The smell of sweat and leather fills the air as you step onto the mat.");
         System.out.println("\tHe hands you a pair of old, worn boxing gloves. ]");
         System.out.println();
@@ -71,21 +72,21 @@ public class UrbanStory {
 
     public static void response3(){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("Fred: \t\"Good. Now, let's work on your jabs. Quick, sharp, and always return to guard.");
         System.out.println("\tKeep your eyes on me. Ready?\"");
     }
     
     public static void response4(){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("Fred: \t\"It always feels weird at first, but trust me, it'll become second nature.");
         System.out.println("\tJust keep practicing, and it'll click.\"");
     }
 
     public static void urbanTraining3(String name){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t[ You begin your training. Fred takes you through a series of drills: jabs, hooks, uppercuts, and footwork.");
         System.out.println("\tEach time you throw a punch, Fred offers corrections, pushing you to go harder and faster. ]");
         System.out.println();
@@ -101,7 +102,7 @@ public class UrbanStory {
 
     public static void urbanTraining4(){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t( Fred throws a quick Jab )");
         System.out.println();
         System.out.println("Fred: \t\"This is your Jab. It's fast and hits first. If your opponent tries a big Uppercut, you can beat them to the punch.");
@@ -115,7 +116,7 @@ public class UrbanStory {
     
     public static void response5(){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t( Fred swings a wide Hook )");
         System.out.println();
         System.out.println("Fred: \t\"But watch out! A Hook is stronger than a Jab. When someone throws a Jab at you,");
@@ -127,7 +128,7 @@ public class UrbanStory {
 
     public static void response6(){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t( Fred pulls back and guards with a Block )");
         System.out.println();
         System.out.println("Fred: \t\"Now, a good Block can stop a lot of punches, especially a heavy Hook. If you see that coming, ");
@@ -139,7 +140,7 @@ public class UrbanStory {
 
     public static void response7(){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t( Fred drops his guard and launches an Uppercut )");
         System.out.println();
         System.out.println("Fred: \t\"But don't get too comfortable behind that guard! A well-placed Uppercut can break through a Block.");
@@ -151,7 +152,7 @@ public class UrbanStory {
 
     public static void response8(String name){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t( Fred takes a step back, his eyes sharp )");
         System.out.println();
         System.out.println("Fred: \t\"Remember, " + name + ", it's all about knowing what's coming and how to counter. Jab stops Uppercut.");
@@ -161,10 +162,53 @@ public class UrbanStory {
 
     public static void urbanTraining5(String name){
         System.out.println();
-        GameLogic.printSeparator(50);
+        GameLogic.printSeparator(70);
         System.out.println("\t( " + name + " smiles, absorbing the lesson )");
         System.out.println();
         System.out.println("Fred: \t\"Let's put that knowledge to the test. Think before you strike, and outsmart your opponent.");
         System.out.println("\tReady to try it out?\"");
+    }
+
+    public static void train(){
+        int success = 0;
+        int choice;
+        
+        System.out.println();
+        GameLogic.printSeparator(70);
+        System.out.println();
+        System.out.println("Fred: \t\"Alright, let's put your skills to the test. Try to counter my next punch.\"");
+        do {
+            int randomNum = 0 + (int)(Math.random() * ((3 - 0) + 1));
+            System.out.println();
+            if(randomNum == 1){
+                System.out.println("( Fred " + array[randomNum] + "s )");
+            } else if(randomNum == 3){
+                System.out.println("( Fred throws an " + array[randomNum] + " )");
+            } else {
+                System.out.println("( Fred throws a " + array[randomNum] + " ) ");
+            }
+            System.out.println("Success: " + success + " / 10");
+            choice = punch();
+
+            if(randomNum == 3 && choice == 1){
+                System.out.println("Good job!");
+                success++;
+            }
+            if(choice == randomNum + 2){
+                System.out.println("Good job!");
+                success++;
+            }
+
+        } while(success < 10);
+        System.out.println("Good job! Success: " + success);
+    }
+
+    static int punch(){
+        System.out.println("Select the counter punch:");
+        for(int i = 1; i <= 4; i++){
+            System.out.println("\t(" + i + ") \"" + array[i-1] + "\"");
+        }
+        int choice = GameLogic.readInt("-> ", 4);
+        return choice;
     }
 }

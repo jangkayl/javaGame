@@ -181,8 +181,11 @@ public class GameLogic{
                 scan.nextLine();
                 pressAnything();
             }
-            
+
             UrbanStory.urbanTraining5(player.getName());
+            pressAnything();
+            UrbanStory.train();
+            scan.nextLine();
             pressAnything();
         }
     }
