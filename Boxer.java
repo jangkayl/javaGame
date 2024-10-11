@@ -12,7 +12,7 @@ public abstract class Boxer {
     public abstract void jab();
     public abstract void hook();
     public abstract void uppercut();
-    public abstract void defend();
+    public abstract void block();
 
     public String getName(){
         return this.name;

@@ -24,7 +24,7 @@ public class Player extends Boxer {
     }
 
     @Override
-    public void defend() {
+    public void block() {
         throw new UnsupportedOperationException("Unimplemented method 'defend'");
     }
 

@@ -17,13 +17,16 @@ public class GameLogic{
                 System.out.println("Please enter a valid number of choice!");
                 scan.next();
             }
+            if(input > choice){
+                System.out.println("Please enter valid choice number!");
+            }
         } while(input < 1 || input > choice);
         return input;
     }
 
     // Clear console
     public static void clearConsole(){
-        for(int i = 0; i < 50; i++){
+        for(int i = 0; i < 5; i++){
             System.out.println();
         }
     }
@@ -153,13 +156,33 @@ public class GameLogic{
             clearConsole();
             UrbanStory.urbanTraining1(player.getName());
             int choice = readInt("-> ", 2);
-            if(choice == 1){
-                UrbanStory.response(player.getName());
-            } else {
-                UrbanStory.response2(player.getName());
-            }
-            scan.nextLine();
+            if(choice == 1) UrbanStory.response(player.getName());
+            else if(choice == 2) UrbanStory.response2(player.getName());
+            
+            UrbanStory.urbanTraining2();
+            choice = readInt("-> ", 2);
+            if(choice == 1) UrbanStory.response3();
+            else UrbanStory.response4();
 
+            UrbanStory.urbanTraining3(player.getName());
+            UrbanStory.urbanTraining4();
+            choice = readInt("-> ", 1);
+            if(choice == 1) UrbanStory.response5();
+
+            choice = readInt("-> ", 1);
+            if(choice == 1) UrbanStory.response6();
+
+            choice = readInt("-> ", 1);
+            if(choice == 1) UrbanStory.response7();
+
+            choice = readInt("-> ", 1);
+            if(choice == 1){
+                UrbanStory.response8(player.getName());
+                scan.nextLine();
+                pressAnything();
+            }
+            
+            UrbanStory.urbanTraining5(player.getName());
             pressAnything();
         }
     }
