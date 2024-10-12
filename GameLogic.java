@@ -1,12 +1,15 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class GameLogic{
     static Scanner scan = new Scanner(System.in);   
+    static DecimalFormat df = new DecimalFormat("#,###.00");   
     static Player player;
+    static int stage = 0;
     public static boolean isRunning;
 
     // Read user input
-    public static int readInt(String prompt, int choice){
+    public static int readInt(String prompt, int min, int max){
         int input;
         do {
             System.out.print(prompt);
@@ -17,10 +20,11 @@ public class GameLogic{
                 System.out.println("Please enter a valid number of choice!");
                 scan.next();
             }
-            if(input > choice){
+            if(input > max || input < min){
                 System.out.println("Please enter valid choice number!");
             }
-        } while(input < 1 || input > choice);
+            scan.nextLine();
+        } while(input < min || input > max);
         return input;
     }
 
@@ -70,18 +74,13 @@ public class GameLogic{
             printHeading("You are " + name + " right?");
             System.out.println("(1) Yes");
             System.out.println("(2) No");
-            int input = readInt("-> ", 2);
+            int input = readInt("-> ", 1, 2);
             if(input == 1) nameSet = true;
-            scan.nextLine();
         } while(!nameSet);
         
-        player = new Player(name, 100, 50);
-        
+        player = new Player(name, 100, 50, 0.1, 2, 0.1);
         Story.printIntro(player.getName());
-        player.chooseTrait();
         isRunning = true;
-        scan.nextLine();
-        pressAnything();
 
         gameLoop();
     }
@@ -143,50 +142,42 @@ public class GameLogic{
         clearConsole();
         printHeading("\tCHARACTER STATS");
         System.out.println(player.getName());
-        System.out.println("\tHP:\t\t" + player.getHp() + " / " + player.getMaxHp());
+        System.out.println("\tHP:\t\t\t" + player.getHp() + " / " + player.getMaxHp());
         System.out.print("\t");
-        printSeparator(30);
-        System.out.println("\tStamina:\t" + player.getStamina() + " / " + player.getStamina());
+        printSeparator(35);
+        System.out.println("\tStamina:\t\t" + player.getStamina() + " / " + player.getStamina());
+        System.out.print("\t");
+        printSeparator(35);
+        System.out.println("\tCritical Chance:\t" + df.format(player.getCritChance() * 100) + "%");
+        System.out.print("\t");
+        printSeparator(35);
+        System.out.println("\tCritical Multiplier:\t" + df.format(player.getCritMultiplier()) + "x");
+        System.out.print("\t");
+        printSeparator(35);
+        System.out.println("\tDodge Chance:\t\t" + df.format(player.getDodgeChance() * 100) + "%");
         pressAnything();
     }
 
     // Enter gym and train with coach
     public static void gymTraining(){
+        int choice = 0;
         if(player.getCurrentWorld() == 0){
-            clearConsole();
-            UrbanStory.urbanTraining1(player.getName());
-            int choice = readInt("-> ", 2);
-            if(choice == 1) UrbanStory.response(player.getName());
-            else if(choice == 2) UrbanStory.response2(player.getName());
-            
-            UrbanStory.urbanTraining2();
-            choice = readInt("-> ", 2);
-            if(choice == 1) UrbanStory.response3();
-            else UrbanStory.response4();
-
-            UrbanStory.urbanTraining3(player.getName());
-            UrbanStory.urbanTraining4();
-            choice = readInt("-> ", 1);
-            if(choice == 1) UrbanStory.response5();
-
-            choice = readInt("-> ", 1);
-            if(choice == 1) UrbanStory.response6();
-
-            choice = readInt("-> ", 1);
-            if(choice == 1) UrbanStory.response7();
-
-            choice = readInt("-> ", 1);
-            if(choice == 1){
-                UrbanStory.response8(player.getName());
-                scan.nextLine();
-                pressAnything();
+            if(stage == 0){
+                clearConsole();
+                UrbanStory.printTraining(player.getName());
+                player.chooseTrait();
+                stage = 1;
+            } else {
+                clearConsole();
+                if(Shop.getStage() < 1){
+                    UrbanStory.urbanTraining6(player.getName());
+                    choice = readInt("-> ", 1, 1);
+                    if(choice == 1) Shop.shop();
+                } else {
+                    Shop.showMenu();
+                }
+                
             }
-
-            UrbanStory.urbanTraining5(player.getName());
-            pressAnything();
-            UrbanStory.train();
-            scan.nextLine();
-            pressAnything();
         }
     }
 
@@ -199,8 +190,7 @@ public class GameLogic{
     public static void gameLoop(){
         while(isRunning){
             printMenu();
-            int input = readInt("-> ", 5);
-            scan.nextLine();
+            int input = readInt("-> ", 1, 5);
             if(input == 1){
                 continueJourney();
             } else if(input == 2){
@@ -209,7 +199,7 @@ public class GameLogic{
                 gymTraining();
             } else if(input == 4){
                 enterTournament();
-            } else {
+            } else if(input == 5) {
                 isRunning = false;
             }
         }

@@ -5,8 +5,8 @@ public class Story {
         GameLogic.printHeading("\tThe Redemption Story");
         GameLogic.printSeparator(40);
         System.out.println();
-        System.out.println("    In the shadowy alleys of Tondo Manila, there was a boy named " + name + " has spent his");
-        System.out.println("life, surviving the harsh streets while studying hard to help his family from poverty.");
+        System.out.println("    In the shadowy alleys of Tondo Manila, there was a boy named " + name + " who has spent his");
+        System.out.println("life surviving the harsh streets while studying hard to help his family from poverty.");
         System.out.println("He has been bullied all his life and all he wants is to graduate and end his sufferings.");
         System.out.println("One day, after hearing his bullies mock his late mother, he snaps and unleashes a mysterious");
         System.out.println("sudden surge of power, easily defeating them. At that time Fred, a retired boxer, witnesses");
