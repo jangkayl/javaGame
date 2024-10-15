@@ -164,11 +164,12 @@ public class GameLogic{
         if(player.getCurrentWorld() == 0){
             if(stage == 0){
                 clearConsole();
-                UrbanStory.printTraining(player.getName());
+                // UrbanStory.printTraining(player.getName());
                 player.chooseTrait();
                 stage = 1;
             } else {
                 clearConsole();
+                new Shop(player);
                 if(Shop.getStage() < 1){
                     UrbanStory.urbanTraining6(player.getName());
                     choice = readInt("-> ", 1, 1);
@@ -183,7 +184,10 @@ public class GameLogic{
 
     // Enter tournament and fight with your opponents
     public static void enterTournament(){
-        
+        if(player.getCurrentWorld() == 0){
+            clearConsole();
+            Tournament.printTournament();
+        }
     }
 
     // Loops the menu options

@@ -1,6 +1,6 @@
 public abstract class Boxer {
     private String name;
-    private int maxHp, hp, stamina;
+    private int maxHp, hp, stamina, maxStamina;
     private double critChance, critMultiplier, dodgeChance;
 
     public Boxer(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance){
@@ -11,6 +11,7 @@ public abstract class Boxer {
         this.critChance = critChance;
         this.critMultiplier = critMultiplier;
         this.dodgeChance = dodgeChance;
+        this.maxStamina = stamina;
     }
 
     public abstract void jab();
@@ -44,6 +45,14 @@ public abstract class Boxer {
 
     public void setStamina(int stamina){
         this.stamina = stamina;
+    }
+
+    public int getMaxStamina(){
+        return this.maxStamina;
+    }
+    
+    public void setMaxStamina(int maxStamina){
+        this.maxStamina = maxStamina;
     }
 
     public double getCritChance(){

@@ -1,9 +1,9 @@
 public class UrbanStory {
     private static String[] array = {"Jab", "Hook", "Block", "Uppercut"};
 
-    static void reply(String reply){
-        System.out.println("Select 1 to " + reply);
-        System.out.println("\t(1) - " + reply);
+    static void reply(int num, String reply){
+        System.out.println("Select " + num + " to " + reply);
+        System.out.println("\t(" + num + ") - " + reply);
     }
 
     static void reply(String reply1, String reply2){
@@ -96,14 +96,14 @@ public class UrbanStory {
         choice = GameLogic.readInt("-> ", 1, 1);
         if(choice == 1) response5();
 
-        choice = GameLogic.readInt("-> ", 1, 1);
-        if(choice == 1) response6();
+        choice = GameLogic.readInt("-> ", 2, 2);
+        if(choice == 2) response6();
 
-        choice = GameLogic.readInt("-> ", 1, 1);
-        if(choice == 1) response7();
+        choice = GameLogic.readInt("-> ", 3, 3);
+        if(choice == 3) response7();
 
-        choice = GameLogic.readInt("-> ", 1, 1);
-        if(choice == 1){
+        choice = GameLogic.readInt("-> ", 4, 4);
+        if(choice == 4){
             response8(name);
         }
 
@@ -120,7 +120,7 @@ public class UrbanStory {
         System.out.println();
         System.out.println("Fred: \t\"I need to know something. Are you ready for this? Training here isn't just about");
         System.out.println("\tlearning how to hit harder. You're gonna learn discipline, control, and how to endure pain.");
-        System.out.println("\tYou think you got what it takes?.\"");
+        System.out.println("\tYou think you got what it takes?\"");
         System.out.println();
         reply("I'm ready. Let's do this!", "I don't know… I've never trained in a real gym before.");
     }
@@ -194,7 +194,7 @@ public class UrbanStory {
         System.out.println();
         System.out.println("Fred: \t\"Now, after I demonstrate, I want you to follow my lead.\"");
         System.out.println();
-        reply("Jab");
+        reply(1, "Jab");
     }
     
     static void response5(){
@@ -203,9 +203,9 @@ public class UrbanStory {
         System.out.println();
         System.out.println("Fred: \t\"But watch out! A Hook is stronger than a Jab. When someone throws a Jab at you,");
         System.out.println("\tanswer with a Hook to overpower them.\"");
-        System.out.println("\t( Hook > Jab )");
+        System.out.println("\t[ Hook > Jab ]");
         System.out.println();
-        reply("Hook");
+        reply(2, "Hook");
     }
 
     static void response6(){
@@ -214,9 +214,9 @@ public class UrbanStory {
         System.out.println();
         System.out.println("Fred: \t\"Now, a good Block can stop a lot of punches, especially a heavy Hook. If you see that coming, ");
         System.out.println("\tget ready to Block. It'll protect you from a nasty hit.\"");
-        System.out.println("\t( Block > Hook )");
+        System.out.println("\t[ Block > Hook ]");
         System.out.println();
-        reply("Block");
+        reply(3, "Block");
     }
 
     static void response7(){
@@ -225,9 +225,9 @@ public class UrbanStory {
         System.out.println();
         System.out.println("Fred: \t\"But don't get too comfortable behind that guard! A well-placed Uppercut can break through a Block.");
         System.out.println("\tIf they're just standing there guarding, hit them hard with an Uppercut.\"");
-        System.out.println("\t( Uppercut > Block )");
+        System.out.println("\t[ Uppercut > Block ]");
         System.out.println();
-        reply("Uppercut");
+        reply(4, "Uppercut");
     }
 
     static void response8(String name){
@@ -266,7 +266,7 @@ public class UrbanStory {
                 System.out.println("( Fred throws a " + array[randomNum] + " ) ");
             }
 
-            System.out.println("Success: " + success + " / 10");
+            System.out.println("Success: " + success + " / 5");
             choice = punch();
             int countered = isCounter(randomNum+1, choice);
 
@@ -281,7 +281,7 @@ public class UrbanStory {
             } else {
                 System.out.println("Not bad, but I wanna see some counter punches!");
             }
-        } while(success < 10);
+        } while(success < 0);
 
         space(70);
         System.out.println("Fred: \t\"Good work, " + name + "! You've got some real potential. Remember, practice makes perfect.");

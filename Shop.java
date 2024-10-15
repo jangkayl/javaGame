@@ -1,4 +1,5 @@
 public class Shop {
+    private static Player player;
     private static int stage;
     static Item[] items = {
         new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 50, "+5% Health, +5% Critical Hit Chance"),
@@ -7,6 +8,14 @@ public class Shop {
         new Item("Beginner's Jump Rope", "Improves footwork and stamina.", 40, "+5% Stamina"),
         new Item("Basic Energy Drink", "Increases stamina for the next fight.", 20, "+10% Stamina for next fight"),
     };
+
+    public Shop(Player player){
+        Shop.player = player;
+    }
+
+    public static Player getPlayer(){
+        return player;
+    }
 
     static void setStage(int stage){
         Shop.stage = stage;
@@ -46,7 +55,8 @@ public class Shop {
         System.out.println("\t(2) Go to Fred's Shop");
         int choice = GameLogic.readInt("-> ", 1, 2);
         if(choice == 1){
-            System.out.println("SHESH");
+            UrbanGym.setPlayer(player);
+            UrbanGym.fightLoop();
         } else {
             showShop();
         }
