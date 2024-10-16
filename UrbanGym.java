@@ -52,6 +52,8 @@ public class UrbanGym {
         for (int opponentChoice : opponentChoices) {
             System.out.println(attack[opponentChoice - 1]);
         }
+
+        printFight(choices, opponentChoices);
     }
     
     private static boolean isValidCombo(String input) {
@@ -75,12 +77,61 @@ public class UrbanGym {
         do {
             printStats();
             selectAttack();
-
             GameLogic.pressAnything();
         } while (player.getHp() > 0);
     }
     
-    static void printFight(){
-        
+    static void printFight(int[] choices, int[] opponentChoices){
+        for(int i = 0; i < 3; i++){
+            int countered = isCounter(opponentChoices[i]);
+            if(countered == 1){
+                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
+                System.out.println(opponent.getName() + " fails to counter " + player.getName() + "'s " + attack[choices[i]]);
+            } else if(countered == 2){
+                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
+                System.out.println(opponent.getName() + " successfully counters " + player.getName() + "'s " + attack[choices[i]]);
+            } else {
+                
+            }
+        }
+    }
+
+    static int isCounter(int opponentMove, int playerMove) {
+        switch (opponentMove) {
+            case 1: 
+                if (playerMove == 2) {
+                    return 1;
+                } else if (playerMove == 4) {
+                    return 2; 
+                } else {
+                    return 0; 
+                }
+            case 2:
+                if (playerMove == 3) {
+                    return 1;
+                } else if (playerMove == 1) {
+                    return 2; 
+                } else {
+                    return 0; 
+                }
+            case 3: 
+                if (playerMove == 4) {
+                    return 1;
+                } else if (playerMove == 2) {
+                    return 2; 
+                } else {
+                    return 0; 
+                }
+            case 4:
+                if (playerMove == 1) {
+                    return 1;
+                } else if (playerMove == 3) {
+                    return 2; 
+                } else {
+                    return 0; 
+                }
+            default:
+                return -1;
+        }
     }
 }
