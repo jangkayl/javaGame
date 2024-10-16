@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class UrbanGym {
-    static Player player;
+    public static Player player;
     static String[] attack = {"Jab", "Hook", "Block", "Uppercut"};
     static StreetFighter opponent = new StreetFighter("Carlito Cortez", 200, 100, 0.2, 2, .20);
     
@@ -12,7 +12,7 @@ public class UrbanGym {
     static void printStats(){
         System.out.println();
         System.out.println(player.getName() + "\t\t\t\t" + opponent.getName());
-        System.out.println("HP\t  " + player.getHp() + "/" + player.getMaxHp() + "\t\tHP\t  " + opponent.getHp() + "/" + opponent.getMaxHp());
+        System.out.println("HP\t  " + player.getHp() + "/" + player.getMaxHp() + "  \t\tHP\t  " + opponent.getHp() + "/" + opponent.getMaxHp());
         System.out.println("Stamina\t  " + player.getStamina() + "/" + player.getMaxStamina() + "\t\t\tStamina\t  " + opponent.getStamina() + "/" + opponent.getMaxStamina());
         System.out.println();
     }

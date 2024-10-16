@@ -1,5 +1,5 @@
 public class StreetFighter extends Boxer {
-    static Boxer player = UrbanGym.player;
+    Player player = UrbanGym.player;
     public StreetFighter(String name, int hp, int stamina, double critChance, double critMultiplier,
             double dodgeChance) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
@@ -39,5 +39,24 @@ public class StreetFighter extends Boxer {
         }
         this.setStamina(newStamina);
     }
-    
+
+    public void performAction(int choice){
+        switch (choice) {
+            case 0:
+                jab();
+                break;
+            case 1:
+                hook();
+                break;
+            case 2:
+                uppercut();
+                break;
+            case 3:
+                block();
+                break;
+            default:
+                System.out.println("Invalid action choice!");
+                break;
+        }
+    }
 }

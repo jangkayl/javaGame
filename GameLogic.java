@@ -176,7 +176,7 @@ public class GameLogic{
         if(player.getCurrentWorld() == 0){
             if(stage == 0){
                 clearConsole();
-                UrbanStory.printTraining(player.getName());
+                // UrbanStory.printTraining(player.getName());
                 player.chooseTrait();
                 stage = 1;
             } else {
