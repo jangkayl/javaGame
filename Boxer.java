@@ -18,9 +18,29 @@ public abstract class Boxer {
     public abstract void hook();
     public abstract void uppercut();
     public abstract void block();
-
+    
     public String getName(){
         return this.name;
+    }
+
+    public void performAction(int choice){
+        switch (choice) {
+            case 0:
+                jab();
+                break;
+            case 1:
+                hook();
+                break;
+            case 2:
+                uppercut();
+                break;
+            case 3:
+                block();
+                break;
+            default:
+                System.out.println("Invalid action choice!");
+                break;
+        }
     }
 
     public int getMaxHp(){

@@ -281,7 +281,7 @@ public class UrbanStory {
             } else {
                 System.out.println("Not bad, but I wanna see some counter punches!");
             }
-        } while(success < 0);
+        } while(success < 5);
 
         space(70);
         System.out.println("Fred: \t\"Good work, " + name + "! You've got some real potential. Remember, practice makes perfect.");

@@ -66,9 +66,12 @@ public class GameLogic{
         printHeading("\tFIST OF REDEMPTION\n\t  RPG BY NWORLD");
         printSeparator(40);
         pressAnything();
+        System.out.println();
+        printSeparator(40);
+        Story.introStory();
         do {
             clearConsole();
-            printHeading("What's your name amigo?");
+            printHeading("Enter your name:");
             System.out.print("-> ");
             name = scan.nextLine();
             printHeading("You are " + name + " right?");
@@ -83,6 +86,7 @@ public class GameLogic{
         isRunning = true;
 
         gameLoop();
+
     }
 
     // Prints the menu options
@@ -141,7 +145,15 @@ public class GameLogic{
     public static void printStats(){
         clearConsole();
         printHeading("\tCHARACTER STATS");
-        System.out.println(player.getName());
+        System.out.print("\t\t");
+        printSeparator(10);
+        System.out.println("\t\t   " + player.getName());
+        System.out.println("\t\t" + "* " +player.getCurrentRank() + " *");
+        System.out.print("\t     ");
+        printSeparator(16);
+        System.out.print("\t\t");
+        printSeparator(10);
+        
         System.out.println("\tHP:\t\t\t" + player.getHp() + " / " + player.getMaxHp());
         System.out.print("\t");
         printSeparator(35);
@@ -164,7 +176,7 @@ public class GameLogic{
         if(player.getCurrentWorld() == 0){
             if(stage == 0){
                 clearConsole();
-                // UrbanStory.printTraining(player.getName());
+                UrbanStory.printTraining(player.getName());
                 player.chooseTrait();
                 stage = 1;
             } else {

@@ -38,21 +38,17 @@ public class UrbanGym {
         int[] opponentChoices = new int[3];
         
         for (int i = 0; i < 3; i++) {
-            choices[i] = Character.getNumericValue(input.charAt(i));
-            opponentChoices[i] = rand.nextInt(4) + 1;
+            choices[i] = Character.getNumericValue(input.charAt(i) - 1);
+            opponentChoices[i] = rand.nextInt(4);
         }
     
-        System.out.println("You've selected:");
-        for (int choice : choices) {
-            System.out.println(attack[choice - 1]);
-        }
-        
         System.out.println();
-        System.out.println("Opponent selected:");
-        for (int opponentChoice : opponentChoices) {
-            System.out.println(attack[opponentChoice - 1]);
+        System.out.println("You've selected:\t\tOpponent selected:");
+        for(int i = 0; i < 3; i++){
+            System.out.println(attack[choices[i]] + "     \t\t\t" + attack[opponentChoices[i]]);
         }
 
+        System.out.println();
         printFight(choices, opponentChoices);
     }
     
@@ -68,68 +64,50 @@ public class UrbanGym {
         }
         return true;
     }
+    
+    static void printFight(int[] choices, int[] opponentChoices){
+        for(int i = 0; i < 3; i++){
+            int countered = isCounter(opponentChoices[i], choices[i]);
+            if(countered == 1){
+                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
+                System.out.println(opponent.getName() + " fails to counter " + player.getName() + " with " + attack[opponentChoices[i]]);
+                player.performAction(choices[i]);
+            } else if(countered == 2){
+                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
+                System.out.println(opponent.getName() + " successfully counters " + player.getName() + " by " + attack[opponentChoices[i]]);
+                opponent.performAction(choices[i]);
+            } else {
+                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
+                System.out.println(opponent.getName() + " draws " + player.getName() + " with " + attack[opponentChoices[i]]);
+            }
+            GameLogic.printSeparator(50);
+        }
+    }
 
     public static void fightLoop() {
         GameLogic.clearConsole();
         System.out.println("You are fighting " + opponent.getName() + "!");
         System.out.println();
         GameLogic.printSeparator(40);
+        player.setOpponent(opponent);
         do {
             printStats();
             selectAttack();
+            printStats();
             GameLogic.pressAnything();
         } while (player.getHp() > 0);
-    }
-    
-    static void printFight(int[] choices, int[] opponentChoices){
-        for(int i = 0; i < 3; i++){
-            int countered = isCounter(opponentChoices[i]);
-            if(countered == 1){
-                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
-                System.out.println(opponent.getName() + " fails to counter " + player.getName() + "'s " + attack[choices[i]]);
-            } else if(countered == 2){
-                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
-                System.out.println(opponent.getName() + " successfully counters " + player.getName() + "'s " + attack[choices[i]]);
-            } else {
-                
-            }
-        }
     }
 
     static int isCounter(int opponentMove, int playerMove) {
         switch (opponentMove) {
-            case 1: 
-                if (playerMove == 2) {
-                    return 1;
-                } else if (playerMove == 4) {
-                    return 2; 
-                } else {
-                    return 0; 
-                }
-            case 2:
-                if (playerMove == 3) {
-                    return 1;
-                } else if (playerMove == 1) {
-                    return 2; 
-                } else {
-                    return 0; 
-                }
-            case 3: 
-                if (playerMove == 4) {
-                    return 1;
-                } else if (playerMove == 2) {
-                    return 2; 
-                } else {
-                    return 0; 
-                }
-            case 4:
-                if (playerMove == 1) {
-                    return 1;
-                } else if (playerMove == 3) {
-                    return 2; 
-                } else {
-                    return 0; 
-                }
+            case 0: 
+                return (playerMove == 1) ? 1 : (playerMove == 3) ? 2 : 0;
+            case 1:
+                return (playerMove == 2) ? 1 : (playerMove == 0) ? 2 : 0;
+            case 2: 
+                return (playerMove == 3) ? 1 : (playerMove == 1) ? 2 : 0;
+            case 3:
+                return (playerMove == 0) ? 1 : (playerMove == 2) ? 2 : 0;
             default:
                 return -1;
         }

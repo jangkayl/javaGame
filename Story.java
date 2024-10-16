@@ -1,4 +1,23 @@
 public class Story {
+    public static void introStory(){
+        System.out.println("\nThe ring isn't just a place, it's a proving ground. Here, every punch thrown tells a story of sacrifice, hunger, and ambition.");
+        System.out.println("Boxing is more than a sport; it's a way of life, where only the bold rise and the weak fall. Fighters enter the ring to test their limits, ");
+        System.out.println("fueled by dreams of glory and haunted by the fear of defeat.");
+        System.out.println();
+        System.out.println("In this world, it's not just about strength, it's about heart, strategy, and the ability to endure. ");
+        System.out.println("Champions are forged through blood, sweat, and countless hours of training, honing their bodies and minds for the ultimate challenge. ");
+        System.out.println("Every bout is a battle of wills, a delicate balance between precision and power, where a single moment can make the difference between victory and defeat.");
+        GameLogic.pressAnything();
+        System.out.println();
+        GameLogic.printSeparator(40);
+        System.out.println("\nNow it's your turn to step through the ropes. Will you master the art of the jab, hook, and uppercut? ");
+        System.out.println("Will you outthink your opponent and dance your way to greatness? Or will the pressure of the ring swallow you whole?");
+        System.out.println("The bell is about to ring, time to fight your way to the top and claim your place among the legends.");
+        System.out.println("\nAre you ready to show what you've got?");
+        GameLogic.pressAnything();
+        System.out.println();
+        GameLogic.printSeparator(40);
+    }
     public static void printIntro(String name){
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
@@ -15,10 +34,5 @@ public class Story {
         System.out.println("within him and warning of greater challenges ahead.");
         System.out.println();
         System.out.println(name + "'s journey has just begun, with battles ahead that go beyond the streets and the ring.");
-        GameLogic.pressAnything();
     }
 }
-
-
-   
-

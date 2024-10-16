@@ -1,8 +1,11 @@
 public class Player extends Boxer {
     private String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};
     private String[] worlds = {"Urban Gym", "Training Facility", "Champ Arena"};
+    private String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION", "LEGEND", "HALL OF FAMER"};
     private int currentWorld;
     private int balance;
+    private int currentRank;
+    private StreetFighter opponent;
 
     public Player(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
@@ -10,31 +13,47 @@ public class Player extends Boxer {
         this.balance = 0;
     }
 
+    
     @Override
     public void jab() {
-        throw new UnsupportedOperationException("Unimplemented method 'jab'");
+        int damage = 10;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getMaxStamina() - damage);
+        System.out.println(opponent.getName() + " - " + damage + " " + opponent.getName() + " for " + damage + " damage!");
     }
-
+    
     @Override
     public void hook() {
-        throw new UnsupportedOperationException("Unimplemented method 'hook'");
+        int damage = 15;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getMaxStamina() - damage);
+        System.out.println(this.getName() + " hooks " + opponent.getName() + " for " + damage + " damage!");
     }
-
+    
     @Override
     public void uppercut() {
-        throw new UnsupportedOperationException("Unimplemented method 'uppercut'");
+        int damage = 20;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getMaxStamina() - damage);
+        System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");
     }
-
+    
     @Override
     public void block() {
-        throw new UnsupportedOperationException("Unimplemented method 'block'");
+        int newStamina = this.getStamina() + 10;
+        if (newStamina > this.getMaxStamina()) {
+            newStamina = this.getMaxStamina();
+        } else {
+            System.out.println(this.getName() + " blocks and gains 10 stamina!");
+        }
+        this.setStamina(newStamina);
     }
-
+    
     public void chooseTrait(){
         String[][] bonus = {{"+50% HP", "-10% Stamina", "5% Critical Hit Chance", "-5% Dodge Chance"}, 
-                            {"+30% Stamina", "+10% Dodge Chance", "20% Critical Hit Chance", "-10% HP"},
-                            {"+20% Critical Hit Chance", "+50% Crit Damage Multiplier", "-10% Stamina", "-5% Dodge Chance"}};
-                            
+        {"+30% Stamina", "+10% Dodge Chance", "20% Critical Hit Chance", "-10% HP"},
+        {"+20% Critical Hit Chance", "+50% Crit Damage Multiplier", "-10% Stamina", "-5% Dodge Chance"}};
+        
         GameLogic.clearConsole();
         GameLogic.printHeading("Choose a trait:");
         for(int i = 0; i < traits.length; i++){
@@ -77,19 +96,36 @@ public class Player extends Boxer {
         }
         GameLogic.pressAnything();
     }
+    
+    public void setOpponent(StreetFighter opponent) {
+        this.opponent = opponent;
+    }
 
+    public void rankUp(){
+        if(currentRank > ranking.length - 1){
+            currentRank++;
+            System.out.println("na rankup nakang yawa ka!");
+        }else{
+            System.out.println("Nana kas pinakataas yati ra");
+        }
+    }
+    
+    public String getCurrentRank() {
+        return ranking[currentRank];
+    }
+    
     public int getCurrentWorld(){
         return this.currentWorld;
     }
-
+    
     public void setCurrentWorld(int currentWorld){
         this.currentWorld = currentWorld;
     }
-
+    
     public String[] getWorlds(){
         return this.worlds;
     }
-
+    
     public void setBalance(int balance){
         this.balance = balance;
     }
