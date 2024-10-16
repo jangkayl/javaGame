@@ -1,5 +1,8 @@
+import java.util.Random;
+
 public class UrbanGym {
     static Player player;
+    static String[] attack = {"Jab", "Hook", "Block", "Uppercut"};
     static StreetFighter opponent = new StreetFighter("Carlito Cortez", 200, 100, 0.2, 2, .20);
     
     public static void setPlayer(Player p) {
@@ -13,9 +16,9 @@ public class UrbanGym {
         System.out.println("Stamina\t  " + player.getStamina() + "/" + player.getMaxStamina() + "\t\t\tStamina\t  " + opponent.getStamina() + "/" + opponent.getMaxStamina());
         System.out.println();
     }
-
+    
     static void selectAttack() {
-        String[] attack = {"Jab", "Hook", "Block", "Uppercut"};
+        System.out.println();
         System.out.println("You're the first one to attack!");
         System.out.println("Select 3 combos");
     
@@ -24,6 +27,7 @@ public class UrbanGym {
         }
     
         String input = GameLogic.scan.nextLine();
+        Random rand = new Random();
     
         while (!isValidCombo(input)) {
             System.out.println("Please enter a valid combo (e.g., 123):");
@@ -31,13 +35,22 @@ public class UrbanGym {
         }
     
         int[] choices = new int[3];
+        int[] opponentChoices = new int[3];
+        
         for (int i = 0; i < 3; i++) {
             choices[i] = Character.getNumericValue(input.charAt(i));
+            opponentChoices[i] = rand.nextInt(4) + 1;
         }
     
         System.out.println("You've selected:");
         for (int choice : choices) {
             System.out.println(attack[choice - 1]);
+        }
+        
+        System.out.println();
+        System.out.println("Opponent selected:");
+        for (int opponentChoice : opponentChoices) {
+            System.out.println(attack[opponentChoice - 1]);
         }
     }
     
@@ -65,5 +78,9 @@ public class UrbanGym {
 
             GameLogic.pressAnything();
         } while (player.getHp() > 0);
+    }
+    
+    static void printFight(){
+        
     }
 }
