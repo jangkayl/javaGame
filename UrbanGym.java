@@ -65,26 +65,45 @@ public class UrbanGym {
         return true;
     }
     
-    static void printFight(int[] choices, int[] opponentChoices){
-        for(int i = 0; i < 3; i++){
-            int countered = isCounter(opponentChoices[i], choices[i]);
-            if(countered == 1){
-                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
-                System.out.println(opponent.getName() + " fails to counter " + player.getName() + " with " + attack[opponentChoices[i]]);
-                player.performAction(choices[i]);
-                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
-            } else if(countered == 2){
-                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
-                opponent.performAction(choices[i]);
-                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
+    static void printFight(int[] choices, int[] opponentChoices) {
+        for (int i = 0; i < 3; i++) {
+            int playerMove = choices[i];
+            int opponentMove = opponentChoices[i];
+            int countered = isCounter(opponentMove, playerMove);
+    
+            // Check if the player has enough stamina
+            if (player.getStamina() < player.getStaminaCost(playerMove)) {
+                System.out.println(player.getName() + " tries to use " + attack[playerMove] + " but doesn't have enough stamina!");
             } else {
-                System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
-                System.out.println(opponent.getName() + " draws " + player.getName() + " with " + attack[opponentChoices[i]]);
-                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
+                if (countered == 1) {
+                    System.out.println(player.getName() + " throws a " + attack[playerMove] + " to " + opponent.getName());
+                    System.out.println(opponent.getName() + " fails to counter " + player.getName() + " with " + attack[opponentMove]);
+                    player.performAction(playerMove);
+                    if (player.getHp() <= 0 || opponent.getHp() <= 0) return;
+                } else if (countered == 2) {
+                    System.out.println(player.getName() + " throws a " + attack[playerMove] + " to " + opponent.getName());
+                    opponent.performAction(playerMove);
+                    if (player.getHp() <= 0 || opponent.getHp() <= 0) return;
+                } else {
+                    System.out.println(player.getName() + " throws a " + attack[playerMove] + " to " + opponent.getName());
+                    System.out.println(opponent.getName() + " draws " + player.getName() + " with " + attack[opponentMove]);
+                    if (player.getHp() <= 0 || opponent.getHp() <= 0) return;
+                }
             }
+    
+            // Check if the opponent has enough stamina
+            if (opponent.getStamina() < opponent.getStaminaCost(opponentMove)) {
+                System.out.println(opponent.getName() + " tries to use " + attack[opponentMove] + " but doesn't have enough stamina!");
+            } else {
+                // Perform the opponent's action if they have enough stamina
+                opponent.performAction(opponentMove);
+                if (player.getHp() <= 0 || opponent.getHp() <= 0) return;
+            }
+    
             GameLogic.printSeparator(50);
         }
     }
+    
 
     public static void fightLoop() {
         GameLogic.clearConsole();

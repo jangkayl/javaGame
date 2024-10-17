@@ -206,7 +206,7 @@ public class GameLogic{
     public static void gameLoop(){
         while(isRunning){
             printMenu();
-            int input = readInt("-> ", 1, 5);
+            int input = readInt("-> ", 1, 6);
             if(input == 1){
                 continueJourney();
             } else if(input == 2){
@@ -217,6 +217,9 @@ public class GameLogic{
                 enterTournament();
             } else if(input == 5) {
                 isRunning = false;
+            } else if(input == 6) {
+                new ShopTemporary(player);
+                ShopTemporary.showMenu();
             }
         }
     }

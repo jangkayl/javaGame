@@ -12,28 +12,40 @@ public class Player extends Boxer {
         this.currentWorld = 0;
         this.balance = 0;
     }
+
+    public int getStaminaCost(int actionIndex) {
+        switch (actionIndex) {
+            case 0: return 10; // Jab
+            case 1: return 15; // Hook
+            case 2: return 20; // Uppercut
+            default: return 0;
+        }
+    }
     
     @Override
     public void jab() {
         int damage = 10;
+        int newStamina = getStaminaCost(0);
         opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getMaxStamina() - damage);
+        this.setStamina(this.getMaxStamina() - newStamina);
         System.out.println(opponent.getName() + " - " + damage + " " + opponent.getName() + " for " + damage + " damage!");
     }
     
     @Override
     public void hook() {
         int damage = 15;
+        int newStamina = getStaminaCost(1);
         opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getMaxStamina() - damage);
+        this.setStamina(this.getMaxStamina() - newStamina);
         System.out.println(this.getName() + " hooks " + opponent.getName() + " for " + damage + " damage!");
     }
     
     @Override
     public void uppercut() {
         int damage = 20;
+        int newStamina = getStaminaCost(2);
         opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getMaxStamina() - damage);
+        this.setStamina(this.getMaxStamina() - newStamina);
         System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");
     }
     
