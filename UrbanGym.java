@@ -3,7 +3,7 @@ import java.util.Random;
 public class UrbanGym {
     public static Player player;
     static String[] attack = {"Jab", "Hook", "Block", "Uppercut"};
-    static StreetFighter opponent = new StreetFighter("Carlito Cortez", 200, 100, 0.2, 2, .20);
+    public static StreetFighter opponent = new StreetFighter("Carlito Cortez", 150, 80, 0.2, 2, .20);
     
     public static void setPlayer(Player p) {
         player = p;
@@ -11,7 +11,7 @@ public class UrbanGym {
 
     static void printStats(){
         System.out.println();
-        System.out.println(player.getName() + "\t\t\t\t" + opponent.getName());
+        System.out.println(player.getName() + "   \t\t\t\t" + opponent.getName());
         System.out.println("HP\t  " + player.getHp() + "/" + player.getMaxHp() + "  \t\tHP\t  " + opponent.getHp() + "/" + opponent.getMaxHp());
         System.out.println("Stamina\t  " + player.getStamina() + "/" + player.getMaxStamina() + "\t\t\tStamina\t  " + opponent.getStamina() + "/" + opponent.getMaxStamina());
         System.out.println();
@@ -72,13 +72,15 @@ public class UrbanGym {
                 System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " fails to counter " + player.getName() + " with " + attack[opponentChoices[i]]);
                 player.performAction(choices[i]);
+                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
-                System.out.println(opponent.getName() + " successfully counters " + player.getName() + " by " + attack[opponentChoices[i]]);
                 opponent.performAction(choices[i]);
+                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             } else {
                 System.out.println(player.getName() + " throws a " + attack[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + attack[opponentChoices[i]]);
+                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             }
             GameLogic.printSeparator(50);
         }
@@ -90,12 +92,19 @@ public class UrbanGym {
         System.out.println();
         GameLogic.printSeparator(40);
         player.setOpponent(opponent);
-        do {
+        while (player.getHp() > 0 && opponent.getHp() > 0) {
             printStats();
             selectAttack();
             printStats();
+            if (player.getHp() <= 0) {
+                System.out.println();
+                System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
+            } else if(opponent.getHp() <= 0){
+                System.out.println();
+                System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
+            }
             GameLogic.pressAnything();
-        } while (player.getHp() > 0);
+        }
     }
 
     static int isCounter(int opponentMove, int playerMove) {

@@ -1,8 +1,12 @@
 public class StreetFighter extends Boxer {
-    Player player = UrbanGym.player;
+    static Player player;
     public StreetFighter(String name, int hp, int stamina, double critChance, double critMultiplier,
             double dodgeChance) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
+    }
+
+    public static void setPlayerOpponent(Player player) {
+        StreetFighter.player = player;
     }
 
     @Override
@@ -31,15 +35,16 @@ public class StreetFighter extends Boxer {
 
     @Override
     public void block() {
-        int newStamina = this.getStamina() + 10;
+        int newStamina = this.getStamina() + 5;
         if (newStamina > this.getMaxStamina()) {
             newStamina = this.getMaxStamina();
         } else {
-            System.out.println(this.getName() + " blocks and gains 10 stamina!");
+            System.out.println(this.getName() + " blocks and gains 5 stamina!");
         }
         this.setStamina(newStamina);
     }
 
+    @Override
     public void performAction(int choice){
         switch (choice) {
             case 0:

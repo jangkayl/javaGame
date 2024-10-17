@@ -56,6 +56,7 @@ public class Shop {
         int choice = GameLogic.readInt("-> ", 1, 2);
         if(choice == 1){
             UrbanGym.setPlayer(player);
+            StreetFighter.setPlayerOpponent(player);
             UrbanGym.fightLoop();
         } else {
             showShop();
@@ -101,6 +102,5 @@ public class Shop {
                 GameLogic.pressAnything();
             }
         }
-        
     }
 }

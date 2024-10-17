@@ -5,14 +5,13 @@ public class Player extends Boxer {
     private int currentWorld;
     private int balance;
     private int currentRank;
-    private StreetFighter opponent;
+    static StreetFighter opponent;
 
     public Player(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
         this.currentWorld = 0;
         this.balance = 0;
     }
-
     
     @Override
     public void jab() {
@@ -40,11 +39,11 @@ public class Player extends Boxer {
     
     @Override
     public void block() {
-        int newStamina = this.getStamina() + 10;
+        int newStamina = this.getStamina() + 5;
         if (newStamina > this.getMaxStamina()) {
             newStamina = this.getMaxStamina();
         } else {
-            System.out.println(this.getName() + " blocks and gains 10 stamina!");
+            System.out.println(this.getName() + " blocks and gains 5 stamina!");
         }
         this.setStamina(newStamina);
     }
@@ -74,6 +73,7 @@ public class Player extends Boxer {
             this.setHp(newHp);
             this.setMaxHp(newHp);
             this.setStamina(newStamina);
+            this.setMaxStamina(newStamina);
             this.setCritChance(0.5);
             this.setDodgeChance(newDodge);
         } else if(input == 2) {
@@ -118,14 +118,14 @@ public class Player extends Boxer {
     }
     
     public void setOpponent(StreetFighter opponent) {
-        this.opponent = opponent;
+        Player.opponent = opponent;
     }
 
     public void rankUp(){
         if(currentRank > ranking.length - 1){
             currentRank++;
             System.out.println("na rankup nakang yawa ka!");
-        }else{
+        } else {
             System.out.println("Nana kas pinakataas yati ra");
         }
     }

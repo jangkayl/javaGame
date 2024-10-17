@@ -18,6 +18,7 @@ public abstract class Boxer {
     public abstract void hook();
     public abstract void uppercut();
     public abstract void block();
+    public abstract void performAction(int choice);
     
     public String getName(){
         return this.name;
@@ -32,6 +33,7 @@ public abstract class Boxer {
     }
 
     public int getHp(){
+        if(this.hp < 0) return 0;
         return this.hp;
     }
 
@@ -40,6 +42,7 @@ public abstract class Boxer {
     }
 
     public int getStamina(){
+        if(this.stamina < 0) return 0;
         return this.stamina;
     }
 
