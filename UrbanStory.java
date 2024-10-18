@@ -122,7 +122,7 @@ public class UrbanStory {
         System.out.println("\tlearning how to hit harder. You're gonna learn discipline, control, and how to endure pain.");
         System.out.println("\tYou think you got what it takes?\"");
         System.out.println();
-        reply("I'm ready. Let's do this!", "I don't know… I've never trained in a real gym before.");
+        reply("I'm ready. Let's do this!", "I don't know... I've never trained in a real gym before.");
     }
 
     static void response(String name){
@@ -154,7 +154,7 @@ public class UrbanStory {
         System.out.println();
         System.out.println("\t( Fred demonstrates the proper stance. )");
         System.out.println();
-        reply("Got it. Let's do this!", "This feels a little awkward…");
+        reply("Got it. Let's do this!", "This feels a little awkward...");
     }
 
     static void response3(){
@@ -318,3 +318,4 @@ public class UrbanStory {
         Shop.showMenu();
     }
 }
+

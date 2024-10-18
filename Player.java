@@ -3,49 +3,37 @@ public class Player extends Boxer {
     private String[] worlds = {"Urban Gym", "Training Facility", "Champ Arena"};
     private String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION", "LEGEND", "HALL OF FAMER"};
     private int currentWorld;
-    private int balance;
     private int currentRank;
+    private int playerPoints;
     static StreetFighter opponent;
 
     public Player(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
         this.currentWorld = 0;
-        this.balance = 0;
-    }
-
-    public int getStaminaCost(int actionIndex) {
-        switch (actionIndex) {
-            case 0: return 10; // Jab
-            case 1: return 15; // Hook
-            case 2: return 20; // Uppercut
-            default: return 0;
-        }
+        this.playerPoints = 0;
     }
     
     @Override
     public void jab() {
         int damage = 10;
-        int newStamina = getStaminaCost(0);
         opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getMaxStamina() - newStamina);
-        System.out.println(opponent.getName() + " - " + damage + " " + opponent.getName() + " for " + damage + " damage!");
+        this.setStamina(this.getStamina() - damage);
+        System.out.println(this.getName() + " jabs " + opponent.getName() + " for " + damage + " damage!");
     }
     
     @Override
     public void hook() {
         int damage = 15;
-        int newStamina = getStaminaCost(1);
         opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getMaxStamina() - newStamina);
+        this.setStamina(this.getStamina() - damage);
         System.out.println(this.getName() + " hooks " + opponent.getName() + " for " + damage + " damage!");
     }
     
     @Override
     public void uppercut() {
         int damage = 20;
-        int newStamina = getStaminaCost(2);
         opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getMaxStamina() - newStamina);
+        this.setStamina(this.getStamina() - damage);
         System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");
     }
     
@@ -109,19 +97,35 @@ public class Player extends Boxer {
         GameLogic.pressAnything();
     }
 
-    public void performAction(int choice){
+    boolean hasEnoughStamina(int requiredStamina) {
+        return this.getStamina() >= requiredStamina;
+    }
+
+    public void performAction(int choice) {
         switch (choice) {
             case 0:
-                jab();
+                if (hasEnoughStamina(10)) {
+                    jab();
+                } else {
+                    System.out.println(this.getName() + " doesn't have enough stamina to jab!");
+                }
                 break;
             case 1:
-                hook();
+                if (hasEnoughStamina(15)) {
+                    hook();
+                } else {
+                    System.out.println(this.getName() + " doesn't have enough stamina to hook!");
+                }
                 break;
             case 2:
-                uppercut();
+                block();
                 break;
             case 3:
-                block();
+                if (hasEnoughStamina(20)) {
+                    uppercut();
+                } else {
+                    System.out.println(this.getName() + " doesn't have enough stamina to uppercut!");
+                }
                 break;
             default:
                 System.out.println("Invalid action choice!");
@@ -136,7 +140,7 @@ public class Player extends Boxer {
     public void rankUp(){
         if(currentRank > ranking.length - 1){
             currentRank++;
-            System.out.println("na rankup nakang yawa ka!");
+            System.out.println("na rankup naka!");
         } else {
             System.out.println("Nana kas pinakataas yati ra");
         }
@@ -158,12 +162,18 @@ public class Player extends Boxer {
         return this.worlds;
     }
     
-    public void setBalance(int balance){
-        this.balance = balance;
-    }
-
-    public int getBalance(){
-        return this.balance;
-    }
+    public void setPlayerPoints(int playerPoints){
+        this.playerPoints = playerPoints;
+   }
+   
+   public int getPlayerPoints(){
+       return playerPoints;
+   }
+   
+   public void addPlayerPoints(int points) {
+       this.playerPoints += points;
+       System.out.println("You earned " + points + " points! Total points: " + playerPoints);
+   }
 
 }
+

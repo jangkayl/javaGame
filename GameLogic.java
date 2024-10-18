@@ -63,12 +63,12 @@ public class GameLogic{
         String name;
         clearConsole();
         printSeparator(40);
-        printHeading("\tFIST OF REDEMPTION\n\t  RPG BY NWORLD");
+        printHeading("\tFIST OF FURY\n     DEVELOPED BY NWORLD");
         printSeparator(40);
         pressAnything();
         System.out.println();
         printSeparator(40);
-        Story.introStory();
+        // Story.introStory();
         do {
             clearConsole();
             printHeading("Enter your name:");
@@ -99,7 +99,9 @@ public class GameLogic{
         System.out.println("(2) Check your stats");
         System.out.println("(3) Train in Gym");
         System.out.println("(4) Enter Tournament");
-        System.out.println("(5) Exit the game");
+        System.out.println("(5) Inventory");
+        System.out.println("(6) Shop");
+        System.out.println("(7) Exit the game");
     }
 
     // Continues players journey
@@ -153,7 +155,6 @@ public class GameLogic{
         printSeparator(16);
         System.out.print("\t\t");
         printSeparator(10);
-        
         System.out.println("\tHP:\t\t\t" + player.getHp() + " / " + player.getMaxHp());
         System.out.print("\t");
         printSeparator(35);
@@ -206,22 +207,44 @@ public class GameLogic{
     public static void gameLoop(){
         while(isRunning){
             printMenu();
-            int input = readInt("-> ", 1, 6);
+            int input = readInt("-> ", 1, 7);
             if(input == 1){
                 continueJourney();
             } else if(input == 2){
                 printStats();
-            } else if(input == 3){
+            } else if(input ==3){
                 gymTraining();
             } else if(input == 4){
                 enterTournament();
             } else if(input == 5) {
-                isRunning = false;
-            } else if(input == 6) {
+                Inventory.inventoryMenu();
+            }else if(input == 6) {
                 new ShopTemporary(player);
                 ShopTemporary.showMenu();
+            }else if(input == 7) {
+                isRunning = false;
             }
         }
     }
+
+    public static void printWithDelay(String text) {
+        for (char c : text.toCharArray()) {
+            System.out.print(c);
+            try {
+                Thread.sleep(5); 
+            } catch (InterruptedException e) {
+                System.out.println("Printing interrupted.");
+                return;
+            }
+        }
+        System.out.println();
+    } 
+    
+    public static void addPoints(int points){
+        int currentPoints = player.getPlayerPoints();
+        currentPoints += points;
+        player.setPlayerPoints(currentPoints);
+    }
+
 
 }
