@@ -1,11 +1,11 @@
 import java.util.Random;
 
 public class Fighting {
+    static Random rand = new Random();
     static StreetFighter opponent;
     static Player player;
     static boolean playerDodged = false;
     static boolean opponentDodged = false;
-
 
     public static void setPlayerOpponent(Player player) {
         Fighting.player = player;
@@ -15,14 +15,9 @@ public class Fighting {
         Fighting.opponent = opponent;
     }
     
-    static double generateRandom(){
-        Random rand = new Random();
-        return rand.nextDouble();
-    }
-
     public static void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
-        double critChance = generateRandom();
-        double dodgeChance = generateRandom();
+        double critChance = rand.nextDouble();
+        double dodgeChance = rand.nextDouble();
         
         if(critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged){
             player.setDamageSetter(player.getCritMultiplier());
@@ -91,8 +86,8 @@ public class Fighting {
     }
 
     public static void opponentSuccessAction(int choice, int playerChoice, boolean isDraw) {
-        double critChance = generateRandom();
-        double dodgeChance = generateRandom();
+        double critChance = rand.nextDouble();
+        double dodgeChance = rand.nextDouble();
         
         if(critChance < opponent.getCritChance() && choice != 2 && !isDraw){
             opponent.setDamageSetter(opponent.getCritMultiplier());

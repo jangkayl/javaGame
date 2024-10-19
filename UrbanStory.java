@@ -318,6 +318,25 @@ public class UrbanStory {
         Shop.showMenu();
     }
 
+    public static void urbanTrainingLose(String name, String opponent) {
+        space(70);
+        System.out.println("Fred: \t\"Ahhh, tough break there, " + name + ". "+ opponent + " is a beast in the ring.\"");
+        System.out.println();
+        System.out.println("\t( Fred steps forward, his expression calm yet encouraging )");
+        System.out.println();
+        System.out.println("Fred:\t\"Listen, losses aren't the end. They're the stepping stones to real progress.");
+        System.out.println("\tEvery time you fall, you get back up stronger.\"");
+        System.out.println();
+        System.out.println("\t( He places a reassuring hand on your shoulder, a knowing smile on his face )");
+        System.out.println();
+        System.out.println("Fred:\t\"You've got what it takes, I see that. So, how about another go? The road to victory isn't easy,");
+        System.out.println("\tbut it's worth every fight. Remember this, Strength isn't in never falling, but in rising every single time.\"");
+        System.out.println();
+        System.out.println("Fred:\t\"Do you want a rematch?\"");
+        GameLogic.pressAnything();
+        Shop.showMenu();
+    }
+
     public static void urbanTraining8(String name){
         space(70);
         System.out.println("\t[ You step out of the ring, sweat dripping from your brow.");
@@ -328,7 +347,17 @@ public class UrbanStory {
         System.out.println("Fred:\t\"Well done, " + name + "! You showed some real grit out there, you're improving fast. But remember,");
         System.out.println("\twinning one sparring match is just the beginning. If you want to get stronger, you'll need to keep pushing.\"");
         System.out.println();
-        System.out.println("Fred:\tYou can take a break, or if you're ready for more, we can keep training. What do you say?\"");
+        System.out.println("Fred:\t\"You can take a break, or if you're ready for more, we can keep training. What do you say?\"");
+        System.out.println();
+        System.out.println("Select what to do:");
+        System.out.println("\t1) Yes, I wanna keep training!");
+        System.out.println("\t2) I'll take a break first.");
+        int choice = GameLogic.readInt("-> ", 1, 2);
+        if(choice == 1) {
+            System.out.println("Continue sa choi!");
+        } else {
+            GameLogic.printMenu();
+        }
     }
 }
 

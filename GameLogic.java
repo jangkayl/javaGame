@@ -6,7 +6,7 @@ public class GameLogic{
     static DecimalFormat df = new DecimalFormat("#,###.00");   
     static Player player;
     static int stage = 0;
-    public static boolean isRunning;
+    public static boolean isRunning, isLose = false;
 
     // Read user input
     public static int readInt(String prompt, int min, int max){
@@ -84,9 +84,7 @@ public class GameLogic{
         player = new Player(name, 100, 50, 0.1, 2, 0.1);
         Story.printIntro(player.getName());
         isRunning = true;
-
         gameLoop();
-
     }
 
     // Prints the menu options
@@ -138,7 +136,6 @@ public class GameLogic{
             printHeading("Invalid world state.");
             System.out.println("Something went wrong! You are stuck in an unknown world.");
         }
-        
         pressAnything();
     }
 
@@ -184,11 +181,17 @@ public class GameLogic{
                 clearConsole();
                 new Shop(player);
                 if(Shop.getStage() < 1){
-                    UrbanStory.urbanTraining6(player.getName());
-                    choice = readInt("-> ", 1, 1);
-                    if(choice == 1) Shop.shop();
+                    if(isLose){
+                        UrbanStory.urbanTrainingLose(player.getName(), UrbanGym.opponent.getName());
+
+                    } else {
+                        UrbanStory.urbanTraining6(player.getName());
+                        choice = readInt("-> ", 1, 1);
+                        if(choice == 1) Shop.shop();
+                    }
                 } else {
-                    UrbanStory.urbanTraining8(player.getName());                    
+                    UrbanStory.urbanTraining8(player.getName());  
+                    GameLogic.printMenu();                  
                 }
             }
         }

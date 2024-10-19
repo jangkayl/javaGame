@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class UrbanGym {
     static Random rand = new Random();
+    static int round = 1;
     public static Player player;
     public static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -10"}, 
                                 {"Hook", "Damage: 15 | Stamina: -15"}, 
@@ -125,7 +126,7 @@ public class UrbanGym {
                         break;
                 }
     
-                if (tempStamina - staminaCost >= 0) {
+                if (tempStamina - staminaCost > 10) {
                     validChoice = true;
                 } else {
                     if(rand.nextDouble() < 0.1)
@@ -138,7 +139,6 @@ public class UrbanGym {
             tempStamina -= staminaCost;
         }
     }
-    
 
     static void printFight(int[] choices, int[] opponentChoices){
         for(int i = 0; i < 3; i++){
@@ -147,17 +147,18 @@ public class UrbanGym {
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
                 Fighting.playerSuccessAction(choices[i], opponentChoices[i], false);
                 Fighting.opponentFailedAction(opponentChoices[i]);
-                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
                 Fighting.opponentSuccessAction(opponentChoices[i], choices[i], false);
                 Fighting.playerFailedAction(choices[i]);
-                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             } else {
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + attack[opponentChoices[i]][0]);
                 Fighting.drawAction(choices[i], opponentChoices[i]);
-                if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
+            }
+            if(player.getHp() <= 0 || opponent.getHp() <= 0){
+                if(player.getHp() <= 0) GameLogic.isLose = true;
+                return;
             }
             GameLogic.printSeparator(50);
         }
@@ -165,7 +166,10 @@ public class UrbanGym {
 
     public static void fightLoop() {
         GameLogic.clearConsole();
-        System.out.println("You are fighting " + opponent.getName() + "!");
+        GameLogic.printSeparator(40);
+        System.out.println("\t\tRound " + round++);
+        GameLogic.printSeparator(40);
+        System.out.println("\tYou are fighting " + opponent.getName() + "!");
         System.out.println();
         GameLogic.printSeparator(40);
         Fighting.setPlayerOpponent(player);
@@ -184,8 +188,11 @@ public class UrbanGym {
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
                 winnerReward();
+                round = 1;
                 Shop.setStage(2);  
-                UrbanStory.urbanTraining8(player.getName());                
+                UrbanStory.urbanTraining8(player.getName());    
+                GameLogic.pressAnything();
+                return;
             }
         }
         player.setHp(player.getMaxHp());
@@ -194,18 +201,13 @@ public class UrbanGym {
     }
 
     static int isCounter(int opponentMove, int playerMove) {
-        switch (opponentMove) {
-            case 0: 
-                return (playerMove == 1) ? 1 : (playerMove == 3) ? 2 : 0;
-            case 1:
-                return (playerMove == 2) ? 1 : (playerMove == 0) ? 2 : 0;
-            case 2: 
-                return (playerMove == 3) ? 1 : (playerMove == 1) ? 2 : 0;
-            case 3:
-                return (playerMove == 0) ? 1 : (playerMove == 2) ? 2 : 0;
-            default:
-                return -1;
-        }
+        return switch (opponentMove) {
+            case 0 -> (playerMove == 1) ? 1 : (playerMove == 3) ? 2 : 0;
+            case 1 -> (playerMove == 2) ? 1 : (playerMove == 0) ? 2 : 0;
+            case 2 -> (playerMove == 3) ? 1 : (playerMove == 1) ? 2 : 0;
+            case 3 -> (playerMove == 0) ? 1 : (playerMove == 2) ? 2 : 0;
+            default -> -1;
+        };
     }
 
     static void winnerReward() {

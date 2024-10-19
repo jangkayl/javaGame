@@ -188,9 +188,6 @@ public class Shop {
                     break;
                 }
         }
-        
-        
-            
     }
 
     public static void shop() {
