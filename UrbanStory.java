@@ -317,5 +317,20 @@ public class UrbanStory {
         GameLogic.pressAnything();
         Shop.showMenu();
     }
+
+    public static void urbanTraining8(String name){
+        space(70);
+        System.out.println("\t[ You step out of the ring, sweat dripping from your brow.");
+        System.out.println("\tThe crowd of gym-goers cheer as you emerge victorious. ]");
+        System.out.println();
+        System.out.println("\t[ Fred, your coach, claps you on the back with a big grin on his face. ]");
+        System.out.println();
+        System.out.println("Fred:\t\"Well done, " + name + "! You showed some real grit out there, you're improving fast. But remember,");
+        System.out.println("\twinning one sparring match is just the beginning. If you want to get stronger, you'll need to keep pushing.\"");
+        System.out.println();
+        System.out.println("Fred:\tYou can take a break, or if you're ready for more, we can keep training. What do you say?\"");
+
+        GameLogic.pressAnything();
+    }
 }
 

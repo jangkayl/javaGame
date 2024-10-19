@@ -139,12 +139,11 @@ public class UrbanGym {
                 System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
-                GameLogic.pressAnything();
             } else if(opponent.getHp() <= 0){
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
-                Shop.setStage(2);                
                 winnerReward();
+                Shop.setStage(2);                
             }
         }
         player.setHp(player.getMaxHp());

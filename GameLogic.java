@@ -188,9 +188,8 @@ public class GameLogic{
                     choice = readInt("-> ", 1, 1);
                     if(choice == 1) Shop.shop();
                 } else {
-                    Shop.showMenu();
+                    UrbanStory.urbanTraining8(player.getName());                    
                 }
-                
             }
         }
     }
@@ -219,8 +218,8 @@ public class GameLogic{
             } else if(input == 5) {
                 Inventory.inventoryMenu();
             }else if(input == 6) {
-                new ShopTemporary(player);
-                ShopTemporary.showMenu();
+                new Shop(player);
+                Shop.showShop(false);
             }else if(input == 7) {
                 isRunning = false;
             }
