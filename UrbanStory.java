@@ -329,8 +329,6 @@ public class UrbanStory {
         System.out.println("\twinning one sparring match is just the beginning. If you want to get stronger, you'll need to keep pushing.\"");
         System.out.println();
         System.out.println("Fred:\tYou can take a break, or if you're ready for more, we can keep training. What do you say?\"");
-
-        GameLogic.pressAnything();
     }
 }
 

@@ -11,57 +11,43 @@ public class StreetFighter extends Boxer {
 
     @Override
     public void jab() {
-        int damage = 10;
+        int damage = (int)(10 * getDamageSetter());
+        int staminaReduced = 10;
         player.setHp(player.getHp() - damage);
-        this.setStamina(this.getStamina() - 15);
+        this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " jabs " + player.getName() + " for " + damage + " damage!");
     }
 
     @Override
     public void hook() {
-        int damage = 15;
+        int damage = (int)(15 * getDamageSetter());
+        int staminaReduced = 15;
         player.setHp(player.getHp() - damage);
-        this.setStamina(this.getStamina() - 20);
+        this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " hooks " + player.getName() + " for " + damage + " damage!");
     }
 
     @Override
     public void uppercut() {
-        int damage = 20;
+        int damage = (int)(20 * getDamageSetter());
+        int staminaReduced = 20;
         player.setHp(player.getHp() - damage);
-        this.setStamina(this.getStamina() - 25);
+        this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " uppercuts " + player.getName() + " for " + damage + " damage!");
     }
 
     @Override
     public void block() {
         int newStamina = this.getStamina() + 5;
-        if (newStamina > this.getStamina()) {
-            newStamina = this.getStamina();
+        if (newStamina > this.getMaxStamina()) {
+            newStamina = this.getMaxStamina();
         } else {
             System.out.println(this.getName() + " blocks and gains 5 stamina!");
         }
         this.setStamina(newStamina);
     }
 
-    @Override
-    public void performAction(int choice){
-        switch (choice) {
-            case 0:
-                jab();
-                break;
-            case 1:
-                hook();
-                break;
-            case 2:
-                uppercut();
-                break;
-            case 3:
-                block();
-                break;
-            default:
-                System.out.println("Invalid action choice!");
-                break;
-        }
+    boolean hasEnoughStamina(int requiredStamina) {
+        return this.getStamina() >= requiredStamina;
     }
 }

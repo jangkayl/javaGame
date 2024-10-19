@@ -12,29 +12,27 @@ public class Player extends Boxer {
         this.currentWorld = 0;
         this.playerPoints = 0;
     }
+
+    public void setOpponent(StreetFighter opponent) {
+        Player.opponent = opponent;
+    }
     
     @Override
     public void jab() {
-        int damage = 10;
+        int damage = (int)(10 * getDamageSetter());
+        int staminaReduced = 10;
         opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getStamina() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " jabs " + opponent.getName() + " for " + damage + " damage!");
     }
     
     @Override
     public void hook() {
-        int damage = 15;
+        int damage = (int)(15 * getDamageSetter());
+        int staminaReduced = 15;
         opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getStamina() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " hooks " + opponent.getName() + " for " + damage + " damage!");
-    }
-    
-    @Override
-    public void uppercut() {
-        int damage = 20;
-        opponent.setHp(opponent.getHp() - damage);
-        this.setStamina(this.getStamina() - damage);
-        System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");
     }
     
     @Override
@@ -48,6 +46,15 @@ public class Player extends Boxer {
         this.setStamina(newStamina);
     }
     
+    @Override
+    public void uppercut() {
+        int damage = (int)(20 * getDamageSetter());
+        int staminaReduced = 20;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");
+    }
+
     public void chooseTrait(){
         String[][] bonus = {{"+50% HP", "-10% Stamina", "5% Critical Hit Chance", "-5% Dodge Chance"}, 
         {"+30% Stamina", "+10% Dodge Chance", "20% Critical Hit Chance", "-10% HP"},
@@ -99,42 +106,6 @@ public class Player extends Boxer {
 
     boolean hasEnoughStamina(int requiredStamina) {
         return this.getStamina() >= requiredStamina;
-    }
-
-    public void performAction(int choice) {
-        switch (choice) {
-            case 0:
-                if (hasEnoughStamina(10)) {
-                    jab();
-                } else {
-                    System.out.println(this.getName() + " doesn't have enough stamina to jab!");
-                }
-                break;
-            case 1:
-                if (hasEnoughStamina(15)) {
-                    hook();
-                } else {
-                    System.out.println(this.getName() + " doesn't have enough stamina to hook!");
-                }
-                break;
-            case 2:
-                block();
-                break;
-            case 3:
-                if (hasEnoughStamina(20)) {
-                    uppercut();
-                } else {
-                    System.out.println(this.getName() + " doesn't have enough stamina to uppercut!");
-                }
-                break;
-            default:
-                System.out.println("Invalid action choice!");
-                break;
-        }
-    }
-    
-    public void setOpponent(StreetFighter opponent) {
-        Player.opponent = opponent;
     }
 
     public void rankUp(){

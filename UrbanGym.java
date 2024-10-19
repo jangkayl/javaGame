@@ -1,8 +1,9 @@
 import java.util.Random;
 
 public class UrbanGym {
+    static Random rand = new Random();
     public static Player player;
-    static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -10"}, 
+    public static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -10"}, 
                                 {"Hook", "Damage: 15 | Stamina: -15"}, 
                                 {"Block", "Stamina: +5"}, 
                                 {"Uppercut", "Damage: 20 | Stamina: -20"}};
@@ -31,12 +32,11 @@ public class UrbanGym {
     
         System.out.print("-> ");
         String input = GameLogic.scan.nextLine();
-        Random rand = new Random();
     
-        while (isValidCombo(input) != 0) {
-            if(isValidCombo(input) == 1){
+        while (isValidCombo(input, player.getStamina()) != 0) {
+            if(isValidCombo(input, player.getStamina()) == 1){
                 System.out.println("Please enter a valid combo (e.g., 123):");
-            } else if(isValidCombo(input) == 2) {
+            } else if(isValidCombo(input, player.getStamina()) == 2) {
                 System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                 System.out.println("You may use 3 Blocks as your combo to regain stamina");
             }
@@ -45,12 +45,14 @@ public class UrbanGym {
 
         int[] choices = new int[3];
         int[] opponentChoices = new int[3];
-        
+
         for (int i = 0; i < 3; i++) {
             choices[i] = Character.getNumericValue(input.charAt(i) - 1);
             opponentChoices[i] = rand.nextInt(4);
         }
-    
+
+        opponentValid(opponentChoices);
+
         System.out.println();
         System.out.println("You've selected:\t\tOpponent selected:");
         for(int i = 0; i < 3; i++){
@@ -61,12 +63,12 @@ public class UrbanGym {
         printFight(choices, opponentChoices);
     }
 
-    private static int isValidCombo(String input) {
+    static int isValidCombo(String input, int stamina) {
         if (input.length() != 3) {
             return 1;
         }
 
-        int tempStamina = player.getStamina();
+        int tempStamina = stamina;
         for (char c : input.toCharArray()) {
             if (!Character.isDigit(c) || c < '1' || c > '4') {
                 return 1;
@@ -95,29 +97,63 @@ public class UrbanGym {
             if (tempStamina - staminaCost < 0) {
                 return 2;
             }
+            tempStamina -= staminaCost;
+        }
+        return 0;
+    }
+
+    static void opponentValid(int[] opponentChoice) {
+        int tempStamina = opponent.getStamina();
+        
+        for (int i = 0; i < opponentChoice.length; i++) {
+            int staminaCost = 0;
+    
+            boolean validChoice = false;
+            while (!validChoice) {
+                switch (opponentChoice[i]) {
+                    case 0: // Jab
+                        staminaCost = 10;
+                        break;
+                    case 1: // Hook
+                        staminaCost = 15;
+                        break;
+                    case 2: // Block 
+                        staminaCost = 0;
+                        break;
+                    case 3:  // Uppercut 
+                        staminaCost = 20;
+                        break;
+                }
+    
+                if (tempStamina - staminaCost >= 0) {
+                    validChoice = true; // Valid move found
+                } else {
+                    opponentChoice[i] = rand.nextInt(4);
+                }
+            }
     
             tempStamina -= staminaCost;
         }
-        
-        return 0;
     }
     
+
     static void printFight(int[] choices, int[] opponentChoices){
         for(int i = 0; i < 3; i++){
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
-                System.out.println(opponent.getName() + " fails to counter " + player.getName() + " with " + attack[opponentChoices[i]][0]);
-                player.performAction(choices[i]);
+                Fighting.playerSuccessAction(choices[i], false);
+                Fighting.opponentFailedAction(opponentChoices[i]);
                 if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
-                opponent.performAction(choices[i]);
+                Fighting.opponentSuccessAction(opponentChoices[i], false);
+                Fighting.playerFailedAction(choices[i]);
                 if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             } else {
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + attack[opponentChoices[i]][0]);
-                player.performAction(choices[i]);
+                Fighting.drawAction(choices[i], opponentChoices[i]);
                 if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             }
             GameLogic.printSeparator(50);
@@ -129,6 +165,8 @@ public class UrbanGym {
         System.out.println("You are fighting " + opponent.getName() + "!");
         System.out.println();
         GameLogic.printSeparator(40);
+        Fighting.setPlayerOpponent(player);
+        Fighting.setOpponent(opponent);
         player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
@@ -143,7 +181,8 @@ public class UrbanGym {
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
                 winnerReward();
-                Shop.setStage(2);                
+                Shop.setStage(2);  
+                UrbanStory.urbanTraining8(player.getName());                
             }
         }
         player.setHp(player.getMaxHp());
@@ -178,5 +217,7 @@ public class UrbanGym {
         System.out.println();
         System.out.println("You can now visit the shop and use your points to buy items.");
         GameLogic.printSeparator(40);
+        GameLogic.pressAnything();
     }
+
 }

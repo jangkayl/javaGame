@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.text.DecimalFormat;
 
 public class GameLogic{
-    static Scanner scan = new Scanner(System.in);   
+    public static Scanner scan = new Scanner(System.in);   
     static DecimalFormat df = new DecimalFormat("#,###.00");   
     static Player player;
     static int stage = 0;

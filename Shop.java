@@ -176,7 +176,6 @@ public class Shop {
                     break;
                 case 5:
                     if(items[choice-1].isSoldOut()) break;
-                    boolean drink = true;
                     GameLogic.printSeparator(35);
                     System.out.println("You've purchased 5 " + items[choice-1].name);
                     GameLogic.printSeparator(35);
