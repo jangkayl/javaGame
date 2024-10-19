@@ -39,5 +39,6 @@ public class Story {
         System.out.println("within him and warning of greater challenges ahead.");
         System.out.println();
         System.out.println(name + "'s journey has just begun, with battles ahead that go beyond the streets and the ring.");
+        GameLogic.pressAnything();
     }
 }

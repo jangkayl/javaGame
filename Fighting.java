@@ -20,7 +20,7 @@ public class Fighting {
         return rand.nextDouble();
     }
 
-    public static void playerSuccessAction(int choice, boolean isDraw) {
+    public static void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
         double critChance = generateRandom();
         double dodgeChance = generateRandom();
         
@@ -29,7 +29,7 @@ public class Fighting {
             System.out.println(player.getName() + "\'s " + UrbanGym.attack[choice][0] + " hit the weak spot! CRITICAL HIT!");
         }
 
-        if(dodgeChance < player.getDodgeChance() && choice != 2 && !isDraw){
+        if(dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw){
             playerDodged = true;
         }
 
@@ -90,7 +90,7 @@ public class Fighting {
         }
     }
 
-    public static void opponentSuccessAction(int choice, boolean isDraw) {
+    public static void opponentSuccessAction(int choice, int playerChoice, boolean isDraw) {
         double critChance = generateRandom();
         double dodgeChance = generateRandom();
         
@@ -99,7 +99,7 @@ public class Fighting {
             System.out.println(opponent.getName() + "\'s " + UrbanGym.attack[choice][0] + " hit the weak spot! CRITICAL HIT!");
         }
 
-        if(dodgeChance < opponent.getDodgeChance() && choice != 2 && !isDraw){
+        if(dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw){
             opponentDodged = true;
         }
 
@@ -162,11 +162,11 @@ public class Fighting {
 
     public static void drawAction(int choice, int opponentChoice) {
         player.setDamageSetter(0.5);
-        playerSuccessAction(choice, true);
+        playerSuccessAction(choice, opponentChoice, false);
         player.setDamageSetter(1);
 
         opponent.setDamageSetter(0.5);
-        opponentSuccessAction(opponentChoice, true);
+        opponentSuccessAction(opponentChoice, choice, false);
         opponent.setDamageSetter(1);
     }
 }

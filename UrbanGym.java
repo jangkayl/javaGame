@@ -126,9 +126,12 @@ public class UrbanGym {
                 }
     
                 if (tempStamina - staminaCost >= 0) {
-                    validChoice = true; // Valid move found
+                    validChoice = true;
                 } else {
-                    opponentChoice[i] = rand.nextInt(4);
+                    if(rand.nextDouble() < 0.1)
+                        opponentChoice[i] = rand.nextInt(4);
+                    else 
+                        opponentChoice[i] = 2;
                 }
             }
     
@@ -142,12 +145,12 @@ public class UrbanGym {
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
-                Fighting.playerSuccessAction(choices[i], false);
+                Fighting.playerSuccessAction(choices[i], opponentChoices[i], false);
                 Fighting.opponentFailedAction(opponentChoices[i]);
                 if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
-                Fighting.opponentSuccessAction(opponentChoices[i], false);
+                Fighting.opponentSuccessAction(opponentChoices[i], choices[i], false);
                 Fighting.playerFailedAction(choices[i]);
                 if(player.getHp() <= 0 || opponent.getHp() <= 0) return;
             } else {
