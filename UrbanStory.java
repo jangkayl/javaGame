@@ -356,7 +356,7 @@ public class UrbanStory {
         if(choice == 1) {
             System.out.println("Continue sa choi!");
         } else {
-            GameLogic.printMenu();
+            GameLogic.gameLoop();
         }
     }
 }

@@ -20,7 +20,7 @@ public class Player extends Boxer {
     @Override
     public void jab() {
         int damage = (int)(10 * getDamageSetter());
-        int staminaReduced = 10;
+        int staminaReduced = 5;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " jabs " + opponent.getName() + " for " + damage + " damage!");
@@ -29,7 +29,7 @@ public class Player extends Boxer {
     @Override
     public void hook() {
         int damage = (int)(15 * getDamageSetter());
-        int staminaReduced = 15;
+        int staminaReduced = 7;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " hooks " + opponent.getName() + " for " + damage + " damage!");
@@ -49,7 +49,7 @@ public class Player extends Boxer {
     @Override
     public void uppercut() {
         int damage = (int)(20 * getDamageSetter());
-        int staminaReduced = 20;
+        int staminaReduced = 10;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");

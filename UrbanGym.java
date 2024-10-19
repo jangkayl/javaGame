@@ -4,10 +4,10 @@ public class UrbanGym {
     static Random rand = new Random();
     static int round = 1;
     public static Player player;
-    public static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -10"}, 
-                                {"Hook", "Damage: 15 | Stamina: -15"}, 
+    public static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -5"}, 
+                                {"Hook", "Damage: 15 | Stamina: -7"}, 
                                 {"Block", "Stamina: +5"}, 
-                                {"Uppercut", "Damage: 20 | Stamina: -20"}};
+                                {"Uppercut", "Damage: 20 | Stamina: -10"}};
     public static StreetFighter opponent = new StreetFighter("Carlito Cortez", 120, 80, 0.2, 2, .20);
     
     public static void setPlayer(Player p) {
@@ -126,10 +126,10 @@ public class UrbanGym {
                         break;
                 }
     
-                if (tempStamina - staminaCost > 10) {
+                if (tempStamina - staminaCost >= 0) {
                     validChoice = true;
                 } else {
-                    if(rand.nextDouble() < 0.1)
+                    if(rand.nextDouble() > 0.3)
                         opponentChoice[i] = rand.nextInt(4);
                     else 
                         opponentChoice[i] = 2;

@@ -35,14 +35,14 @@ public class Fighting {
         
         switch (choice) {
             case 0:
-                if (player.hasEnoughStamina(10)) {
+                if (player.hasEnoughStamina(5)) {
                     player.jab();
                 } else {
                     System.out.println(player.getName() + " doesn't have enough stamina to jab!");
                 }
                 break;
             case 1:
-                if (player.hasEnoughStamina(15)) {
+                if (player.hasEnoughStamina(7)) {
                     player.hook();
                 } else {
                     System.out.println(player.getName() + " doesn't have enough stamina to hook!");
@@ -52,7 +52,7 @@ public class Fighting {
                 player.block();
                 break;
             case 3:
-                if (player.hasEnoughStamina(20)) {
+                if (player.hasEnoughStamina(10)) {
                     player.uppercut();
                 } else {
                     System.out.println(player.getName() + " doesn't have enough stamina to uppercut!");
@@ -69,15 +69,15 @@ public class Fighting {
     public static void playerFailedAction(int choice) {
         switch (choice) {
             case 0:
-                player.setStamina(player.getStamina() - 10);
+                player.setStamina(player.getStamina() - 5);
                 break;
             case 1:
-                player.setStamina(player.getStamina() - 15);
+                player.setStamina(player.getStamina() - 7);
                 break;
             case 2:
                 break;
             case 3:
-                player.setStamina(player.getStamina() - 20);
+                player.setStamina(player.getStamina() - 10);
                 break;
             default:
                 System.out.println("Invalid action choice!");
@@ -105,14 +105,14 @@ public class Fighting {
 
         switch (choice) {
             case 0:
-                if (opponent.hasEnoughStamina(10)) {
+                if (opponent.hasEnoughStamina(5)) {
                     opponent.jab();
                 } else {
                     System.out.println(opponent.getName() + " doesn't have enough stamina to jab!");
                 }
                 break;
             case 1:
-                if (opponent.hasEnoughStamina(15)) {
+                if (opponent.hasEnoughStamina(7)) {
                     opponent.hook();
                 } else {
                     System.out.println(opponent.getName() + " doesn't have enough stamina to hook!");
@@ -122,7 +122,7 @@ public class Fighting {
                 opponent.block();
                 break;
             case 3:
-                if (opponent.hasEnoughStamina(20)) {
+                if (opponent.hasEnoughStamina(10)) {
                     opponent.uppercut();
                 } else {
                     System.out.println(opponent.getName() + " doesn't have enough stamina to uppercut!");
@@ -139,15 +139,15 @@ public class Fighting {
     public static void opponentFailedAction(int choice) {
         switch (choice) {
             case 0:
-                opponent.setStamina(opponent.getStamina() - 10);
+                opponent.setStamina(opponent.getStamina() - 5);
                 break;
             case 1:
-                opponent.setStamina(opponent.getStamina() - 15);
+                opponent.setStamina(opponent.getStamina() - 7);
                 break;
             case 2:
                 break;
             case 3:
-                opponent.setStamina(opponent.getStamina() - 20);
+                opponent.setStamina(opponent.getStamina() - 10);
                 break;
             default:
                 System.out.println("Invalid action choice!");
