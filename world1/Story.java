@@ -1,3 +1,4 @@
+package world1;
 public class Story {
     public static void introStory() {
         System.out.println("\nThe ring isn't just a place, it's a proving ground. Here, every punch thrown tells a story of sacrifice, hunger, and ambition.");
@@ -21,7 +22,6 @@ public class Story {
         System.out.println();
         GameLogic.printSeparator(40);
     }
-
    
     public static void printIntro(String name){
         GameLogic.clearConsole();

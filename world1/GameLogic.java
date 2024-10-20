@@ -1,12 +1,19 @@
+package world1;
 import java.util.Scanner;
+
+import world1.database.GameDataManager;
+import world1.database.GameDatabase;
+
 import java.text.DecimalFormat;
 
 public class GameLogic{
     public static Scanner scan = new Scanner(System.in);   
     static DecimalFormat df = new DecimalFormat("#,###.00");   
     static Player player;
-    static int stage = 0;
-    public static boolean isRunning, isLose = false;
+    public static PlayerProgress playerProgress;
+    public static boolean isRunning;
+    static GameDatabase gameData = new GameDatabase();
+    static GameDataManager gameDataManager = new GameDataManager();
 
     // Read user input
     public static int readInt(String prompt, int min, int max){
@@ -58,9 +65,10 @@ public class GameLogic{
     }
 
     // Starting the game
-    public static void startGame(){
+    public static void startGame() {
         boolean nameSet = false;
         String name;
+
         clearConsole();
         printSeparator(40);
         printHeading("\tFIST OF FURY\n     DEVELOPED BY NWORLD");
@@ -68,24 +76,52 @@ public class GameLogic{
         pressAnything();
         System.out.println();
         printSeparator(40);
-        // Story.introStory();
-        do {
+
+        while (true) { 
             clearConsole();
-            printHeading("Enter your name:");
-            System.out.print("-> ");
-            name = scan.nextLine();
-            printHeading("You are " + name + " right?");
-            System.out.println("(1) Yes");
-            System.out.println("(2) No");
-            int input = readInt("-> ", 1, 2);
-            if(input == 1) nameSet = true;
-        } while(!nameSet);
-        
-        player = new Player(name, 100, 50, 0.1, 2, 0.1);
+            System.out.println("Have you ever played this game?");
+            System.out.println("1) Yep!");
+            System.out.println("2) Not yet");
+            int choice = readInt("-> ", 1, 2);
+            
+            if (choice == 2) {
+                do {
+                    clearConsole();
+                    printHeading("Enter your name:");
+                    System.out.print("-> ");
+                    name = scan.nextLine();
+                    printHeading("You are " + name + " right?");
+                    System.out.println("(1) Yes");
+                    System.out.println("(2) No");
+                    int input = readInt("-> ", 1, 2);
+                    if (input == 1) nameSet = true;
+                } while (!nameSet);
+    
+                player = new Player(name, 100, 50, 0.1, 2.0, 0.1, 0, 0, 0, 0, false);
+                playerProgress = new PlayerProgress(1);
+                gameData.inputPlayerDetails(player);
+                gameData.inputProgress(playerProgress);
+                gameData.saveGame();
+                break;
+            } else {
+                gameData.loadGame();
+                player = gameData.getGameDataManager().getPlayer();
+                playerProgress = gameData.getGameDataManager().getPlayerProgress();
+                if (player != null) {
+                    break; 
+                } else {
+                    System.out.println();
+                    System.out.println("No player found in the database. Please create a new player.");
+                    pressAnything();
+                }
+            }
+        }
+    
         Story.printIntro(player.getName());
         isRunning = true;
         gameLoop();
     }
+    
 
     // Prints the menu options
     public static void printMenu(){
@@ -93,6 +129,7 @@ public class GameLogic{
         printHeading("\tMENU");
         System.out.println("Choose an action:");
         printSeparator(20);
+        System.out.println("(0) Save progress");
         System.out.println("(1) Continue on your journey");
         System.out.println("(2) Check your stats");
         System.out.println("(3) Train in Gym");
@@ -100,6 +137,35 @@ public class GameLogic{
         System.out.println("(5) Inventory");
         System.out.println("(6) Shop");
         System.out.println("(7) Exit the game");
+        player.setHp(player.getMaxHp());
+        player.setStamina(player.getMaxStamina());
+    }
+
+    // Loops the menu options
+    public static void gameLoop(){
+        while(isRunning){
+            printMenu();
+            int input = readInt("-> ", 0, 7);
+            if(input == 0){
+                gameData.saveGame();
+                pressAnything();
+            } else if(input == 1){
+                continueJourney();
+            } else if(input == 2){
+                printStats();
+            } else if(input ==3){
+                gymTraining();
+            } else if(input == 4){
+                enterTournament();
+            } else if(input == 5) {
+                Inventory.inventoryMenu();
+            } else if(input == 6) {
+                new Shop(player);
+                Shop.showShop(false);
+            } else if(input == 7) {
+                isRunning = false;
+            }
+        }
     }
 
     // Continues players journey
@@ -146,7 +212,7 @@ public class GameLogic{
         printHeading("\tCHARACTER STATS");
         System.out.print("\t\t");
         printSeparator(10);
-        System.out.println("\t\t   " + player.getName());
+        System.out.println("\t\t" + player.getName());
         System.out.println("\t\t" + "* " +player.getCurrentRank() + " *");
         System.out.print("\t     ");
         printSeparator(16);
@@ -155,7 +221,7 @@ public class GameLogic{
         System.out.println("\tHP:\t\t\t" + player.getHp() + " / " + player.getMaxHp());
         System.out.print("\t");
         printSeparator(35);
-        System.out.println("\tStamina:\t\t" + player.getStamina() + " / " + player.getStamina());
+        System.out.println("\tStamina:\t\t" + player.getStamina() + " / " + player.getMaxStamina());
         System.out.print("\t");
         printSeparator(35);
         System.out.println("\tCritical Chance:\t" + df.format(player.getCritChance() * 100) + "%");
@@ -171,25 +237,28 @@ public class GameLogic{
     // Enter gym and train with coach
     public static void gymTraining(){
         int choice = 0;
+        System.out.println("Stage: " + player.getStage());
         if(player.getCurrentWorld() == 0){
-            if(stage == 0){
+            if(player.getStage() == 0){
                 clearConsole();
                 // UrbanStory.printTraining(player.getName());
                 player.chooseTrait();
-                stage = 1;
+                player.setStage(1);
+                System.out.println("Stage: " + player.getStage());
+                gameData.saveGame();
             } else {
                 clearConsole();
                 new Shop(player);
-                if(Shop.getStage() < 1){
-                    if(isLose){
+                if(Shop.getShopStage() < 1){
+                    if(player.getIsLose() == true){
                         UrbanStory.urbanTrainingLose(player.getName(), UrbanGym.opponent.getName());
-
                     } else {
                         UrbanStory.urbanTraining6(player.getName());
                         choice = readInt("-> ", 1, 1);
                         if(choice == 1) Shop.shop();
                     }
                 } else {
+                    playerProgress.setRound(0);
                     UrbanStory.urbanTraining8(player.getName());  
                     GameLogic.printMenu();                  
                 }
@@ -201,31 +270,10 @@ public class GameLogic{
     public static void enterTournament(){
         if(player.getCurrentWorld() == 0){
             clearConsole();
-            Tournament.printTournament();
-        }
-    }
-
-    // Loops the menu options
-    public static void gameLoop(){
-        while(isRunning){
-            printMenu();
-            int input = readInt("-> ", 1, 7);
-            if(input == 1){
-                continueJourney();
-            } else if(input == 2){
-                printStats();
-            } else if(input ==3){
-                gymTraining();
-            } else if(input == 4){
-                enterTournament();
-            } else if(input == 5) {
-                Inventory.inventoryMenu();
-            }else if(input == 6) {
-                new Shop(player);
-                Shop.showShop(false);
-            }else if(input == 7) {
-                isRunning = false;
-            }
+            Tournament.notValidTournament();
+        } else {
+            clearConsole();
+            Tournament.notValidTournament();
         }
     }
 

@@ -1,3 +1,4 @@
+package world1;
 import java.util.Random;
 
 public class Fighting {

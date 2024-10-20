@@ -1,3 +1,4 @@
+package world1;
 public abstract class Boxer {
     private String name;
     private int maxHp, hp, stamina, maxStamina;
@@ -22,6 +23,10 @@ public abstract class Boxer {
     
     public String getName(){
         return this.name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public int getMaxHp(){

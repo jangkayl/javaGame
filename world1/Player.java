@@ -1,16 +1,24 @@
-public class Player extends Boxer {
+package world1;
+import world1.interfaces.PlayerInterface;
+
+public class Player extends Boxer implements PlayerInterface {
     private String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};
     private String[] worlds = {"Urban Gym", "Training Facility", "Champ Arena"};
     private String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION", "LEGEND", "HALL OF FAMER"};
     private int currentWorld;
     private int currentRank;
     private int playerPoints;
+    private boolean isLose;
+    private int stage;
     static StreetFighter opponent;
 
-    public Player(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance) {
+    public Player(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance, int playerPoints, int currentWorld, int currentRank, int stage, boolean isLose) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
-        this.currentWorld = 0;
-        this.playerPoints = 0;
+        this.playerPoints = playerPoints;
+        this.currentWorld = currentWorld;
+        this.currentRank = currentRank;
+        this.stage = stage;
+        this.isLose = isLose;
     }
 
     public void setOpponent(StreetFighter opponent) {
@@ -116,6 +124,14 @@ public class Player extends Boxer {
             System.out.println("Nana kas pinakataas yati ra");
         }
     }
+
+    public void setCurrentRank(int currentRank){
+        this.currentRank = currentRank;
+    }
+
+    public int getRank(){
+        return currentRank;
+    }
     
     public String getCurrentRank() {
         return ranking[currentRank];
@@ -135,16 +151,32 @@ public class Player extends Boxer {
     
     public void setPlayerPoints(int playerPoints){
         this.playerPoints = playerPoints;
-   }
+    }
    
-   public int getPlayerPoints(){
+    public int getPlayerPoints(){
        return playerPoints;
-   }
+    }
    
-   public void addPlayerPoints(int points) {
+    public void addPlayerPoints(int points) {
        this.playerPoints += points;
        System.out.println("You earned " + points + " points! Total points: " + playerPoints);
-   }
+    }    
+
+    public int getStage() {
+        return stage;
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+
+    public boolean getIsLose() {
+        return isLose;
+    }
+
+    public void setIsLose(boolean isLose) {
+        this.isLose = isLose;
+    }
 
 }
 

@@ -1,8 +1,9 @@
+package world1;
 import java.util.Random;
 
 public class UrbanGym {
     static Random rand = new Random();
-    static int round = 1;
+    static PlayerProgress playerProgress = GameLogic.playerProgress;
     public static Player player;
     public static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -5"}, 
                                 {"Hook", "Damage: 15 | Stamina: -7"}, 
@@ -80,16 +81,16 @@ public class UrbanGym {
             
             switch (move) {
                 case 1: // Jab
-                    staminaCost = 10;
+                    staminaCost = 5;
                     break;
                 case 2: // Hook
-                    staminaCost = 15;
+                    staminaCost = 7;
                     break;
                 case 3: // Block (assuming no stamina cost)
                     staminaCost = 0;
                     break;
                 case 4:  // Uppercut 
-                    staminaCost = 20;
+                    staminaCost = 10;
                     break;
                 default:
                     return 1;
@@ -113,16 +114,16 @@ public class UrbanGym {
             while (!validChoice) {
                 switch (opponentChoice[i]) {
                     case 0: // Jab
-                        staminaCost = 10;
+                        staminaCost = 5;
                         break;
                     case 1: // Hook
-                        staminaCost = 15;
+                        staminaCost = 7;
                         break;
                     case 2: // Block 
                         staminaCost = 0;
                         break;
                     case 3:  // Uppercut 
-                        staminaCost = 20;
+                        staminaCost = 10;
                         break;
                 }
     
@@ -157,7 +158,7 @@ public class UrbanGym {
                 Fighting.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
-                if(player.getHp() <= 0) GameLogic.isLose = true;
+                if(player.getHp() <= 0) player.setIsLose(true);
                 return;
             }
             GameLogic.printSeparator(50);
@@ -167,9 +168,9 @@ public class UrbanGym {
     public static void fightLoop() {
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
-        System.out.println("\t\tRound " + round++);
+        System.out.println("\t\tRound " + playerProgress.getRound());
         GameLogic.printSeparator(40);
-        System.out.println("\tYou are fighting " + opponent.getName() + "!");
+        System.out.println("    You are fighting " + opponent.getName() + "!");
         System.out.println();
         GameLogic.printSeparator(40);
         Fighting.setPlayerOpponent(player);
@@ -188,8 +189,8 @@ public class UrbanGym {
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
                 winnerReward();
-                round = 1;
-                Shop.setStage(2);  
+                playerProgress.setRound(playerProgress.getRound() + 1);
+                Shop.setShopStage(2);  
                 UrbanStory.urbanTraining8(player.getName());    
                 GameLogic.pressAnything();
                 return;

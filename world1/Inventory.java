@@ -1,11 +1,12 @@
+package world1;
 import java.util.ArrayList;
 
 public class Inventory {
-    static class Item {
-        String name;
-        String description;
+    public static class Item {
+        public String name;
+        public String description;
 
-        Item(String name, String description) {
+        public Item(String name, String description) {
             this.name = name;
             this.description = description;
         }
@@ -17,6 +18,10 @@ public class Inventory {
     public static void setInventory(String item, String description) {
         inventoryItems.add(new Item(item, description));
         isEmpty = false;
+    }
+
+    public static ArrayList<Item> getInventoryItems() {
+        return inventoryItems;
     }
 
     public static void inventoryMenu() {

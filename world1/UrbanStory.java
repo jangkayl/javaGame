@@ -1,3 +1,4 @@
+package world1;
 public class UrbanStory {
     private static String[] array = {"Jab", "Hook", "Block", "Uppercut"};
 
@@ -357,6 +358,34 @@ public class UrbanStory {
             System.out.println("Continue sa choi!");
         } else {
             GameLogic.gameLoop();
+        }
+    }
+
+    public static void tournaOpponentBackstory(String opponentName) {
+        switch (opponentName) {
+            case "Brave Challenger":
+                System.out.println("\t\t🔥Backstory: The Brave Challenger is known for their relentless spirit and courage. " +
+                        "\n\t\tThey have fought through countless battles, earning respect from both friends and foes. " +
+                        "\n\t\tTheir journey began in a small town, where they trained day and night to become a formidable fighter. " +
+                        "\n\t\tNow, they seek to prove their strength in the tournament!");
+                        GameLogic.pressAnything();
+                break;
+            case "Savage Warrior":
+                System.out.println("\t\t💪Backstory: The Savage Warrior is a fierce competitor, feared by many for their brutal fighting style. " +
+                        "\n\t\tRaised in a harsh environment, they have learned to rely on their raw strength and instinct. " +
+                        "\n\t\tTheir reputation for taking down opponents with a single blow has made them a legend in the underground fighting scene. " +
+                        "\n\t\tThey enter the tournament to cement their legacy!");
+                        GameLogic.pressAnything();
+                break;
+            case "Legendary Champion":
+                System.out.println("\t\t🌟Backstory: The Legendary Champion has a storied history of victories and is regarded as a hero by many. " +
+                        "\n\t\tWith a record of undefeated battles, they have mastered every technique in the book. " +
+                        "\n\t\tHowever, their path has not been without hardship, as they have faced great losses that have shaped their character. " +
+                        "\n\t\tNow, they fight not just for glory, but to inspire the next generation of fighters.");
+                        GameLogic.pressAnything();
+                break;
+            default:
+                System.out.println("No backstory available for this opponent.");
         }
     }
 }

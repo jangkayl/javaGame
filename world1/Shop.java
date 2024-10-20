@@ -1,3 +1,4 @@
+package world1;
 public class Shop {
     static Player player;
     private static int stage;
@@ -17,11 +18,11 @@ public class Shop {
         return player;
     }
 
-    public static void setStage(int stage){
+    public static void setShopStage(int stage){
         Shop.stage = stage;
     }
 
-    public static int getStage(){
+    public static int getShopStage(){
         return stage;
     }
     
@@ -94,7 +95,7 @@ public class Shop {
         
         System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
 
-        if(getStage() < 1 && isTraining){
+        if(getShopStage() < 1 && isTraining){
             choice = GameLogic.readInt("-> ", 0, items.length);
             UrbanStory.urbanTraining7();
         } else {

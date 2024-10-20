@@ -1,3 +1,4 @@
+package world1;
 public class StreetFighter extends Boxer {
     static Player player;
     public StreetFighter(String name, int hp, int stamina, double critChance, double critMultiplier,
