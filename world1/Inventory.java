@@ -21,14 +21,16 @@ public class Inventory {
     }
 
     public static ArrayList<Item> getInventoryItems() {
-        return inventoryItems;
+        ArrayList<Item> items = new ArrayList<>();
+        return items; 
     }
 
     public static void inventoryMenu() {
         GameLogic.clearConsole();
-        GameLogic.printHeading("\tInventory");
+        GameLogic.printHeading(GameLogic.centerText("Inventory", 30));
         if (isEmpty) {
-            System.out.println("\tNO ITEM YET");
+            System.out.println();
+            System.out.println(GameLogic.centerText("NO ITEM YET", 30));
             GameLogic.pressAnything();
             return;
         }

@@ -5,17 +5,16 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import world1.Inventory;
 import world1.Player;
 import world1.PlayerProgress;
+import world1.Shop;
 
 public class GameDataManager {
     private Player player;
     private PlayerProgress playerProgress;
-    private List<Inventory> inventory = new ArrayList<>();
+    private Inventory inventory;
 
     public void setPlayer(Player player){
         this.player = player;
@@ -23,6 +22,10 @@ public class GameDataManager {
 
     public void setPlayerProgress(PlayerProgress playerProgress){
         this.playerProgress = playerProgress;
+    }
+
+    public void setInventory(Inventory inventory){
+        this.inventory = inventory;
     }
 
     public void loadGameData(String fileName) {
@@ -110,22 +113,30 @@ public class GameDataManager {
 
     private void addProgress(String key, String value) {
         if (playerProgress == null) {
-            playerProgress = new PlayerProgress(0);
+            playerProgress = new PlayerProgress(0, 0);
         }
 
         switch (key) {
             case "round":
                 playerProgress.setRound(Integer.parseInt(value));
                 break;
+            case "shopStage":
+                playerProgress.setShopStage(Integer.parseInt(value));
+                break;
         }
     }
 
-    private void addInventoryItem(String name, String description) {
-        Inventory.setInventory(name, description);
+    private void addInventoryItem(String key, String value) {
+        if(key.equals("world1")){
+            String name = Shop.getItemNameByIndex(Integer.parseInt(value)); 
+            String description = Shop.getItemDescriptionByIndex(Integer.parseInt(value)); 
+            if (name != null && description != null) {
+                Inventory.setInventory(name, description); 
+            }
+        }
     }
 
     public void saveGameData(String fileName) {
-
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             // Save player data
             bw.write("[player]\n");
@@ -148,13 +159,13 @@ public class GameDataManager {
             bw.write("\n[progress]\n");
             if (playerProgress != null) {
                 bw.write("round=" + playerProgress.getRound() + "\n");
-                bw.write("shopStage=" + playerProgress.getRound() + "\n");
+                bw.write("shopStage=" + playerProgress.getShopStage() + "\n");
             }
 
             // Save inventory data
             bw.write("\n[inventory]\n");
             for (Inventory.Item item : Inventory.getInventoryItems()) {
-                bw.write(item.name + "=" + item.description + "\n");
+                bw.write("world1=" + item.description + "\n");
             }
 
             System.out.println();
@@ -172,9 +183,5 @@ public class GameDataManager {
     
     public PlayerProgress getPlayerProgress() {
         return playerProgress;
-    }
-
-    public List<Inventory> getInventory() {
-        return inventory;
     }
 }

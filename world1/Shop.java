@@ -1,7 +1,7 @@
 package world1;
 public class Shop {
-    static Player player;
-    private static int stage;
+    static Player player = GameLogic.player;
+    static PlayerProgress playerProgress = GameLogic.playerProgress;
     static Item[] items = {
         new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false"),
         new Item("Light Training Gloves", "Increases punch speed and improves dodge ability.", 75, "+15% Stamina, +5% Dodge Chance","false"),
@@ -10,20 +10,8 @@ public class Shop {
         new Item("Basic Energy Drink", "Increases stamina for the next fight.", 20, "+15% Stamina for next fight","false"),
     };
 
-    public Shop(Player player){
-        Shop.player = player;
-    }
-
     public static Player getPlayer(){
         return player;
-    }
-
-    public static void setShopStage(int stage){
-        Shop.stage = stage;
-    }
-
-    public static int getShopStage(){
-        return stage;
     }
     
     public static class Item {
@@ -47,8 +35,8 @@ public class Shop {
             System.out.println("\tEffect:\t" + effect);
             System.out.println();
         }
-        
-       public boolean isSoldOut() {
+
+        public boolean isSoldOut() {
             return "true".equals(status);
         }
 
@@ -56,6 +44,20 @@ public class Shop {
             this.status = "true";
             this.name += " - SOLD OUT";
         }
+    }
+
+    public static String getItemNameByIndex(int index) {
+        if (index < 0 || index >= items.length) {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
+        return items[index].name;
+    }
+
+    public static String getItemDescriptionByIndex(int index) {
+        if (index < 0 || index >= items.length) {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
+        return items[index].description;
     }
 
     public static void showMenu(){
@@ -95,7 +97,7 @@ public class Shop {
         
         System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
 
-        if(getShopStage() < 1 && isTraining){
+        if(playerProgress.getShopStage() < 1 && isTraining){
             choice = GameLogic.readInt("-> ", 0, items.length);
             UrbanStory.urbanTraining7();
         } else {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GAME.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gameData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/GameLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/PlayerProgress.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/PlayerProgress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/UrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/UrbanGym.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/UrbanStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/UrbanStory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/database/GameDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/database/GameDataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/database/GameDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/database/GameDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/interfaces/PlayerProgressInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/interfaces/PlayerProgressInterface.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "jangkayl"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:jangkayl/javaGame.git",
+    "accountId": "4821c9bb-2cf6-4ce1-959c-5fbb6f256c1f"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2nhplsy296x5yAiK99eOR5w6kCw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindow.Run.ShowToolbar": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/Music/GAME",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="" />
+      <created>1729435315649</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729435315649</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/GAME$Main.ic" NAME="Main Coverage Results" MODIFIED="1729435829769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>

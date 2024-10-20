@@ -2,6 +2,7 @@ package world1.database;
 
 import world1.Player;
 import world1.PlayerProgress;
+import world1.Inventory;
 
 public class GameDatabase {
     private static final String FILE_NAME = "gameData.txt";
@@ -29,5 +30,9 @@ public class GameDatabase {
 
     public void inputProgress(PlayerProgress playerProgress) {
         gameDataManager.setPlayerProgress(playerProgress);
+    }
+
+    public void inputInventory(Inventory arrayList) { 
+        gameDataManager.setInventory(arrayList);
     }
 }

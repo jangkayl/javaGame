@@ -1,13 +1,13 @@
 [player]
 name=MgaJexter
-hp=165
-maxHp=165
+hp=150
+maxHp=150
 stamina=45
 maxStamina=45
-critChance=0.75
+critChance=0.5
 critMultiplier=2.0
 dodgeChance=0.095
-playerPoints=25
+playerPoints=100
 currentWorld=0
 currentRank=0
 stage=1
@@ -18,4 +18,3 @@ round=0
 shopStage=2
 
 [inventory]
-Wrist Wraps=+10% Health, +5% Critical Hit Chance

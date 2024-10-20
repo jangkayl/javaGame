@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 public class GameLogic{
     public static Scanner scan = new Scanner(System.in);   
     static DecimalFormat df = new DecimalFormat("#,###.00");   
-    static Player player;
+    public static Player player;
     public static PlayerProgress playerProgress;
     public static boolean isRunning;
     static GameDatabase gameData = new GameDatabase();
@@ -64,6 +64,37 @@ public class GameLogic{
         scan.nextLine();
     }
 
+    public static String formatColumns(String leftText, String rightText, int columnWidth) {
+		StringBuilder formattedLine = new StringBuilder();
+
+		formattedLine.append(leftText);
+		int spaces = columnWidth - leftText.length();
+		formattedLine.append(" ".repeat(Math.max(0, spaces)));
+
+		formattedLine.append(rightText);
+
+		return formattedLine.toString();
+	}
+
+    public static String centerText(String text, int totalWidth) {
+        if (text == null || text.length() >= totalWidth) {
+            return text;
+        }
+
+        int padding = (totalWidth - text.length()) / 2;
+        StringBuilder centeredText = new StringBuilder();
+
+        centeredText.append(" ".repeat(padding));
+
+        centeredText.append(text);
+
+        while (centeredText.length() < totalWidth) {
+            centeredText.append(" ");
+        }
+
+        return centeredText.toString();
+    }
+
     // Starting the game
     public static void startGame() {
         boolean nameSet = false;
@@ -71,7 +102,7 @@ public class GameLogic{
 
         clearConsole();
         printSeparator(40);
-        printHeading("\tFIST OF FURY\n     DEVELOPED BY NWORLD");
+        printHeading("\t\tFIST OF FURY\n     DEVELOPED BY NWORLD");
         printSeparator(40);
         pressAnything();
         System.out.println();
@@ -98,7 +129,7 @@ public class GameLogic{
                 } while (!nameSet);
     
                 player = new Player(name, 100, 50, 0.1, 2.0, 0.1, 0, 0, 0, 0, false);
-                playerProgress = new PlayerProgress(1);
+                playerProgress = new PlayerProgress(1, 0);
                 gameData.inputPlayerDetails(player);
                 gameData.inputProgress(playerProgress);
                 gameData.saveGame();
@@ -121,12 +152,12 @@ public class GameLogic{
         isRunning = true;
         gameLoop();
     }
-    
 
     // Prints the menu options
     public static void printMenu(){
+        gameData.saveGame();
         clearConsole();
-        printHeading("\tMENU");
+        printHeading(centerText("MENU", 30));
         System.out.println("Choose an action:");
         printSeparator(20);
         System.out.println("(0) Save progress");
@@ -160,8 +191,8 @@ public class GameLogic{
             } else if(input == 5) {
                 Inventory.inventoryMenu();
             } else if(input == 6) {
-                new Shop(player);
                 Shop.showShop(false);
+                gameData.inputInventory(getInventoryItems);
             } else if(input == 7) {
                 isRunning = false;
             }
@@ -209,48 +240,41 @@ public class GameLogic{
     // Checks players stats
     public static void printStats(){
         clearConsole();
-        printHeading("\tCHARACTER STATS");
+        printHeading(centerText("CHARACTER STATS", 30));
         System.out.print("\t\t");
         printSeparator(10);
-        System.out.println("\t\t" + player.getName());
-        System.out.println("\t\t" + "* " +player.getCurrentRank() + " *");
-        System.out.print("\t     ");
-        printSeparator(16);
-        System.out.print("\t\t");
+        System.out.println(centerText(player.getName(), 28));
+        System.out.println(centerText("* " + player.getCurrentRank() + " *", 27));
+        System.out.print(centerText(" ", 6));
+        printSeparator(15);
+        System.out.print(centerText(" ", 8));
         printSeparator(10);
-        System.out.println("\tHP:\t\t\t" + player.getHp() + " / " + player.getMaxHp());
-        System.out.print("\t");
+        System.out.println(formatColumns(" HP:",player.getHp() + " / " + player.getMaxHp(), 25));
         printSeparator(35);
-        System.out.println("\tStamina:\t\t" + player.getStamina() + " / " + player.getMaxStamina());
-        System.out.print("\t");
+        System.out.println(formatColumns(" Stamina:",player.getStamina() + " / " + player.getMaxStamina(), 25));
         printSeparator(35);
-        System.out.println("\tCritical Chance:\t" + df.format(player.getCritChance() * 100) + "%");
-        System.out.print("\t");
+        System.out.println(formatColumns(" Critical Chance:", df.format(player.getCritChance() * 100) + "%", 25));
         printSeparator(35);
-        System.out.println("\tCritical Multiplier:\t" + df.format(player.getCritMultiplier()) + "x");
-        System.out.print("\t");
+        System.out.println(formatColumns(" Critical Multiplier:", df.format(player.getCritMultiplier()) + "x", 25));
         printSeparator(35);
-        System.out.println("\tDodge Chance:\t\t" + df.format(player.getDodgeChance() * 100) + "%");
+        System.out.println(formatColumns(" Dodge Chance:", df.format(player.getDodgeChance() * 100) + "%", 25));
         pressAnything();
     }
 
     // Enter gym and train with coach
     public static void gymTraining(){
         int choice = 0;
-        System.out.println("Stage: " + player.getStage());
         if(player.getCurrentWorld() == 0){
             if(player.getStage() == 0){
                 clearConsole();
                 // UrbanStory.printTraining(player.getName());
                 player.chooseTrait();
                 player.setStage(1);
-                System.out.println("Stage: " + player.getStage());
                 gameData.saveGame();
             } else {
                 clearConsole();
-                new Shop(player);
-                if(Shop.getShopStage() < 1){
-                    if(player.getIsLose() == true){
+                if(playerProgress.getShopStage() < 1){
+                    if(player.getIsLose()){
                         UrbanStory.urbanTrainingLose(player.getName(), UrbanGym.opponent.getName());
                     } else {
                         UrbanStory.urbanTraining6(player.getName());
@@ -258,9 +282,7 @@ public class GameLogic{
                         if(choice == 1) Shop.shop();
                     }
                 } else {
-                    playerProgress.setRound(0);
                     UrbanStory.urbanTraining8(player.getName());  
-                    GameLogic.printMenu();                  
                 }
             }
         }

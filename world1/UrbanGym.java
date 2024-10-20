@@ -17,9 +17,9 @@ public class UrbanGym {
 
     static void printStats(){
         System.out.println();
-        System.out.println(player.getName() + "  \t\t\t\t" + opponent.getName());
-        System.out.println("HP\t  " + player.getHp() + "/" + player.getMaxHp() + "  \t\tHP\t  " + opponent.getHp() + "/" + opponent.getMaxHp());
-        System.out.println("Stamina\t  " + player.getStamina() + "/" + player.getMaxStamina() + "\t\t\tStamina\t  " + opponent.getStamina() + "/" + opponent.getMaxStamina());
+        System.out.println(GameLogic.formatColumns(player.getName(), opponent.getName(), 30));
+        System.out.println(GameLogic.formatColumns("HP        " + player.getHp() + "/" + player.getMaxHp(), "HP        " + opponent.getHp() + "/" + opponent.getMaxHp(), 30));
+        System.out.println(GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30));
         System.out.println();
     }
     
@@ -158,7 +158,6 @@ public class UrbanGym {
                 Fighting.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
-                if(player.getHp() <= 0) player.setIsLose(true);
                 return;
             }
             GameLogic.printSeparator(50);
@@ -168,9 +167,9 @@ public class UrbanGym {
     public static void fightLoop() {
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
-        System.out.println("\t\tRound " + playerProgress.getRound());
+        System.out.println(GameLogic.centerText("Round " + playerProgress.getRound(), 40));
         GameLogic.printSeparator(40);
-        System.out.println("    You are fighting " + opponent.getName() + "!");
+        System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
         System.out.println();
         GameLogic.printSeparator(40);
         Fighting.setPlayerOpponent(player);
@@ -183,14 +182,17 @@ public class UrbanGym {
             if (player.getHp() <= 0) {
                 System.out.println();
                 System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
+                player.setIsLose(true);
+                playerProgress.setRound(playerProgress.getRound() + 1);
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
             } else if(opponent.getHp() <= 0){
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
+                player.setIsLose(false);
                 winnerReward();
-                playerProgress.setRound(playerProgress.getRound() + 1);
-                Shop.setShopStage(2);  
+                playerProgress.setRound(0);  
+                playerProgress.setShopStage(2);  
                 UrbanStory.urbanTraining8(player.getName());    
                 GameLogic.pressAnything();
                 return;
