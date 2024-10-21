@@ -356,7 +356,6 @@ public class UrbanStory {
         int choice = GameLogic.readInt("-> ", 1, 2);
         if(choice == 1) {
             System.out.println("Continue sa choi!");
-            GameLogic.pressAnything();
         } else {
             return;
         }

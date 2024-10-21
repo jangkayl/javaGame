@@ -5,16 +5,18 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import world1.Inventory;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.Shop;
+import world1.Inventory.Item;
 
 public class GameDataManager {
     private Player player;
     private PlayerProgress playerProgress;
-    private Inventory inventory;
+    private ArrayList<Item> inventoryItems = new ArrayList<>();
 
     public void setPlayer(Player player){
         this.player = player;
@@ -24,8 +26,8 @@ public class GameDataManager {
         this.playerProgress = playerProgress;
     }
 
-    public void setInventory(Inventory inventory){
-        this.inventory = inventory;
+    public void setInventory(ArrayList<Item> inventoryItems){
+        this.inventoryItems = inventoryItems;
     }
 
     public void loadGameData(String fileName) {
@@ -164,9 +166,12 @@ public class GameDataManager {
 
             // Save inventory data
             bw.write("\n[inventory]\n");
-            for (Inventory.Item item : Inventory.getInventoryItems()) {
-                bw.write("world1=" + item.description + "\n");
+            inventoryItems = Inventory.getInventoryItems();
+            for (int i = 0; i < inventoryItems.size(); i++) {
+                // Write the index and details of each item per line
+                bw.write("world1=" + i + "\n");
             }
+            
 
             System.out.println();
             System.out.println("Game data saved successfully!");
@@ -183,5 +188,9 @@ public class GameDataManager {
     
     public PlayerProgress getPlayerProgress() {
         return playerProgress;
+    }
+
+    public ArrayList<Item> getInventory() {
+        return inventoryItems;
     }
 }

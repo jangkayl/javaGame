@@ -21,8 +21,7 @@ public class Inventory {
     }
 
     public static ArrayList<Item> getInventoryItems() {
-        ArrayList<Item> items = new ArrayList<>();
-        return items; 
+        return inventoryItems; 
     }
 
     public static void inventoryMenu() {

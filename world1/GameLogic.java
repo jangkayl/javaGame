@@ -12,7 +12,7 @@ public class GameLogic{
     public static Player player;
     public static PlayerProgress playerProgress;
     public static boolean isRunning;
-    static GameDatabase gameData = new GameDatabase();
+    public static GameDatabase gameData = new GameDatabase();
     static GameDataManager gameDataManager = new GameDataManager();
 
     // Read user input
@@ -190,9 +190,11 @@ public class GameLogic{
                 enterTournament();
             } else if(input == 5) {
                 Inventory.inventoryMenu();
+                gameData.getGameDataManager().getInventory();
             } else if(input == 6) {
+                new Shop(player, playerProgress);
                 Shop.showShop(false);
-                gameData.inputInventory(getInventoryItems);
+                gameData.inputInventory(Inventory.getInventoryItems());
             } else if(input == 7) {
                 isRunning = false;
             }

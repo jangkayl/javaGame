@@ -1,6 +1,6 @@
 package world1;
 public class Shop {
-    static Player player = GameLogic.player;
+    static Player player;
     static PlayerProgress playerProgress = GameLogic.playerProgress;
     static Item[] items = {
         new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false"),
@@ -10,8 +10,9 @@ public class Shop {
         new Item("Basic Energy Drink", "Increases stamina for the next fight.", 20, "+15% Stamina for next fight","false"),
     };
 
-    public static Player getPlayer(){
-        return player;
+    public Shop(Player p, PlayerProgress progress){
+        player = p;
+        playerProgress = progress;
     }
     
     public static class Item {
