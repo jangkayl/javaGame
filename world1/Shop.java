@@ -3,11 +3,11 @@ public class Shop {
     static Player player;
     static PlayerProgress playerProgress = GameLogic.playerProgress;
     static Item[] items = {
-        new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false"),
-        new Item("Light Training Gloves", "Increases punch speed and improves dodge ability.", 75, "+15% Stamina, +5% Dodge Chance","false"),
-        new Item("Protein Bar", "A quick recovery boost after training.", 30, "+10% Health","false"),
-        new Item("Beginner's Jump Rope", "Improves footwork and stamina.", 40, "+13% Stamina","false"),
-        new Item("Basic Energy Drink", "Increases stamina for the next fight.", 20, "+15% Stamina for next fight","false"),
+        new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false","HAND"),
+        new Item("Light Training Gloves", "Increases punch speed and improves dodge ability.", 75, "+15% Stamina, +5% Dodge Chance","false","HAND"),
+        new Item("Warrior's Helmet", "A sturdy helmet that provides excellent protection and boosts health recovery.", 30, "+10% Health", "false", "HEAD"),
+        new Item("Beginner's Boots", "Improves footwork and stamina.", 40, "+13% Stamina","false","BOOT"),
+        new Item("Basic Energy Drink", "Increases stamina for the next fight.", 20, "+15% Stamina for next fight","false","FOOD"),
     };
 
     public Shop(Player p, PlayerProgress progress){
@@ -21,13 +21,15 @@ public class Shop {
         int cost;
         String effect;
         String status;
+        String body;
 
-        public Item(String name, String description, int cost, String effect, String status) {
+        public Item(String name, String description, int cost, String effect, String status, String body) {
             this.name = name;
             this.description = description;
             this.cost = cost;
             this.effect = effect;
             this.status = status;
+            this.body = body;
         }
 
         public void displayItem() {
@@ -61,6 +63,25 @@ public class Shop {
         return items[index].description;
     }
 
+    public static String getItemBodyByIndex(int index) {
+        if (index < 0 || index >= items.length) {
+            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        }
+        return items[index].body;
+    }
+
+    public static int getItemIndexByDescription(String description) {
+        for (int i = 0; i < items.length; i++) {
+            System.out.println("Description: " + description);
+            System.out.println("Item: " + items[i].description);
+            if (items[i] != null && description.trim().equals(items[i].description.trim())) {
+                return i; 
+            }
+        }
+        return -1; 
+    }
+    
+    
     public static void showMenu(){
         GameLogic.clearConsole();
         GameLogic.printHeading("    Urban Gym");
@@ -131,7 +152,7 @@ public class Shop {
                     GameLogic.printSeparator(35);
                     System.out.println();
                     maxHp = (int)(player.getMaxHp() + (player.getMaxHp() * 0.10));
-                    Inventory.setInventory(items[choice-1].name,items[choice-1].effect);
+                    Inventory.setInventory(items[choice-1].name, items[choice-1].description, items[choice-1].body);
                     player.setHp(maxHp);
                     player.setMaxHp(maxHp);
                     player.setCritChance(player.getCritChance() +(player.getCritChance() * .5));
@@ -145,7 +166,7 @@ public class Shop {
                     GameLogic.printSeparator(35);
                     System.out.println();
                     maxStam = (int) (player.getMaxStamina() + (player.getMaxStamina() * 0.15));
-                    Inventory.setInventory(items[choice-1].name,items[choice-1].effect);
+                    Inventory.setInventory(items[choice-1].name, items[choice-1].description, items[choice-1].body);
                     player.setStamina(maxStam);
                     player.setMaxStamina(maxStam);
                     player.setDodgeChance(player.getDodgeChance() +(player.getDodgeChance() * .5));
@@ -159,7 +180,7 @@ public class Shop {
                     GameLogic.printSeparator(35);
                     System.out.println();
                     maxHp = (int)(player.getMaxHp() + (player.getMaxHp() * 0.10));
-                    Inventory.setInventory(items[choice-1].name,items[choice-1].effect);
+                    Inventory.setInventory(items[choice-1].name, items[choice-1].description, items[choice-1].body);
                     player.setHp(maxHp);
                     player.setMaxHp(maxHp);
                     items[choice-1].setSoldOut();
@@ -172,7 +193,7 @@ public class Shop {
                     GameLogic.printSeparator(35);
                     System.out.println();
                     maxStam = (int) (player.getMaxStamina() + (player.getMaxStamina() * 0.10));
-                    Inventory.setInventory(items[choice-1].name,items[choice-1].effect);
+                    Inventory.setInventory(items[choice-1].name, items[choice-1].description, items[choice-1].body);
                     player.setStamina(maxStam);
                     player.setMaxStamina(maxStam);
                     items[choice-1].setSoldOut();
@@ -220,4 +241,59 @@ public class Shop {
         }
         return false;
     }
+
+    public static void applyEffect(String name){
+        int choice = 0 ;
+        for(int i = 0 ; i < 5 ; i++){
+            if(name.equals(items[i].name)){
+                choice = i;
+                break;
+            }
+        }
+        switch(choice){
+            case 0:
+            applyHpEffect(0.10, 0.5,choice);
+            break;
+        case 1:
+            applyStaminaEffect(0.15, 0.5,choice);
+            break;
+        case 2:
+            applyHpEffect(0.10, 0,choice);
+            break;
+        case 3:
+            applyStaminaEffect(0.10, 0,choice);
+            break;
+        case 4:
+            applyStaminaEffect(0.15, 0,choice);
+            break;
+        default:
+            System.out.println("Invalid item choice.");
+        }
+    }
+
+    private static void applyHpEffect(double hpIncreasePercentage, double critChanceIncreasePercentage,int choice) {
+        int maxHp = (int) (player.getMaxHp() + (player.getMaxHp() * hpIncreasePercentage));
+        player.setHp(maxHp);
+        player.setMaxHp(maxHp);
+        
+        if (critChanceIncreasePercentage > 0) {
+            player.setCritChance(player.getCritChance() + (player.getCritChance() * critChanceIncreasePercentage));
+        }
+        
+        items[choice].setSoldOut();
+    
+    }
+    
+    private static void applyStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
+        int maxStamina = (int) (player.getMaxStamina() + (player.getMaxStamina() * stamIncreasePercentage));
+        player.setStamina(maxStamina);
+        player.setMaxStamina(maxStamina);
+        
+        if (dodgeChanceIncreasePercentage > 0) {
+            player.setDodgeChance(player.getDodgeChance() + (player.getDodgeChance() * dodgeChanceIncreasePercentage));
+        }
+        
+        items[choice].setSoldOut();
+    }
+    
 }

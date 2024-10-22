@@ -1,6 +1,7 @@
 package world1;
 import java.util.Scanner;
 
+import world1.Inventory.Item;
 import world1.database.GameDataManager;
 import world1.database.GameDatabase;
 
@@ -11,6 +12,7 @@ public class GameLogic{
     static DecimalFormat df = new DecimalFormat("#,###.00");   
     public static Player player;
     public static PlayerProgress playerProgress;
+    public static Item[] inventoryItems;
     public static boolean isRunning;
     public static GameDatabase gameData = new GameDatabase();
     static GameDataManager gameDataManager = new GameDataManager();
@@ -138,6 +140,13 @@ public class GameLogic{
                 gameData.loadGame();
                 player = gameData.getGameDataManager().getPlayer();
                 playerProgress = gameData.getGameDataManager().getPlayerProgress();
+                inventoryItems = gameData.getGameDataManager().getInventory();
+                if(inventoryItems != null){
+                    for(int i = 0; i < inventoryItems.length; i++){
+                        System.out.println(inventoryItems[i].name);
+                    }
+                }
+                Inventory.setInventoryItems(inventoryItems);
                 if (player != null) {
                     break; 
                 } else {
@@ -175,6 +184,7 @@ public class GameLogic{
     // Loops the menu options
     public static void gameLoop(){
         while(isRunning){
+            new Shop(player, playerProgress);
             printMenu();
             int input = readInt("-> ", 0, 7);
             if(input == 0){
@@ -189,12 +199,11 @@ public class GameLogic{
             } else if(input == 4){
                 enterTournament();
             } else if(input == 5) {
-                Inventory.inventoryMenu();
                 gameData.getGameDataManager().getInventory();
+                Inventory.inventoryMenu();
             } else if(input == 6) {
-                new Shop(player, playerProgress);
                 Shop.showShop(false);
-                gameData.inputInventory(Inventory.getInventoryItems());
+                gameData.inputInventory(Inventory.inventoryItems);
             } else if(input == 7) {
                 isRunning = false;
             }
@@ -292,13 +301,8 @@ public class GameLogic{
 
     // Enter tournament and fight with your opponents
     public static void enterTournament(){
-        if(player.getCurrentWorld() == 0){
-            clearConsole();
-            Tournament.notValidTournament();
-        } else {
-            clearConsole();
-            Tournament.notValidTournament();
-        }
+	    clearConsole();
+	    Tournament.notValidTournament();
     }
 
     public static void printWithDelay(String text) {

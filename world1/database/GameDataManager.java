@@ -5,18 +5,17 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import world1.Inventory;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.Shop;
-import world1.Inventory.Item;
+import world1.Inventory.Item; 
 
 public class GameDataManager {
     private Player player;
     private PlayerProgress playerProgress;
-    private ArrayList<Item> inventoryItems = new ArrayList<>();
+    private Item[] inventoryItems;
 
     public void setPlayer(Player player){
         this.player = player;
@@ -26,7 +25,7 @@ public class GameDataManager {
         this.playerProgress = playerProgress;
     }
 
-    public void setInventory(ArrayList<Item> inventoryItems){
+    public void setInventory(Item[] inventoryItems){
         this.inventoryItems = inventoryItems;
     }
 
@@ -129,15 +128,34 @@ public class GameDataManager {
     }
 
     private void addInventoryItem(String key, String value) {
-        if(key.equals("world1")){
+        if (inventoryItems == null) {
+            inventoryItems = new Item[0];
+        }
+
+        if (key.equals("world1")) {
             String name = Shop.getItemNameByIndex(Integer.parseInt(value)); 
             String description = Shop.getItemDescriptionByIndex(Integer.parseInt(value)); 
-            if (name != null && description != null) {
-                Inventory.setInventory(name, description); 
+            String body = Shop.getItemBodyByIndex(Integer.parseInt(value)); 
+            System.out.println("Name: " + name);
+            System.out.println("description: " + description);
+            System.out.println("body: " + body);
+            
+            if (name != null && description != null && body != null) {
+                Item newItem = new Item(name, description, body);
+                
+                Item[] newInventory = new Item[inventoryItems.length + 1];
+                
+                for (int i = 0; i < inventoryItems.length; i++) {
+                    newInventory[i] = inventoryItems[i];
+                }
+                
+                newInventory[newInventory.length - 1] = newItem;
+                
+                inventoryItems = newInventory;
             }
         }
     }
-
+    
     public void saveGameData(String fileName) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             // Save player data
@@ -166,13 +184,15 @@ public class GameDataManager {
 
             // Save inventory data
             bw.write("\n[inventory]\n");
-            inventoryItems = Inventory.getInventoryItems();
-            for (int i = 0; i < inventoryItems.size(); i++) {
-                // Write the index and details of each item per line
-                bw.write("world1=" + i + "\n");
+            if(inventoryItems != null){
+                for(int i = 0; i < Inventory.getItemCount(); i++){
+                    System.out.println("Add inventory: " + inventoryItems[i].name);
+                    int index = Shop.getItemIndexByDescription(inventoryItems[i].description);
+                    System.out.println("Index: " + index);
+                    bw.write("world1=" + index + "\n");
+                }
             }
             
-
             System.out.println();
             System.out.println("Game data saved successfully!");
 
@@ -190,7 +210,7 @@ public class GameDataManager {
         return playerProgress;
     }
 
-    public ArrayList<Item> getInventory() {
+    public Item[] getInventory() {
         return inventoryItems;
     }
 }

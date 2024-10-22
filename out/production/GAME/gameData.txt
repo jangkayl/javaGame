@@ -1,12 +1,12 @@
 [player]
-name=MgaJexter
+name=mgaJexter
 hp=165
 maxHp=165
-stamina=51
-maxStamina=51
+stamina=45
+maxStamina=45
 critChance=0.75
 critMultiplier=2.0
-dodgeChance=0.14250000000000002
+dodgeChance=0.095
 playerPoints=25
 currentWorld=0
 currentRank=0

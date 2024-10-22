@@ -2,7 +2,6 @@ package world1.database;
 
 import world1.Player;
 import world1.PlayerProgress;
-import java.util.ArrayList;
 import world1.Inventory.Item;
 
 public class GameDatabase {
@@ -33,7 +32,7 @@ public class GameDatabase {
         gameDataManager.setPlayerProgress(playerProgress);
     }
 
-    public void inputInventory(ArrayList<Item> inventoryItems) { 
+    public void inputInventory(Item[] inventoryItems) { 
         gameDataManager.setInventory(inventoryItems);
     }
 }
