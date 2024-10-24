@@ -5,22 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/gameData.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/GameLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/GameLogic.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Inventory$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Inventory$Item.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDataManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDatabase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/GameLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/database/GameDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/database/GameDataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/database/GameDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/database/GameDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +50,7 @@
     "ToolWindow.Run.ShowToolbar": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Downloads/GAME 5/Game/src/game",
+    "last_opened_file_path": "C:/Users/User/Music/GAME",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>

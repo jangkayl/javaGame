@@ -2,7 +2,7 @@ package world1;
 public class Shop {
     static Player player;
     static PlayerProgress playerProgress = GameLogic.playerProgress;
-    static Item[] items = {
+    public static Item[] items = {
         new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false","HAND"),
         new Item("Light Training Gloves", "Increases punch speed and improves dodge ability.", 75, "+15% Stamina, +5% Dodge Chance","false","HAND"),
         new Item("Warrior's Helmet", "A sturdy helmet that provides excellent protection and boosts health recovery.", 30, "+10% Health", "false", "HEAD"),
@@ -302,7 +302,6 @@ public class Shop {
             double newCrit = player.getCritChance() + critChanceIncreasePercentage;
             player.setCritChance(newCrit);
         }
-        items[choice].setSoldOut();
     }
     
     private static void applyStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
@@ -315,7 +314,6 @@ public class Shop {
             double newDodge = player.getDodgeChance() + dodgeChanceIncreasePercentage;
             player.setDodgeChance(newDodge);
         }
-        items[choice].setSoldOut();
     }
 
     private static void removeHpEffect(double hpIncreasePercentage, double critChanceIncreasePercentage,int choice) {
@@ -328,7 +326,6 @@ public class Shop {
             double newCrit = player.getCritChance() - critChanceIncreasePercentage;
             player.setCritChance(newCrit);
         }
-        items[choice].setSoldOut();
     }
     
     private static void removeStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
@@ -340,6 +337,5 @@ public class Shop {
         if (dodgeChanceIncreasePercentage > 0) {
             player.setDodgeChance(player.getDodgeChance() - dodgeChanceIncreasePercentage);
         }
-        items[choice].setSoldOut();
     }
 }

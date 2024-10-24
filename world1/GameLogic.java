@@ -10,11 +10,12 @@ import java.text.DecimalFormat;
 public class GameLogic{
     public static Scanner scan = new Scanner(System.in);   
     static DecimalFormat df = new DecimalFormat("#,###.00");   
-    public static Player player;
-    public static PlayerProgress playerProgress;
-    public static Item[] inventoryItems;
-    public static boolean isRunning;
-    public static GameDatabase gameData = new GameDatabase();
+    static Player player;
+    static PlayerProgress playerProgress;
+    static Item[] inventoryItems;
+    static Item[] slots;
+    static boolean isRunning;
+    static GameDatabase gameData = new GameDatabase();
     static GameDataManager gameDataManager = new GameDataManager();
 
     // Read user input
@@ -141,12 +142,9 @@ public class GameLogic{
                 player = gameData.getGameDataManager().getPlayer();
                 playerProgress = gameData.getGameDataManager().getPlayerProgress();
                 inventoryItems = gameData.getGameDataManager().getInventory();
-                if(inventoryItems != null){
-                    for(int i = 0; i < inventoryItems.length; i++){
-                        System.out.println(inventoryItems[i].name);
-                    }
-                }
+                slots = gameData.getGameDataManager().getSlots();
                 Inventory.setInventoryItems(inventoryItems);
+                Inventory.setSlots(slots);
                 if (player != null) {
                     break; 
                 } else {
@@ -200,7 +198,9 @@ public class GameLogic{
                 enterTournament();
             } else if(input == 5) {
                 gameData.getGameDataManager().getInventory();
+                gameData.getGameDataManager().getSlots();
                 Inventory.inventoryMenu();
+                gameData.inputSlots(Inventory.getSlots());
             } else if(input == 6) {
                 Shop.showShop(false);
                 gameData.inputInventory(Inventory.getInventoryItems());

@@ -6,12 +6,7 @@ public class Inventory {
     private static int itemCount = 0; 
     static boolean isEmpty = true;
     private static String[] slotName = {"HEAD","BODY","HAND","BOOTS","FOOD"};
-
-    private static Item headSlot = null;
-    private static Item bodySlot = null;
-    private static Item handsSlot = null;
-    private static Item bootsSlot = null;
-    private static Item foodSlot = null;
+    private static Item[] slot = new Item[5];
 
     public static class Item {
         public String name;
@@ -35,6 +30,18 @@ public class Inventory {
         return inventoryItems;
     }
 
+    public static Item[] getSlots(){
+        return slot;
+    }
+
+    public static void setSlots(Item[] slots){
+        if (slots != null) {
+            for (int i = 0; i < slots.length; i++) {
+                slot[i] = slots[i];
+            }
+        }
+    }
+
     public static void setInventoryItems(Item[] items){
         if (items != null) {
             if (items.length <= MAX_ITEMS) {
@@ -42,7 +49,6 @@ public class Inventory {
                     inventoryItems[i] = items[i];
                 }
                 itemCount = items.length;
-                System.out.println("Length: " + items.length);
                 isEmpty = false;
             } else {
                 System.out.println("Not enough space in the inventodry!");
@@ -62,7 +68,6 @@ public class Inventory {
 
     // Display the inventory menu
     public static void inventoryMenu() {
-        GameLogic.clearConsole();
         inventoryAsk();
         GameLogic.pressAnything();
     }
@@ -70,15 +75,14 @@ public class Inventory {
     public static void displayInventory(){
         GameLogic.printHeading("\tInventory");
         System.out.println("Equipped Items:");
-        System.out.println("\t1. Head: " + (headSlot != null ? headSlot.name + " - " + headSlot.effect : "Empty"));
-        System.out.println("\t2. Body: " + (bodySlot != null ? bodySlot.name + " - " + bodySlot.effect : "Empty"));
-        System.out.println("\t3. Hands: " + (handsSlot != null ? handsSlot.name + " - " + handsSlot.effect : "Empty"));
-        System.out.println("\t4. Boots: " + (bootsSlot != null ? bootsSlot.name + " - " + bootsSlot.effect : "Empty"));
+        System.out.println("\t1. Head: " + (slot[0] != null ? slot[0].name + " - " + slot[0].effect : "Empty"));
+        System.out.println("\t2. Body: " + (slot[1] != null ? slot[1].name + " - " + slot[1].effect : "Empty"));
+        System.out.println("\t3. Hands: " + (slot[2] != null ? slot[2].name + " - " + slot[2].effect : "Empty"));
+        System.out.println("\t4. Boots: " + (slot[3] != null ? slot[3].name + " - " + slot[3].effect : "Empty"));
         System.out.println("Buff Items:");
-        System.out.println("\t"+ (foodSlot != null ? foodSlot.name + " - " + foodSlot.effect : "Empty"));
+        System.out.println("\t"+ (slot[4] != null ? slot[4].name + " - " + slot[4].effect : "Empty"));
         System.out.println(); 
         System.out.println("Inventory Items:");
-        System.out.println("Item count: " + itemCount);
         if (itemCount == 0) {
             System.out.println("\tNO ITEM YET");
             GameLogic.pressAnything();
@@ -95,6 +99,7 @@ public class Inventory {
         
         outerLoop:
         while(true){
+            GameLogic.clearConsole();
             displayInventory();
             System.out.println(); 
             System.out.println("What would you like to do?");
@@ -140,10 +145,14 @@ public class Inventory {
                 }
                 while(true){
                     System.out.println(); 
-                    System.out.println("Which item do you want to unequip? (Press 0 to go back)");
+                    System.out.println("Which item do you want to unequip? (Press 0 to go back or 5 to UNEQUIP ALL)");
                     System.out.println(); 
             
-                    choice = GameLogic.readInt("Choose your item by number (1 to 4): ", 0, 4);
+                    choice = GameLogic.readInt("Choose your item by number (1 to 4): ", 0, 5);
+                    if(choice == 5){
+                        removeAllInventory();
+                        continue outerLoop;
+                    }
                     if (choice == 0) {  
                         GameLogic.pressAnything();
                         continue outerLoop;
@@ -164,15 +173,15 @@ public class Inventory {
     
     static boolean isNull(String body){
         if(body == "HEAD"){
-            return headSlot == null;
+            return slot[0] == null;
         } else if(body == "BODY"){
-            return bodySlot == null;
+            return slot[1] == null;
         } else if(body == "HAND") {
-            return handsSlot == null;
+            return slot[2] == null;
         } else if(body == "BOOTS") {
-            return bootsSlot == null;
+            return slot[3] == null;
         } else if(body == "FOOD") {
-            return foodSlot == null;
+            return slot[4] == null;
         }
         return false;
     }
@@ -198,23 +207,23 @@ public class Inventory {
         Shop.applyEffect(selectedItem.effect);
         switch (equipmentSlot.toUpperCase()) {
             case "HEAD":
-                headSlot = selectedItem;
+                slot[0] = selectedItem;
                 System.out.println(selectedItem.name + " has been equipped to HEAD.");
                 break;
             case "BODY":
-                bodySlot = selectedItem;
+                slot[1] = selectedItem;
                 System.out.println(selectedItem.name + " has been equipped to BODY.");
                 break;
             case "HAND":
-                handsSlot = selectedItem;
+                slot[2] = selectedItem;
                 System.out.println(selectedItem.name + " has been equipped to HAND.");
                 break;
             case "BOOTS":
-                bootsSlot = selectedItem;
+                slot[3] = selectedItem;
                 System.out.println(selectedItem.name + " has been equipped to BOOTS.");
                 break;
             case "FOOD":
-                foodSlot = selectedItem;
+                slot[4] = selectedItem;
                 System.out.println(selectedItem.name + " has been consumed! You feel refreshed.");
                 break;
             default:
@@ -234,54 +243,67 @@ public class Inventory {
         
         GameLogic.pressAnything();
     }
-    
+
+    public static void remove(Item removedItem){
+        if(removedItem != null) {
+            inventoryItems[itemCount] = removedItem;
+            itemCount++;
+            Shop.removeEffect(removedItem.effect);
+
+        }
+    }
+
+    public static void removeAllInventory(){
+        Item removedItem = null;
+        for(int i = 0 ; i < 5 ;i++){
+            removedItem = slot[i];
+            slot[i] = null;
+            remove(removedItem);
+        }
+        System.out.println();
+        System.out.println("All items has been returned to your inventory.");
+        GameLogic.pressAnything();
+    }
+
     public static void inventoryRemove(String equipmentSlot) {
         Item removedItem = null;
         System.out.println();
 
-        // Check the specified equipment slot
         switch (equipmentSlot.toUpperCase()) {
             case "HEAD":
-                if(noEquip(headSlot)) return; 
-                removedItem = headSlot;
-                headSlot = null;
-                System.out.println(removedItem.name + " have been removed from your HEAD.");
+                if(noEquip(slot[0])) return;
+                removedItem = slot[0];
+                slot[0] = null;
+                System.out.println(removedItem.name + " have been removed from your HEAD and been returned to your inventory.");
                 break;
             case "BODY":
-                if(noEquip(bodySlot)) return; 
-                removedItem = bodySlot;
-                bodySlot = null;
-                System.out.println(removedItem.name + " have been removed from your BODY.");
+                if(noEquip(slot[1])) return;
+                removedItem = slot[1];
+                slot[1] = null;
+                System.out.println(removedItem.name + " have been removed from your BODY and been returned to your inventory.");
                 break;
             case "HAND":
-                if(noEquip(handsSlot)) return; 
-                removedItem = handsSlot;
-                handsSlot = null;
-                System.out.println(removedItem.name + " have been removed from your HAND.");
+                if(noEquip(slot[2])) return;
+                removedItem = slot[2];
+                slot[2] = null;
+                System.out.println(removedItem.name + " have been removed from your HAND and been returned to your inventory.");
                 break;
             case "BOOTS":
-                if(noEquip(bootsSlot)) return; 
-                removedItem = bootsSlot;
-                bootsSlot = null;
-                System.out.println(removedItem.name + " have been removed from your BOOTS.");
+                if(noEquip(slot[3])) return;
+                removedItem = slot[3];
+                slot[3] = null;
+                System.out.println(removedItem.name + " have been removed from your BOOTS and been returned to your inventory.");
                 break;
             case "FOOD":
-                if(noEquip(foodSlot)) return; 
-                foodSlot = null;
+                if(noEquip(slot[4])) return;
+                slot[4] = null;
                 System.out.println(removedItem.name + " has been consumed! You feel refreshed.");
                 break;
             default:
                 System.out.println("Invalid slot.");
                 return;
         }
-
-        if (removedItem != null) {
-            inventoryItems[itemCount] = removedItem; 
-            itemCount++;
-            Shop.removeEffect(removedItem.effect);
-            System.out.println(removedItem.name + " has been returned to your inventory.");
-        }
-
+        remove(removedItem);
         GameLogic.pressAnything();
     }
 }

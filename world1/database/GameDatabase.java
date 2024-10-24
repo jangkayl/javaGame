@@ -35,4 +35,9 @@ public class GameDatabase {
     public void inputInventory(Item[] inventoryItems) { 
         gameDataManager.setInventory(inventoryItems);
     }
+
+    public void inputSlots(Item[] slots) { 
+        gameDataManager.setSlots(slots);
+    }
+    
 }
