@@ -12,7 +12,7 @@ public class StreetFighter extends Boxer {
 
     @Override
     public void jab() {
-        int damage = (int)(10 * getDamageSetter());
+        int damage = (int)Math.floor(10 * getDamageSetter());
         int staminaReduced = 5;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
@@ -21,7 +21,7 @@ public class StreetFighter extends Boxer {
 
     @Override
     public void hook() {
-        int damage = (int)(15 * getDamageSetter());
+        int damage = (int)Math.floor(15 * getDamageSetter());
         int staminaReduced = 7;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
@@ -30,7 +30,7 @@ public class StreetFighter extends Boxer {
 
     @Override
     public void uppercut() {
-        int damage = (int)(20 * getDamageSetter());
+        int damage = (int)Math.floor(20 * getDamageSetter());
         int staminaReduced = 10;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);

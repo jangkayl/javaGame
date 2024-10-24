@@ -27,7 +27,7 @@ public class Player extends Boxer implements PlayerInterface {
     
     @Override
     public void jab() {
-        int damage = (int)(10 * getDamageSetter());
+        int damage = (int)Math.floor(10 * getDamageSetter());
         int staminaReduced = 5;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
@@ -36,7 +36,7 @@ public class Player extends Boxer implements PlayerInterface {
     
     @Override
     public void hook() {
-        int damage = (int)(15 * getDamageSetter());
+        int damage = (int)Math.floor(15 * getDamageSetter());
         int staminaReduced = 7;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
@@ -56,7 +56,7 @@ public class Player extends Boxer implements PlayerInterface {
     
     @Override
     public void uppercut() {
-        int damage = (int)(20 * getDamageSetter());
+        int damage = (int)Math.floor(20 * getDamageSetter());
         int staminaReduced = 10;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
@@ -64,9 +64,9 @@ public class Player extends Boxer implements PlayerInterface {
     }
 
     public void chooseTrait(){
-        String[][] bonus = {{"+50% HP", "-10% Stamina", "5% Critical Hit Chance", "-5% Dodge Chance"}, 
+        String[][] bonus = {{"+50% HP", "-10% Stamina", "15% Critical Hit Chance", "-5% Dodge Chance"}, 
         {"+30% Stamina", "+10% Dodge Chance", "20% Critical Hit Chance", "-10% HP"},
-        {"+20% Critical Hit Chance", "+50% Crit Damage Multiplier", "-10% Stamina", "-5% Dodge Chance"}};
+        {"20% Critical Hit Chance", "+50% Crit Damage Multiplier", "-10% Stamina", "-5% Dodge Chance"}};
         
         GameLogic.clearConsole();
         GameLogic.printHeading("Choose a trait:");
@@ -82,18 +82,18 @@ public class Player extends Boxer implements PlayerInterface {
         int input = GameLogic.readInt("-> ", 1, 3);
         GameLogic.printHeading("You chose " + traits[input-1] + "!");
         if(input == 1){
-            int newHp = getMaxHp() + (int)(getMaxHp() * 0.5);
-            int newStamina = getStamina() - (int)(getStamina() * 0.1);
+            int newHp = getMaxHp() + (int)Math.floor(getMaxHp() * 0.5);
+            int newStamina = getStamina() - (int)Math.floor(getStamina() * 0.1);
             double newDodge = getDodgeChance() - (getDodgeChance() * 0.05);
             this.setHp(newHp);
             this.setMaxHp(newHp);
             this.setStamina(newStamina);
             this.setMaxStamina(newStamina);
-            this.setCritChance(0.5);
+            this.setCritChance(0.15);
             this.setDodgeChance(newDodge);
         } else if(input == 2) {
-            int newHp = getMaxHp() - (int)(getMaxHp() * 0.1);
-            int newStamina = getStamina() + (int)(getStamina() * 0.3);
+            int newHp = getMaxHp() - (int)Math.floor(getMaxHp() * 0.1);
+            int newStamina = getStamina() + (int)Math.floor(getStamina() * 0.3);
             double newDodge = getDodgeChance() + (getDodgeChance() * 0.1);
             this.setStamina(newStamina);
             this.setHp(newHp);
@@ -101,7 +101,7 @@ public class Player extends Boxer implements PlayerInterface {
             this.setDodgeChance(newDodge);
             this.setCritChance(0.2);
         } else if(input == 3) {
-            int newStamina = getStamina() - (int)(getStamina() * 0.1);
+            int newStamina = getStamina() - (int)Math.floor(getStamina() * 0.1);
             double newDodge = getDodgeChance() - (getDodgeChance() * 0.05);
             double newCritMulti = getCritMultiplier() + (getCritMultiplier() * 0.5);
             this.setCritChance(0.2);

@@ -136,12 +136,13 @@ public class GameDataManager {
             String name = Shop.getItemNameByIndex(Integer.parseInt(value)); 
             String description = Shop.getItemDescriptionByIndex(Integer.parseInt(value)); 
             String body = Shop.getItemBodyByIndex(Integer.parseInt(value)); 
+            String effect = Shop.getItemEffectByIndex(Integer.parseInt(value)); 
             System.out.println("Name: " + name);
             System.out.println("description: " + description);
             System.out.println("body: " + body);
             
             if (name != null && description != null && body != null) {
-                Item newItem = new Item(name, description, body);
+                Item newItem = new Item(name, description, body, effect);
                 
                 Item[] newInventory = new Item[inventoryItems.length + 1];
                 
@@ -186,9 +187,7 @@ public class GameDataManager {
             bw.write("\n[inventory]\n");
             if(inventoryItems != null){
                 for(int i = 0; i < Inventory.getItemCount(); i++){
-                    System.out.println("Add inventory: " + inventoryItems[i].name);
                     int index = Shop.getItemIndexByDescription(inventoryItems[i].description);
-                    System.out.println("Index: " + index);
                     bw.write("world1=" + index + "\n");
                 }
             }

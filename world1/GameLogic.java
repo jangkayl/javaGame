@@ -203,7 +203,7 @@ public class GameLogic{
                 Inventory.inventoryMenu();
             } else if(input == 6) {
                 Shop.showShop(false);
-                gameData.inputInventory(Inventory.inventoryItems);
+                gameData.inputInventory(Inventory.getInventoryItems());
             } else if(input == 7) {
                 isRunning = false;
             }
