@@ -1,13 +1,13 @@
 [player]
-name=MgaJexter
+name=Mgajexter
 hp=150
 maxHp=150
 stamina=45
 maxStamina=45
-critChance=0.2
+critChance=0.15000000000000002
 critMultiplier=2.0
 dodgeChance=0.09500000000000001
-playerPoints=780
+playerPoints=855
 currentWorld=0
 currentRank=0
 stage=1
@@ -19,6 +19,6 @@ shopStage=2
 
 [inventory]
 world1=0
-world1=1
 world1=2
+world1=1
 world1=3

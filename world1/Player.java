@@ -63,6 +63,32 @@ public class Player extends Boxer implements PlayerInterface {
         System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");
     }
 
+
+    // Additional Combos
+    public void leadBodyShot() {
+        int damage = (int)Math.floor(15 * getDamageSetter());
+        int staminaReduced = 7;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " lead body shots " + opponent.getName() + " for " + damage + " damage!");
+    }
+
+    public void crossToTheRibs() {
+        int damage = (int)Math.floor(20 * getDamageSetter());
+        int staminaReduced = 9;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " Cross to the Ribs " + opponent.getName() + " for " + damage + " damage!");
+    }
+
+    public void finishingUppercut() {
+        int damage = (int)Math.floor(25 * getDamageSetter());
+        int staminaReduced = 14;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " Cross to the Ribs " + opponent.getName() + " for " + damage + " damage!");
+    }
+
     public void chooseTrait(){
         String[][] bonus = {{"+50% HP", "-10% Stamina", "15% Critical Hit Chance", "-5% Dodge Chance"}, 
         {"+30% Stamina", "+10% Dodge Chance", "20% Critical Hit Chance", "-10% HP"},
@@ -112,7 +138,7 @@ public class Player extends Boxer implements PlayerInterface {
         GameLogic.pressAnything();
     }
 
-    boolean hasEnoughStamina(int requiredStamina) {
+    public boolean hasEnoughStamina(int requiredStamina) {
         return this.getStamina() >= requiredStamina;
     }
 

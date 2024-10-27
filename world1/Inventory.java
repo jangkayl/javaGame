@@ -85,7 +85,6 @@ public class Inventory {
         System.out.println("Inventory Items:");
         if (itemCount == 0) {
             System.out.println("\tNO ITEM YET");
-            GameLogic.pressAnything();
             return;
         }
         for (int j = 0; j < itemCount; j++) {
@@ -137,7 +136,7 @@ public class Inventory {
                     }
                 }
             } else if (actionChoice == 2){
-                if(itemCount == 0){
+                if(!(slot[0] != null || slot[1] != null || slot[2] != null || slot[3] != null || slot[4] != null)){
                     System.out.println();
                     System.out.println("There is nothing to remove yet.");
                     GameLogic.pressAnything();
@@ -170,7 +169,7 @@ public class Inventory {
             }
         }
     }
-    
+
     static boolean isNull(String body){
         if(body == "HEAD"){
             return slot[0] == null;

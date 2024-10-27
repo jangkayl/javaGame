@@ -2,6 +2,8 @@ package world1;
 import java.util.Scanner;
 
 import world1.Inventory.Item;
+import world1.TrainInGym.PabloUrbanGym;
+import world1.TrainInGym.UrbanGym;
 import world1.database.GameDataManager;
 import world1.database.GameDatabase;
 
@@ -11,11 +13,11 @@ public class GameLogic{
     public static Scanner scan = new Scanner(System.in);   
     static DecimalFormat df = new DecimalFormat("#,###.00");   
     static Player player;
-    static PlayerProgress playerProgress;
+    public static PlayerProgress playerProgress;
     static Item[] inventoryItems;
     static Item[] slots;
     static boolean isRunning;
-    static GameDatabase gameData = new GameDatabase();
+    public static GameDatabase gameData = new GameDatabase();
     static GameDataManager gameDataManager = new GameDataManager();
 
     // Read user input
@@ -293,7 +295,16 @@ public class GameLogic{
                         if(choice == 1) Shop.shop();
                     }
                 } else {
-                    UrbanStory.urbanTraining8(player.getName());  
+                    if(player.getStage() == 1) UrbanStory.urbanTraining8(player.getName());  
+                    else if(player.getStage() == 2){
+                        PabloUrbanGym.setPlayer(GameLogic.player);
+                        StreetFighter.setPlayerOpponent(GameLogic.player);
+                        PabloUrbanGym.fightLoop2();
+                    }
+                    if(player.getStage() == 3){
+                        UrbanStory.inviteToTournament(player.getName());
+                        pressAnything();
+                    }
                 }
             }
         }

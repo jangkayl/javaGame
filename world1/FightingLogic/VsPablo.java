@@ -1,7 +1,11 @@
-package world1;
+package world1.FightingLogic;
 import java.util.Random;
 
-public class Fighting {
+import world1.Player;
+import world1.StreetFighter;
+import world1.TrainInGym.PabloUrbanGym;
+
+public class VsPablo {
     static Random rand = new Random();
     static StreetFighter opponent;
     static Player player;
@@ -9,11 +13,11 @@ public class Fighting {
     static boolean opponentDodged = false;
 
     public static void setPlayerOpponent(Player player) {
-        Fighting.player = player;
+        VsPablo.player = player;
     }
 
     public static void setOpponent(StreetFighter opponent) {
-        Fighting.opponent = opponent;
+        VsPablo.opponent = opponent;
     }
     
     public static void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
@@ -22,7 +26,7 @@ public class Fighting {
         
         if(critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged){
             player.setDamageSetter(player.getCritMultiplier());
-            System.out.println(player.getName() + "\'s " + UrbanGym.attack[choice][0] + " hit the weak spot! CRITICAL HIT!");
+            System.out.println(player.getName() + "\'s " + PabloUrbanGym.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if(dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw){
@@ -59,6 +63,27 @@ public class Fighting {
                     System.out.println(player.getName() + " doesn't have enough stamina to uppercut!");
                 }
                 break;
+            case 4:
+                if (player.hasEnoughStamina(7)) {
+                    player.leadBodyShot();
+                } else {
+                    System.out.println(player.getName() + " doesn't have enough stamina to lead body shot!");
+                }
+                break;
+            case 5:
+                if (player.hasEnoughStamina(9)) {
+                    player.crossToTheRibs();
+                } else {
+                    System.out.println(player.getName() + " doesn't have enough stamina to cross to the ribs!");
+                }
+                break;
+            case 6:
+                if (player.hasEnoughStamina(14)) {
+                    player.finishingUppercut();
+                } else {
+                    System.out.println(player.getName() + " doesn't have enough stamina to finishing uppercut!");
+                }
+                break;
             default:
                 System.out.println("Invalid action choice!");
                 break;
@@ -80,6 +105,15 @@ public class Fighting {
             case 3:
                 player.setStamina(player.getStamina() - 10);
                 break;
+            case 4:
+                player.setStamina(player.getStamina() - 7);
+                break;
+            case 5:
+                player.setStamina(player.getStamina() - 9);
+                break;
+            case 6:
+                player.setStamina(player.getStamina() - 14);
+                break;
             default:
                 System.out.println("Invalid action choice!");
                 break;
@@ -92,7 +126,7 @@ public class Fighting {
         
         if(critChance < opponent.getCritChance() && choice != 2 && !isDraw){
             opponent.setDamageSetter(opponent.getCritMultiplier());
-            System.out.println(opponent.getName() + "\'s " + UrbanGym.attack[choice][0] + " hit the weak spot! CRITICAL HIT!");
+            System.out.println(opponent.getName() + "\'s " + PabloUrbanGym.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if(dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw){
@@ -129,6 +163,27 @@ public class Fighting {
                     System.out.println(opponent.getName() + " doesn't have enough stamina to uppercut!");
                 }
                 break;
+            case 4:
+                if (opponent.hasEnoughStamina(7)) {
+                    opponent.jabToTheBody();
+                } else {
+                    System.out.println(opponent.getName() + " doesn't have enough stamina to jab to the body!");
+                }
+                break;
+            case 5:
+                if (opponent.hasEnoughStamina(9)) {
+                    opponent.leadHook();
+                } else {
+                    System.out.println(opponent.getName() + " doesn't have enough stamina to lead hook!");
+                }
+                break;
+            case 6:
+                if (opponent.hasEnoughStamina(14)) {
+                    opponent.rearUppercut();
+                } else {
+                    System.out.println(opponent.getName() + " doesn't have enough stamina to rear uppercut!");
+                }
+                break;
             default:
                 System.out.println("Invalid action choice!");
                 break;
@@ -149,6 +204,15 @@ public class Fighting {
                 break;
             case 3:
                 opponent.setStamina(opponent.getStamina() - 10);
+                break;
+            case 4:
+                opponent.setStamina(opponent.getStamina() - 7);
+                break;
+            case 5:
+                opponent.setStamina(opponent.getStamina() - 9);
+                break;
+            case 6:
+                opponent.setStamina(opponent.getStamina() - 14);
                 break;
             default:
                 System.out.println("Invalid action choice!");

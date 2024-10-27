@@ -7,15 +7,16 @@ public class Tournament {
             "Savage Warrior",
             "Legendary Champion"
     };
-
-    public static void notValidTournament(){
-        GameLogic.printSeparator(40);
-        GameLogic.printHeading("TOURNAMENT");
-        GameLogic.printSeparator(40);
-        System.out.println();
-        System.out.println("Unya naka ari kay bukog pakay ka basig nig hapak nako nimo knockout naka.");
-        System.out.println("Adtoas Coach Fred sa gym kaw nya pag sparring mo way hikapay basig ma knockout paka.");
-        System.out.println();
+    
+    public static void notValidTournament(){ 
+        GameLogic.printSeparator(40); GameLogic.printHeading("TOURNAMENT - UNQUALIFIED"); 
+        GameLogic.printSeparator(40); 
+        System.out.println(); 
+        System.out.println("Hold up there! You're not ready for this arena yet.'"); 
+        System.out.println("Step into the ring now, and one solid hit will have you on the floor before you even know it!"); 
+        System.out.println("Go back to Coach Fred at the gym, work those muscles, and test your mettle in sparring. No pulling punches—this is where the real training begins!"); 
+        System.out.println("You’ll need more than just guts to survive in here, so sharpen those reflexes or get ready to see stars!"); 
+        System.out.println(); 
         GameLogic.pressAnything();
     }
 

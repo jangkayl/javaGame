@@ -48,7 +48,33 @@ public class StreetFighter extends Boxer {
         this.setStamina(newStamina);
     }
 
-    boolean hasEnoughStamina(int requiredStamina) {
+    public boolean hasEnoughStamina(int requiredStamina) {
         return this.getStamina() >= requiredStamina;
+    }
+
+
+    // Additional Combos
+    public void jabToTheBody() {
+        int damage = (int)Math.floor(15 * getDamageSetter());
+        int staminaReduced = 7;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " jabs to the body " + player.getName() + " for " + damage + " damage!");
+    }
+
+    public void leadHook() {
+        int damage = (int)Math.floor(20 * getDamageSetter());
+        int staminaReduced = 9;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " lead hooks " + player.getName() + " for " + damage + " damage!");
+    }
+
+    public void rearUppercut() {
+        int damage = (int)Math.floor(25 * getDamageSetter());
+        int staminaReduced = 14;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " rear uppercuts " + player.getName() + " for " + damage + " damage!");
     }
 }

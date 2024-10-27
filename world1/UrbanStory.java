@@ -1,4 +1,7 @@
 package world1;
+
+import world1.TrainInGym.PabloUrbanGym;
+
 public class UrbanStory {
     private static String[] array = {"Jab", "Hook", "Block", "Uppercut"};
 
@@ -352,15 +355,127 @@ public class UrbanStory {
         System.out.println();
         System.out.println("Select what to do:");
         System.out.println("\t1) Yes, I wanna keep training!");
-        System.out.println("\t2) I'll take a break first.");
+        System.out.println("\t2) I'll take a break first and check the Shop.");
         int choice = GameLogic.readInt("-> ", 1, 2);
         if(choice == 1) {
-            System.out.println("Continue sa choi!");
+            urbanTrainingCombo(name);
         } else {
+            Shop.showShop(false);
             return;
         }
     }
 
+    public static void urbanTrainingCombo(String name) {
+        space(70);
+        System.out.println("Fred:\t\"Alright " + name + ", let's elevate your skills with the \"The Body Breaker\" combo!\"");
+        System.out.println();
+        System.out.println("Fred:\t\"First, deliver a Lead Body Shot to counter a Jab!\"");
+        System.out.println("\t[ Fred demonstrates the Lead Body Shot, successfully countering a Jab. ]");
+        System.out.println();
+        System.out.println("Fred:\t\"Next, follow up with a Cross to the Ribs to counter an Hook!\"");
+        System.out.println("\t[ Fred executes a Cross to the Ribs, countering an Hook. ]");
+        System.out.println();
+        System.out.println("Fred:\t\"Finally, finish with a powerful Finishing Uppercut to counter a Block!\"");
+        System.out.println("\t[ Fred showcases the Finishing Uppercut, effectively countering a Block. ]");
+        System.out.println();
+        System.out.println("Fred:\t\"Now that you've seen the 'The Body Breaker' in action, let's see you practice it!");
+        System.out.println("\tAfter that, I invite you for a spar. It'll be a great chance to hone your skills!\"");
+        System.out.println();
+        GameLogic.pressAnything();
+        train2(name);
+    }
+
+    static void train2(String name){
+        String[] skill = {"Jab", "Hook", "Block"};
+        String[] combo = {"Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
+        int success = 0;
+        int choice;
+        
+        space(70);
+        System.out.println("Fred: \t\"Alright, let's put your skills to the test. Try to counter my next punch.\"");
+        do {
+            int randomNum = 0 + (int)(Math.random() * ((2 - 0) + 1));
+            System.out.println();
+            if(randomNum == 2){
+                System.out.println("( Fred " + skill[randomNum] + "s )");
+            } else if(randomNum == 3){
+                System.out.println("( Fred throws an " + skill[randomNum] + " )");
+            } else {
+                System.out.println("( Fred throws a " + skill[randomNum] + " ) ");
+            }
+
+            System.out.println("Success: " + success + " / 5");
+            System.out.println("Select the counter punch:");
+            for(int i = 1; i <= 3; i++){
+                System.out.println("\t(" + i + ") \"" + combo[i-1] + "\"");
+            }
+            choice = GameLogic.readInt("-> ", 1, 3);
+
+            System.out.println();
+            GameLogic.printSeparator(30);
+            System.out.println();
+            if(isCounter2(randomNum+1, choice)){
+                System.out.println("Great job!");
+                success++;
+            } else {
+                System.out.println("No, you should try to counter punch it!");
+            }
+        } while(success < 5);
+
+        space(70);
+        System.out.println("Fred:\t\"Great job with the 'The Body Breaker' combo, " + name + "! Now it's time to put those skills to the test.\"");
+        System.out.println("\tI've arranged a sparring match for you against one of the best Pablo 'El Halcón' Martínez!");
+        System.out.println("\tPablo's fast and skilled, so this will be a true test of what you've learned. Remember to stay focused and use your combo!\"");
+        System.out.println();
+        System.out.println("\t[ Fred gestures toward the sparring ring, where Pablo stands ready, his eyes sharp and confident. ]");
+        System.out.println();
+        System.out.println("Fred:\t\"Step into the ring, and show Pablo what you've got!\"");
+        System.out.println();
+        System.out.println("\t[ You take a deep breath, stepping into the ring to face Pablo 'El Halcón' Martínez, eager to prove your skills... ]");
+        GameLogic.pressAnything();
+        PabloUrbanGym.setPlayer(GameLogic.player);
+        StreetFighter.setPlayerOpponent(GameLogic.player);
+        PabloUrbanGym.fightLoop2();
+    }
+
+    static boolean isCounter2(int fredMove, int playerMove) {
+        switch (fredMove) {
+            case 1: 
+                if (playerMove == 1) return true;
+                return false; 
+            case 2:
+                if (playerMove == 2) return true;
+                return false; 
+            case 3: 
+                if (playerMove == 3) return true;
+                return false; 
+            default:
+                return false;
+        }
+    }
+
+    public static void inviteToTournament(String name) {
+        System.out.println();
+        System.out.println("Fred: \t\"You've really impressed me today, " + name + ". I've seen the way you’ve put in the work, and");
+        System.out.println("\tI've got to say, it's paying off. Those punches, the footwork... you've got the makings of");
+        System.out.println("\tsomeone who can go the distance.\"");
+        System.out.println();
+        System.out.println("\t( He claps his hands in approval, a proud smile spreading across his face. )");
+        System.out.println();
+        System.out.println("Fred: \t\"Now, here’s the thing. There's a tournament coming up. It's tough, no doubt about it, but");
+        System.out.println("\tit’s also the kind of challenge that'll push you to the next level. You’ve earned the right");
+        System.out.println("\tto be there if you want it. Just say the word, and I'll get you signed up.\"");
+        System.out.println();
+        reply("I'm in! Let's do this.", "I'll think about it, Fred. Not sure if I'm ready yet.");
+        int choice = GameLogic.readInt("-> ", 1, 2);
+        if(choice == 1){
+            GameLogic.enterTournament();
+        } else {
+            return;
+        }
+    }
+    
+    
     public static void tournaOpponentBackstory(String opponentName) {
         switch (opponentName) {
             case "Brave Challenger":

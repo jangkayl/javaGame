@@ -1,5 +1,12 @@
-package world1;
+package world1.TrainInGym;
 import java.util.Random;
+
+import world1.GameLogic;
+import world1.Player;
+import world1.PlayerProgress;
+import world1.StreetFighter;
+import world1.UrbanStory;
+import world1.FightingLogic.VsCarlito;
 
 public class UrbanGym {
     static Random rand = new Random();
@@ -13,6 +20,45 @@ public class UrbanGym {
     
     public static void setPlayer(Player p) {
         player = p;
+    }
+
+    public static void fightLoop() {
+        GameLogic.clearConsole();
+        GameLogic.printSeparator(40);
+        System.out.println(GameLogic.centerText("Round " + playerProgress.getRound(), 40));
+        GameLogic.printSeparator(40);
+        System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
+        System.out.println();
+        GameLogic.printSeparator(40);
+        VsCarlito.setPlayerOpponent(player);
+        VsCarlito.setOpponent(opponent);
+        player.setOpponent(opponent);
+        printStats();
+        while (player.getHp() > 0 && opponent.getHp() > 0) {
+            selectAttack();
+            printStats();
+            if (player.getHp() <= 0) {
+                System.out.println();
+                System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
+                player.setIsLose(true);
+                playerProgress.setRound(playerProgress.getRound() + 1);
+                opponent.setHp(opponent.getMaxHp());
+                opponent.setStamina(opponent.getMaxStamina());
+            } else if(opponent.getHp() <= 0){
+                System.out.println();
+                System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
+                player.setIsLose(false);
+                winnerReward();
+                player.setHp(player.getMaxHp());
+                player.setStamina(player.getMaxStamina());
+                playerProgress.setRound(1);  
+                playerProgress.setShopStage(2);  
+                UrbanStory.urbanTraining8(player.getName());    
+                GameLogic.pressAnything();
+                return;
+            }
+        }
+        GameLogic.pressAnything();
     }
 
     static void printStats(){
@@ -146,61 +192,22 @@ public class UrbanGym {
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
-                Fighting.playerSuccessAction(choices[i], opponentChoices[i], false);
-                Fighting.opponentFailedAction(opponentChoices[i]);
+                VsCarlito.playerSuccessAction(choices[i], opponentChoices[i], false);
+                VsCarlito.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
-                Fighting.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                Fighting.playerFailedAction(choices[i]);
+                VsCarlito.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                VsCarlito.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + attack[opponentChoices[i]][0]);
-                Fighting.drawAction(choices[i], opponentChoices[i]);
+                VsCarlito.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
             }
             GameLogic.printSeparator(50);
         }
-    }
-
-    public static void fightLoop() {
-        GameLogic.clearConsole();
-        GameLogic.printSeparator(40);
-        System.out.println(GameLogic.centerText("Round " + playerProgress.getRound(), 40));
-        GameLogic.printSeparator(40);
-        System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
-        System.out.println();
-        GameLogic.printSeparator(40);
-        Fighting.setPlayerOpponent(player);
-        Fighting.setOpponent(opponent);
-        player.setOpponent(opponent);
-        printStats();
-        while (player.getHp() > 0 && opponent.getHp() > 0) {
-            selectAttack();
-            printStats();
-            if (player.getHp() <= 0) {
-                System.out.println();
-                System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
-                player.setIsLose(true);
-                playerProgress.setRound(playerProgress.getRound() + 1);
-                opponent.setHp(opponent.getMaxHp());
-                opponent.setStamina(opponent.getMaxStamina());
-            } else if(opponent.getHp() <= 0){
-                System.out.println();
-                System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
-                player.setIsLose(false);
-                winnerReward();
-                playerProgress.setRound(0);  
-                playerProgress.setShopStage(2);  
-                UrbanStory.urbanTraining8(player.getName());    
-                GameLogic.pressAnything();
-                return;
-            }
-        }
-        player.setHp(player.getMaxHp());
-        player.setStamina(player.getMaxStamina());
-        GameLogic.pressAnything();
     }
 
     static int isCounter(int opponentMove, int playerMove) {
@@ -227,5 +234,4 @@ public class UrbanGym {
         GameLogic.printSeparator(40);
         GameLogic.pressAnything();
     }
-
 }

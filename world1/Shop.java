@@ -1,4 +1,7 @@
 package world1;
+
+import world1.TrainInGym.UrbanGym;
+
 public class Shop {
     static Player player;
     static PlayerProgress playerProgress = GameLogic.playerProgress;
