@@ -1,68 +1,105 @@
 package world1;
+
+import java.util.Scanner;
+
+import world1.TournamentFight.RamirezTourna;
+
 public class Tournament {
-    private Player player;
-    private static final int MAX_OPPONENTS = 3;
-    private static final String[] OPPONENTS = {
-            "Brave Challenger",
-            "Savage Warrior",
-            "Legendary Champion"
-    };
-    
-    public static void notValidTournament(){ 
-        GameLogic.printSeparator(40); GameLogic.printHeading("TOURNAMENT - UNQUALIFIED"); 
-        GameLogic.printSeparator(40); 
-        System.out.println(); 
-        System.out.println("Hold up there! You're not ready for this arena yet.'"); 
-        System.out.println("Step into the ring now, and one solid hit will have you on the floor before you even know it!"); 
-        System.out.println("Go back to Coach Fred at the gym, work those muscles, and test your mettle in sparring. No pulling punches—this is where the real training begins!"); 
-        System.out.println("You’ll need more than just guts to survive in here, so sharpen those reflexes or get ready to see stars!"); 
-        System.out.println(); 
-        GameLogic.pressAnything();
-    }
+    private static Player player = GameLogic.player;
+    private static String[] opponents = {"El Tigre"};
+    static PlayerProgress playerProgress = GameLogic.playerProgress;
+    public static StreetFighter opponent1 = new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, .30);
 
-    public Tournament(Player player) {
-        this.player = player;
-    }
-
-    public void attemptTournament(int playerStage) {
+    public static void attemptTournament(int playerStage) {
         GameLogic.clearConsole();
-        GameLogic.printSeparator(40);
-        System.out.println("⚔️  Tournament Entry Attempt  ⚔️");
-        GameLogic.printSeparator(40);
-        System.out.println("You step forward, ready to face the toughest challengers...");
-        System.out.println();
-
-        if (playerStage < 5) {
-            System.out.println("But the tournament official stops with a grin");
-            System.out.println("Gatekeeper: \"Hold it right there! You're not ready yet, you're still at stage " + playerStage + "\"");
-            System.out.println("\t\t\tYou need to reach *Stage 5* before entering the tournament");
-            System.out.println("\t\t\tHead back to the Training Gym, build your skills and get stronger");
-            System.out.println("\t\t\tOnly once you've reached *Stage 5* status can you compete here.");
+        if (playerStage < 3) {
+            System.out.println("⚔️  Tournament Entry Attempt  ⚔️");
+            GameLogic.printSeparator(40);
+            System.out.println("You step forward, ready to face the toughest challengers...");
+            System.out.println();
+            GameLogic.printSeparator(40);
+            System.out.println("[ But the tournament official stops with a grin ]");
+            System.out.println("Gatekeeper: \"Hold it right there! You're not ready for this arena yet. Step into the ring now, and one solid hit");
+            System.out.println("\t\t\tHead back to the Train in Gym, build your skills and get stronger will have you on the floor before you even know it!");
+            System.out.println("\t\t\tGo back to Coach Fred at the gym, work those muscles, and test your mettle in sparring. No pulling punches—this is where the real training begins!\"");
             System.out.println();
             System.out.println("🏋️ Tip: Train hard, rank up, and grow stronger to unlock the tournament! 🏆");
+            GameLogic.pressAnything();
         } else {
             startTournament();
         }
     }
 
-    public void startTournament() {
+    public static void startTournament() {
         GameLogic.clearConsole();
         GameLogic.printHeading("\t🏆 Champ Arena Tournament 🏆");
         System.out.println("Welcome, " + player.getName() + "! Prepare to fight your way to the top!");
+        playerProgress.setDone(1);
 
-        for (String opponentName : OPPONENTS) {
-            System.out.println("You will face: " + opponentName);
-            UrbanStory.tournaOpponentBackstory(opponentName);
-            if (!battle(opponentName)) {
-                System.out.println("You were defeated! Better luck next time.");
-                break;
+        while(true){
+            if (player.getStage() == 3) {
+                startMatch(0);
+                if (playerProgress.getOpponentWins() == 3) {
+                    if (!offerRematch()) {
+                        break;
+                    } else {
+                        resetMatchScores();
+                        continue;
+                    }
+                } else if(playerProgress.getPlayerWins() == 3){
+                    player.setStage(4);
+                    resetMatchScores();
+                }
+                GameLogic.pressAnything();
+            } else if (player.getStage() == 4) {
+                startMatch(1);
+                if (playerProgress.getOpponentWins() == 3) {
+                    if (!offerRematch()) {
+                        break;
+                    } else {
+                        resetMatchScores();
+                        continue;
+                    }
+                } else if(playerProgress.getPlayerWins() == 3){
+                    player.setStage(4);
+                    resetMatchScores();
+                }
+                GameLogic.pressAnything();
             }
         }
-
-        concludeTournament();
+        // concludeTournament();
+        GameLogic.pressAnything();
     }
 
-    private void concludeTournament() {
+    private static void startMatch(int opponentIndex) {
+        System.out.println("You will face: " + opponents[opponentIndex]);
+        UrbanStory.tournaOpponentBackstory(opponents[opponentIndex]);
+        
+        while (!isMatchConcluded()) {
+            RamirezTourna.setPlayer(player);
+            StreetFighter.setPlayerOpponent(player);
+            RamirezTourna.fightLoop2();
+        }
+    }
+
+    private static void resetMatchScores() {
+        playerProgress.setRound(1);
+        playerProgress.setPlayerWins(0);
+        playerProgress.setOpponentWins(0);
+    }
+
+    private static boolean isMatchConcluded() {
+        return playerProgress.getPlayerWins() == 3 || playerProgress.getOpponentWins() == 3;
+    }
+
+    private static boolean offerRematch() {
+        System.out.println("You lost this match. Do you want a rematch? (yes/no)");
+        
+        String response = GameLogic.scan.nextLine().trim().toLowerCase();
+        return response.equals("yes");
+    }
+
+    private static void concludeTournament() {
         System.out.println("Tournament has ended. Thank you for participating!");
         if (player.getCurrentRank().equals("CHAMPION")) {
             System.out.println("You've solidified your status as a champion! Keep training to maintain your rank.");
@@ -78,86 +115,10 @@ public class Tournament {
         GameLogic.clearConsole();
     }
 
-    private boolean battle(String opponentName) {
-        StreetFighter opponent = new StreetFighter(opponentName, 100, 100, 0.1, 1.5, 0.1);
-        player.setOpponent(opponent);
-        GameLogic.clearConsole();
-        System.out.println("A wild " + opponentName + " appears!");
-
-        while (player.getHp() > 0 && opponent.getHp() > 0) {
-            System.out.println("\n" + player.getName() + " HP: " + player.getHp() + " | " + opponentName + " HP: " + opponent.getHp());
-            int action = getPlayerAction();
-
-            executePlayerAction(action);
-
-            if (opponent.getHp() <= 0) {
-                System.out.println(opponentName + " has been defeated!");
-                player.addPlayerPoints(10);
-                System.out.println("You have earned 10 points!");
-                GameLogic.pressAnything();
-                return true;
-            }
-
-            executeOpponentAction(opponent);
-        }
-
-        System.out.println(player.getName() + " has been defeated!");
-        return false;
+    public static void printStanding(){
+        System.out.println();  
+        System.out.println("\t ~ ~ ~ BEST OF 3 ~ ~ ~");
+        System.out.println(player.getName() + " - " + playerProgress.getPlayerWins() + "\t\t" + opponent1.getName() + " - " + playerProgress.getOpponentWins());
+        GameLogic.pressAnything();
     }
-
-    private void displayHealthStatus(String opponentName, StreetFighter opponent) {
-        System.out.println("\n" + player.getName() + " HP: " + player.getHp() + " | " + opponentName + " HP: " + opponent.getHp());
-    }
-
-    private int getPlayerAction() {
-        System.out.println("Choose your action: ");
-        System.out.println("1. Jab");
-        System.out.println("2. Hook");
-        System.out.println("3. Uppercut");
-        System.out.println("4. Block");
-        return GameLogic.readInt("-> ", 1, 4);
-    }
-
-    private void executePlayerAction(int action) {
-        switch (action) {
-            case 1: 
-                player.jab();
-                break;
-            case 2: 
-                player.hook();
-                break;
-            case 3: 
-                player.uppercut();
-                break;
-            case 4: 
-                player.block();
-                break;
-            default:
-                System.out.println("Invalid action. Try again.");
-        }
-    }
-
-    private void executeOpponentAction(StreetFighter opponent) {
-        int opponentAction = (int) (Math.random() * 3);
-        int damage = 0;
-
-        switch (opponentAction) {
-            case 0:
-                opponent.jab();
-                break;
-            case 1:
-                opponent.hook();
-                break;
-            case 2:
-                opponent.uppercut();
-                break;
-            default:
-                System.out.println("Opponent takes no action.");
-                return;
-        }
-
-        player.setDamageSetter(damage);
-        System.out.println("Opponent dealt " + damage + " damage!");
-    }
-
 }

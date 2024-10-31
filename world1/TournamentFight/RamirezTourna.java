@@ -1,35 +1,36 @@
-package world1.TrainInGym;
+package world1.TournamentFight;
 import java.util.Random;
 
 import world1.GameLogic;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
-import world1.FightingLogic.VsPablo;
+import world1.Tournament;
+import world1.FightingLogic.VsRamirez;
 
-public class PabloUrbanGym {
+public class RamirezTourna {
     static Random rand = new Random();
     static int[] opponentChoices = new int[3];
     static PlayerProgress playerProgress = GameLogic.playerProgress;
-    public static Player player;
+    static Player player;
     static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
-                                {"Hook", "Damage: 15 | Stamina: -7"}, 
-                                {"Block", "Stamina: +5"}, 
-                                {"Uppercut", "Damage: 20 | Stamina: -10"},
-                                {"The Body Breaker", ""}};
+                                    {"Hook", "Damage: 15 | Stamina: -7"}, 
+                                    {"Block", "Stamina: +5"}, 
+                                    {"Uppercut", "Damage: 20 | Stamina: -10"},
+                                    {"The Body Breaker", ""}};
     static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
     public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Jab to the Body", "Lead Hook", "Rear Uppercut"};
-    public static StreetFighter opponent = new StreetFighter("Pablo Martínez", 130, 70, 0.2, 2, .30);
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook"};
+    static StreetFighter opponent = Tournament.opponent1;
     
     public static void setPlayer(Player p) {
         player = p;
     }
 
     public static void fightLoop2() {
-        player.setStage(2);
+        player.setStage(3);
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
@@ -38,8 +39,8 @@ public class PabloUrbanGym {
         System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
         System.out.println();
         GameLogic.printSeparator(40);
-        VsPablo.setPlayerOpponent(player);
-        VsPablo.setOpponent(opponent);
+        VsRamirez.setPlayerOpponent(player);
+        VsRamirez.setOpponent(opponent);
         player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
@@ -52,6 +53,14 @@ public class PabloUrbanGym {
                 playerProgress.setRound(playerProgress.getRound() + 1);
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
+                player.setHp(player.getMaxHp());
+                player.setStamina(player.getMaxStamina());
+                if(playerProgress.getOpponentWins() != 3){
+                    playerProgress.setOpponentWins(playerProgress.getOpponentWins() + 1);
+                }
+                Tournament.printStanding();
+                GameLogic.gameData.saveGame();
+                return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
@@ -59,9 +68,13 @@ public class PabloUrbanGym {
                 winnerReward();
                 player.setHp(player.getMaxHp());
                 player.setStamina(player.getMaxStamina());
-                playerProgress.setRound(1);  
-                playerProgress.setShopStage(3);  
-                player.setStage(3);
+                opponent.setHp(opponent.getMaxHp());
+                opponent.setStamina(opponent.getMaxStamina());
+                playerProgress.setRound(playerProgress.getRound() + 1);
+                if(playerProgress.getPlayerWins() != 3){
+                    playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
+                }
+                Tournament.printStanding();
                 GameLogic.gameData.saveGame();
                 return;
             }
@@ -128,7 +141,7 @@ public class PabloUrbanGym {
                 System.out.println();
                 System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                 System.out.println("You may use 3 Blocks as your combo to regain stamina");
-                System.out.println();
+                    System.out.println();
                 continue;
             }
             break;
@@ -266,16 +279,16 @@ public class PabloUrbanGym {
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                VsPablo.playerSuccessAction(choices[i], opponentChoices[i], false);
-                VsPablo.opponentFailedAction(opponentChoices[i]);
+                VsRamirez.playerSuccessAction(choices[i], opponentChoices[i], false);
+                VsRamirez.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                VsPablo.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                VsPablo.playerFailedAction(choices[i]);
+                VsRamirez.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                VsRamirez.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                VsPablo.drawAction(choices[i], opponentChoices[i]);
+                VsRamirez.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -320,20 +333,24 @@ public class PabloUrbanGym {
         return 0;
     }
 
-    static void winnerReward() {
-        System.out.println(); 
-        GameLogic.printSeparator(40);
-        System.out.println(); 
-        System.out.println("Congratulations! You've won the match!");
-        System.out.println();  
-        System.out.println("Fred is giving you another 125 points.");
-        GameLogic.addPoints(125);
-        System.out.println();
-        System.out.println("You now have " + player.getPlayerPoints() + " points.");
-        System.out.println();
-        System.out.println("Visit the shop and use your points to buy items.");
-        System.out.println(); 
-        GameLogic.printSeparator(40);
-        GameLogic.pressAnything();
+    private static void winnerReward() {
+        if(playerProgress.getPlayerWins() != 3){
+            System.out.println(); 
+            GameLogic.printSeparator(40);
+            System.out.println(); 
+            System.out.println("Congratulations! You've won the match!");
+        }
+        // System.out.println(); 
+        // GameLogic.printSeparator(40);
+        // System.out.println(); 
+        // System.out.println("Congratulations! You've won the match!");
+        // System.out.println();  
+        // System.out.println("Your next opponent will be ??????");
+        // GameLogic.addPoints(125);
+        // System.out.println();
+        // System.out.println("Wanna go visit Shop or your Inventory?");
+        // System.out.println();
+        // GameLogic.printSeparator(40);
+        // GameLogic.pressAnything();
     }
 }

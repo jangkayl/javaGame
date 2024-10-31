@@ -1,16 +1,16 @@
-    package world1.database;
+package world1.database;
 
-    import java.io.BufferedReader;
-    import java.io.BufferedWriter;
-    import java.io.FileReader;
-    import java.io.FileWriter;
-    import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-    import world1.Inventory;
-    import world1.Player;
-    import world1.PlayerProgress;
-    import world1.Shop;
-    import world1.Inventory.Item; 
+import world1.Inventory;
+import world1.Player;
+import world1.PlayerProgress;
+import world1.Shop;
+import world1.Inventory.Item; 
 
     public class GameDataManager {
         private Player player;
@@ -119,15 +119,24 @@
 
         private void addProgress(String key, String value) {
             if (playerProgress == null) {
-                playerProgress = new PlayerProgress(0, 0);
+                playerProgress = new PlayerProgress(0, 0, 0);
             }
-
+            
             switch (key) {
                 case "round":
                     playerProgress.setRound(Integer.parseInt(value));
                     break;
                 case "shopStage":
                     playerProgress.setShopStage(Integer.parseInt(value));
+                    break;
+                case "done":
+                    playerProgress.setDone(Integer.parseInt(value));
+                    break;
+                case "opponentWins":
+                    playerProgress.setOpponentWins(Integer.parseInt(value));
+                    break;
+                case "playerWins":
+                    playerProgress.setPlayerWins(Integer.parseInt(value));
                     break;
             }
         }
@@ -193,6 +202,9 @@
                 if (playerProgress != null) {
                     bw.write("round=" + playerProgress.getRound() + "\n");
                     bw.write("shopStage=" + playerProgress.getShopStage() + "\n");
+                    bw.write("done=" + playerProgress.getDone() + "\n");
+                    bw.write("playerWins=" + playerProgress.getPlayerWins() + "\n");
+                    bw.write("opponentWins=" + playerProgress.getOpponentWins() + "\n");
                 }
 
                 // Save inventory data
@@ -233,7 +245,6 @@
                             }
                         }
                     }
-
                 }
                 
                 System.out.println();

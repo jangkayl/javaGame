@@ -134,7 +134,7 @@ public class GameLogic{
                 } while (!nameSet);
     
                 player = new Player(name, 100, 50, 0.1, 2.0, 0.1, 0, 0, 0, 0, false);
-                playerProgress = new PlayerProgress(1, 0);
+                playerProgress = new PlayerProgress(1, 0, 0);
                 gameData.inputPlayerDetails(player);
                 gameData.inputProgress(playerProgress);
                 gameData.saveGame();
@@ -301,8 +301,12 @@ public class GameLogic{
                         StreetFighter.setPlayerOpponent(GameLogic.player);
                         PabloUrbanGym.fightLoop2();
                     }
-                    if(player.getStage() == 3){
-                        UrbanStory.inviteToTournament(player.getName());
+                    if(player.getStage() >= 3){
+                        if(playerProgress.getDone() != 1){
+                            UrbanStory.inviteToTournament(player.getName());
+                        } else {
+                            System.out.println("Go to tournament and continue fighting your opponent!");
+                        }
                         pressAnything();
                     }
                 }
@@ -313,7 +317,7 @@ public class GameLogic{
     // Enter tournament and fight with your opponents
     public static void enterTournament(){
 	    clearConsole();
-	    Tournament.notValidTournament();
+        Tournament.attemptTournament(player.getStage());
     }
 
     public static void printWithDelay(String text) {

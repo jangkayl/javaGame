@@ -361,6 +361,7 @@ public class UrbanStory {
             urbanTrainingCombo(name);
         } else {
             Shop.showShop(false);
+            GameLogic.gameData.inputInventory(Inventory.getInventoryItems());
             return;
         }
     }
@@ -456,14 +457,14 @@ public class UrbanStory {
 
     public static void inviteToTournament(String name) {
         System.out.println();
-        System.out.println("Fred: \t\"You've really impressed me today, " + name + ". I've seen the way you’ve put in the work, and");
+        System.out.println("Fred: \t\"You've really impressed me today, " + name + ". I've seen the way you've put in the work, and");
         System.out.println("\tI've got to say, it's paying off. Those punches, the footwork... you've got the makings of");
         System.out.println("\tsomeone who can go the distance.\"");
         System.out.println();
         System.out.println("\t( He claps his hands in approval, a proud smile spreading across his face. )");
         System.out.println();
-        System.out.println("Fred: \t\"Now, here’s the thing. There's a tournament coming up. It's tough, no doubt about it, but");
-        System.out.println("\tit’s also the kind of challenge that'll push you to the next level. You’ve earned the right");
+        System.out.println("Fred: \t\"Now, here's the thing. There's a tournament coming up. It's tough, no doubt about it, but");
+        System.out.println("\tit's also the kind of challenge that'll push you to the next level. You've earned the right");
         System.out.println("\tto be there if you want it. Just say the word, and I'll get you signed up.\"");
         System.out.println();
         reply("I'm in! Let's do this.", "I'll think about it, Fred. Not sure if I'm ready yet.");
@@ -478,27 +479,27 @@ public class UrbanStory {
     
     public static void tournaOpponentBackstory(String opponentName) {
         switch (opponentName) {
-            case "Brave Challenger":
-                System.out.println("\t\t🔥Backstory: The Brave Challenger is known for their relentless spirit and courage. " +
-                        "\n\t\tThey have fought through countless battles, earning respect from both friends and foes. " +
-                        "\n\t\tTheir journey began in a small town, where they trained day and night to become a formidable fighter. " +
+            case "El Tigre":
+                System.out.println("\t\t🔥Backstory: Introducing Rico \"El Tigre\" Ramirez, a fierce contender from Manila, inspired by his father's legacy as a former champion." +
+                        "\n\t\tKnown for his explosive style and powerful uppercuts, Rico has quickly climbed the ranks of boxing, embodying resilience and determination." +
+                        "\n\t\tAs he steps into the ring for this tournament, he carries the hopes of his community, ready to unleash the spirit of the tiger and claim his place among the greats!" +
                         "\n\t\tNow, they seek to prove their strength in the tournament!");
                         GameLogic.pressAnything();
                 break;
-            case "Savage Warrior":
-                System.out.println("\t\t💪Backstory: The Savage Warrior is a fierce competitor, feared by many for their brutal fighting style. " +
-                        "\n\t\tRaised in a harsh environment, they have learned to rely on their raw strength and instinct. " +
-                        "\n\t\tTheir reputation for taking down opponents with a single blow has made them a legend in the underground fighting scene. " +
-                        "\n\t\tThey enter the tournament to cement their legacy!");
-                        GameLogic.pressAnything();
-                break;
-            case "Legendary Champion":
-                System.out.println("\t\t🌟Backstory: The Legendary Champion has a storied history of victories and is regarded as a hero by many. " +
-                        "\n\t\tWith a record of undefeated battles, they have mastered every technique in the book. " +
-                        "\n\t\tHowever, their path has not been without hardship, as they have faced great losses that have shaped their character. " +
-                        "\n\t\tNow, they fight not just for glory, but to inspire the next generation of fighters.");
-                        GameLogic.pressAnything();
-                break;
+            // case "Savage Warrior":
+            //     System.out.println("\t\t💪Backstory: The Savage Warrior is a fierce competitor, feared by many for their brutal fighting style. " +
+            //             "\n\t\tRaised in a harsh environment, they have learned to rely on their raw strength and instinct. " +
+            //             "\n\t\tTheir reputation for taking down opponents with a single blow has made them a legend in the underground fighting scene. " +
+            //             "\n\t\tThey enter the tournament to cement their legacy!");
+            //             GameLogic.pressAnything();
+            //     break;
+            // case "Legendary Champion":
+            //     System.out.println("\t\t🌟Backstory: The Legendary Champion has a storied history of victories and is regarded as a hero by many. " +
+            //             "\n\t\tWith a record of undefeated battles, they have mastered every technique in the book. " +
+            //             "\n\t\tHowever, their path has not been without hardship, as they have faced great losses that have shaped their character. " +
+            //             "\n\t\tNow, they fight not just for glory, but to inspire the next generation of fighters.");
+            //             GameLogic.pressAnything();
+            //     break;
             default:
                 System.out.println("No backstory available for this opponent.");
         }

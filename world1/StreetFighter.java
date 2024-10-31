@@ -53,7 +53,7 @@ public class StreetFighter extends Boxer {
     }
 
 
-    // Additional Combos
+    // Pablo's COMBO
     public void jabToTheBody() {
         int damage = (int)Math.floor(15 * getDamageSetter());
         int staminaReduced = 7;
@@ -76,5 +76,14 @@ public class StreetFighter extends Boxer {
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " rear uppercuts " + player.getName() + " for " + damage + " damage!");
+    }
+
+    // Ramirez's COMBO
+    public void cross() {
+        int damage = (int)Math.floor(15 * getDamageSetter());
+        int staminaReduced = 7;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " cross " + player.getName() + " for " + damage + " damage!");
     }
 }
