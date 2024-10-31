@@ -1,24 +1,24 @@
 [player]
-name=Kyle
-hp=123
-maxHp=123
-stamina=57
-maxStamina=57
-critChance=0.25
-critMultiplier=3.0
+name=MgaJexter
+hp=182
+maxHp=182
+stamina=51
+maxStamina=51
+critChance=0.2
+critMultiplier=2.0
 dodgeChance=0.095
 playerPoints=80
 currentWorld=0
 currentRank=0
-stage=3
+stage=5
 isLose=false
 
 [progress]
-round=6
+round=1
 shopStage=3
 done=1
-playerWins=3
-opponentWins=2
+playerWins=0
+opponentWins=0
 
 [inventory]
 HEAD=2

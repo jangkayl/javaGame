@@ -6,9 +6,9 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Tournament;
-import world1.FightingLogic.VsRamirez;
+import world1.FightingLogic.VsLopez;
 
-public class RamirezTourna {
+public class LopezTourna {
     static Random rand = new Random();
     static int[] opponentChoices = new int[3];
     static PlayerProgress playerProgress = GameLogic.playerProgress;
@@ -22,7 +22,7 @@ public class RamirezTourna {
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
     public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook"};
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Quick Jab", "Cross", "Power Punch"};
     static Tournament tourna = new Tournament();
     static StreetFighter opponent = tourna.getOpponent();
     
@@ -31,8 +31,7 @@ public class RamirezTourna {
     }
 
     public static void fightLoop2() {
-
-        player.setStage(3);
+        player.setStage(4);
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
@@ -41,8 +40,8 @@ public class RamirezTourna {
         System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
         System.out.println();
         GameLogic.printSeparator(40);
-        VsRamirez.setPlayerOpponent(player);
-        VsRamirez.setOpponent(opponent);
+        VsLopez.setPlayerOpponent(player);
+        VsLopez.setOpponent(opponent);
         player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
@@ -243,10 +242,10 @@ public class RamirezTourna {
                         staminaCost = 10;
                         break;
                     case 5:
-                        staminaCost = 7;
+                        staminaCost = 9;
                         break;
                     case 6:
-                        staminaCost = 9;
+                        staminaCost = 7;
                         break;
                     case 7:
                         staminaCost = 14;
@@ -281,16 +280,16 @@ public class RamirezTourna {
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                VsRamirez.playerSuccessAction(choices[i], opponentChoices[i], false);
-                VsRamirez.opponentFailedAction(opponentChoices[i]);
+                VsLopez.playerSuccessAction(choices[i], opponentChoices[i], false);
+                VsLopez.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                VsRamirez.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                VsRamirez.playerFailedAction(choices[i]);
+                VsLopez.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                VsLopez.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                VsRamirez.drawAction(choices[i], opponentChoices[i]);
+                VsLopez.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -323,7 +322,7 @@ public class RamirezTourna {
                 break;
             case 5:
                 if(playerMove == 0) return 1;
-                if(playerMove == 1 || playerMove == 2) return 2;
+                if(playerMove == 0 || playerMove == 1) return 2;
                 break;
             case 6:
                 if(playerMove == 2) return 1;

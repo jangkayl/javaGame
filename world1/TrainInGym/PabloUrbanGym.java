@@ -63,7 +63,6 @@ public class PabloUrbanGym {
                 playerProgress.setShopStage(3);  
                 player.setStage(3);
                 GameLogic.gameData.saveGame();
-                return;
             }
         }
         GameLogic.pressAnything();
@@ -334,6 +333,5 @@ public class PabloUrbanGym {
         System.out.println("Visit the shop and use your points to buy items.");
         System.out.println(); 
         GameLogic.printSeparator(40);
-        GameLogic.pressAnything();
     }
 }

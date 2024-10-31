@@ -1,14 +1,21 @@
 package world1;
 
-import java.util.Scanner;
-
+import world1.TournamentFight.LopezTourna;
 import world1.TournamentFight.RamirezTourna;
 
 public class Tournament {
     private static Player player = GameLogic.player;
-    private static String[] opponents = {"El Tigre"};
+    private static String[] opponents = {"El Tigre", "El Jablo"};
     static PlayerProgress playerProgress = GameLogic.playerProgress;
-    public static StreetFighter opponent1 = new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, .30);
+    static StreetFighter opponent;
+
+    public void setOpponent(StreetFighter enemy){
+        opponent = enemy;
+    }
+
+    public StreetFighter getOpponent(){
+        return opponent;
+    }
 
     public static void attemptTournament(int playerStage) {
         GameLogic.clearConsole();
@@ -49,6 +56,7 @@ public class Tournament {
                 } else if(playerProgress.getPlayerWins() == 3){
                     player.setStage(4);
                     resetMatchScores();
+                    break;
                 }
                 GameLogic.pressAnything();
             } else if (player.getStage() == 4) {
@@ -61,10 +69,14 @@ public class Tournament {
                         continue;
                     }
                 } else if(playerProgress.getPlayerWins() == 3){
-                    player.setStage(4);
+                    player.setStage(5);
                     resetMatchScores();
+                    break;
                 }
                 GameLogic.pressAnything();
+            } else if (player.getStage() == 5) {
+                System.out.println("BASIC");     
+                break;           
             }
         }
         // concludeTournament();
@@ -75,10 +87,20 @@ public class Tournament {
         System.out.println("You will face: " + opponents[opponentIndex]);
         UrbanStory.tournaOpponentBackstory(opponents[opponentIndex]);
         
-        while (!isMatchConcluded()) {
-            RamirezTourna.setPlayer(player);
-            StreetFighter.setPlayerOpponent(player);
-            RamirezTourna.fightLoop2();
+        if(opponentIndex == 0){
+            while (!isMatchConcluded()) {
+                opponent = new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, .30);
+                RamirezTourna.setPlayer(player);
+                StreetFighter.setPlayerOpponent(player);
+                RamirezTourna.fightLoop2();
+            }
+        } else if(opponentIndex == 1){
+            while (!isMatchConcluded()) {
+                opponent = new StreetFighter("Oscar Lopez", 170, 100, 0.2, 2, .30);
+                LopezTourna.setPlayer(player);
+                StreetFighter.setPlayerOpponent(player);
+                LopezTourna.fightLoop2();
+            }
         }
     }
 
@@ -115,10 +137,10 @@ public class Tournament {
         GameLogic.clearConsole();
     }
 
-    public static void printStanding(){
+    public void printStanding(){
         System.out.println();  
         System.out.println("\t ~ ~ ~ BEST OF 3 ~ ~ ~");
-        System.out.println(player.getName() + " - " + playerProgress.getPlayerWins() + "\t\t" + opponent1.getName() + " - " + playerProgress.getOpponentWins());
+        System.out.println(player.getName() + " - " + playerProgress.getPlayerWins() + "\t\t" + opponent.getName() + " - " + playerProgress.getOpponentWins());
         GameLogic.pressAnything();
     }
 }

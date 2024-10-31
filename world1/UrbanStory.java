@@ -362,7 +362,6 @@ public class UrbanStory {
         } else {
             Shop.showShop(false);
             GameLogic.gameData.inputInventory(Inventory.getInventoryItems());
-            return;
         }
     }
 
@@ -486,13 +485,13 @@ public class UrbanStory {
                         "\n\t\tNow, they seek to prove their strength in the tournament!");
                         GameLogic.pressAnything();
                 break;
-            // case "Savage Warrior":
-            //     System.out.println("\t\t💪Backstory: The Savage Warrior is a fierce competitor, feared by many for their brutal fighting style. " +
-            //             "\n\t\tRaised in a harsh environment, they have learned to rely on their raw strength and instinct. " +
-            //             "\n\t\tTheir reputation for taking down opponents with a single blow has made them a legend in the underground fighting scene. " +
-            //             "\n\t\tThey enter the tournament to cement their legacy!");
-            //             GameLogic.pressAnything();
-            //     break;
+            case "El Jablo":
+                System.out.println("\t\t💪Backstory: Oscar \"El Jablo\" Lopez, from Cebu City, grew up in a hardworking family as the youngest of five. Inspired by local boxing matches," +
+                        "\n\t\the honed his skills in underground fights, earning a reputation for his lightning-fast jabs and explosive combos. Driven by a desire to uplift" +
+                        "\n\t\t his community and motivated by a friend's injury in the ring, Oscar turned pro. Now, as he enters the tournament, he's determined to prove" +
+                        "\n\t\thimself as a champion, ready to unleash his quick jab, powerful cross, and knockout power punch.");
+                        GameLogic.pressAnything();
+                break;
             // case "Legendary Champion":
             //     System.out.println("\t\t🌟Backstory: The Legendary Champion has a storied history of victories and is regarded as a hero by many. " +
             //             "\n\t\tWith a record of undefeated battles, they have mastered every technique in the book. " +
