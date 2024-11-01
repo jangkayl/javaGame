@@ -8,6 +8,7 @@ public class PlayerProgress implements PlayerProgressInterface {
     private int done;
     private int opponentWins;
     private int playerWins;
+    private int addStats;
 
     public PlayerProgress(int round, int shopStage, int done) {
         this.round = round;
@@ -15,6 +16,7 @@ public class PlayerProgress implements PlayerProgressInterface {
         this.done = done;
         this.playerWins = 0;
         this.opponentWins = 0;
+        this.addStats = 0;
     }
 
     public void setRound(int round){
@@ -55,5 +57,13 @@ public class PlayerProgress implements PlayerProgressInterface {
 
     public int getPlayerWins(){
         return playerWins;
+    }
+
+    public void setAddStats(int stats){
+        this.addStats = stats;
+    }
+
+    public int getAddStats(){
+        return addStats;
     }
 }

@@ -3,7 +3,8 @@ package world1;
 public class Inventory {
     private static final int MAX_ITEMS = 10;  
     private static Item[] inventoryItems = new Item[MAX_ITEMS];  
-    private static int itemCount = 0; 
+    private static int itemCount = 0;
+    static Shop shop; 
     static boolean isEmpty = true;
     private static String[] slotName = {"HEAD","BODY","HAND","BOOTS","FOOD"};
     private static Item[] slot = new Item[5];
@@ -22,19 +23,19 @@ public class Inventory {
         }
     }
 
-    public static int getItemCount(){
+    public int getItemCount(){
         return itemCount;
     }
 
-    public static Item[] getInventoryItems(){
+    public Item[] getInventoryItems(){
         return inventoryItems;
     }
 
-    public static Item[] getSlots(){
+    public Item[] getSlots(){
         return slot;
     }
 
-    public static void setSlots(Item[] slots){
+    public void setSlots(Item[] slots){
         if (slots != null) {
             for (int i = 0; i < slots.length; i++) {
                 slot[i] = slots[i];
@@ -42,7 +43,7 @@ public class Inventory {
         }
     }
 
-    public static void setInventoryItems(Item[] items){
+    public void setInventoryItems(Item[] items){
         if (items != null) {
             if (items.length <= MAX_ITEMS) {
                 for (int i = 0; i < items.length; i++) {
@@ -56,7 +57,7 @@ public class Inventory {
         }
     }
 
-    public static void setInventory(String item, String description, String body, String effect) {
+    public void setInventory(String item, String description, String body, String effect) {
         if (itemCount < MAX_ITEMS) {
             inventoryItems[itemCount] = new Item(item, description, body, effect);
             itemCount++;
@@ -67,12 +68,13 @@ public class Inventory {
     }
 
     // Display the inventory menu
-    public static void inventoryMenu() {
+    public void inventoryMenu() {
         inventoryAsk();
         GameLogic.pressAnything();
     }
 
     public static void displayInventory(){
+        shop = GameLogic.shop;
         GameLogic.printHeading("\tInventory");
         System.out.println("Equipped Items:");
         System.out.println("\t1. Head: " + (slot[0] != null ? slot[0].name + " - " + slot[0].effect : "Empty"));
@@ -93,7 +95,7 @@ public class Inventory {
         }
     }
 
-    public static void inventoryAsk(){
+    public void inventoryAsk(){
         int choice;
         
         outerLoop:
@@ -203,7 +205,7 @@ public class Inventory {
         }
 
         Item selectedItem = inventoryItems[itemIndex];
-        Shop.applyEffect(selectedItem.effect);
+        shop.applyEffect(selectedItem.effect);
         switch (equipmentSlot.toUpperCase()) {
             case "HEAD":
                 slot[0] = selectedItem;
@@ -243,16 +245,15 @@ public class Inventory {
         GameLogic.pressAnything();
     }
 
-    public static void remove(Item removedItem){
+    public void remove(Item removedItem){
         if(removedItem != null) {
             inventoryItems[itemCount] = removedItem;
             itemCount++;
-            Shop.removeEffect(removedItem.effect);
-
+            shop.removeEffect(removedItem.effect);
         }
     }
 
-    public static void removeAllInventory(){
+    public void removeAllInventory(){
         Item removedItem = null;
         for(int i = 0 ; i < 5 ;i++){
             removedItem = slot[i];
@@ -264,7 +265,7 @@ public class Inventory {
         GameLogic.pressAnything();
     }
 
-    public static void inventoryRemove(String equipmentSlot) {
+    public void inventoryRemove(String equipmentSlot) {
         Item removedItem = null;
         System.out.println();
 

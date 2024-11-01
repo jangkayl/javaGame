@@ -4,6 +4,7 @@ import world1.TrainInGym.UrbanGym;
 
 public class Shop {
     static Player player;
+    static Inventory inventory = new Inventory();
     static PlayerProgress playerProgress = GameLogic.playerProgress;
     public static Item[] items = {
         new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false","HAND"),
@@ -52,35 +53,35 @@ public class Shop {
         }
     }
 
-    public static String getItemNameByIndex(int index) {
+    public String getItemNameByIndex(int index) {
         if (index < 0 || index >= items.length) {
             throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         }
         return items[index].name;
     }
 
-    public static String getItemDescriptionByIndex(int index) {
+    public String getItemDescriptionByIndex(int index) {
         if (index < 0 || index >= items.length) {
             throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         }
         return items[index].description;
     }
 
-    public static String getItemBodyByIndex(int index) {
+    public String getItemBodyByIndex(int index) {
         if (index < 0 || index >= items.length) {
             throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         }
         return items[index].body;
     }
 
-    public static String getItemEffectByIndex(int index) {
+    public String getItemEffectByIndex(int index) {
         if (index < 0 || index >= items.length) {
             throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         }
         return items[index].effect;
     }
 
-    public static int getItemIndexByDescription(String description) {
+    public int getItemIndexByDescription(String description) {
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null && description.trim().equals(items[i].description.trim())) {
                 return i; 
@@ -89,8 +90,7 @@ public class Shop {
         return -1; 
     }
     
-    
-    public static void showMenu(){
+    public void showMenu(){
         GameLogic.clearConsole();
         GameLogic.printHeading("    Urban Gym");
         System.out.println();
@@ -100,114 +100,80 @@ public class Shop {
         int choice = GameLogic.readInt("-> ", 1, 2);
         if(choice == 1){
             UrbanGym.setPlayer(player);
-            StreetFighter.setPlayerOpponent(player);
             UrbanGym.fightLoop();
         } else {
             showShop(true);
         }
     }
 
-    static void showShop(boolean isTraining) {
-        int choice = 0;
-        boolean isSold = false;
-
-        System.out.println();
-        GameLogic.printHeading("        Gym Shop");
-        System.out.println();
-        
-        GameLogic.printSeparator(20);
-        System.out.println("Player Points: " + player.getPlayerPoints());
-        GameLogic.printSeparator(20);
-        System.out.println();
-        
-        for (int i = 0; i < items.length; i++) {
-            System.out.println("(" + (i + 1) + ") " + items[i].name);
-            items[i].displayItem();
-        }
-        
-        System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
-
-        if(playerProgress.getShopStage() < 1 && isTraining){
-            choice = GameLogic.readInt("-> ", 0, items.length);
-            UrbanStory.urbanTraining7();
-        } else {
+    public void showShop(boolean isTraining) {
+        while (true) {
+            int choice = -1;
+            boolean isSold = false;
+    
+            System.out.println();
+            GameLogic.printHeading("        Gym Shop");
+            System.out.println();
+    
+            GameLogic.printSeparator(20);
+            System.out.println("Player Points: " + player.getPlayerPoints());
+            GameLogic.printSeparator(20);
+            System.out.println();
+    
+            // Display items for sale
+            for (int i = 0; i < items.length; i++) {
+                System.out.println("(" + (i + 1) + ") " + items[i].name);
+                items[i].displayItem();
+            }
+    
+            System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
+    
+            // Training check before entering purchase loop
+            if (playerProgress.getShopStage() < 1 && isTraining) {
+                choice = GameLogic.readInt("-> ", 0, items.length);
+                UrbanStory.urbanTraining7();
+                return;
+            }
+    
+            // Purchase loop
             while (!isSold) {
                 choice = GameLogic.readInt("-> ", 0, items.length);
-        
                 if (choice == 0) {
                     System.out.println("Exiting the shop...");
-                    return;  
+                    GameLogic.pressAnything();
+                    return;
                 }
-                
+    
                 if (soldChecker(choice)) {
                     System.out.println(items[choice - 1].name + " is already sold. Choose another item.");
-                    isSold = false;
+                } else if (notEnoughtPoints(choice)) {
+                    System.out.println("You don't have enough points to buy " + items[choice - 1].name + ". Please choose another item or earn more points.");
                 } else {
-                    if (!notEnoughtPoints(choice)) {      
-                        isSold = true;
-                        player.setPlayerPoints(player.getPlayerPoints() - items[choice - 1].cost);
-                        
-                    } else {
-                        System.out.println("You don't have enough points to buy " + items[choice - 1].name + ". Please choose another item or earn more points.");
+                    // Successful purchase
+                    System.out.println();
+                    player.setPlayerPoints(player.getPlayerPoints() - items[choice - 1].cost);
+                    GameLogic.printSeparator(35);
+                    System.out.println("You've purchased " + items[choice - 1].name);
+                    GameLogic.printSeparator(35);
+                    System.out.println();
+    
+                    // Add item to inventory
+                    if (choice != 5) {
+                        inventory.setInventory(items[choice - 1].name, items[choice - 1].description, items[choice - 1].body, items[choice - 1].effect);
                     }
+    
+                    // Mark item as sold and set isSold to true to exit inner loop
+                    items[choice - 1].setSoldOut();
+                    isSold = true;
                 }
             }
-
-            switch(choice){
-                case 1:
-                    if(items[choice-1].isSoldOut()) break;
-                    GameLogic.printSeparator(35);
-                    System.out.println("You bought " + items[choice - 1].name + " for " + items[choice - 1].cost + " points.");
-                    GameLogic.printSeparator(35);
-                    System.out.println();
-                    Inventory.setInventory(items[choice-1].name, items[choice-1].description, items[choice-1].body, items[choice-1].effect);
-                    items[choice-1].setSoldOut();
-                    GameLogic.pressAnything();
-                    break;
-                case 2:
-                    if(items[choice-1].isSoldOut()) break;
-                    GameLogic.printSeparator(35);
-                    System.out.println("You've purchased 2 " + items[choice-1].name);
-                    GameLogic.printSeparator(35);
-                    System.out.println();
-                    Inventory.setInventory(items[choice-1].name, items[choice-1].description, items[choice-1].body, items[choice-1].effect);
-                    items[choice-1].setSoldOut();
-                    GameLogic.pressAnything();
-                    break;
-                case 3:
-                    if(items[choice-1].isSoldOut()) break;
-                    GameLogic.printSeparator(35);
-                    System.out.println("You've purchased 3 " + items[choice-1].name);
-                    GameLogic.printSeparator(35);
-                    System.out.println();
-                    Inventory.setInventory(items[choice-1].name, items[choice-1].description, items[choice-1].body, items[choice-1].effect);
-                    items[choice-1].setSoldOut();
-                    GameLogic.pressAnything();
-                    break;
-                case 4:
-                    if(items[choice-1].isSoldOut()) break;
-                    GameLogic.printSeparator(35);
-                    System.out.println("You've purchased 4 " + items[choice-1].name);
-                    GameLogic.printSeparator(35);
-                    System.out.println();
-                    Inventory.setInventory(items[choice-1].name, items[choice-1].description, items[choice-1].body, items[choice-1].effect);
-                    items[choice-1].setSoldOut();
-                    GameLogic.pressAnything();
-                    break;
-                case 5:
-                    if(items[choice-1].isSoldOut()) break;
-                    GameLogic.printSeparator(35);
-                    System.out.println("You've purchased 5 " + items[choice-1].name);
-                    GameLogic.printSeparator(35);
-                    System.out.println();
-                    items[choice-1].setSoldOut();
-                    GameLogic.pressAnything();
-                    break;
-                }
+    
+            GameLogic.pressAnything(); 
         }
     }
+    
 
-    public static void shop() {
+    public void shop() {
         GameLogic.clearConsole();
         GameLogic.printHeading("        Gym Shop");
 
@@ -234,7 +200,7 @@ public class Shop {
         return false;
     }
 
-    public static void applyEffect(String effect){
+    public void applyEffect(String effect){
         int choice = 0 ;
         for(int i = 0 ; i < 5 ; i++){
             if(effect.equals(items[i].effect)){
@@ -265,7 +231,7 @@ public class Shop {
         }
     }
 
-    public static void removeEffect(String effect){
+    public void removeEffect(String effect){
         int choice = 0 ;
         for(int i = 0 ; i < 5 ; i++){
             if(effect.equals(items[i].effect)){
@@ -295,7 +261,7 @@ public class Shop {
         }
     }
 
-    private static void applyHpEffect(double hpIncreasePercentage, double critChanceIncreasePercentage,int choice) {
+    private void applyHpEffect(double hpIncreasePercentage, double critChanceIncreasePercentage,int choice) {
         double hpMultiplier = 1 + hpIncreasePercentage;
         int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);
         player.setHp(maxHp);
@@ -307,7 +273,7 @@ public class Shop {
         }
     }
     
-    private static void applyStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
+    private void applyStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
         double staminaMultiplier = 1 + stamIncreasePercentage;
         int maxStamina = (int)Math.ceil(player.getMaxStamina() * staminaMultiplier);
         player.setStamina(maxStamina);
@@ -319,7 +285,7 @@ public class Shop {
         }
     }
 
-    private static void removeHpEffect(double hpIncreasePercentage, double critChanceIncreasePercentage,int choice) {
+    private void removeHpEffect(double hpIncreasePercentage, double critChanceIncreasePercentage,int choice) {
         double hpMultiplier = 1 + hpIncreasePercentage;
         int maxHp = (int) Math.floor(player.getMaxHp() / hpMultiplier);
         player.setHp(maxHp);
@@ -331,7 +297,7 @@ public class Shop {
         }
     }
     
-    private static void removeStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
+    private void removeStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
         double staminaMultiplier = 1 + stamIncreasePercentage;
         int maxStamina = (int)Math.floor(player.getMaxStamina() / staminaMultiplier);
         player.setStamina(maxStamina);

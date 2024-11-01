@@ -3,6 +3,8 @@ package world1;
 import world1.TrainInGym.PabloUrbanGym;
 
 public class UrbanStory {
+    static Inventory inventory = new Inventory();
+    static Shop shop = GameLogic.shop;
     private static String[] array = {"Jab", "Hook", "Block", "Uppercut"};
 
     static void reply(int num, String reply){
@@ -319,7 +321,7 @@ public class UrbanStory {
         System.out.println();
         System.out.println("Fred: \t\"Go on, show me what you've got. And remember \"train hard, shop smart\".");
         GameLogic.pressAnything();
-        Shop.showMenu();
+        shop.showMenu();
     }
 
     public static void urbanTrainingLose(String name, String opponent) {
@@ -338,7 +340,7 @@ public class UrbanStory {
         System.out.println();
         System.out.println("Fred:\t\"Do you want a rematch?\"");
         GameLogic.pressAnything();
-        Shop.showMenu();
+        GameLogic.shop.showMenu();
     }
 
     public static void urbanTraining8(String name){
@@ -360,8 +362,8 @@ public class UrbanStory {
         if(choice == 1) {
             urbanTrainingCombo(name);
         } else {
-            Shop.showShop(false);
-            GameLogic.gameData.inputInventory(Inventory.getInventoryItems());
+            shop.showShop(false);
+            GameLogic.gameData.inputInventory(inventory.getInventoryItems());
         }
     }
 
@@ -434,7 +436,6 @@ public class UrbanStory {
         System.out.println("\t[ You take a deep breath, stepping into the ring to face Pablo 'El Halcón' Martínez, eager to prove your skills... ]");
         GameLogic.pressAnything();
         PabloUrbanGym.setPlayer(GameLogic.player);
-        StreetFighter.setPlayerOpponent(GameLogic.player);
         PabloUrbanGym.fightLoop2();
     }
 
@@ -474,31 +475,47 @@ public class UrbanStory {
             return;
         }
     }
-    
+
+    public static boolean tournaLoseTraining(String name) {
+        System.out.println();
+        GameLogic.printSeparator(40);
+        System.out.println();
+        System.out.println("Fred: \t\"The tournament was a tough test. Losing happens, but it's how we get stronger.\"");
+        System.out.println("\t\tLet's train harder, gain more stats, and you'll be ready for the next challenge.");
+        System.out.println("\t\tReady to get back to work?\"");
+        System.out.println();
+        reply("I'm in! Let's do this.", "I'll think about it, Fred. Not sure if I'm ready yet.");
+        int choice = GameLogic.readInt("-> ", 1, 2);
+        if(choice == 1){
+            return true;
+        } 
+        return false;
+    }
     
     public static void tournaOpponentBackstory(String opponentName) {
         switch (opponentName) {
             case "El Tigre":
-                System.out.println("\t\t🔥Backstory: Introducing Rico \"El Tigre\" Ramirez, a fierce contender from Manila, inspired by his father's legacy as a former champion." +
+                System.out.println("\n\t\t🔥Backstory: Introducing Rico \"El Tigre\" Ramirez, a fierce contender from Manila, inspired by his father's legacy as a former champion." +
                         "\n\t\tKnown for his explosive style and powerful uppercuts, Rico has quickly climbed the ranks of boxing, embodying resilience and determination." +
-                        "\n\t\tAs he steps into the ring for this tournament, he carries the hopes of his community, ready to unleash the spirit of the tiger and claim his place among the greats!" +
-                        "\n\t\tNow, they seek to prove their strength in the tournament!");
-                        GameLogic.pressAnything();
+                        "\n\t\tAs he steps into the ring for this tournament, he carries the hopes of his community, ready to unleash the spirit of the tiger and claim" +
+                        "\n\t\this place among the greats! Now, they seek to prove their strength in the tournament!");
+                GameLogic.pressAnything();
                 break;
             case "El Jablo":
-                System.out.println("\t\t💪Backstory: Oscar \"El Jablo\" Lopez, from Cebu City, grew up in a hardworking family as the youngest of five. Inspired by local boxing matches," +
+                System.out.println("\n\t\t💪Backstory: Oscar \"El Jablo\" Lopez, from Cebu City, grew up in a hardworking family as the youngest of five. Inspired by local boxing matches," +
                         "\n\t\the honed his skills in underground fights, earning a reputation for his lightning-fast jabs and explosive combos. Driven by a desire to uplift" +
                         "\n\t\t his community and motivated by a friend's injury in the ring, Oscar turned pro. Now, as he enters the tournament, he's determined to prove" +
                         "\n\t\thimself as a champion, ready to unleash his quick jab, powerful cross, and knockout power punch.");
                         GameLogic.pressAnything();
                 break;
-            // case "Legendary Champion":
-            //     System.out.println("\t\t🌟Backstory: The Legendary Champion has a storied history of victories and is regarded as a hero by many. " +
-            //             "\n\t\tWith a record of undefeated battles, they have mastered every technique in the book. " +
-            //             "\n\t\tHowever, their path has not been without hardship, as they have faced great losses that have shaped their character. " +
-            //             "\n\t\tNow, they fight not just for glory, but to inspire the next generation of fighters.");
-            //             GameLogic.pressAnything();
-            //     break;
+            case "El Taeh":
+                System.out.print(" - The Thunderous Finisher");
+                System.out.println("\n\t\t🌟Backstory: Ishmael Tetteh, \"The Thunderous Finisher,\" is a 28-year-old Ghanaian-American middleweight boxer with 28 wins (24 by KO)." +
+                        "\n\t\tInspired by Canelo Alvarez, he has mastered a signature combo—Right Uppercut, Left Hook, Right Cross—reflecting his journey from Accra to the boxing ring." +
+                        "\n\t\t After a pivotal early loss, he trained under a retired champion, transforming into a powerful and agile fighter." +
+                        "\n\t\tNow, as he prepares for a major tournament, Ishmael fights for victory and his community, ready to make his mark in the boxing world.");
+                GameLogic.pressAnything();
+                break;
             default:
                 System.out.println("No backstory available for this opponent.");
         }

@@ -1,13 +1,13 @@
 package world1;
 public class StreetFighter extends Boxer {
-    static Player player;
+    static Player player = GameLogic.player;
     public StreetFighter(String name, int hp, int stamina, double critChance, double critMultiplier,
             double dodgeChance) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
     }
 
-    public static void setPlayerOpponent(Player player) {
-        StreetFighter.player = player;
+    public void setPlayerOpponent(Player play) {
+        player = play;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class StreetFighter extends Boxer {
 
     // Lopez COMBO
     public void quickJab() {
-        int damage = (int)Math.floor(20 * getDamageSetter());
+        int damage = (int)Math.floor(25 * getDamageSetter());
         int staminaReduced = 9;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
@@ -97,10 +97,35 @@ public class StreetFighter extends Boxer {
     }
 
     public void powerPunch() {
-        int damage = (int)Math.floor(25 * getDamageSetter());
+        int damage = (int)Math.floor(30 * getDamageSetter());
         int staminaReduced = 14;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         System.out.println(this.getName() + " power punch " + player.getName() + " for " + damage + " damage!");
+    }
+
+    // Tetteh COMBO
+    public void rightUppercut() {
+        int damage = (int)Math.floor(20 * getDamageSetter());
+        int staminaReduced = 9;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " right uppercut " + player.getName() + " for " + damage + " damage!");
+    }
+
+    public void leftHook() {
+        int damage = (int)Math.floor(25 * getDamageSetter());
+        int staminaReduced = 10;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " left hook " + player.getName() + " for " + damage + " damage!");
+    }
+
+    public void rightCross() {
+        int damage = (int)Math.floor(30 * getDamageSetter());
+        int staminaReduced = 14;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        System.out.println(this.getName() + " right cross " + player.getName() + " for " + damage + " damage!");
     }
 }

@@ -2,6 +2,7 @@ package world1;
 import java.util.Scanner;
 
 import world1.Inventory.Item;
+import world1.TrainInGym.FredGym;
 import world1.TrainInGym.PabloUrbanGym;
 import world1.TrainInGym.UrbanGym;
 import world1.database.GameDataManager;
@@ -12,10 +13,12 @@ import java.text.DecimalFormat;
 public class GameLogic{
     public static Scanner scan = new Scanner(System.in);   
     static DecimalFormat df = new DecimalFormat("#,###.00");   
-    static Player player;
+    public static Player player;
     public static PlayerProgress playerProgress;
     static Item[] inventoryItems;
     static Item[] slots;
+    public static Inventory inventory = new Inventory();
+    public static Shop shop = new Shop(player, playerProgress);
     static boolean isRunning;
     public static GameDatabase gameData = new GameDatabase();
     static GameDataManager gameDataManager = new GameDataManager();
@@ -145,8 +148,8 @@ public class GameLogic{
                 playerProgress = gameData.getGameDataManager().getPlayerProgress();
                 inventoryItems = gameData.getGameDataManager().getInventory();
                 slots = gameData.getGameDataManager().getSlots();
-                Inventory.setInventoryItems(inventoryItems);
-                Inventory.setSlots(slots);
+                inventory.setInventoryItems(inventoryItems);
+                inventory.setSlots(slots);
                 if (player != null) {
                     break; 
                 } else {
@@ -184,7 +187,7 @@ public class GameLogic{
     // Loops the menu options
     public static void gameLoop(){
         while(isRunning){
-            new Shop(player, playerProgress);
+            shop = new Shop(player, playerProgress);
             printMenu();
             int input = readInt("-> ", 0, 7);
             if(input == 0){
@@ -201,11 +204,11 @@ public class GameLogic{
             } else if(input == 5) {
                 gameData.getGameDataManager().getInventory();
                 gameData.getGameDataManager().getSlots();
-                Inventory.inventoryMenu();
-                gameData.inputSlots(Inventory.getSlots());
+                inventory.inventoryMenu();
+                gameData.inputSlots(inventory.getSlots());
             } else if(input == 6) {
-                Shop.showShop(false);
-                gameData.inputInventory(Inventory.getInventoryItems());
+                shop.showShop(false);
+                gameData.inputInventory(inventory.getInventoryItems());
             } else if(input == 7) {
                 isRunning = false;
             }
@@ -278,6 +281,19 @@ public class GameLogic{
     public static void gymTraining(){
         int choice = 0;
         if(player.getCurrentWorld() == 0){
+            
+            // Train with Fred after losing in the Tournament
+            if(playerProgress.getOpponentWins() == 3 && playerProgress.getAddStats() != 5){
+                if(UrbanStory.tournaLoseTraining(player.getName())){
+                    playerProgress.setRound(1);
+                    FredGym.setPlayer(GameLogic.player);
+                    FredGym.fightLoop2();
+                    return;
+                }
+                return;
+            }
+
+            // Train with Fred
             if(player.getStage() == 0){
                 clearConsole();
                 // UrbanStory.printTraining(player.getName());
@@ -292,19 +308,21 @@ public class GameLogic{
                     } else {
                         UrbanStory.urbanTraining6(player.getName());
                         choice = readInt("-> ", 1, 1);
-                        if(choice == 1) Shop.shop();
+                        if(choice == 1) shop.shop();
                     }
                 } else {
                     if(player.getStage() == 1) UrbanStory.urbanTraining8(player.getName());  
                     else if(player.getStage() == 2){
                         PabloUrbanGym.setPlayer(GameLogic.player);
-                        StreetFighter.setPlayerOpponent(GameLogic.player);
                         PabloUrbanGym.fightLoop2();
                     }
                     if(player.getStage() >= 3){
                         if(playerProgress.getDone() != 1){
                             UrbanStory.inviteToTournament(player.getName());
                         } else {
+                            if(playerProgress.getAddStats() == 5){
+                                System.out.println("Fred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n");
+                            }
                             System.out.println("Go to tournament and continue fighting your opponent!");
                         }
                         pressAnything();

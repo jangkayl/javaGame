@@ -12,6 +12,11 @@ public class VsLopez {
     static boolean playerDodged = false;
     static boolean opponentDodged = false;
 
+    public VsLopez(Player play, StreetFighter enemy){
+        player = play;
+        opponent = enemy;
+    }
+
     public static void setPlayerOpponent(Player player) {
         VsLopez.player = player;
     }
@@ -20,7 +25,7 @@ public class VsLopez {
         VsLopez.opponent = opponent;
     }
     
-    public static void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
+    public void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
         double critChance = rand.nextDouble();
         double dodgeChance = rand.nextDouble();
         
@@ -92,7 +97,7 @@ public class VsLopez {
         opponentDodged = false;
     }
 
-    public static void playerFailedAction(int choice) {
+    public void playerFailedAction(int choice) {
         switch (choice) {
             case 0:
                 player.setStamina(player.getStamina() - 5);
@@ -120,7 +125,7 @@ public class VsLopez {
         }
     }
 
-    public static void opponentSuccessAction(int choice, int playerChoice, boolean isDraw) {
+    public void opponentSuccessAction(int choice, int playerChoice, boolean isDraw) {
         double critChance = rand.nextDouble();
         double dodgeChance = rand.nextDouble();
         
@@ -192,7 +197,7 @@ public class VsLopez {
         playerDodged = false;
     }
 
-    public static void opponentFailedAction(int choice) {
+    public void opponentFailedAction(int choice) {
         switch (choice) {
             case 0:
                 opponent.setStamina(opponent.getStamina() - 5);
@@ -220,7 +225,7 @@ public class VsLopez {
         }
     }
 
-    public static void drawAction(int choice, int opponentChoice) {
+    public void drawAction(int choice, int opponentChoice) {
         player.setDamageSetter(0.5);
         playerSuccessAction(choice, opponentChoice, false);
         player.setDamageSetter(1);

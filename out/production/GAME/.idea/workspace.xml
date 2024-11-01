@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PabloUrbanGym.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PabloUrbanGym.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Tournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsLopez.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightingLogic/VsLopez.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/GameLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/LopezTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/LopezTourna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/UrbanStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/UrbanStory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/database/GameDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/database/GameDataManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

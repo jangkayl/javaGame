@@ -1,38 +1,34 @@
-package world1.TournamentFight;
+package world1.TrainInGym;
 import java.util.Random;
 
 import world1.GameLogic;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
-import world1.Tournament;
-import world1.FightingLogic.VsLopez;
+import world1.FightingLogic.VsPablo;
 
-public class LopezTourna {
+public class FredGym {
     static Random rand = new Random();
     static int[] opponentChoices = new int[3];
     static PlayerProgress playerProgress = GameLogic.playerProgress;
-    static Player player;
+    public static Player player;
     static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
-                                    {"Hook", "Damage: 15 | Stamina: -7"}, 
-                                    {"Block", "Stamina: +5"}, 
-                                    {"Uppercut", "Damage: 20 | Stamina: -10"},
-                                    {"The Body Breaker", ""}};
+                                {"Hook", "Damage: 15 | Stamina: -7"}, 
+                                {"Block", "Stamina: +5"}, 
+                                {"Uppercut", "Damage: 20 | Stamina: -10"},
+                                {"The Body Breaker", ""}};
     static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
     public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Quick Jab", "Cross", "Power Punch"};
-    static Tournament tourna = new Tournament();
-    static StreetFighter opponent = tourna.getOpponent();
-    static VsLopez lopez;
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Jab to the Body", "Lead Hook", "Rear Uppercut"};
+    public static StreetFighter opponent = new StreetFighter("Fred", 130, 70, 0.2, 2, .30);
     
     public static void setPlayer(Player p) {
         player = p;
     }
 
     public static void fightLoop2() {
-        player.setStage(4);
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
@@ -41,7 +37,8 @@ public class LopezTourna {
         System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
         System.out.println();
         GameLogic.printSeparator(40);
-        lopez = new VsLopez(player, opponent);
+        VsPablo.setPlayerOpponent(player);
+        VsPablo.setOpponent(opponent);
         player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
@@ -50,39 +47,28 @@ public class LopezTourna {
             if (player.getHp() <= 0) {
                 System.out.println();
                 System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
-                player.setIsLose(true);
                 playerProgress.setRound(playerProgress.getRound() + 1);
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
                 player.setHp(player.getMaxHp());
                 player.setStamina(player.getMaxStamina());
-                if(playerProgress.getOpponentWins() != 3){
-                    playerProgress.setOpponentWins(playerProgress.getOpponentWins() + 1);
-                }
-                tourna.printStanding();
-                GameLogic.gameData.saveGame();
+                GameLogic.pressAnything();
                 return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
-                player.setIsLose(false);
                 winnerReward();
                 player.setHp(player.getMaxHp());
                 player.setStamina(player.getMaxStamina());
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
-                playerProgress.setRound(playerProgress.getRound() + 1);
-                if(playerProgress.getPlayerWins() != 3){
-                    playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
-                } else {
-                    player.setStage(5);
-                }
-                tourna.printStanding();
+                playerProgress.setRound(1);  
+                playerProgress.setShopStage(3);  
                 GameLogic.gameData.saveGame();
+                GameLogic.pressAnything();
                 return;
             }
         }
-        GameLogic.pressAnything();
     }
 
     static void printStats(){
@@ -280,16 +266,16 @@ public class LopezTourna {
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                lopez.playerSuccessAction(choices[i], opponentChoices[i], false);
-                lopez.opponentFailedAction(opponentChoices[i]);
+                VsPablo.playerSuccessAction(choices[i], opponentChoices[i], false);
+                VsPablo.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                lopez.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                lopez.playerFailedAction(choices[i]);
+                VsPablo.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                VsPablo.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                lopez.drawAction(choices[i], opponentChoices[i]);
+                VsPablo.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -321,8 +307,8 @@ public class LopezTourna {
                 if(playerMove == 0 || playerMove == 1) return 2;
                 break;
             case 5:
-                if(playerMove == 3) return 1;
-                if(playerMove == 0 || playerMove == 1) return 2;
+                if(playerMove == 0) return 1;
+                if(playerMove == 1 || playerMove == 2) return 2;
                 break;
             case 6:
                 if(playerMove == 2) return 1;
@@ -334,13 +320,49 @@ public class LopezTourna {
         return 0;
     }
 
-    private static void winnerReward() {
-        if(playerProgress.getPlayerWins() != 3){
-            System.out.println(); 
-            GameLogic.printSeparator(40);
-            System.out.println(); 
-            System.out.println("Congratulations! You've won the match!");
+    static void winnerReward() {
+        System.out.println(); 
+        GameLogic.printSeparator(40);
+        System.out.println(); 
+        playerProgress.setAddStats(playerProgress.getAddStats() + 1);
+        System.out.println("Congratulations! You've won " + playerProgress.getAddStats() + " / 5 matches");
+        System.out.println();  
+        System.out.println("Fred: \t\"Great job! Now, choose what stats you want to upgrade.\"");
+        
+        System.out.println("\nHere are your choices: ( Select one only )");
+        System.out.println("1. HP - Increase by +20% ");
+        System.out.println("2. Stamina - Increase by +20%");
+        System.out.println("3. Crit Chance - Increase by +10%");
+        System.out.println("4. Dodge Chance - Increase by +10%");
+        System.out.println("5. Crit Multiplier - Increase by +10%");
+        System.out.print("\nEnter the number of the stat you'd like to upgrade: ");
+        int choice = GameLogic.readInt("", 1, 5);
+        addStats(choice);
+        System.out.println();
+        System.out.println("Fred: \"Stats added! Remember, you can train up to 5 times!\"");
+        GameLogic.printSeparator(40);
+    }
+
+    static void addStats(int choice){
+        if(choice == 1){
+            double hpMultiplier = 1 + 0.20;
+            int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);
+            player.setHp(maxHp);
+            player.setMaxHp(maxHp);
+        } else if(choice == 2){
+            double staminaMultiplier = 1 + 0.20;
+            int maxStamina = (int)Math.ceil(player.getMaxStamina() * staminaMultiplier);
+            player.setStamina(maxStamina);
+            player.setMaxStamina(maxStamina);
+        } else if(choice == 3){
+            double newCrit = player.getCritChance() + 0.10;
+            player.setCritChance(newCrit);
+        } else if(choice == 4){
+            double newDodge = player.getDodgeChance() + 0.10;
+            player.setDodgeChance(newDodge);
+        } else if(choice == 5){
+            double newMulti = player.getCritMultiplier() + 0.10;
+            player.setCritMultiplier(newMulti);
         }
-    
     }
 }

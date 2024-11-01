@@ -3,30 +3,35 @@ import java.util.Random;
 
 import world1.Player;
 import world1.StreetFighter;
-import world1.TrainInGym.PabloUrbanGym;
+import world1.TournamentFight.LopezTourna;
 
-public class VsPablo {
+public class VsTetteh {
     static Random rand = new Random();
     static StreetFighter opponent;
     static Player player;
     static boolean playerDodged = false;
     static boolean opponentDodged = false;
 
+    public VsTetteh(Player play, StreetFighter enemy){
+        player = play;
+        opponent = enemy;
+    }
+
     public static void setPlayerOpponent(Player player) {
-        VsPablo.player = player;
+        VsLopez.player = player;
     }
 
     public static void setOpponent(StreetFighter opponent) {
-        VsPablo.opponent = opponent;
+        VsLopez.opponent = opponent;
     }
     
-    public static void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
+    public void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
         double critChance = rand.nextDouble();
         double dodgeChance = rand.nextDouble();
         
         if(critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged){
             player.setDamageSetter(player.getCritMultiplier());
-            System.out.println(player.getName() + "\'s " + PabloUrbanGym.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
+            System.out.println(player.getName() + "\'s " + LopezTourna.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if(dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw){
@@ -92,7 +97,7 @@ public class VsPablo {
         opponentDodged = false;
     }
 
-    public static void playerFailedAction(int choice) {
+    public void playerFailedAction(int choice) {
         switch (choice) {
             case 0:
                 player.setStamina(player.getStamina() - 5);
@@ -120,13 +125,13 @@ public class VsPablo {
         }
     }
 
-    public static void opponentSuccessAction(int choice, int playerChoice, boolean isDraw) {
+    public void opponentSuccessAction(int choice, int playerChoice, boolean isDraw) {
         double critChance = rand.nextDouble();
         double dodgeChance = rand.nextDouble();
         
         if(critChance < opponent.getCritChance() && choice != 2 && !isDraw){
             opponent.setDamageSetter(opponent.getCritMultiplier());
-            System.out.println(opponent.getName() + "\'s " + PabloUrbanGym.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
+            System.out.println(opponent.getName() + "\'s " + LopezTourna.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if(dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw){
@@ -142,7 +147,7 @@ public class VsPablo {
             case 0:
                 if (opponent.hasEnoughStamina(5)) {
                     opponent.jab();
-                }
+                } 
                 break;
             case 1:
                 if (opponent.hasEnoughStamina(7)) {
@@ -158,19 +163,19 @@ public class VsPablo {
                 }
                 break;
             case 4:
-                if (opponent.hasEnoughStamina(7)) {
-                    opponent.jabToTheBody();
-                }
+                if (opponent.hasEnoughStamina(9)) {
+                    opponent.rightUppercut();
+                } 
                 break;
             case 5:
-                if (opponent.hasEnoughStamina(9)) {
-                    opponent.leadHook();
+                if (opponent.hasEnoughStamina(10)) {
+                    opponent.leftHook();
                 }
                 break;
             case 6:
                 if (opponent.hasEnoughStamina(14)) {
-                    opponent.rearUppercut();
-                } 
+                    opponent.rightCross();
+                }
                 break;
             default:
                 System.out.println("Invalid action choice!");
@@ -180,7 +185,7 @@ public class VsPablo {
         playerDodged = false;
     }
 
-    public static void opponentFailedAction(int choice) {
+    public void opponentFailedAction(int choice) {
         switch (choice) {
             case 0:
                 opponent.setStamina(opponent.getStamina() - 5);
@@ -194,10 +199,10 @@ public class VsPablo {
                 opponent.setStamina(opponent.getStamina() - 10);
                 break;
             case 4:
-                opponent.setStamina(opponent.getStamina() - 7);
+                opponent.setStamina(opponent.getStamina() - 9);
                 break;
             case 5:
-                opponent.setStamina(opponent.getStamina() - 9);
+                opponent.setStamina(opponent.getStamina() - 10);
                 break;
             case 6:
                 opponent.setStamina(opponent.getStamina() - 14);
@@ -208,7 +213,7 @@ public class VsPablo {
         }
     }
 
-    public static void drawAction(int choice, int opponentChoice) {
+    public void drawAction(int choice, int opponentChoice) {
         player.setDamageSetter(0.5);
         playerSuccessAction(choice, opponentChoice, false);
         player.setDamageSetter(1);

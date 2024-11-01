@@ -6,9 +6,9 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Tournament;
-import world1.FightingLogic.VsLopez;
+import world1.FightingLogic.VsTetteh;
 
-public class LopezTourna {
+public class TettehTourna {
     static Random rand = new Random();
     static int[] opponentChoices = new int[3];
     static PlayerProgress playerProgress = GameLogic.playerProgress;
@@ -22,17 +22,17 @@ public class LopezTourna {
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
     public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Quick Jab", "Cross", "Power Punch"};
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross"};
     static Tournament tourna = new Tournament();
     static StreetFighter opponent = tourna.getOpponent();
-    static VsLopez lopez;
+    static VsTetteh vsTetteh;
     
     public static void setPlayer(Player p) {
         player = p;
     }
 
     public static void fightLoop2() {
-        player.setStage(4);
+        player.setStage(5);
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
@@ -41,7 +41,7 @@ public class LopezTourna {
         System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
         System.out.println();
         GameLogic.printSeparator(40);
-        lopez = new VsLopez(player, opponent);
+        vsTetteh = new VsTetteh(player, opponent);
         player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
@@ -75,7 +75,7 @@ public class LopezTourna {
                 if(playerProgress.getPlayerWins() != 3){
                     playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
                 } else {
-                    player.setStage(5);
+                    player.setStage(6);
                 }
                 tourna.printStanding();
                 GameLogic.gameData.saveGame();
@@ -200,10 +200,10 @@ public class LopezTourna {
                     staminaCost = 10;
                     break;
                 case 5:
-                    staminaCost = 7;
+                    staminaCost = 9;
                     break;
                 case 6:
-                    staminaCost = 9;
+                    staminaCost = 10;
                     break;
                 case 7:
                     staminaCost = 14;
@@ -245,7 +245,7 @@ public class LopezTourna {
                         staminaCost = 9;
                         break;
                     case 6:
-                        staminaCost = 7;
+                        staminaCost = 10;
                         break;
                     case 7:
                         staminaCost = 14;
@@ -255,7 +255,7 @@ public class LopezTourna {
                 if (tempStamina - staminaCost >= 0) {
                     validChoice = true;
                 } else {
-                    if(rand.nextDouble() > 0.3)
+                    if(rand.nextDouble() > 0.6)
                         opponentChoice[i] = rand.nextInt(7);
                         if (opponentChoice[i] >= 4) {
                             if(tempStamina - 30 < 0){
@@ -280,16 +280,16 @@ public class LopezTourna {
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                lopez.playerSuccessAction(choices[i], opponentChoices[i], false);
-                lopez.opponentFailedAction(opponentChoices[i]);
+                vsTetteh.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsTetteh.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                lopez.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                lopez.playerFailedAction(choices[i]);
+                vsTetteh.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsTetteh.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                lopez.drawAction(choices[i], opponentChoices[i]);
+                vsTetteh.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -317,16 +317,16 @@ public class LopezTourna {
                 if(playerMove == 2) return 2;
                 break;
             case 4:
-                if(playerMove == 3) return 1;
-                if(playerMove == 0 || playerMove == 1) return 2;
+                if(playerMove == 2) return 1;
+                if(playerMove == 0 || playerMove == 3) return 2;
                 break;
             case 5:
-                if(playerMove == 3) return 1;
-                if(playerMove == 0 || playerMove == 1) return 2;
+                if(playerMove == 0) return 1;
+                if(playerMove == 1 || playerMove == 2) return 2;
                 break;
             case 6:
-                if(playerMove == 2) return 1;
-                if(playerMove == 3 || playerMove == 0) return 2;
+                if(playerMove == 3) return 1;
+                if(playerMove == 1 || playerMove == 0) return 2;
                 break;
             default:
                 break;
@@ -341,6 +341,5 @@ public class LopezTourna {
             System.out.println(); 
             System.out.println("Congratulations! You've won the match!");
         }
-    
     }
 }

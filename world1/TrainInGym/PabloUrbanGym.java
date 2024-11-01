@@ -106,7 +106,6 @@ public class PabloUrbanGym {
                     choices = new int[]{5, 6, 7}; 
                     break;
                 } else {
-                    System.out.println();
                     System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                     System.out.println("You may use 3 Blocks as your combo to regain stamina");
                     System.out.println();
@@ -124,7 +123,6 @@ public class PabloUrbanGym {
                 System.out.println("Please enter a valid combo (e.g., 123):");
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
-                System.out.println();
                 System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                 System.out.println("You may use 3 Blocks as your combo to regain stamina");
                 System.out.println();
@@ -227,10 +225,10 @@ public class PabloUrbanGym {
                         staminaCost = 10;
                         break;
                     case 5:
-                        staminaCost = 7;
+                        staminaCost = 9;
                         break;
                     case 6:
-                        staminaCost = 9;
+                        staminaCost = 7;
                         break;
                     case 7:
                         staminaCost = 14;
@@ -286,20 +284,20 @@ public class PabloUrbanGym {
     static int isCounter(int opponentMove, int playerMove) {
         switch (opponentMove) {
             case 0:
-                if(playerMove == 3 || playerMove == 6) return 1;
-                if(playerMove == 1 || playerMove == 5) return 2;
+                if(playerMove == 1 || playerMove == 5 || playerMove == 4) return 1;
+                if(playerMove == 3 || playerMove == 6) return 2;
                 break;
             case 1:
-                if(playerMove == 0 || playerMove == 5) return 1;
-                if(playerMove == 2 || playerMove == 6) return 2;
+                if(playerMove == 2 || playerMove == 6 || playerMove == 5) return 1;
+                if(playerMove == 0 || playerMove == 4) return 2;
                 break;
             case 2:
-                if(playerMove == 1 || playerMove == 6) return 1;
-                if(playerMove == 3 || playerMove == 4) return 2;
+                if(playerMove == 3 || playerMove == 4) return 1;
+                if(playerMove == 1 || playerMove == 6 || playerMove == 5) return 2;
                 break;
             case 3:
-                if(playerMove == 6 || playerMove == 2) return 1;
-                if(playerMove == 0 || playerMove == 4) return 2;
+                if(playerMove == 0 || playerMove == 4 || playerMove == 6) return 1;
+                if(playerMove == 2) return 2;
                 break;
             case 4:
                 if(playerMove == 3) return 1;

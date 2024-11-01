@@ -31,7 +31,6 @@ public class RamirezTourna {
     }
 
     public static void fightLoop2() {
-
         player.setStage(3);
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
@@ -75,6 +74,8 @@ public class RamirezTourna {
                 playerProgress.setRound(playerProgress.getRound() + 1);
                 if(playerProgress.getPlayerWins() != 3){
                     playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
+                } else {
+                    player.setStage(4);
                 }
                 tourna.printStanding();
                 GameLogic.gameData.saveGame();
@@ -122,7 +123,6 @@ public class RamirezTourna {
                     choices = new int[]{5, 6, 7}; 
                     break;
                 } else {
-                    System.out.println();
                     System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                     System.out.println("You may use 3 Blocks as your combo to regain stamina");
                     System.out.println();
@@ -140,10 +140,9 @@ public class RamirezTourna {
                 System.out.println("Please enter a valid combo (e.g., 123):");
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
-                System.out.println();
                 System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                 System.out.println("You may use 3 Blocks as your combo to regain stamina");
-                    System.out.println();
+                System.out.println();
                 continue;
             }
             break;
@@ -302,32 +301,32 @@ public class RamirezTourna {
     static int isCounter(int opponentMove, int playerMove) {
         switch (opponentMove) {
             case 0:
-                if(playerMove == 3 || playerMove == 6) return 1;
-                if(playerMove == 1 || playerMove == 5) return 2;
+                if(playerMove == 1 || playerMove == 5 || playerMove == 4) return 1;
+                if(playerMove == 3 || playerMove == 6) return 2;
                 break;
             case 1:
-                if(playerMove == 0 || playerMove == 5) return 1;
-                if(playerMove == 2 || playerMove == 6) return 2;
+                if(playerMove == 2 || playerMove == 6 || playerMove == 5) return 1;
+                if(playerMove == 0 || playerMove == 4) return 2;
                 break;
             case 2:
-                if(playerMove == 1 || playerMove == 6) return 1;
-                if(playerMove == 3 || playerMove == 4) return 2;
+                if(playerMove == 3 || playerMove == 4) return 1;
+                if(playerMove == 1 || playerMove == 6 || playerMove == 5) return 2;
                 break;
             case 3:
-                if(playerMove == 6 || playerMove == 2) return 1;
-                if(playerMove == 0 || playerMove == 4) return 2;
+                if(playerMove == 0 || playerMove == 4 || playerMove == 6) return 1;
+                if(playerMove == 2) return 2;
                 break;
             case 4:
                 if(playerMove == 3) return 1;
                 if(playerMove == 0 || playerMove == 1) return 2;
                 break;
             case 5:
-                if(playerMove == 0) return 1;
-                if(playerMove == 1 || playerMove == 2) return 2;
-                break;
-            case 6:
                 if(playerMove == 2) return 1;
                 if(playerMove == 3 || playerMove == 0) return 2;
+                break;
+            case 6:
+                if(playerMove == 0) return 1;
+                if(playerMove == 1 || playerMove == 2) return 2;
                 break;
             default:
                 break;
@@ -342,17 +341,5 @@ public class RamirezTourna {
             System.out.println(); 
             System.out.println("Congratulations! You've won the match!");
         }
-        // System.out.println(); 
-        // GameLogic.printSeparator(40);
-        // System.out.println(); 
-        // System.out.println("Congratulations! You've won the match!");
-        // System.out.println();  
-        // System.out.println("Your next opponent will be ??????");
-        // GameLogic.addPoints(125);
-        // System.out.println();
-        // System.out.println("Wanna go visit Shop or your Inventory?");
-        // System.out.println();
-        // GameLogic.printSeparator(40);
-        // GameLogic.pressAnything();
     }
 }
