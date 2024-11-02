@@ -74,10 +74,12 @@ public class UrbanStory {
 
     public static void printUrban(){
         System.out.println();
-        System.out.println("A tough, inner-city gym where local fighters sharpen their skills and compete in underground matches.");
+        System.out.println("Welcome to the Urban Gym, a tough, inner-city training ground.");
+        System.out.println("Here, local fighters sharpen their skills and compete in underground matches.");
         System.out.println();
-        System.out.println("You are training in the streets, fighting to survive and improve your skills.");
-        System.out.println("Train rigorously with your coach, once you're ready, prove your strength by winning a tournament.");
+        System.out.println("Under the watchful eye of Coach Fred, you train rigorously to hone your skills.");
+        System.out.println("Every punch, every dodge, and every strategy counts as you prepare for the battles ahead.");
+        System.out.println("Once you're ready, prove your strength by winning a tournament.");
         System.out.println("Victory will grant you the opportunity to advance to the next world. Keep striving for greatness!");
         System.out.println();
     }
@@ -124,19 +126,16 @@ public class UrbanStory {
         System.out.println();
         System.out.println("\t( He pauses, giving you a serious look. )");
         System.out.println();
-        System.out.println("Fred: \t\"I need to know something. Are you ready for this? Training here isn't just about");
-        System.out.println("\tlearning how to hit harder. You're gonna learn discipline, control, and how to endure pain.");
-        System.out.println("\tYou think you got what it takes?\"");
+        System.out.println("Fred: \t\"Training here isn't just about hitting harder. It's about discipline, control, and endurance. Think you've got it?");
         System.out.println();
-        reply("I'm ready. Let's do this!", "I don't know... I've never trained in a real gym before.");
+        reply("I'm ready. Let's do this!", "Not sure... Never trained in a real gym.");
     }
 
     static void response(String name){
         space(70);
         System.out.println("\t( Fred nods with approval. )");
         System.out.println();
-        System.out.println("Fred: \t\"That's the spirit. Confidence is good, but remember, pride can get you hurt.\"");
-        System.out.println("\tKeep your head in the game, and let's see what you've got.");
+        System.out.println("Fred: \t\"That's the spirit. Confidence is good, but keep your head in the game.\"");
         System.out.println();
         System.out.println(name + ": \t\"Let's go!\"");
     }
@@ -153,8 +152,7 @@ public class UrbanStory {
 
     static void urbanTraining2(){
         space(70);
-        System.out.println("\t[ Fred leads you inside the gym. The smell of sweat and leather fills the air as you step onto the mat.");
-        System.out.println("\tHe hands you a pair of old, worn boxing gloves. ]");
+        System.out.println("\t[ Inside the gym, you take in the smell of sweat and leather. Fred hands you old gloves. ]");
         System.out.println();
         System.out.println("Fred: \t\"First things first. Let's see your stance. You've got power, but power's no good without balance.\"");
         System.out.println();
@@ -165,8 +163,7 @@ public class UrbanStory {
 
     static void response3(){
         space(70);
-        System.out.println("Fred: \t\"Good. Now, let's work on your jabs. Quick, sharp, and always return to guard.");
-        System.out.println("\tKeep your eyes on me. Ready?\"");
+        System.out.println("Fred: \t\"Good. Now, let's see those jabs—quick, sharp, back to guard. Ready?\"");
     }
     
     static void response4(){
@@ -177,8 +174,7 @@ public class UrbanStory {
 
     static void urbanTraining3(String name){
         space(70);
-        System.out.println("\t[ You begin your training. Fred takes you through a series of drills: jabs, hooks, uppercuts, and footwork.");
-        System.out.println("\tEach time you throw a punch, Fred offers corrections, pushing you to go harder and faster. ]");
+        System.out.println("\t[ Fred takes you through a series of drills: jabs, hooks, uppercuts, and footwork. ]");
         System.out.println();
         System.out.println("Fred: \t\"You've got potential, " + name + ". But remember, boxing isn't just about strength. It's about outsmarting your");
         System.out.println("\topponent. When you're in the ring, you have to think two steps ahead. Now, let's see what you've really got.\"");
@@ -240,9 +236,9 @@ public class UrbanStory {
         space(70);
         System.out.println("\t( Fred takes a step back, his eyes sharp )");
         System.out.println();
-        System.out.println("Fred: \t\"Remember, " + name + ", it's all about knowing what's coming and how to counter. Jab stops Uppercut.");
-        System.out.println("\tHook overpowers Jab. Block defends against Hook. And Uppercut breaks through Block. Get these counters down,");
-        System.out.println("\tand you'll be ready for anything!\"");
+        System.out.println("Fred: \t\"Remember, " + name + ", it's all about knowing what's coming and how to counter.");
+        System.out.println("\tJAB stops UPPERCUT, HOOK overpowers JAB, BLOCK defends against HOOK, and UPPERCUT breaks through BLOCK.");
+        System.out.println("\tGet these counters down, and you'll be ready for anything!\"");
         GameLogic.pressAnything();
     }
 
@@ -250,8 +246,7 @@ public class UrbanStory {
         space(70);
         System.out.println("\t( " + name + " smiles, absorbing the lesson )");
         System.out.println();
-        System.out.println("Fred: \t\"Let's put that knowledge to the test. Think before you strike, and outsmart your opponent.");
-        System.out.println("\tReady to try it out?\"");
+        System.out.println("Fred: \t\"Think before striking. Outsmart your opponent. Ready to test it out?\"");
         GameLogic.pressAnything();
     }
 
@@ -313,7 +308,7 @@ public class UrbanStory {
         System.out.println();
         System.out.println("\t( Fred leans in with a serious expression )");
         System.out.println();
-        System.out.println("Fred: \t\"Head over to the ringside and spar with one of our top fighters, Ricky 'The Phantom'.");
+        System.out.println("Fred: \t\"Head over to the ringside and spar with one of our top fighters, Carlito 'The Phantom' Cortez.");
         System.out.println("\tBeat him, and I'll let you purchase some exclusive items in the shop only the best get access to.");
         System.out.println("\tIt's not gonna be easy, but I know you've got it in you.\"");
         System.out.println();
@@ -339,8 +334,16 @@ public class UrbanStory {
         System.out.println("\tbut it's worth every fight. Remember this, Strength isn't in never falling, but in rising every single time.\"");
         System.out.println();
         System.out.println("Fred:\t\"Do you want a rematch?\"");
-        GameLogic.pressAnything();
-        GameLogic.shop.showMenu();
+        System.out.println();
+        System.out.println("Select what to reply:");
+        System.out.println("\t(1) Sure, im just warming up!");
+        System.out.println("\t(2) Let me take a break first.");
+        int choice = GameLogic.readInt("", 1, 2);
+        if(choice == 1){
+            GameLogic.shop.showMenu();
+        } else {
+            return;
+        }
     }
 
     public static void urbanTraining8(String name){
@@ -369,19 +372,18 @@ public class UrbanStory {
 
     public static void urbanTrainingCombo(String name) {
         space(70);
-        System.out.println("Fred:\t\"Alright " + name + ", let's elevate your skills with the \"The Body Breaker\" combo!\"");
+        System.out.println("Fred:\t\"Alright " + name + ", let’s master 'The Body Breaker' combo!\"");
         System.out.println();
-        System.out.println("Fred:\t\"First, deliver a Lead Body Shot to counter a Jab!\"");
-        System.out.println("\t[ Fred demonstrates the Lead Body Shot, successfully countering a Jab. ]");
+        System.out.println("Fred:\t\"Step 1: Lead Body Shot to counter a Jab.\"");
+        System.out.println("\t[ Fred demonstrates the Lead Body Shot. ]");
         System.out.println();
-        System.out.println("Fred:\t\"Next, follow up with a Cross to the Ribs to counter an Hook!\"");
-        System.out.println("\t[ Fred executes a Cross to the Ribs, countering an Hook. ]");
+        System.out.println("Fred:\t\"Step 2: Cross to the Ribs to counter a Hook.\"");
+        System.out.println("\t[ Fred executes a precise Cross to the Ribs. ]");
         System.out.println();
-        System.out.println("Fred:\t\"Finally, finish with a powerful Finishing Uppercut to counter a Block!\"");
-        System.out.println("\t[ Fred showcases the Finishing Uppercut, effectively countering a Block. ]");
+        System.out.println("Fred:\t\"Step 3: Finishing Uppercut to break through a Block.\"");
+        System.out.println("\t[ Fred showcases the Finishing Uppercut. ]");
         System.out.println();
-        System.out.println("Fred:\t\"Now that you've seen the 'The Body Breaker' in action, let's see you practice it!");
-        System.out.println("\tAfter that, I invite you for a spar. It'll be a great chance to hone your skills!\"");
+        System.out.println("Fred:\t\"Got it? Now, give it a try! Afterward, let's spar and put those moves to the test!\"");
         System.out.println();
         GameLogic.pressAnything();
         train2(name);
@@ -426,14 +428,14 @@ public class UrbanStory {
 
         space(70);
         System.out.println("Fred:\t\"Great job with the 'The Body Breaker' combo, " + name + "! Now it's time to put those skills to the test.\"");
-        System.out.println("\tI've arranged a sparring match for you against one of the best Pablo 'El Halcón' Martínez!");
+        System.out.println("\tI've arranged a sparring match for you against one of the best Pablo 'El Tigre' Martínez!");
         System.out.println("\tPablo's fast and skilled, so this will be a true test of what you've learned. Remember to stay focused and use your combo!\"");
         System.out.println();
         System.out.println("\t[ Fred gestures toward the sparring ring, where Pablo stands ready, his eyes sharp and confident. ]");
         System.out.println();
         System.out.println("Fred:\t\"Step into the ring, and show Pablo what you've got!\"");
         System.out.println();
-        System.out.println("\t[ You take a deep breath, stepping into the ring to face Pablo 'El Halcón' Martínez, eager to prove your skills... ]");
+        System.out.println("\t[ You take a deep breath, stepping into the ring to face Pablo 'El Tigre' Martínez, eager to prove your skills... ]");
         GameLogic.pressAnything();
         PabloUrbanGym.setPlayer(GameLogic.player);
         PabloUrbanGym.fightLoop2();
@@ -457,7 +459,7 @@ public class UrbanStory {
 
     public static void inviteToTournament(String name) {
         System.out.println();
-        System.out.println("Fred: \t\"You've really impressed me today, " + name + ". I've seen the way you've put in the work, and");
+        System.out.println("\nFred: \t\"You've really impressed me today, " + name + ". I've seen the way you've put in the work, and");
         System.out.println("\tI've got to say, it's paying off. Those punches, the footwork... you've got the makings of");
         System.out.println("\tsomeone who can go the distance.\"");
         System.out.println();

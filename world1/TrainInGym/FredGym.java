@@ -111,7 +111,6 @@ public class FredGym {
                 } else {
                     System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                     System.out.println("You may use 3 Blocks as your combo to regain stamina");
-                    System.out.println();
                     continue;
                 }
             } else if (input.contains("5") || input.contains("6") || input.contains("7")) {
@@ -128,7 +127,6 @@ public class FredGym {
             } else if(isValidCombo(input, player.getStamina()) == 2) {
                 System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                 System.out.println("You may use 3 Blocks as your combo to regain stamina");
-                System.out.println();
                 continue;
             }
             break;

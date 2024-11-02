@@ -86,7 +86,6 @@ public class UrbanGym {
             } else if(isValidCombo(input, player.getStamina()) == 2) {
                 System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
                 System.out.println("You may use 3 Blocks as your combo to regain stamina");
-                System.out.println();
             }
             input = GameLogic.scan.nextLine();
         }

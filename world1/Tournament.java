@@ -1,7 +1,7 @@
 package world1;
 
 import world1.TournamentFight.LopezTourna;
-import world1.TournamentFight.RamirezTourna;
+import world1.TournamentFight.Ramirez2;
 import world1.TournamentFight.TettehTourna;
 
 public class Tournament {
@@ -92,35 +92,22 @@ public class Tournament {
     private static void startMatch(int opponentIndex) {
         System.out.println();
         System.out.println();
-        if(opponentIndex != 2){
-            System.out.print("You will face: " + opponents[opponentIndex]);
-            UrbanStory.tournaOpponentBackstory(opponents[opponentIndex]);
-        } else {
-            System.out.print("FINAL OPPONENT: " + opponents[opponentIndex]);
-            UrbanStory.tournaOpponentBackstory(opponents[opponentIndex]);
+
+        String opponentName = opponents[opponentIndex];
+        System.out.print(opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: ");
+        System.out.println(opponentName);
+        UrbanStory.tournaOpponentBackstory(opponentName);
+
+        switch (opponentIndex) {
+            case 0 -> fightWithOpponent(new Ramirez2(player, new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, .30)));
+            // case 1 -> fightWithOpponent(new LopezTourna(player, new StreetFighter("Oscar Lopez", 170, 100, 0.2, 2, .30)));
+            // case 2 -> fightWithOpponent(new TettehTourna(player, new StreetFighter("Ishmael Tetteh", 200, 120, 0.3, 2.5, .40)));
         }
-        
-        if(opponentIndex == 0){
-            while (!isMatchConcluded()) {
-                opponent = new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, .30);
-                RamirezTourna.setPlayer(player);
-                opponent.setPlayerOpponent(player);
-                RamirezTourna.fightLoop2();
-            }
-        } else if(opponentIndex == 1){
-            while (!isMatchConcluded()) {
-                opponent = new StreetFighter("Oscar Lopez", 170, 100, 0.2, 2, .30);
-                LopezTourna.setPlayer(player);
-                opponent.setPlayerOpponent(player);
-                LopezTourna.fightLoop2();
-            }
-        } else if(opponentIndex == 2){
-            while (!isMatchConcluded()) {
-                opponent = new StreetFighter("Ishmael Tetteh", 200, 120, 0.3, 2.5, .40);
-                TettehTourna.setPlayer(player);
-                opponent.setPlayerOpponent(player);
-                TettehTourna.fightLoop2();
-            }
+    }
+
+    private static void fightWithOpponent(FightLogic fightLogic) {
+        while (!isMatchConcluded()) {
+            fightLogic.fightLoop();
         }
     }
 

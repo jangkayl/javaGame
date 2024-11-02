@@ -91,19 +91,8 @@ public class Shop {
     }
     
     public void showMenu(){
-        GameLogic.clearConsole();
-        GameLogic.printHeading("    Urban Gym");
-        System.out.println();
-        System.out.println("Select where to go:");
-        System.out.println("\t(1) Practice in Gym");
-        System.out.println("\t(2) Go to Fred's Shop");
-        int choice = GameLogic.readInt("-> ", 1, 2);
-        if(choice == 1){
-            UrbanGym.setPlayer(player);
-            UrbanGym.fightLoop();
-        } else {
-            showShop(true);
-        }
+        UrbanGym.setPlayer(player);
+        UrbanGym.fightLoop();
     }
 
     public void showShop(boolean isTraining) {

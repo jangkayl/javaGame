@@ -166,7 +166,7 @@ public class GameLogic{
     }
 
     // Prints the menu options
-    public static void printMenu(){
+    static void printMenu(){
         gameData.saveGame();
         clearConsole();
         printHeading(centerText("MENU", 30));
@@ -184,11 +184,30 @@ public class GameLogic{
         player.setStamina(player.getMaxStamina());
     }
 
+    static void printMenu2(){
+        gameData.saveGame();
+        clearConsole();
+        printHeading(centerText("MENU", 30));
+        System.out.println("Choose an action:");
+        printSeparator(20);
+        System.out.println("(0) Save progress");
+        System.out.println("(1) Continue on your journey");
+        System.out.println("(2) Check your Stats");
+        System.out.println("(3) Tutorial");
+        System.out.println("(4) Exit the game");
+        player.setHp(player.getMaxHp());
+        player.setStamina(player.getMaxStamina());
+    }
+
     // Loops the menu options
-    public static void gameLoop(){
+    static void gameLoop(){
         while(isRunning){
             shop = new Shop(player, playerProgress);
-            printMenu();
+            if(player.getStage() < 2){
+                printMenu2();
+            } else {
+                printMenu();
+            }
             int input = readInt("-> ", 0, 7);
             if(input == 0){
                 gameData.saveGame();
@@ -216,45 +235,53 @@ public class GameLogic{
     }
 
     // Continues players journey
-    public static void continueJourney() {
+    static void continueJourney() {
         clearConsole();
-        
-        if(player.getCurrentWorld() == 0) {
+        if(player.getStage() == 0){
             printSeparator(40);
             String[] worlds = player.getWorlds();
             printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
             printSeparator(40);
             UrbanStory.printUrban();
             printSeparator(50);
-            // System.out.println("You have completed your street training. Time to move to the next level.");
-            // player.setCurrentWorld(1); 
-            // System.out.println("You are now moving to the Training Facility...");
+            System.out.println("Are you ready to start your journey?");
+            System.out.println("(1) Yes\n(2) No");
+            int choice2 = GameLogic.readInt("-> ", 1, 2);
+            if(choice2 == 1){
+                gymTraining();
+            } else {
+                return;
+            }
+        } else {
+            gymTraining();
         }
-        else if(player.getCurrentWorld() == 1) {
-            printHeading("Training Facility");
-            System.out.println("You've made it to a proper gym! Time to hone your skills and become stronger.");
-            System.out.println("You feel your power growing with every session. Keep it up!");
+        // System.out.println("You have completed your street training. Time to move to the next level.");
+        // player.setCurrentWorld(1); 
+        // System.out.println("You are now moving to the Training Facility...");
+        // else if(player.getCurrentWorld() == 1) {
+        //     printHeading("Training Facility");
+        //     System.out.println("You've made it to a proper gym! Time to hone your skills and become stronger.");
+        //     System.out.println("You feel your power growing with every session. Keep it up!");
             
-            System.out.println("You have finished training at the facility. Prepare for the final challenge.");
-            player.setCurrentWorld(2);
-            System.out.println("You're now headed to the Champ Arena...");
-        }
-        else if(player.getCurrentWorld() == 2) {
-            printHeading("Champ Arena");
-            System.out.println("This is it! You've reached the pinnacle of your journey. Time to prove your worth in the arena.");
-            System.out.println("Fighters from all over the world await you in the arena. Get ready to face the best.");
-            System.out.println("Good luck, Champion!");
-        }
-        else {
-            printHeading("Invalid world state.");
-            System.out.println("Something went wrong! You are stuck in an unknown world.");
-        }
-        pressAnything();
+        //     System.out.println("You have finished training at the facility. Prepare for the final challenge.");
+        //     player.setCurrentWorld(2);
+        //     System.out.println("You're now headed to the Champ Arena...");
+        // }
+        // else if(player.getCurrentWorld() == 2) {
+        //     printHeading("Champ Arena");
+        //     System.out.println("This is it! You've reached the pinnacle of your journey. Time to prove your worth in the arena.");
+        //     System.out.println("Fighters from all over the world await you in the arena. Get ready to face the best.");
+        //     System.out.println("Good luck, Champion!");
+        // }
+        // else {
+        //     printHeading("Invalid world state.");
+        //     System.out.println("Something went wrong! You are stuck in an unknown world.");
+        // }
     }
 
 
     // Checks players stats
-    public static void printStats(){
+    static void printStats(){
         clearConsole();
         printHeading(centerText("CHARACTER STATS", 30));
         System.out.print("\t\t");
@@ -278,7 +305,7 @@ public class GameLogic{
     }
 
     // Enter gym and train with coach
-    public static void gymTraining(){
+    static void gymTraining(){
         int choice = 0;
         if(player.getCurrentWorld() == 0){
             
