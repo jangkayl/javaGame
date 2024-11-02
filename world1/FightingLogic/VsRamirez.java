@@ -1,6 +1,7 @@
 package world1.FightingLogic;
 import java.util.Random;
 
+import world1.FightLogic;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
@@ -12,6 +13,11 @@ public class VsRamirez {
     static Player player = GameLogic.player;
     static boolean playerDodged = false;
     static boolean opponentDodged = false;
+
+    public VsRamirez(Player play, StreetFighter enemy){
+        player = play;
+        opponent = enemy;
+    }
 
     public static void setPlayerOpponent(Player player) {
         VsRamirez.player = player;
@@ -27,7 +33,7 @@ public class VsRamirez {
         
         if(critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged){
             player.setDamageSetter(player.getCritMultiplier());
-            System.out.println(player.getName() + "\'s " + Ramirez2.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
+            System.out.println(player.getName() + "\'s " + FightLogic.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if(dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw){

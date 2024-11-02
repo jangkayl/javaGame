@@ -1,24 +1,8 @@
 package world1.FightingLogic;
-import java.util.Random;
 
-import world1.Player;
-import world1.StreetFighter;
 import world1.TrainInGym.UrbanGym;
 
-public class VsCarlito {
-    static Random rand = new Random();
-    static StreetFighter opponent;
-    static Player player;
-    static boolean playerDodged = false;
-    static boolean opponentDodged = false;
-
-    public static void setPlayerOpponent(Player player) {
-        VsCarlito.player = player;
-    }
-
-    public static void setOpponent(StreetFighter opponent) {
-        VsCarlito.opponent = opponent;
-    }
+public class VsCarlito extends FighterAction{
     
     public static void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
         double critChance = rand.nextDouble();

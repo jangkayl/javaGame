@@ -1,6 +1,7 @@
 package world1.FightingLogic;
 import java.util.Random;
 
+import world1.FightLogic;
 import world1.Player;
 import world1.StreetFighter;
 import world1.TournamentFight.Tetteh2;
@@ -31,7 +32,7 @@ public class VsTetteh {
         
         if(critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged){
             player.setDamageSetter(player.getCritMultiplier());
-            System.out.println(player.getName() + "\'s " + Tetteh2.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
+            System.out.println(player.getName() + "\'s " + FightLogic.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if(dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw){

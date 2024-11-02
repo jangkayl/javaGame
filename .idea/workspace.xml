@@ -10,34 +10,28 @@
       <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/gameData.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsLopez.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsLopez.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsPablo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsPablo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsRamirez.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsRamirez.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsTetteh.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsTetteh.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/GameLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/GameLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Inventory$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Inventory$Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/PlayerProgress.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/PlayerProgress.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/StreetFighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/StreetFighter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/LopezTourna.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/LopezTourna.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/RamirezTourna.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/RamirezTourna.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/LopezTourna.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/RamirezTourna.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/TettehTourna.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PabloUrbanGym.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PabloUrbanGym.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/UrbanGym.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/UrbanGym.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/UrbanStory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/UrbanStory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsLopez.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightingLogic/VsLopez.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsPablo.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightingLogic/VsPablo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsRamirez.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightingLogic/VsRamirez.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsTetteh.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightingLogic/VsTetteh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/GameLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/PlayerProgress.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/PlayerProgress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/StreetFighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/StreetFighter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Tournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/LopezTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/LopezTourna.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/RamirezTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/RamirezTourna.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/UrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/UrbanGym.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/UrbanStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/UrbanStory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/database/GameDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/database/GameDataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/Lopez2.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/Lopez2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/Ramirez2.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/Ramirez2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/Tetteh2.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/Tetteh2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/GameLogic2.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/GameLogic2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +70,7 @@
     "ToolWindow.Run.ShowToolbar": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Downloads/GAME",
+    "last_opened_file_path": "C:/Users/User/Music/GAME",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>

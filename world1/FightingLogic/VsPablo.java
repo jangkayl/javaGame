@@ -1,24 +1,8 @@
 package world1.FightingLogic;
-import java.util.Random;
 
-import world1.Player;
-import world1.StreetFighter;
 import world1.TrainInGym.PabloUrbanGym;
 
-public class VsPablo {
-    static Random rand = new Random();
-    static StreetFighter opponent;
-    static Player player;
-    static boolean playerDodged = false;
-    static boolean opponentDodged = false;
-
-    public static void setPlayerOpponent(Player player) {
-        VsPablo.player = player;
-    }
-
-    public static void setOpponent(StreetFighter opponent) {
-        VsPablo.opponent = opponent;
-    }
+public class VsPablo extends FighterAction{
     
     public static void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
         double critChance = rand.nextDouble();

@@ -218,19 +218,23 @@ public class GameLogic{
         clearConsole();
         if(player.getCurrentWorld() == 0){
             if(playerProgress.getShopStage() == 0){
-                printSeparator(40);
-                String[] worlds = player.getWorlds();
-                printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
-                printSeparator(40);
-                UrbanStory.printUrban();
-                printSeparator(50);
-                System.out.println("Are you ready to start your journey?");
-                System.out.println("(1) Yes\n(2) No");
-                int choice2 = GameLogic.readInt("-> ", 1, 2);
-                if(choice2 == 1){
-                    gymTraining();
+                if(player.getStage() == 0){
+                    printSeparator(40);
+                    String[] worlds = player.getWorlds();
+                    printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
+                    printSeparator(40);
+                    UrbanStory.printUrban();
+                    printSeparator(50);
+                    System.out.println("Are you ready to start your journey?");
+                    System.out.println("(1) Yes\n(2) No");
+                    int choice2 = GameLogic.readInt("-> ", 1, 2);
+                    if(choice2 == 1){
+                        gymTraining();
+                    } else {
+                        return;
+                    }
                 } else {
-                    return;
+                    gymTraining();
                 }
             } else {
                 System.out.println("(1) Train with Fred");
