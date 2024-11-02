@@ -7,6 +7,7 @@ import world1.TrainInGym.PabloUrbanGym;
 import world1.TrainInGym.UrbanGym;
 import world1.database.GameDataManager;
 import world1.database.GameDatabase;
+import world2.GameLogic2;
 
 import java.text.DecimalFormat;
 
@@ -172,29 +173,14 @@ public class GameLogic{
         printHeading(centerText("MENU", 30));
         System.out.println("Choose an action:");
         printSeparator(20);
-        System.out.println("(0) Save progress");
-        System.out.println("(1) Continue on your journey");
-        System.out.println("(2) Check your stats");
-        System.out.println("(3) Train in Gym");
-        System.out.println("(4) Enter Tournament");
-        System.out.println("(5) Inventory");
-        System.out.println("(6) Shop");
-        System.out.println("(7) Exit the game");
-        player.setHp(player.getMaxHp());
-        player.setStamina(player.getMaxStamina());
-    }
-
-    static void printMenu2(){
-        gameData.saveGame();
-        clearConsole();
-        printHeading(centerText("MENU", 30));
-        System.out.println("Choose an action:");
-        printSeparator(20);
-        System.out.println("(0) Save progress");
+        System.out.println("(0) Exit Game");
         System.out.println("(1) Continue on your journey");
         System.out.println("(2) Check your Stats");
         System.out.println("(3) Tutorial");
-        System.out.println("(4) Exit the game");
+        if(playerProgress.getShopStage() > 0){
+            System.out.println("(4) Inventory");
+            System.out.println("(5) Shop");
+        }
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
     }
@@ -203,33 +189,26 @@ public class GameLogic{
     static void gameLoop(){
         while(isRunning){
             shop = new Shop(player, playerProgress);
-            if(player.getStage() < 2){
-                printMenu2();
-            } else {
-                printMenu();
-            }
+            printMenu();
             int input = readInt("-> ", 0, 7);
             if(input == 0){
-                gameData.saveGame();
-                pressAnything();
+                isRunning = false;
             } else if(input == 1){
                 continueJourney();
             } else if(input == 2){
                 printStats();
-            } else if(input ==3){
-                gymTraining();
-            } else if(input == 4){
-                enterTournament();
-            } else if(input == 5) {
-                gameData.getGameDataManager().getInventory();
-                gameData.getGameDataManager().getSlots();
-                inventory.inventoryMenu();
-                gameData.inputSlots(inventory.getSlots());
-            } else if(input == 6) {
-                shop.showShop(false);
-                gameData.inputInventory(inventory.getInventoryItems());
-            } else if(input == 7) {
-                isRunning = false;
+            } else if(input == 3){
+                UrbanStory.tutorialMenu();
+            } else if(playerProgress.getShopStage() > 0){
+                if(input == 4){
+                    gameData.getGameDataManager().getInventory();
+                    gameData.getGameDataManager().getSlots();
+                    inventory.inventoryMenu();
+                    gameData.inputSlots(inventory.getSlots());
+                } else if(input == 5){
+                    shop.showShop(false);
+                    gameData.inputInventory(inventory.getInventoryItems());
+                }
             }
         }
     }
@@ -237,36 +216,40 @@ public class GameLogic{
     // Continues players journey
     static void continueJourney() {
         clearConsole();
-        if(player.getStage() == 0){
-            printSeparator(40);
-            String[] worlds = player.getWorlds();
-            printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
-            printSeparator(40);
-            UrbanStory.printUrban();
-            printSeparator(50);
-            System.out.println("Are you ready to start your journey?");
-            System.out.println("(1) Yes\n(2) No");
-            int choice2 = GameLogic.readInt("-> ", 1, 2);
-            if(choice2 == 1){
-                gymTraining();
+        if(player.getCurrentWorld() == 0){
+            if(playerProgress.getShopStage() == 0){
+                printSeparator(40);
+                String[] worlds = player.getWorlds();
+                printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
+                printSeparator(40);
+                UrbanStory.printUrban();
+                printSeparator(50);
+                System.out.println("Are you ready to start your journey?");
+                System.out.println("(1) Yes\n(2) No");
+                int choice2 = GameLogic.readInt("-> ", 1, 2);
+                if(choice2 == 1){
+                    gymTraining();
+                } else {
+                    return;
+                }
             } else {
-                return;
+                System.out.println("(1) Train with Fred");
+                System.out.println("(2) Enter Tournament");
+                System.out.println("(3) Go Back");
+                int choice2 = GameLogic.readInt("-> ", 1, 3);
+                if(choice2 == 1){
+                    gymTraining();
+                } else if(choice2 == 2) {
+                    enterTournament();
+                } else {
+                    return;
+                }
             }
-        } else {
-            gymTraining();
+        }  else if(player.getCurrentWorld() == 1) {
+            GameLogic2.startWorld2();
         }
-        // System.out.println("You have completed your street training. Time to move to the next level.");
-        // player.setCurrentWorld(1); 
-        // System.out.println("You are now moving to the Training Facility...");
-        // else if(player.getCurrentWorld() == 1) {
-        //     printHeading("Training Facility");
-        //     System.out.println("You've made it to a proper gym! Time to hone your skills and become stronger.");
-        //     System.out.println("You feel your power growing with every session. Keep it up!");
-            
-        //     System.out.println("You have finished training at the facility. Prepare for the final challenge.");
-        //     player.setCurrentWorld(2);
-        //     System.out.println("You're now headed to the Champ Arena...");
-        // }
+        
+        
         // else if(player.getCurrentWorld() == 2) {
         //     printHeading("Champ Arena");
         //     System.out.println("This is it! You've reached the pinnacle of your journey. Time to prove your worth in the arena.");
@@ -312,10 +295,23 @@ public class GameLogic{
             // Train with Fred after losing in the Tournament
             if(playerProgress.getOpponentWins() == 3 && playerProgress.getAddStats() != 5){
                 if(UrbanStory.tournaLoseTraining(player.getName())){
-                    playerProgress.setRound(1);
-                    FredGym.setPlayer(GameLogic.player);
-                    FredGym.fightLoop2();
-                    return;
+                    while(playerProgress.getAddStats() != 5){
+                        FredGym.setPlayer(GameLogic.player);
+                        FredGym.fightLoop2();
+                        clearConsole();
+                        System.out.println("Fred: \t\"Want to train more to gain more stats?\"");
+                        System.out.println();
+                        System.out.println("(1) Sure, lets go for another round!");
+                        System.out.println("(2) I'll take a break first.");
+                        choice = readInt("-> ", 1, 2);
+                        if(choice == 1 && playerProgress.getAddStats() == 5){
+                            System.out.println();
+                            System.out.println("\nFred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n");
+                            GameLogic.pressAnything();
+                        }
+                        if(choice == 2) break;
+                        continue;
+                    }
                 }
                 return;
             }

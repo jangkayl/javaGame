@@ -1,8 +1,8 @@
 package world1;
 
-import world1.TournamentFight.LopezTourna;
+import world1.TournamentFight.Lopez2;
 import world1.TournamentFight.Ramirez2;
-import world1.TournamentFight.TettehTourna;
+import world1.TournamentFight.Tetteh2;
 
 public class Tournament {
     static StreetFighter opponent;
@@ -41,47 +41,50 @@ public class Tournament {
     public static void startTournament() {
         GameLogic.clearConsole();
         GameLogic.printHeading("\t🏆 Champ Arena Tournament 🏆");
-        System.out.println("Welcome, " + player.getName() + "! Prepare to fight your way to the top!");
-        playerProgress.setDone(1);
-        printTournament();
 
-        while(true){
-            if (playerProgress.getOpponentWins() == 3) {
-                if(offerRematch()){
-                    resetMatchScores();
-                    continue;
-                } else {
-                    GameLogic.gymTraining();
-                    return;
-                }
-            }
+        if(player.getStage() < 6){
+            System.out.println("Welcome, " + player.getName() + "! Prepare to fight your way to the top!");
+            playerProgress.setDone(1);
+            printTournament();
 
-            // Before each major stage, encourage checking the shop or inventory
-            if (player.getStage() == 3) {
-                if (visitShopOrInventory()) {
-                    startMatch(0);
-                    if (playerProgress.getPlayerWins() == 3) {
-                        player.setStage(4);
+            while(true){
+                if (playerProgress.getOpponentWins() == 3) {
+                    if(offerRematch()){
                         resetMatchScores();
                         continue;
+                    } else {
+                        GameLogic.gymTraining();
+                        return;
                     }
                 }
-            } else if (player.getStage() == 4) {
-                if (visitShopOrInventory()) {
-                    startMatch(1);
-                    if (playerProgress.getPlayerWins() == 3) {
-                        player.setStage(5);
-                        resetMatchScores();
-                        continue;
+    
+                // Before each major stage, encourage checking the shop or inventory
+                if (player.getStage() == 3) {
+                    if (visitShopOrInventory()) {
+                        startMatch(0);
+                        if (playerProgress.getPlayerWins() == 3) {
+                            player.setStage(4);
+                            resetMatchScores();
+                            continue;
+                        }
                     }
-                }
-            } else if (player.getStage() == 5) {
-                if (visitShopOrInventory()) {
-                    startMatch(2);
-                    if (playerProgress.getPlayerWins() == 3) {
-                        player.setStage(5);
-                        resetMatchScores();
-                        break;
+                } else if (player.getStage() == 4) {
+                    if (visitShopOrInventory()) {
+                        startMatch(1);
+                        if (playerProgress.getPlayerWins() == 3) {
+                            player.setStage(5);
+                            resetMatchScores();
+                            continue;
+                        }
+                    }
+                } else if (player.getStage() == 5) {
+                    if (visitShopOrInventory()) {
+                        startMatch(2);
+                        if (playerProgress.getPlayerWins() == 3) {
+                            player.setStage(6);
+                            resetMatchScores();
+                            break;
+                        }
                     }
                 }
             }
@@ -92,19 +95,34 @@ public class Tournament {
     private static void startMatch(int opponentIndex) {
         System.out.println();
         System.out.println();
-
+    
         String opponentName = opponents[opponentIndex];
         System.out.print(opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: ");
-        System.out.println(opponentName);
+        System.out.print(opponentName);
+    
         UrbanStory.tournaOpponentBackstory(opponentName);
-
+    
+        // Initialize opponent based on the index
         switch (opponentIndex) {
-            case 0 -> fightWithOpponent(new Ramirez2(player, new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, .30)));
-            // case 1 -> fightWithOpponent(new LopezTourna(player, new StreetFighter("Oscar Lopez", 170, 100, 0.2, 2, .30)));
-            // case 2 -> fightWithOpponent(new TettehTourna(player, new StreetFighter("Ishmael Tetteh", 200, 120, 0.3, 2.5, .40)));
+            case 0 -> {
+                opponent = new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, 0.30);
+                opponent.setPlayerOpponent(player);
+                fightWithOpponent(new Ramirez2(player, opponent));
+            }
+            case 1 -> {
+                opponent = new StreetFighter("Oscar Lopez", 170, 100, 0.2, 2, 0.30);
+                opponent.setPlayerOpponent(player);
+                fightWithOpponent(new Lopez2(player, opponent));
+            }
+            case 2 -> {
+                opponent = new StreetFighter("Ishmael Tetteh", 200, 120, 0.3, 2.5, 0.40);
+                opponent.setPlayerOpponent(player);
+                fightWithOpponent(new Tetteh2(player, opponent));
+            }
+            default -> System.out.println("Invalid opponent index.");
         }
     }
-
+    
     private static void fightWithOpponent(FightLogic fightLogic) {
         while (!isMatchConcluded()) {
             fightLogic.fightLoop();
@@ -141,10 +159,10 @@ public class Tournament {
     }
 
     private static void concludeTournament() {
-        System.out.println("Tournament has ended. Thank you for participating!");
-        if (player.getCurrentRank().equals("CHAMPION")) {
-            System.out.println("You've solidified your status as a champion! Keep training to maintain your rank.");
-        }
+        System.out.println("🥊 Congratulations, Champion of the Ring! 🥊\n");
+        System.out.println("You've conquered the tournament, delivering knockout blows and proving you have the heart of a true fighter!");
+        System.out.println("The crowd roars, and your name is now legend. But the journey isn't over...");
+        player.setCurrentWorld(1);
         GameLogic.pressAnything();
     }
 

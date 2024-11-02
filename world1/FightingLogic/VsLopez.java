@@ -3,7 +3,7 @@ import java.util.Random;
 
 import world1.Player;
 import world1.StreetFighter;
-import world1.TournamentFight.LopezTourna;
+import world1.TournamentFight.Lopez2;
 
 public class VsLopez {
     static Random rand = new Random();
@@ -31,7 +31,7 @@ public class VsLopez {
         
         if(critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged){
             player.setDamageSetter(player.getCritMultiplier());
-            System.out.println(player.getName() + "\'s " + LopezTourna.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
+            System.out.println(player.getName() + "\'s " + Lopez2.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if(dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw){
@@ -131,7 +131,7 @@ public class VsLopez {
         
         if(critChance < opponent.getCritChance() && choice != 2 && !isDraw){
             opponent.setDamageSetter(opponent.getCritMultiplier());
-            System.out.println(opponent.getName() + "\'s " + LopezTourna.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
+            System.out.println(opponent.getName() + "\'s " + Lopez2.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if(dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw){

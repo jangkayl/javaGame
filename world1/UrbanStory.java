@@ -72,6 +72,76 @@ public class UrbanStory {
         return choice;
     }
 
+    public static void tutorialMenu() {
+        System.out.println();
+        GameLogic.printSeparator(50);
+        System.out.println("WELCOME TO THE TUTORIAL!");
+        System.out.println();
+        System.out.println("In this tutorial, you'll get a quick overview of the basic mechanics and controls you'll need to succeed.");
+        System.out.println("You'll learn how to perform essential moves, manage your stamina, and make smart decisions in combat.");
+        System.out.println("Each section will guide you step-by-step to help you get comfortable with the controls and timing.");
+        System.out.println("Take your time, and remember: practice makes perfect.");
+        System.out.println();
+        System.out.println("Are you ready to begin?");
+        System.out.println("(1) Yes, let's get started!  (2) No, I'd like to explore more options first.");
+        GameLogic.printSeparator(50);
+        int choice = GameLogic.readInt("-> ", 1, 2);
+        if(choice == 2) return;
+        tutorialStart(GameLogic.player.getName(), choice);
+    }
+
+    public static void tutorialStart(String name, int choice){
+        urbanTraining4();
+        choice = GameLogic.readInt("-> ", 1, 1);
+        if(choice == 1) response5();
+
+        choice = GameLogic.readInt("-> ", 2, 2);
+        if(choice == 2) response6();
+
+        choice = GameLogic.readInt("-> ", 3, 3);
+        if(choice == 3) response7();
+
+        choice = GameLogic.readInt("-> ", 4, 4);
+        if(choice == 4){
+            response8(name);
+        }
+        int success = 0;
+
+        space(70);
+        System.out.println("Fred: \t\"Alright, let's put your skills to the test. Try to counter my next punch.\"");
+        do {
+            int randomNum = 0 + (int)(Math.random() * ((3 - 0) + 1));
+            System.out.println();
+            if(randomNum == 2){
+                System.out.println("( Fred " + array[randomNum] + "s )");
+            } else if(randomNum == 3){
+                System.out.println("( Fred throws an " + array[randomNum] + " )");
+            } else {
+                System.out.println("( Fred throws a " + array[randomNum] + " ) ");
+            }
+
+            System.out.println("Success: " + success + " / 5");
+            choice = punch();
+            int countered = isCounter(randomNum+1, choice);
+
+            System.out.println();
+            GameLogic.printSeparator(30);
+            System.out.println();
+            if(countered == 1){
+                System.out.println("Great job!");
+                success++;
+            } else if(countered == 2){
+                System.out.println("No, you should try to counter punch it!");
+            } else {
+                System.out.println("Not bad, but I wanna see some counter punches!");
+            }
+        } while(success < 5);
+        System.out.println("Congratulations, " + name + "! You've completed the tutorial!🤩");
+        System.out.println("Your fundamentals are solid, but remember: there's always more to learn.");
+        System.out.println("Keep training hard, and you'll be unstoppable in no time!");
+        GameLogic.pressAnything();
+    }
+
     public static void printUrban(){
         System.out.println();
         System.out.println("Welcome to the Urban Gym, a tough, inner-city training ground.");
@@ -290,7 +360,7 @@ public class UrbanStory {
         GameLogic.pressAnything();
     }
 
-    static void urbanTraining6(String name){
+    public static void urbanTraining6(String name){
         space(70);
         System.out.println("Fred: \t\"Good to see you back, " + name + ". You've made some progress, but there's still work to do.");
         System.out.println("\tI want you to know that training is important, but so is preparation. I've opened up a shop here");
@@ -365,14 +435,13 @@ public class UrbanStory {
         if(choice == 1) {
             urbanTrainingCombo(name);
         } else {
-            shop.showShop(false);
-            GameLogic.gameData.inputInventory(inventory.getInventoryItems());
+            return;
         }
     }
 
     public static void urbanTrainingCombo(String name) {
         space(70);
-        System.out.println("Fred:\t\"Alright " + name + ", let’s master 'The Body Breaker' combo!\"");
+        System.out.println("Fred:\t\"Alright " + name + ", let's master 'The Body Breaker' combo!\"");
         System.out.println();
         System.out.println("Fred:\t\"Step 1: Lead Body Shot to counter a Jab.\"");
         System.out.println("\t[ Fred demonstrates the Lead Body Shot. ]");

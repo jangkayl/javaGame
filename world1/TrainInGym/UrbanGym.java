@@ -42,8 +42,13 @@ public class UrbanGym {
                 System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
                 player.setIsLose(true);
                 playerProgress.setRound(playerProgress.getRound() + 1);
+                player.setHp(player.getMaxHp());
+                player.setStamina(player.getMaxStamina());
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
+                GameLogic.pressAnything();
+                UrbanStory.urbanTrainingLose(player.getName(), UrbanGym.opponent.getName());
+                return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
@@ -57,7 +62,6 @@ public class UrbanGym {
                 return;
             }
         }
-        GameLogic.pressAnything();
     }
 
     static void printStats(){
@@ -222,6 +226,7 @@ public class UrbanGym {
     static void winnerReward() {
         System.out.println(); 
         GameLogic.printSeparator(40);
+        System.out.println(); 
         System.out.println("Congratulations! You've won the match!");
         System.out.println();  
         System.out.println("Fred is giving you 100 points as a starter pack to get you started.");
@@ -230,6 +235,7 @@ public class UrbanGym {
         System.out.println("You now have " + player.getPlayerPoints() + " points.");
         System.out.println();
         System.out.println("You can now visit the shop and use your points to buy items.");
+        System.out.println(); 
         GameLogic.printSeparator(40);
         GameLogic.pressAnything();
     }

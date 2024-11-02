@@ -130,10 +130,21 @@ public class PabloUrbanGym {
         }
 
         for (int i = 0; i < 3; i++) {
-            choices[i] = Character.getNumericValue(input.charAt(i) - 1);
-            opponentChoices[i] = rand.nextInt(7);
+            // Adjust the character input value correctly
+            choices[i] = Character.getNumericValue(input.charAt(i)) - 1; // Use input directly
+        
+            // Generate opponentChoices with higher probability for 1 to 4
+            int randomValue = rand.nextInt(10); // Generate a random number between 0 and 9
+        
+            // Higher probability for numbers 1 to 4
+            if (randomValue < 8) { // 80% chance
+                opponentChoices[i] = rand.nextInt(4); // 0, 1, 2, or 3 (which correspond to 1 to 4)
+            } else { // 40% chance
+                opponentChoices[i] = 4 + rand.nextInt(3); // 4, 5, or 6
+            }
         }
-
+        
+        // Check for opponentChoices being >= 4
         for (int i = 0; i < 3; i++) {
             if (opponentChoices[i] >= 4) {
                 opponentChoices = new int[]{4, 5, 6}; 

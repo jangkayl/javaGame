@@ -18,9 +18,24 @@ public abstract class FightLogic {
     public void setOpponent(StreetFighter opponent) {
         FightLogic.opponent = opponent;
     }
-
+    
     public void fightLoop() {
-        player.setStage(3);
+        switch (player.getStage()) {
+            case 3:
+                player.setStage(3);
+                break;
+            case 4:
+                player.setStage(4);
+                break;
+            case 5:
+                player.setStage(5);
+                break;
+            case 6:
+                player.setStage(6);
+                break;
+            default:
+                break;
+        }
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
@@ -34,30 +49,35 @@ public abstract class FightLogic {
         while (player.getHp() > 0 && opponent.getHp() > 0) {
             selectAttack();
             printStats();
-            checkForWin();
+            if (player.getHp() <= 0) {
+                System.out.println("\n" + player.getName() + " is knocked out! " + getOpponentName() + " wins!");
+                handleLoss();
+                return;
+            } else if (opponent.getHp() <= 0) {
+                System.out.println("\n" + getOpponentName() + " is knocked out! " + player.getName() + " wins!");
+                handleWin();
+                return;
+            }
         }
         GameLogic.pressAnything();
     }
 
-    protected void checkForWin() {
-        if (player.getHp() <= 0) {
-            System.out.println("\n" + player.getName() + " is knocked out! " + getOpponentName() + " wins!");
-            handleLoss();
-        } else if (opponent.getHp() <= 0) {
-            System.out.println("\n" + getOpponentName() + " is knocked out! " + player.getName() + " wins!");
-            handleWin();
+    public void winnerReward(){
+        if(playerProgress.getPlayerWins() != 3){
+            System.out.println(); 
+            GameLogic.printSeparator(40);
+            System.out.println(); 
+            System.out.println("Congratulations! You've won the match!");
         }
     }
-
+    
     protected void handleWin() {
         player.setIsLose(false);
         winnerReward();
         resetFighterStats();
         playerProgress.setRound(playerProgress.getRound() + 1);
-        if (playerProgress.getPlayerWins() != 3) {
+        if(playerProgress.getPlayerWins() != 3){
             playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
-        } else {
-            player.setStage(4);
         }
         tournament.printStanding();
         GameLogic.gameData.saveGame();
@@ -81,13 +101,12 @@ public abstract class FightLogic {
         opponent.setStamina(opponent.getMaxStamina());
     }
 
-    protected abstract void winnerReward();
 
     protected void printStats() {
         System.out.println();
         System.out.println(GameLogic.formatColumns(player.getName(), opponent.getName(), 30));
-        System.out.println(GameLogic.formatColumns("HP " + player.getHp() + "/" + player.getMaxHp(), "HP " + opponent.getHp() + "/" + opponent.getMaxHp(), 30));
-        System.out.println(GameLogic.formatColumns("Stamina " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30));
+        System.out.println(GameLogic.formatColumns("HP        " + player.getHp() + "/" + player.getMaxHp(), "HP        " + opponent.getHp() + "/" + opponent.getMaxHp(), 30));
+        System.out.println(GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30));
         System.out.println();
     }
 
