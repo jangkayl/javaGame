@@ -3,7 +3,7 @@ import world1.interfaces.PlayerInterface;
 
 public class Player extends Boxer implements PlayerInterface {
     private String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};
-    private String[] worlds = {"Urban Gym", "Training Facility", "Champ Arena"};
+    private String[] worlds = {"Urban Gym", "Underworld Rumble ", "Champ Arena"};
     private String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION", "LEGEND", "HALL OF FAMER"};
     private int currentWorld;
     private int currentRank;

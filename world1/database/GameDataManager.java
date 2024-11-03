@@ -156,10 +156,10 @@ public class GameDataManager {
             slots = new Item[5];
         }
 
-        String name = shop.getItemNameByIndex(Integer.parseInt(value)); 
-        String description = shop.getItemDescriptionByIndex(Integer.parseInt(value)); 
-        String body = shop.getItemBodyByIndex(Integer.parseInt(value)); 
-        String effect = shop.getItemEffectByIndex(Integer.parseInt(value)); 
+        String name = Shop.items[Integer.parseInt(value)].getName();
+        String description = Shop.items[Integer.parseInt(value)].getDescription();
+        String body = Shop.items[Integer.parseInt(value)].getBody();
+        String effect = Shop.items[Integer.parseInt(value)].getEffect();
 
         if(name == null && description == null && body == null) return;
         Item newItem = new Item(name, description, body, effect);

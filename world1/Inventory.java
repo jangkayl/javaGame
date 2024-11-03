@@ -16,7 +16,7 @@ public class Inventory {
         String effect;
         
         public Item(String name, String description, String body, String effect) {
-            this.name = name.replace(" - SOLD OUT", "");
+            this.name = name;
             this.body = body;
             this.description = description;
             this.effect = effect;

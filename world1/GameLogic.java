@@ -20,7 +20,7 @@ public class GameLogic{
     static Item[] slots;
     public static Inventory inventory = new Inventory();
     public static Shop shop = new Shop(player, playerProgress);
-    static boolean isRunning;
+    public static boolean isRunning;
     public static GameDatabase gameData = new GameDatabase();
     static GameDataManager gameDataManager = new GameDataManager();
 
@@ -163,7 +163,12 @@ public class GameLogic{
     
         Story.printIntro(player.getName());
         isRunning = true;
-        gameLoop();
+        
+        if(player.getCurrentWorld() == 1){
+            GameLogic2.gameLoop();
+        } else {
+            gameLoop();
+        }
     }
 
     // Prints the menu options
@@ -187,10 +192,15 @@ public class GameLogic{
 
     // Loops the menu options
     static void gameLoop(){
+        int input;
         while(isRunning){
             shop = new Shop(player, playerProgress);
             printMenu();
-            int input = readInt("-> ", 0, 7);
+            if(playerProgress.getShopStage() > 0){
+                input = GameLogic.readInt("-> ", 0, 5);
+            } else {
+                input = GameLogic.readInt("-> ", 0, 3);
+            }
             if(input == 0){
                 isRunning = false;
             } else if(input == 1){
@@ -250,25 +260,13 @@ public class GameLogic{
                 }
             }
         }  else if(player.getCurrentWorld() == 1) {
-            GameLogic2.startWorld2();
+            GameLogic2.gameLoop();
         }
-        
-        
-        // else if(player.getCurrentWorld() == 2) {
-        //     printHeading("Champ Arena");
-        //     System.out.println("This is it! You've reached the pinnacle of your journey. Time to prove your worth in the arena.");
-        //     System.out.println("Fighters from all over the world await you in the arena. Get ready to face the best.");
-        //     System.out.println("Good luck, Champion!");
-        // }
-        // else {
-        //     printHeading("Invalid world state.");
-        //     System.out.println("Something went wrong! You are stuck in an unknown world.");
-        // }
     }
 
 
     // Checks players stats
-    static void printStats(){
+    public static void printStats(){
         clearConsole();
         printHeading(centerText("CHARACTER STATS", 30));
         System.out.print("\t\t");

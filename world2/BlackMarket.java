@@ -1,20 +1,22 @@
-package world1;
+package world2;
 
-import world1.TrainInGym.UrbanGym;
+import world1.GameLogic;
+import world1.Inventory;
+import world1.Player;
+import world1.PlayerProgress;
 
-public class Shop {
+public class BlackMarket {
     static Player player;
     static Inventory inventory = new Inventory();
     static PlayerProgress playerProgress = GameLogic.playerProgress;
     public static Item[] items = {
-        new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false","HAND"),
-        new Item("Light Training Gloves", "Increases punch speed and improves dodge ability.", 75, "+15% Stamina, +5% Dodge Chance","false","HAND"),
-        new Item("Warrior's Helmet", "A sturdy helmet that provides excellent protection and boosts health recovery.", 30, "+10% Health", "false", "HEAD"),
-        new Item("Beginner's Boots", "Improves footwork and stamina.", 40, "+13% Stamina","false","BOOTS"),
-        new Item("Basic Energy Drink", "Increases stamina for the next fight.", 20, "+15% Stamina for next fight","false","FOOD"),
+        new Item("Reinforced Headband", "Tough headband that protects the skull and conceals small illegal items.", 100, "+10% HP, +5% Crit Chance, +10% Dodge Chance","false","HEAD"),
+        new Item("Blood-Forged Knuckles", "Powerful knuckles for brutal punches, but reduce health over time due to strain on the hands.", 150, "-10% Health, +15% Crit Hit Chance","false","HAND"),
+        new Item("Shadowrunner Sneakers", "Lightweight shoes that improve agility but provide less protection.", 75, "+15% Stamina, +10% Dodge Chance, -10% HP","false","BOOTS"),
+        new Item("Tactical Combat Boots", "Sturdy boots that improve footwork and durability.", 80, "+10% Health, +5% Crit Hit Chance, +10% Stamina", "false", "BOOTS"),
     };
 
-    public Shop(Player p, PlayerProgress progress){
+    public BlackMarket(Player p, PlayerProgress progress){
         player = p;
         playerProgress = progress;
     }
@@ -51,7 +53,7 @@ public class Shop {
             this.status = "true";
             this.name += " - SOLD OUT";
         }
-
+        
         public String getName(){
             return name;
         }
@@ -85,19 +87,15 @@ public class Shop {
         }
         return -1; 
     }
-    
-    public void showMenu(){
-        UrbanGym.setPlayer(player);
-        UrbanGym.fightLoop();
-    }
 
     public void showShop(boolean isTraining) {
+        GameLogic.clearConsole();
         while (true) {
             int choice = -1;
             boolean isSold = false;
     
             System.out.println();
-            GameLogic.printHeading("        Gym Shop");
+            GameLogic.printHeading("        Black Market");
             System.out.println();
     
             GameLogic.printSeparator(20);
@@ -113,13 +111,6 @@ public class Shop {
     
             System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
     
-            // Training check before entering purchase loop
-            if (playerProgress.getShopStage() < 1 && isTraining) {
-                choice = GameLogic.readInt("-> ", 0, items.length);
-                UrbanStory.urbanTraining7();
-                return;
-            }
-    
             // Purchase loop
             while (!isSold) {
                 choice = GameLogic.readInt("-> ", 0, items.length);
@@ -131,7 +122,7 @@ public class Shop {
     
                 if (soldChecker(choice)) {
                     System.out.println(items[choice - 1].name + " is already sold. Choose another item.");
-                } else if (notEnoughPoints(choice)) {
+                } else if (notEnoughtPoints(choice)) {
                     System.out.println("You don't have enough points to buy " + items[choice - 1].name + ". Please choose another item or earn more points.");
                 } else {
                     // Successful purchase
@@ -157,31 +148,23 @@ public class Shop {
         }
     }
     
-
-    public void shop() {
-        GameLogic.clearConsole();
-        GameLogic.printHeading("        Gym Shop");
-
-        System.out.println("Fred: \t\"Welcome to the shop. Here, you can buy all sorts of gear and items that'll");
-        System.out.println("\thelp boost your stats. You want more stamina? We've got special protein shakes for that.");
-        System.out.println("\tNeed a better chance to land critical hits? Try out our precision wraps. These items can");
-        System.out.println("\tbe real game-changers if you use them right.\"");
-
-        GameLogic.pressAnything();
-        showShop(true);
+    static boolean soldChecker(int choice){
+        if(items[choice-1].isSoldOut()){
+            return true;
+        }
+        return false;
     }
-
-    private boolean soldChecker(int choice) {
-        return items[choice - 1].isSoldOut();
-    }
-
-    private boolean notEnoughPoints(int choice) {
-        return player.getPlayerPoints() < items[choice - 1].getCost();
+    
+    static boolean notEnoughtPoints(int choice){
+        if(player.getPlayerPoints() < items[choice-1].cost){
+            return true;
+        }
+        return false;
     }
 
     public void applyEffect(String effect){
         int choice = 0 ;
-        for(int i = 0 ; i < 5 ; i++){
+        for(int i = 0 ; i < items.length ; i++){
             if(effect.equals(items[i].effect)){
                 choice = i;
                 break;
@@ -192,18 +175,19 @@ public class Shop {
         switch(choice){
             case 0:
                 applyHpEffect(0.10, 0.05,choice);
+                applyStaminaEffect(0, 0.10,choice);
                 break;
             case 1:
-                applyStaminaEffect(0.15, 0.05,choice);
+                removeHpEffect(0.10, 0,choice);
+                applyStaminaEffect(0.15, 0,choice);
                 break;
             case 2:
-                applyHpEffect(0.10, 0,choice);
+                removeHpEffect(0.10, 0,choice);
+                applyStaminaEffect(0.15, 0.1,choice);
                 break;
             case 3:
-                applyStaminaEffect(0.13, 0,choice);
-                break;
-            case 4:
-                applyStaminaEffect(0.13, 0,choice);
+                applyHpEffect(0.10, 0.05,choice);
+                applyStaminaEffect(0.10, 0,choice);
                 break;
             default:
                 System.out.println("Invalid item choice.");
@@ -222,18 +206,19 @@ public class Shop {
         switch(choice){
             case 0:
                 removeHpEffect(0.10, 0.05,choice);
+                removeStaminaEffect(0, 0.10,choice);
                 break;
             case 1:
-                removeStaminaEffect(0.15, 0.05,choice);
+                applyHpEffect(0.10, 0,choice);
+                removeStaminaEffect(0.15, 0,choice);
                 break;
             case 2:
-                removeHpEffect(0.10, 0,choice);
+                applyHpEffect(0.10, 0,choice);
+                removeStaminaEffect(0.15, 0.1,choice);
                 break;
             case 3:
-                removeStaminaEffect(0.13, 0,choice);
-                break;
-            case 4:
-                removeStaminaEffect(0.15, 0,choice);
+                removeHpEffect(0.10, 0.05,choice);
+                removeStaminaEffect(0.10, 0,choice);
                 break;
             default:
                 System.out.println("Invalid item choice.");

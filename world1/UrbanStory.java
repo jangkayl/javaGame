@@ -591,5 +591,6 @@ public class UrbanStory {
                 System.out.println("No backstory available for this opponent.");
         }
     }
+
 }
 

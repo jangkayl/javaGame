@@ -3,6 +3,7 @@ package world1;
 import world1.TournamentFight.Lopez2;
 import world1.TournamentFight.Ramirez2;
 import world1.TournamentFight.Tetteh2;
+import world2.GameLogic2;
 
 public class Tournament {
     static StreetFighter opponent;
@@ -90,6 +91,9 @@ public class Tournament {
             }
         }
         concludeTournament();
+        if(player.getCurrentWorld() == 1) {
+            GameLogic2.gameLoop();
+        }
     }
 
     private static void startMatch(int opponentIndex) {
@@ -159,12 +163,51 @@ public class Tournament {
     }
 
     private static void concludeTournament() {
-        System.out.println("🥊 Congratulations, Champion of the Ring! 🥊\n");
+        System.out.println();
+        System.out.println("🥊 Congratulations, Champion of the Ring! 🥊");
         System.out.println("You've conquered the tournament, delivering knockout blows and proving you have the heart of a true fighter!");
-        System.out.println("The crowd roars, and your name is now legend. But the journey isn't over...");
-        player.setCurrentWorld(1);
+        System.out.println("The crowd roars, and your name is now legend. But the journey isn't over...\n");
+        
+        System.out.println("As you return home, you can still hear the echoes of cheering fans, the thrill of victory fresh in your mind.");
+        System.out.println("But your celebration is cut short when you see your childhood friend, Niko, waiting anxiously outside your door.");
         GameLogic.pressAnything();
+
+        GameLogic.printSeparator(70);
+        System.out.println();
+        System.out.println("Niko: \t\"Hey, I'm glad I found you. It's urgent... your mom has been taken to the hospital. She needs help, and it doesn't look good.\"");
+        System.out.println();
+        System.out.println("\t( Panic rises in your chest as you race to the hospital, each step heavier than the last. )");
+        System.out.println();
+        System.out.println("\tYou find your mother weak, hooked to machines. The doctors say the operation could save her life, but it's costly, your recent winnings barely cover it.\n");
+        GameLogic.pressAnything();
+    
+        System.out.println();
+        GameLogic.printSeparator(70);
+        System.out.println();
+        System.out.println("Niko: \t\"I know it's tough, but there's another way. It's risky and illegal... Fighters can earn big money in the underground ring.");
+        System.out.println("\tIt's brutal, but you could make what you need fast.\"");
+        System.out.println();
+        System.out.println("\t( Niko's eyes are serious, and you can see the weight of the decision settling in. )");
+        System.out.println();
+        System.out.println("\tYou take a deep breath, feeling the burden of your mother's health pressing down on you.");
+        System.out.println();
+        System.out.println("Niko: \t\"It's dangerous, but if you're as good as I think you are, you could pull this off. Just think about it...\"\n");
+        GameLogic.pressAnything();
+    
+        System.out.println();
+        GameLogic.printSeparator(70);
+        System.out.println();
+        System.out.println("\tWith your mother's life at stake, you know what you must do. You nod at Niko.");
+        System.out.println();
+        System.out.println("Niko: \t\"Alright, let's do this. I'll show you the ropes. Get ready for a new world of fighting!\"\n");
+        GameLogic.pressAnything();
+        GameLogic.printSeparator(70);
+
+        // Update the player's world/state to reflect the new story path.
+        player.setCurrentWorld(1);
     }
+    
+    
 
     private static void printTournament() {
         System.out.println();
