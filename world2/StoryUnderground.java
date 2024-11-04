@@ -54,5 +54,4 @@ public class StoryUnderground {
         GameLogic.printSeparator(50);
         GameLogic.pressAnything();
     }
-    
 }

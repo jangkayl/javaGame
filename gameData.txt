@@ -11,7 +11,7 @@ playerPoints=595
 currentWorld=1
 currentRank=0
 stage=7
-isLose=
+isLose=false
 
 [progress]
 round=1

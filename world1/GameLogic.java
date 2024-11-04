@@ -321,7 +321,7 @@ public class GameLogic{
             // Train with Fred
             if(player.getStage() == 0){
                 clearConsole();
-                // UrbanStory.printTraining(player.getName());
+                UrbanStory.printTraining(player.getName());
                 player.chooseTrait();
                 player.setStage(1);
                 gameData.saveGame();

@@ -8,6 +8,7 @@ import world1.Inventory;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.Shop;
+import world2.BetFight.BetFight;
 
 public class GameLogic2 {
     public static Scanner scan = new Scanner(System.in);   
@@ -86,9 +87,9 @@ public class GameLogic2 {
                 System.out.println("(3) Go back");
                 int choice = GameLogic.readInt("-> ", 0, 3);
                 if(choice == 0){
-                    
+                    TrainWithJakester.teachDirtyBoxingMoves();
                 } else if (choice == 1){
-
+                    BetFight.betFight();
                 } else if(choice == 2){
                     shop.showShop(false);
                     GameLogic.gameData.inputInventory(inventory.getInventoryItems());
