@@ -7,19 +7,20 @@ import world1.GameLogic;
 import world1.Inventory;
 import world1.Player;
 import world1.PlayerProgress;
+import world1.Shop;
 
 public class GameLogic2 {
     public static Scanner scan = new Scanner(System.in);   
     static DecimalFormat df = new DecimalFormat("#,###.00");   
     public static Player player = GameLogic.player;
     public static PlayerProgress playerProgress = GameLogic.playerProgress;
+    public static Shop shop = GameLogic.shop;
     public static Inventory inventory = new Inventory();
-    public static BlackMarket market = new BlackMarket(player, playerProgress);
     
     public static void gameLoop(){
         int input;
         while(GameLogic.isRunning){
-            market = new BlackMarket(player, playerProgress);
+            shop = new Shop(player, playerProgress);
             printMenu();
             if(playerProgress.getShopStage() > 3){
                 input = GameLogic.readInt("-> ", 0, 4);
@@ -89,12 +90,11 @@ public class GameLogic2 {
                 } else if (choice == 1){
 
                 } else if(choice == 2){
-                    market.showShop(false);
+                    shop.showShop(false);
                     GameLogic.gameData.inputInventory(inventory.getInventoryItems());
                 } else if(choice == 3){
                     return;
                 }
-                GameLogic.pressAnything();
             }
         }
     }

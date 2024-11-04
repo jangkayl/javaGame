@@ -7,10 +7,17 @@ public class Shop {
     static Inventory inventory = new Inventory();
     static PlayerProgress playerProgress = GameLogic.playerProgress;
     public static Item[] items = {
+        // World 1 Items
         new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false","HAND", 0.1, 0, 0.05, 0, 0),
         new Item("Light Training Gloves", "Increases punch speed and improves dodge ability.", 75, "+15% Stamina, +5% Dodge Chance","false","HAND", 0, 0.15, 0, 0, 0.05),
         new Item("Warrior's Helmet", "A sturdy helmet that provides excellent protection and boosts health recovery.", 30, "+10% Health", "false", "HEAD", 0.1, 0, 0, 0, 0),
         new Item("Beginner's Boots", "Improves footwork and stamina.", 40, "+13% Stamina","false","BOOTS", 0, 0.13, 0, 0, 0),
+
+        // World 2 Items
+        new Item("Reinforced Headband", "Tough headband that protects the skull and conceals small illegal items.", 100, "+10% HP, +5% Crit Chance, +10% Dodge Chance","false","HEAD", 0.1, 0, 0.05, 0, 0.1),
+        new Item("Blood-Forged Knuckles", "Powerful knuckles for brutal punches, but reduce health over time due to strain on the hands.", 150, "-10% Health, +15% Crit Hit Chance","false","HAND", 0.1, 0, 0.15, 0, 0),
+        new Item("Shadowrunner Sneakers", "Lightweight shoes that improve agility but provide less protection.", 75, "+15% Stamina, +10% Dodge Chance, -10% HP","false","BOOTS", -0.1, 0.15, 0, 0, 0.1),
+        new Item("Tactical Combat Boots", "Sturdy boots that improve footwork and durability.", 80, "+10% Health, +5% Crit Hit Chance, +10% Stamina", "false", "BOOTS", 0.1, 0.1, 0.05, 0, 0),
     };
 
     public Shop(Player p, PlayerProgress progress){
@@ -122,7 +129,11 @@ public class Shop {
             boolean isSold = false;
     
             System.out.println();
-            GameLogic.printHeading("        Gym Shop");
+            if(player.getCurrentWorld() == 0){
+                GameLogic.printHeading("        Gym Shop");
+            } else if(player.getCurrentWorld() == 1){
+                GameLogic.printHeading("        Black Market");
+            }
             System.out.println();
     
             GameLogic.printSeparator(20);
@@ -131,9 +142,16 @@ public class Shop {
             System.out.println();
     
             // Display items for sale
-            for (int i = 0; i < items.length; i++) {
-                System.out.println("(" + (i + 1) + ") " + items[i].name);
-                items[i].displayItem();
+            if(player.getCurrentWorld() == 0){
+                for (int i = 0; i < items.length; i++) {
+                    System.out.println("(" + (i + 1) + ") " + items[i].name);
+                    items[i].displayItem();
+                }
+            } else if(player.getCurrentWorld() == 1){
+                for (int i = 4; i < items.length; i++) {
+                    System.out.println("(" + (i - 3) + ") " + items[i].name);
+                    items[i].displayItem();
+                }
             }
     
             System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
@@ -147,7 +165,13 @@ public class Shop {
     
             // Purchase loop
             while (!isSold) {
-                choice = GameLogic.readInt("-> ", 0, items.length);
+                choice = GameLogic.readInt("-> ", 0, 4);
+
+                // If player is in World2
+                if(player.getCurrentWorld() == 1 && choice != 0){
+                    choice += 4;
+                }
+
                 if (choice == 0) {
                     System.out.println("Exiting the shop...");
                     GameLogic.pressAnything();
@@ -168,9 +192,7 @@ public class Shop {
                     System.out.println();
     
                     // Add item to inventory
-                    if (choice != 5) {
-                        inventory.setInventory(items[choice - 1].name, items[choice - 1].description, items[choice - 1].body, items[choice - 1].effect);
-                    }
+                    inventory.setInventory(items[choice - 1].name, items[choice - 1].description, items[choice - 1].body, items[choice - 1].effect);
     
                     // Mark item as sold and set isSold to true to exit inner loop
                     items[choice - 1].setSoldOut();
@@ -206,7 +228,7 @@ public class Shop {
     // Apply Effect
     public void applyEffect(String effect){
         int choice = 0 ;
-        for(int i = 0 ; i < 5 ; i++){
+        for(int i = 0 ; i < items.length; i++){
             if(effect.equals(items[i].effect)){
                 choice = i;
                 break;
@@ -226,7 +248,7 @@ public class Shop {
     // Remove Effect
     public void removeEffect(String effect){
         int choice = 0 ;
-        for(int i = 0 ; i < 5 ; i++){
+        for(int i = 0 ; i < items.length; i++){
             if(effect.equals(items[i].effect)){
                 choice = i;
                 break;

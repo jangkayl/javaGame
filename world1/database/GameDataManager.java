@@ -164,7 +164,7 @@ public class GameDataManager {
         if(name == null && description == null && body == null) return;
         Item newItem = new Item(name, description, body, effect);
 
-        if (key.equals("world1")) {
+        if (key.equals("item")) {
             Item[] newInventory = new Item[inventoryItems.length + 1];
             for (int i = 0; i < inventoryItems.length; i++) {
                 newInventory[i] = inventoryItems[i];
@@ -221,7 +221,7 @@ public class GameDataManager {
                 for(int i = 0; i < inventory.getItemCount(); i++){
                     int index = shop.getItemIndexByDescription(inventoryItems[i].description);
                     if(!Shop.items[index].isSoldOut()) Shop.items[index].setSoldOut();
-                    bw.write("world1=" + index + "\n");
+                    bw.write("item=" + index + "\n");
                 }
             }
 

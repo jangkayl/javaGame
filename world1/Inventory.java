@@ -206,14 +206,13 @@ public class Inventory {
 
         Item selectedItem = inventoryItems[itemIndex];
 
-        shop.applyEffect(selectedItem.effect);
-
-
-        // for(int i = 0; i < Shop.items.length; i++){
-        //     if(shop.getItemIndexByDescription(selectedItem.description) != -1){
-        //         shop.applyEffect(selectedItem.effect);
-        //     }
-        // }
+        // Check if its in Shop
+        for(int i = 0; i < Shop.items.length; i++){
+            if(shop.getItemIndexByDescription(selectedItem.description) != -1){
+                shop.applyEffect(selectedItem.effect);
+                break;
+            }
+        }
 
         switch (equipmentSlot.toUpperCase()) {
             case "HEAD":
@@ -258,20 +257,21 @@ public class Inventory {
         if(removedItem != null) {
             inventoryItems[itemCount] = removedItem;
             itemCount++;
-            shop.removeEffect(removedItem.effect);
 
-            // for(int i = 0; i < Shop.items.length; i++){
-            //     if(shop.getItemIndexByDescription(removedItem.description) != -1){
-            //         shop.removeEffect(removedItem.effect);
-            //     }
-            // }
+            // Check if its in Shop
+            for(int i = 0; i < Shop.items.length; i++){
+                if(shop.getItemIndexByDescription(removedItem.description) != -1){
+                    shop.removeEffect(removedItem.effect);
+                    break;
+                }
+            }
             
         }
     }
 
     public void removeAllInventory(){
         Item removedItem = null;
-        for(int i = 0 ; i < 5 ;i++){
+        for(int i = 0 ; i < 5; i++){
             removedItem = slot[i];
             slot[i] = null;
             remove(removedItem);
@@ -309,11 +309,6 @@ public class Inventory {
                 removedItem = slot[3];
                 slot[3] = null;
                 System.out.println(removedItem.name + " have been removed from your BOOTS and been returned to your inventory.");
-                break;
-            case "FOOD":
-                if(noEquip(slot[4])) return;
-                slot[4] = null;
-                System.out.println(removedItem.name + " has been consumed! You feel refreshed.");
                 break;
             default:
                 System.out.println("Invalid slot.");
