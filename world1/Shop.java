@@ -7,11 +7,10 @@ public class Shop {
     static Inventory inventory = new Inventory();
     static PlayerProgress playerProgress = GameLogic.playerProgress;
     public static Item[] items = {
-        new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false","HAND"),
-        new Item("Light Training Gloves", "Increases punch speed and improves dodge ability.", 75, "+15% Stamina, +5% Dodge Chance","false","HAND"),
-        new Item("Warrior's Helmet", "A sturdy helmet that provides excellent protection and boosts health recovery.", 30, "+10% Health", "false", "HEAD"),
-        new Item("Beginner's Boots", "Improves footwork and stamina.", 40, "+13% Stamina","false","BOOTS"),
-        new Item("Basic Energy Drink", "Increases stamina for the next fight.", 20, "+15% Stamina for next fight","false","FOOD"),
+        new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false","HAND", 0.1, 0, 0.05, 0, 0),
+        new Item("Light Training Gloves", "Increases punch speed and improves dodge ability.", 75, "+15% Stamina, +5% Dodge Chance","false","HAND", 0, 0.15, 0, 0, 0.05),
+        new Item("Warrior's Helmet", "A sturdy helmet that provides excellent protection and boosts health recovery.", 30, "+10% Health", "false", "HEAD", 0.1, 0, 0, 0, 0),
+        new Item("Beginner's Boots", "Improves footwork and stamina.", 40, "+13% Stamina","false","BOOTS", 0, 0.13, 0, 0, 0),
     };
 
     public Shop(Player p, PlayerProgress progress){
@@ -26,14 +25,20 @@ public class Shop {
         String effect;
         String status;
         String body;
+        double hp, stamina, critChance, critMulti, dodgeChance;
 
-        public Item(String name, String description, int cost, String effect, String status, String body) {
+        public Item(String name, String description, int cost, String effect, String status, String body, double hp, double stamina, double critChance, double critMulti, double dodgeChance) {
             this.name = name;
             this.description = description;
             this.cost = cost;
             this.effect = effect;
             this.status = status;
             this.body = body;
+            this.hp = hp;
+            this.stamina = stamina;
+            this.critChance = critChance;
+            this.critMulti = critMulti;
+            this.dodgeChance = dodgeChance;
         }
 
         public void displayItem() {
@@ -74,6 +79,26 @@ public class Shop {
 
         public String getBody(){
             return body;
+        }
+
+        public double getHp(){
+            return hp;
+        }
+
+        public double getStamina(){
+            return stamina;
+        }
+
+        public double getCritChance(){
+            return critChance;
+        }
+
+        public double getCritMulti(){
+            return critMulti;
+        }
+
+        public double getDodgeChance(){
+            return dodgeChance;
         }
     }
 
@@ -156,7 +181,6 @@ public class Shop {
             GameLogic.pressAnything(); 
         }
     }
-    
 
     public void shop() {
         GameLogic.clearConsole();
@@ -179,6 +203,7 @@ public class Shop {
         return player.getPlayerPoints() < items[choice - 1].getCost();
     }
 
+    // Apply Effect
     public void applyEffect(String effect){
         int choice = 0 ;
         for(int i = 0 ; i < 5 ; i++){
@@ -189,27 +214,16 @@ public class Shop {
         }
         System.out.println();
 
-        switch(choice){
-            case 0:
-                applyHpEffect(0.10, 0.05,choice);
-                break;
-            case 1:
-                applyStaminaEffect(0.15, 0.05,choice);
-                break;
-            case 2:
-                applyHpEffect(0.10, 0,choice);
-                break;
-            case 3:
-                applyStaminaEffect(0.13, 0,choice);
-                break;
-            case 4:
-                applyStaminaEffect(0.13, 0,choice);
-                break;
-            default:
-                System.out.println("Invalid item choice.");
+        if(items[choice].getCritChance() != 0 || items[choice].getHp() != 0){
+            applyHpAndCritChanceEffect(items[choice].getHp(), items[choice].getCritChance());
+        }
+
+        if(items[choice].getStamina() != 0 || items[choice].getDodgeChance() != 0){
+            applyStaminaAndDodgeChanceEffect(items[choice].getStamina(), items[choice].getDodgeChance());
         }
     }
 
+    // Remove Effect
     public void removeEffect(String effect){
         int choice = 0 ;
         for(int i = 0 ; i < 5 ; i++){
@@ -218,29 +232,17 @@ public class Shop {
                 break;
             }
         }
-        
-        switch(choice){
-            case 0:
-                removeHpEffect(0.10, 0.05,choice);
-                break;
-            case 1:
-                removeStaminaEffect(0.15, 0.05,choice);
-                break;
-            case 2:
-                removeHpEffect(0.10, 0,choice);
-                break;
-            case 3:
-                removeStaminaEffect(0.13, 0,choice);
-                break;
-            case 4:
-                removeStaminaEffect(0.15, 0,choice);
-                break;
-            default:
-                System.out.println("Invalid item choice.");
+
+        if(items[choice].getCritChance() != 0 || items[choice].getHp() != 0){
+            removeHpAndCritChanceEffect(items[choice].getHp(), items[choice].getCritChance());
+        }
+
+        if(items[choice].getStamina() != 0 || items[choice].getDodgeChance() != 0){
+            removeStaminaAndDodgeChanceEffect(items[choice].getStamina(), items[choice].getDodgeChance());
         }
     }
 
-    private void applyHpEffect(double hpIncreasePercentage, double critChanceIncreasePercentage,int choice) {
+    private void applyHpAndCritChanceEffect(double hpIncreasePercentage, double critChanceIncreasePercentage) {
         double hpMultiplier = 1 + hpIncreasePercentage;
         int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);
         player.setHp(maxHp);
@@ -252,7 +254,7 @@ public class Shop {
         }
     }
     
-    private void applyStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
+    private void applyStaminaAndDodgeChanceEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage) {
         double staminaMultiplier = 1 + stamIncreasePercentage;
         int maxStamina = (int)Math.ceil(player.getMaxStamina() * staminaMultiplier);
         player.setStamina(maxStamina);
@@ -264,7 +266,7 @@ public class Shop {
         }
     }
 
-    private void removeHpEffect(double hpIncreasePercentage, double critChanceIncreasePercentage,int choice) {
+    private void removeHpAndCritChanceEffect(double hpIncreasePercentage, double critChanceIncreasePercentage) {
         double hpMultiplier = 1 + hpIncreasePercentage;
         int maxHp = (int) Math.floor(player.getMaxHp() / hpMultiplier);
         player.setHp(maxHp);
@@ -276,7 +278,7 @@ public class Shop {
         }
     }
     
-    private void removeStaminaEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage,int choice) {
+    private void removeStaminaAndDodgeChanceEffect(double stamIncreasePercentage, double dodgeChanceIncreasePercentage) {
         double staminaMultiplier = 1 + stamIncreasePercentage;
         int maxStamina = (int)Math.floor(player.getMaxStamina() / staminaMultiplier);
         player.setStamina(maxStamina);

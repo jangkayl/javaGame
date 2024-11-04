@@ -205,7 +205,16 @@ public class Inventory {
         }
 
         Item selectedItem = inventoryItems[itemIndex];
+
         shop.applyEffect(selectedItem.effect);
+
+
+        // for(int i = 0; i < Shop.items.length; i++){
+        //     if(shop.getItemIndexByDescription(selectedItem.description) != -1){
+        //         shop.applyEffect(selectedItem.effect);
+        //     }
+        // }
+
         switch (equipmentSlot.toUpperCase()) {
             case "HEAD":
                 slot[0] = selectedItem;
@@ -250,6 +259,13 @@ public class Inventory {
             inventoryItems[itemCount] = removedItem;
             itemCount++;
             shop.removeEffect(removedItem.effect);
+
+            // for(int i = 0; i < Shop.items.length; i++){
+            //     if(shop.getItemIndexByDescription(removedItem.description) != -1){
+            //         shop.removeEffect(removedItem.effect);
+            //     }
+            // }
+            
         }
     }
 
