@@ -10,7 +10,7 @@ dodgeChance=0.195
 playerPoints=595
 currentWorld=1
 currentRank=0
-stage=7
+stage=8
 isLose=false
 
 [progress]
@@ -22,10 +22,3 @@ opponentWins=0
 addStats=5
 
 [inventory]
-item=2
-item=6
-item=0
-item=3
-HEAD=4
-HAND=5
-BOOTS=7

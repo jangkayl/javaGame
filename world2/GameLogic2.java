@@ -79,23 +79,53 @@ public class GameLogic2 {
                 StoryUnderground.printUnderground();
                 StoryUnderground.printIntroduction(player.getName());
                 player.setStage(7);
-            } if(player.getStage() == 7){
-                GameLogic.clearConsole();
-                System.out.println("(0) Train with Jakester");
-                System.out.println("(1) Bet on Matches");
-                System.out.println("(2) Black Market");
-                System.out.println("(3) Go back");
-                int choice = GameLogic.readInt("-> ", 0, 3);
-                if(choice == 0){
-                    TrainWithJakester.teachDirtyBoxingMoves();
-                } else if (choice == 1){
-                    BetFight.betFight();
-                } else if(choice == 2){
-                    shop.showShop(false);
-                    GameLogic.gameData.inputInventory(inventory.getInventoryItems());
-                } else if(choice == 3){
-                    return;
+            } else {
+                while (true) {
+                    GameLogic.clearConsole();
+                    if(player.getStage() == 7){
+                        System.out.println("(0) Train with Jakester");
+                    } else if(player.getStage() >= 8){
+                        System.out.println("(0) Continue Journey");
+                    }
+                    System.out.println("(1) Bet on Matches");
+                    System.out.println("(2) Black Market");
+                    System.out.println("(3) Go back");
+                    int choice = GameLogic.readInt("-> ", 0, 3);
+                    if(choice == 0){
+                        if(player.getStage() == 7){
+                            TrainWithJakester.teachDirtyBoxingMoves();
+                        } else if(player.getStage() >= 8){
+                            journeyMeny();
+                        }
+                    } else if (choice == 1){
+                        BetFight.betFight();
+                    } else if(choice == 2){
+                        shop.showShop(false);
+                        GameLogic.gameData.inputInventory(inventory.getInventoryItems());
+                    } else if(choice == 3){
+                        break;
+                    }
                 }
+            }
+        }
+    }
+
+    static void journeyMeny(){
+        while(true){
+            GameLogic.clearConsole();
+            System.out.println("(1) Review Move Hints");
+            System.out.println("(2) Spar - Earn points and gain stats");
+            System.out.println("(3) Enter Tournament");
+            System.out.println("(4) Go back");
+            int choice = GameLogic.readInt("-> ", 1, 4);
+            if(choice == 1){
+                BoxerHints.teachHints();
+            } else if(choice == 2){
+                Sparring.enterSparring();
+            } else if(choice == 3){
+                Tournament.attemptTournament(player.getStage());
+            } else if(choice == 4){
+                break;
             }
         }
     }
