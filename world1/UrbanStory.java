@@ -563,23 +563,24 @@ public class UrbanStory {
         return false;
     }
     
-    public static void tournaOpponentBackstory(String opponentName) {
-        switch (opponentName) {
-            case "El Tigre":
+    public static void tournaOpponentBackstory(StreetFighter opponent) {
+        Tournament.showOpStats(opponent);
+        switch (opponent.getName()) {
+            case "Rico Ramirez":
                 System.out.println("\n\t\t🔥Backstory: Introducing Rico \"El Tigre\" Ramirez, a fierce contender from Manila, inspired by his father's legacy as a former champion." +
                         "\n\t\tKnown for his explosive style and powerful uppercuts, Rico has quickly climbed the ranks of boxing, embodying resilience and determination." +
                         "\n\t\tAs he steps into the ring for this tournament, he carries the hopes of his community, ready to unleash the spirit of the tiger and claim" +
                         "\n\t\this place among the greats! Now, they seek to prove their strength in the tournament!");
                 GameLogic.pressAnything();
                 break;
-            case "El Jablo":
+            case "Oscar Lopez":
                 System.out.println("\n\t\t💪Backstory: Oscar \"El Jablo\" Lopez, from Cebu City, grew up in a hardworking family as the youngest of five. Inspired by local boxing matches," +
                         "\n\t\the honed his skills in underground fights, earning a reputation for his lightning-fast jabs and explosive combos. Driven by a desire to uplift" +
                         "\n\t\t his community and motivated by a friend's injury in the ring, Oscar turned pro. Now, as he enters the tournament, he's determined to prove" +
                         "\n\t\thimself as a champion, ready to unleash his quick jab, powerful cross, and knockout power punch.");
                         GameLogic.pressAnything();
                 break;
-            case "El Taeh":
+            case "Ishmael Tetteh":
                 System.out.print(" - The Thunderous Finisher");
                 System.out.println("\n\t\t🌟Backstory: Ishmael Tetteh, \"The Thunderous Finisher,\" is a 28-year-old Ghanaian-American middleweight boxer with 28 wins (24 by KO)." +
                         "\n\t\tInspired by Canelo Alvarez, he has mastered a signature combo—Right Uppercut, Left Hook, Right Cross—reflecting his journey from Accra to the boxing ring." +

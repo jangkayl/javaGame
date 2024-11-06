@@ -1,24 +1,24 @@
-package world1.TournamentFight;
+package world2.SparringOpponents;
 
-import world1.FightLogic;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
-import world1.FightingLogic.VsRamirez;
+import world2.SparringLogic.SparFightLogic;
+import world2.SparringLogic.VsPerez;
 
-public class Ramirez2 extends FightLogic{
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook"};
-    static VsRamirez vsRamirez;
+public class PerezSparring extends SparFightLogic{
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Elbow Strike", "Head Butt", "Low Blow"};
+    static VsPerez vsPerez;
     
-    public Ramirez2(Player player, StreetFighter opponent) {
+    public PerezSparring(Player player, StreetFighter opponent) {
         super(player, opponentAttacks);
         setOpponent(opponent);
-        vsRamirez = new VsRamirez(player, opponent);
+        vsPerez = new VsPerez(player, opponent);
     }
 
     @Override
     public String getOpponentName() {
-        return "Ramirez";
+        return "Perez";
     }
 
     @Override
@@ -27,16 +27,16 @@ public class Ramirez2 extends FightLogic{
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                VsRamirez.playerSuccessAction(choices[i], opponentChoices[i], false);
-                VsRamirez.opponentFailedAction(opponentChoices[i]);
+                vsPerez.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsPerez.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                VsRamirez.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                VsRamirez.playerFailedAction(choices[i]);
+                vsPerez.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsPerez.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                VsRamirez.drawAction(choices[i], opponentChoices[i]);
+                vsPerez.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -49,32 +49,44 @@ public class Ramirez2 extends FightLogic{
     protected int isCounter(int opponentMove, int playerMove) {
         switch (opponentMove) {
             case 0:
-                if(playerMove == 1 || playerMove == 5 || playerMove == 4) return 1;
+                if(playerMove == 1 || playerMove == 5 || playerMove == 4 || playerMove == 7) return 1;
                 if(playerMove == 3 || playerMove == 6) return 2;
                 break;
             case 1:
-                if(playerMove == 2 || playerMove == 6 || playerMove == 5) return 1;
-                if(playerMove == 0 || playerMove == 4) return 2;
+                if(playerMove == 2 || playerMove == 6 || playerMove == 5 || playerMove == 7) return 1;
+                if(playerMove == 0 || playerMove == 4 || playerMove == 9) return 2;
                 break;
             case 2:
-                if(playerMove == 3 || playerMove == 4) return 1;
-                if(playerMove == 1 || playerMove == 6 || playerMove == 5) return 2;
+                if(playerMove == 3 || playerMove == 4 || playerMove == 8 || playerMove == 9) return 1;
+                if(playerMove == 1 || playerMove == 6 || playerMove == 5 || playerMove == 7) return 2;
                 break;
             case 3:
                 if(playerMove == 0 || playerMove == 4 || playerMove == 6) return 1;
                 if(playerMove == 2) return 2;
                 break;
             case 4:
-                if(playerMove == 3) return 1;
-                if(playerMove == 0 || playerMove == 1) return 2;
+                if(playerMove == 2) return 1;
+                if(playerMove == 0 || playerMove == 3 || playerMove == 8) return 2;
                 break;
             case 5:
-                if(playerMove == 2) return 1;
-                if(playerMove == 3 || playerMove == 0) return 2;
-                break;
-            case 6:
                 if(playerMove == 0) return 1;
                 if(playerMove == 1 || playerMove == 2) return 2;
+                break;
+            case 6:
+                if(playerMove == 3) return 1;
+                if(playerMove == 1 || playerMove == 0) return 2;
+                break;
+            case 7:  // Elbow Strike
+                if(playerMove == 2) return 1;
+                if(playerMove == 1 || playerMove == 0 || playerMove == 4 || playerMove == 5) return 2;
+                break;
+            case 8:  // Head Butt
+                if(playerMove == 3) return 1;
+                if(playerMove == 2) return 2;
+                break;
+            case 9:  // Low Blow
+                if(playerMove == 1) return 1;
+                if(playerMove == 2) return 2;
                 break;
             default:
                 break;
@@ -92,7 +104,7 @@ public class Ramirez2 extends FightLogic{
 
             while (!validChoice) {
                 switch (opponentChoice[i]) {
-                        case 1: // Jab
+                    case 1: // Jab
                         staminaCost = 5;
                         break;
                     case 2: // Hook
@@ -105,13 +117,22 @@ public class Ramirez2 extends FightLogic{
                         staminaCost = 10;
                         break;
                     case 5:
-                        staminaCost = 7;
+                        staminaCost = 9;
                         break;
                     case 6:
-                        staminaCost = 9;
+                        staminaCost = 10;
                         break;
                     case 7:
                         staminaCost = 14;
+                        break;
+                    case 8:
+                        staminaCost = 25;
+                        break;
+                    case 9:
+                        staminaCost = 20;
+                        break;
+                    case 10:
+                        staminaCost = 25;
                         break;
                 }
     
@@ -119,7 +140,7 @@ public class Ramirez2 extends FightLogic{
                     validChoice = true;
                 } else {
                     if(rand.nextDouble() > 0.3)
-                        opponentChoice[i] = rand.nextInt(7);
+                        opponentChoice[i] = rand.nextInt(10);
                         if (opponentChoice[i] >= 4) {
                             if(tempStamina - 30 < 0){
                                 opponentChoices = new int[]{2, 2, 2}; 
@@ -136,5 +157,5 @@ public class Ramirez2 extends FightLogic{
             tempStamina -= staminaCost;
         }
     }
-
 }
+

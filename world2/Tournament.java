@@ -22,4 +22,9 @@ public class Tournament {
         }
     }
 
+    public void printStanding() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'printStanding'");
+    }
+
 }

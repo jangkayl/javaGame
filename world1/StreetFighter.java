@@ -2,8 +2,8 @@ package world1;
 public class StreetFighter extends Boxer {
     static Player player = GameLogic.player;
     public StreetFighter(String name, int hp, int stamina, double critChance, double critMultiplier,
-            double dodgeChance) {
-        super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
+            double dodgeChance, int rank) {
+        super(name, hp, stamina, critChance, critMultiplier, dodgeChance, rank);
     }
 
     public void setPlayerOpponent(Player play) {
@@ -48,10 +48,44 @@ public class StreetFighter extends Boxer {
         this.setStamina(newStamina);
     }
 
+    @Override
+    public void elbowStrike(){
+        int damage = (int)Math.floor(40 * getDamageSetter());
+        int staminaReduced = 25;
+        int hpReduced = 10;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        this.setHp(this.getHp() - hpReduced);
+        System.out.println(this.getName() + " elbow strike " + player.getName() + " for " + damage + " damage!");
+    }
+    
+    @Override
+    public void headButt(){
+        int damage = (int)Math.floor(30 * getDamageSetter());
+        int staminaReduced = 20;
+        int hpReduced = 15;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        this.setHp(this.getHp() - hpReduced);
+        System.out.println(this.getName() + " head butt " + player.getName() + " for " + damage + " damage!");
+    }
+    
+    @Override
+    public void lowBlow(){
+        int damage = (int)Math.floor(40 * getDamageSetter());
+        int staminaReduced = 25;
+        int hpReduced = 20;
+        player.setHp(player.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        this.setHp(this.getHp() - hpReduced);
+        System.out.println(this.getName() + " low blow " + player.getName() + " for " + damage + " damage!");
+    }
+
     public boolean hasEnoughStamina(int requiredStamina) {
         return this.getStamina() >= requiredStamina;
     }
 
+    // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
     // Pablo's COMBO
     public void jabToTheBody() {

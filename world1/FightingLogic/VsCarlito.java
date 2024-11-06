@@ -1,121 +1,40 @@
 package world1.FightingLogic;
 
-import world1.TrainInGym.UrbanGym;
+import world1.GameLogic;
+import world1.Player;
+import world1.StreetFighter;
+import world1.TrainInGym.CarlitoUrbanGym;
 
-public class VsCarlito extends FighterAction{
-    
-    public static void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
-        double critChance = rand.nextDouble();
-        double dodgeChance = rand.nextDouble();
-        
-        if(critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged){
-            player.setDamageSetter(player.getCritMultiplier());
-            System.out.println(player.getName() + "\'s " + UrbanGym.attack[choice][0] + " hit the weak spot! CRITICAL HIT!");
-        }
+public class VsCarlito extends PlayerVsOpponent{
+    static Player player = GameLogic.player;
 
-        if(dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw){
-            playerDodged = true;
-        }
-
-        if(opponentDodged){
-            player.setDamageSetter(0);
-            System.out.println(opponent.getName() + " dodges " + player.getName() + " punch!");
-        }
-        
-        switch (choice) {
-            case 0:
-                if (player.hasEnoughStamina(5)) {
-                    player.jab();
-                } else {
-                    System.out.println(player.getName() + " doesn't have enough stamina to jab!");
-                }
-                break;
-            case 1:
-                if (player.hasEnoughStamina(7)) {
-                    player.hook();
-                } else {
-                    System.out.println(player.getName() + " doesn't have enough stamina to hook!");
-                }
-                break;
-            case 2:
-                player.block();
-                break;
-            case 3:
-                if (player.hasEnoughStamina(10)) {
-                    player.uppercut();
-                } else {
-                    System.out.println(player.getName() + " doesn't have enough stamina to uppercut!");
-                }
-                break;
-            default:
-                System.out.println("Invalid action choice!");
-                break;
-        }
-        player.setDamageSetter(1);
-        opponentDodged = false;
+    public VsCarlito(Player play, StreetFighter opponent){
+        super(player, opponent);
     }
 
-    public static void playerFailedAction(int choice) {
-        switch (choice) {
-            case 0:
-                player.setStamina(player.getStamina() - 5);
-                break;
-            case 1:
-                player.setStamina(player.getStamina() - 7);
-                break;
-            case 2:
-                break;
-            case 3:
-                player.setStamina(player.getStamina() - 10);
-                break;
-            default:
-                System.out.println("Invalid action choice!");
-                break;
+    @Override
+    protected String[] getOpponentAttacks() {
+        String[] attacks = new String[4];
+        for(int i = 0; i < 4; i++){
+            attacks[i] = CarlitoUrbanGym.attack[i][0];
         }
+        return attacks;
     }
 
-    public static void opponentSuccessAction(int choice, int playerChoice, boolean isDraw) {
-        double critChance = rand.nextDouble();
-        double dodgeChance = rand.nextDouble();
-        
-        if(critChance < opponent.getCritChance() && choice != 2 && !isDraw){
-            opponent.setDamageSetter(opponent.getCritMultiplier());
-            System.out.println(opponent.getName() + "\'s " + UrbanGym.attack[choice][0] + " hit the weak spot! CRITICAL HIT!");
-        }
-
-        if(dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw){
-            opponentDodged = true;
-        }
-
-        if(playerDodged){
-            opponent.setDamageSetter(0);
-            System.out.println(player.getName() + " dodges " + opponent.getName() + " punch!");
-        }
-
+    @Override
+    protected void opponentPerformAction(int choice) {
         switch (choice) {
             case 0:
-                if (opponent.hasEnoughStamina(5)) {
-                    opponent.jab();
-                } else {
-                    System.out.println(opponent.getName() + " doesn't have enough stamina to jab!");
-                }
+                if (opponent.hasEnoughStamina(5)) opponent.jab();
                 break;
             case 1:
-                if (opponent.hasEnoughStamina(7)) {
-                    opponent.hook();
-                } else {
-                    System.out.println(opponent.getName() + " doesn't have enough stamina to hook!");
-                }
+                if (opponent.hasEnoughStamina(7)) opponent.hook();
                 break;
             case 2:
                 opponent.block();
                 break;
             case 3:
-                if (opponent.hasEnoughStamina(10)) {
-                    opponent.uppercut();
-                } else {
-                    System.out.println(opponent.getName() + " doesn't have enough stamina to uppercut!");
-                }
+                if (opponent.hasEnoughStamina(10)) opponent.uppercut();
                 break;
             default:
                 System.out.println("Invalid action choice!");
@@ -125,7 +44,8 @@ public class VsCarlito extends FighterAction{
         playerDodged = false;
     }
 
-    public static void opponentFailedAction(int choice) {
+    @Override
+    protected void opponentPerformFailed(int choice) {
         switch (choice) {
             case 0:
                 opponent.setStamina(opponent.getStamina() - 5);
@@ -142,15 +62,5 @@ public class VsCarlito extends FighterAction{
                 System.out.println("Invalid action choice!");
                 break;
         }
-    }
-
-    public static void drawAction(int choice, int opponentChoice) {
-        player.setDamageSetter(0.5);
-        playerSuccessAction(choice, opponentChoice, false);
-        player.setDamageSetter(1);
-
-        opponent.setDamageSetter(0.5);
-        opponentSuccessAction(opponentChoice, choice, false);
-        opponent.setDamageSetter(1);
     }
 }

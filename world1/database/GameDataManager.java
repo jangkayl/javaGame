@@ -74,7 +74,7 @@ public class GameDataManager {
 
     private void setPlayerData(String key, String value) {
         if (player == null) {
-            player = new Player("", 0, 0, 0, 0,0, 0, 0, 0, 0, false);
+            player = new Player("", 0, 0, 0, 0,0, 0, 0, 0, 0, false, 0);
         }
 
         switch (key) {
@@ -199,7 +199,7 @@ public class GameDataManager {
                 bw.write("dodgeChance=" + player.getDodgeChance() + "\n");
                 bw.write("playerPoints=" + player.getPlayerPoints() + "\n");
                 bw.write("currentWorld=" + player.getCurrentWorld() + "\n");
-                bw.write("currentRank=" + player.getRank() + "\n");
+                bw.write("currentRank=" + player.getPlayerRank() + "\n");
                 bw.write("stage=" + player.getStage() + "\n");
                 bw.write("isLose=" + player.getIsLose() + "\n");
             }

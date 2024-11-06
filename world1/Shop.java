@@ -1,6 +1,6 @@
 package world1;
 
-import world1.TrainInGym.UrbanGym;
+import world1.TrainInGym.CarlitoUrbanGym;
 
 public class Shop {
     static Player player;
@@ -119,8 +119,8 @@ public class Shop {
     }
     
     public void showMenu(){
-        UrbanGym.setPlayer(player);
-        UrbanGym.fightLoop();
+        CarlitoUrbanGym.setPlayer(player);
+        CarlitoUrbanGym.fightLoop();
     }
 
     public void showShop(boolean isTraining) {
@@ -143,7 +143,7 @@ public class Shop {
     
             // Display items for sale
             if(player.getCurrentWorld() == 0){
-                for (int i = 0; i < items.length; i++) {
+                for (int i = 0; i < 4; i++) {
                     System.out.println("(" + (i + 1) + ") " + items[i].name);
                     items[i].displayItem();
                 }

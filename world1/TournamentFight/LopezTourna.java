@@ -4,21 +4,21 @@ import world1.FightLogic;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
-import world1.FightingLogic.VsTetteh;
+import world1.FightingLogic.VsLopez;
 
-public class Tetteh2 extends FightLogic{
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross"};
-    static VsTetteh vsTetteh;
+public class LopezTourna extends FightLogic{
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Quick Jab", "Cross", "Power Punch"};
+    static VsLopez vsLopez;
     
-    public Tetteh2(Player player, StreetFighter opponent) {
+    public LopezTourna(Player player, StreetFighter opponent) {
         super(player, opponentAttacks);
         setOpponent(opponent);
-        vsTetteh = new VsTetteh(player, opponent);
+        vsLopez = new VsLopez(player, opponent);
     }
 
     @Override
     public String getOpponentName() {
-        return "Tetteh";
+        return "Lopez";
     }
 
     @Override
@@ -27,16 +27,16 @@ public class Tetteh2 extends FightLogic{
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsTetteh.playerSuccessAction(choices[i], opponentChoices[i], false);
-                vsTetteh.opponentFailedAction(opponentChoices[i]);
+                vsLopez.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsLopez.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsTetteh.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                vsTetteh.playerFailedAction(choices[i]);
+                vsLopez.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsLopez.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                vsTetteh.drawAction(choices[i], opponentChoices[i]);
+                vsLopez.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -65,16 +65,16 @@ public class Tetteh2 extends FightLogic{
                 if(playerMove == 2) return 2;
                 break;
             case 4:
-                if(playerMove == 2) return 1;
-                if(playerMove == 0 || playerMove == 3) return 2;
+                if(playerMove == 3) return 1;
+                if(playerMove == 0 || playerMove == 1) return 2;
                 break;
             case 5:
-                if(playerMove == 0) return 1;
-                if(playerMove == 1 || playerMove == 2) return 2;
+                if(playerMove == 3) return 1;
+                if(playerMove == 0 || playerMove == 1) return 2;
                 break;
             case 6:
-                if(playerMove == 3) return 1;
-                if(playerMove == 1 || playerMove == 0) return 2;
+                if(playerMove == 2) return 1;
+                if(playerMove == 3 || playerMove == 0) return 2;
                 break;
             default:
                 break;
@@ -92,7 +92,7 @@ public class Tetteh2 extends FightLogic{
 
             while (!validChoice) {
                 switch (opponentChoice[i]) {
-                    case 1: // Jab
+                        case 1: // Jab
                         staminaCost = 5;
                         break;
                     case 2: // Hook
@@ -108,7 +108,7 @@ public class Tetteh2 extends FightLogic{
                         staminaCost = 9;
                         break;
                     case 6:
-                        staminaCost = 10;
+                        staminaCost = 7;
                         break;
                     case 7:
                         staminaCost = 14;

@@ -1,8 +1,8 @@
 package world1;
 
-import world1.TournamentFight.Lopez2;
-import world1.TournamentFight.Ramirez2;
-import world1.TournamentFight.Tetteh2;
+import world1.TournamentFight.LopezTourna;
+import world1.TournamentFight.RamirezTourna;
+import world1.TournamentFight.TettehTourna;
 import world2.GameLogic2;
 
 public class Tournament {
@@ -104,27 +104,30 @@ public class Tournament {
         System.out.print(opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: ");
         System.out.print(opponentName);
     
-        UrbanStory.tournaOpponentBackstory(opponentName);
-    
+        
         // Initialize opponent based on the index
         switch (opponentIndex) {
             case 0 -> {
-                opponent = new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, 0.30);
+                opponent = new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, 0.30, 2);
                 opponent.setPlayerOpponent(player);
-                fightWithOpponent(new Ramirez2(player, opponent));
+                UrbanStory.tournaOpponentBackstory(opponent);
+                fightWithOpponent(new RamirezTourna(player, opponent));
             }
             case 1 -> {
-                opponent = new StreetFighter("Oscar Lopez", 170, 100, 0.2, 2, 0.30);
+                opponent = new StreetFighter("Oscar Lopez", 170, 100, 0.2, 2, 0.30, 2);
                 opponent.setPlayerOpponent(player);
-                fightWithOpponent(new Lopez2(player, opponent));
+                UrbanStory.tournaOpponentBackstory(opponent);
+                fightWithOpponent(new LopezTourna(player, opponent));
             }
             case 2 -> {
-                opponent = new StreetFighter("Ishmael Tetteh", 200, 120, 0.3, 2.5, 0.40);
+                opponent = new StreetFighter("Ishmael Tetteh", 200, 120, 0.3, 2.5, 0.40, 3);
                 opponent.setPlayerOpponent(player);
-                fightWithOpponent(new Tetteh2(player, opponent));
+                UrbanStory.tournaOpponentBackstory(opponent);
+                fightWithOpponent(new TettehTourna(player, opponent));
             }
             default -> System.out.println("Invalid opponent index.");
         }
+
     }
     
     private static void fightWithOpponent(FightLogic fightLogic) {
@@ -207,7 +210,28 @@ public class Tournament {
         player.setCurrentWorld(1);
     }
     
-    
+    public static void showOpStats(StreetFighter opponent){
+        System.out.println();
+        System.out.print(GameLogic.centerText(" ", 48));
+        System.out.println(GameLogic.centerText(opponent.getName(), 28));
+        System.out.print(GameLogic.centerText(" ", 48));
+        System.out.println(GameLogic.centerText("* " + opponent.getRank() + " *", 27));
+
+        System.out.print(GameLogic.centerText(" ", 45));
+        System.out.println(GameLogic.formatColumns(" HP:",opponent.getHp() + " / " + opponent.getMaxHp(), 25));
+
+        System.out.print(GameLogic.centerText(" ", 45));
+        System.out.println(GameLogic.formatColumns(" Stamina:",opponent.getStamina() + " / " + opponent.getMaxStamina(), 25));
+
+        System.out.print(GameLogic.centerText(" ", 45));
+        System.out.println(GameLogic.formatColumns(" Critical Chance:", GameLogic.df.format(opponent.getCritChance() * 100) + "%", 25));
+
+        System.out.print(GameLogic.centerText(" ", 45));
+        System.out.println(GameLogic.formatColumns(" Critical Multiplier:", GameLogic.df.format(opponent.getCritMultiplier()) + "x", 25));
+
+        System.out.print(GameLogic.centerText(" ", 45));
+        System.out.println(GameLogic.formatColumns(" Dodge Chance:", GameLogic.df.format(opponent.getDodgeChance() * 100) + "%", 25));
+    }
 
     private static void printTournament() {
         System.out.println();

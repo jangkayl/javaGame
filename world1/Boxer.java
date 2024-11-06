@@ -1,10 +1,11 @@
 package world1;
 public abstract class Boxer {
     private String name;
-    private int maxHp, hp, stamina, maxStamina;
+    protected String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION", "LEGEND", "HALL OF FAMER"};
+    private int maxHp, hp, stamina, maxStamina, rank;
     private double critChance, critMultiplier, dodgeChance, damageSetter;
 
-    public Boxer(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance){
+    public Boxer(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance, int rank){
         this.name = name;
         this.maxHp = hp;
         this.hp = hp;
@@ -14,12 +15,16 @@ public abstract class Boxer {
         this.dodgeChance = dodgeChance;
         this.maxStamina = stamina;
         this.damageSetter = 1;
+        this.rank = rank;
     }
 
     public abstract void jab();
     public abstract void hook();
     public abstract void uppercut();
     public abstract void block();
+    public abstract void elbowStrike();
+    public abstract void headButt();
+    public abstract void lowBlow();
     
     public String getName(){
         return this.name;
@@ -93,5 +98,13 @@ public abstract class Boxer {
 
     public void setDamageSetter(double damageSetter){
         this.damageSetter = damageSetter;
+    }
+
+    public String getRank(){
+        return ranking[rank];
+    }
+
+    public String[] getAllRankings(){
+        return ranking;
     }
 }

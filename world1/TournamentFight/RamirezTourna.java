@@ -4,21 +4,21 @@ import world1.FightLogic;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
-import world1.FightingLogic.VsLopez;
+import world1.FightingLogic.VsRamirez;
 
-public class Lopez2 extends FightLogic{
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Quick Jab", "Cross", "Power Punch"};
-    static VsLopez vsLopez;
+public class RamirezTourna extends FightLogic{
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook"};
+    static VsRamirez vsRamirez;
     
-    public Lopez2(Player player, StreetFighter opponent) {
+    public RamirezTourna(Player player, StreetFighter opponent) {
         super(player, opponentAttacks);
         setOpponent(opponent);
-        vsLopez = new VsLopez(player, opponent);
+        vsRamirez = new VsRamirez(player, opponent);
     }
 
     @Override
     public String getOpponentName() {
-        return "Lopez";
+        return "Ramirez";
     }
 
     @Override
@@ -27,16 +27,16 @@ public class Lopez2 extends FightLogic{
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsLopez.playerSuccessAction(choices[i], opponentChoices[i], false);
-                vsLopez.opponentFailedAction(opponentChoices[i]);
+                vsRamirez.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsRamirez.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsLopez.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                vsLopez.playerFailedAction(choices[i]);
+                vsRamirez.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsRamirez.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                vsLopez.drawAction(choices[i], opponentChoices[i]);
+                vsRamirez.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -69,12 +69,12 @@ public class Lopez2 extends FightLogic{
                 if(playerMove == 0 || playerMove == 1) return 2;
                 break;
             case 5:
-                if(playerMove == 3) return 1;
-                if(playerMove == 0 || playerMove == 1) return 2;
-                break;
-            case 6:
                 if(playerMove == 2) return 1;
                 if(playerMove == 3 || playerMove == 0) return 2;
+                break;
+            case 6:
+                if(playerMove == 0) return 1;
+                if(playerMove == 1 || playerMove == 2) return 2;
                 break;
             default:
                 break;
@@ -105,10 +105,10 @@ public class Lopez2 extends FightLogic{
                         staminaCost = 10;
                         break;
                     case 5:
-                        staminaCost = 9;
+                        staminaCost = 7;
                         break;
                     case 6:
-                        staminaCost = 7;
+                        staminaCost = 9;
                         break;
                     case 7:
                         staminaCost = 14;
@@ -136,4 +136,5 @@ public class Lopez2 extends FightLogic{
             tempStamina -= staminaCost;
         }
     }
+
 }

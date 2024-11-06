@@ -8,7 +8,7 @@ import world1.StreetFighter;
 import world1.UrbanStory;
 import world1.FightingLogic.VsCarlito;
 
-public class UrbanGym {
+public class CarlitoUrbanGym {
     static Random rand = new Random();
     static PlayerProgress playerProgress = GameLogic.playerProgress;
     public static Player player;
@@ -16,13 +16,15 @@ public class UrbanGym {
                                 {"Hook", "Damage: 15 | Stamina: -7"}, 
                                 {"Block", "Stamina: +5"}, 
                                 {"Uppercut", "Damage: 20 | Stamina: -10"}};
-    public static StreetFighter opponent = new StreetFighter("Carlito Cortez", 120, 80, 0.2, 2, .20);
-    
+    public static StreetFighter opponent = new StreetFighter("Carlito Cortez", 120, 80, 0.2, 2, .20, 1);
+    static VsCarlito vsCarlito;
+
     public static void setPlayer(Player p) {
         player = p;
     }
 
     public static void fightLoop() {
+        vsCarlito = new VsCarlito(player, opponent);
         GameLogic.clearConsole();
         GameLogic.printSeparator(40);
         System.out.println(GameLogic.centerText("Round " + playerProgress.getRound(), 40));
@@ -30,8 +32,6 @@ public class UrbanGym {
         System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
         System.out.println();
         GameLogic.printSeparator(40);
-        VsCarlito.setPlayerOpponent(player);
-        VsCarlito.setOpponent(opponent);
         player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
@@ -47,7 +47,7 @@ public class UrbanGym {
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
                 GameLogic.pressAnything();
-                UrbanStory.urbanTrainingLose(player.getName(), UrbanGym.opponent.getName());
+                UrbanStory.urbanTrainingLose(player.getName(), CarlitoUrbanGym.opponent.getName());
                 return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
@@ -195,16 +195,16 @@ public class UrbanGym {
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
-                VsCarlito.playerSuccessAction(choices[i], opponentChoices[i], false);
-                VsCarlito.opponentFailedAction(opponentChoices[i]);
+                vsCarlito.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsCarlito.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
-                VsCarlito.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                VsCarlito.playerFailedAction(choices[i]);
+                vsCarlito.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsCarlito.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + attack[opponentChoices[i]][0]);
-                VsCarlito.drawAction(choices[i], opponentChoices[i]);
+                vsCarlito.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;

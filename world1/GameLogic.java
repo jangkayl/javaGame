@@ -4,7 +4,7 @@ import java.util.Scanner;
 import world1.Inventory.Item;
 import world1.TrainInGym.FredGym;
 import world1.TrainInGym.PabloUrbanGym;
-import world1.TrainInGym.UrbanGym;
+import world1.TrainInGym.CarlitoUrbanGym;
 import world1.database.GameDataManager;
 import world1.database.GameDatabase;
 import world2.GameLogic2;
@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 
 public class GameLogic{
     public static Scanner scan = new Scanner(System.in);   
-    static DecimalFormat df = new DecimalFormat("#,###.00");   
+    public static DecimalFormat df = new DecimalFormat("#,###.00");   
     public static Player player;
     public static PlayerProgress playerProgress;
     static Item[] inventoryItems;
@@ -137,7 +137,7 @@ public class GameLogic{
                     if (input == 1) nameSet = true;
                 } while (!nameSet);
     
-                player = new Player(name, 100, 50, 0.1, 2.0, 0.1, 0, 0, 0, 0, false);
+                player = new Player(name, 100, 50, 0.1, 2.0, 0.1, 0, 0, 0, 0, false, 0);
                 playerProgress = new PlayerProgress(1, 0, 0);
                 gameData.inputPlayerDetails(player);
                 gameData.inputProgress(playerProgress);
@@ -247,16 +247,19 @@ public class GameLogic{
                     gymTraining();
                 }
             } else {
-                System.out.println("(1) Train with Fred");
-                System.out.println("(2) Enter Tournament");
-                System.out.println("(3) Go Back");
-                int choice2 = GameLogic.readInt("-> ", 1, 3);
-                if(choice2 == 1){
-                    gymTraining();
-                } else if(choice2 == 2) {
-                    enterTournament();
-                } else {
-                    return;
+                while(true){
+                    clearConsole();
+                    System.out.println("(1) Train with Fred");
+                    System.out.println("(2) Enter Tournament");
+                    System.out.println("(3) Go Back");
+                    int choice2 = GameLogic.readInt("-> ", 1, 3);
+                    if(choice2 == 1){
+                        gymTraining();
+                    } else if(choice2 == 2) {
+                        enterTournament();
+                    } else {
+                        return;
+                    }
                 }
             }
         }  else if(player.getCurrentWorld() == 1) {
@@ -329,7 +332,7 @@ public class GameLogic{
                 clearConsole();
                 if(playerProgress.getShopStage() < 1){
                     if(player.getIsLose()){
-                        UrbanStory.urbanTrainingLose(player.getName(), UrbanGym.opponent.getName());
+                        UrbanStory.urbanTrainingLose(player.getName(), CarlitoUrbanGym.opponent.getName());
                     } else {
                         UrbanStory.urbanTraining6(player.getName());
                         choice = readInt("-> ", 1, 1);
@@ -346,7 +349,9 @@ public class GameLogic{
                             UrbanStory.inviteToTournament(player.getName());
                         } else {
                             if(playerProgress.getAddStats() == 5){
-                                System.out.println("Fred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n");
+                                System.out.println("Fred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"");
+                                pressAnything();
+                                return;
                             }
                             System.out.println("Go to tournament and continue fighting your opponent!");
                         }

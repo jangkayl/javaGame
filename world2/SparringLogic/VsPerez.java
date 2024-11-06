@@ -1,14 +1,14 @@
-package world1.FightingLogic;
+package world2.SparringLogic;
 
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
 import world1.TournamentFight.TettehTourna;
 
-public class VsTetteh extends PlayerVsOpponent{
+public class VsPerez extends PlayerVsSpar{
     static Player player = GameLogic.player;
 
-    public VsTetteh(Player play, StreetFighter opponent){
+    public VsPerez(Player play, StreetFighter opponent){
         super(player, opponent);
     }
 
@@ -41,6 +41,15 @@ public class VsTetteh extends PlayerVsOpponent{
             case 6:
                 if (opponent.hasEnoughStamina(14)) opponent.rightCross();
                 break;
+            case 7:
+                if (opponent.hasEnoughStamina(9)) opponent.elbowStrike();
+                break;
+            case 8:
+                if (opponent.hasEnoughStamina(10)) opponent.headButt();
+                break;
+            case 9:
+                if (opponent.hasEnoughStamina(14)) opponent.lowBlow();
+                break;
             default:
                 System.out.println("Invalid action choice!");
                 break;
@@ -69,6 +78,15 @@ public class VsTetteh extends PlayerVsOpponent{
                 break;
             case 6:
                 opponent.setStamina(opponent.getStamina() - 14);
+                break;
+            case 7:
+                opponent.setStamina(opponent.getStamina() - 25);
+                break;
+            case 8:
+                opponent.setStamina(opponent.getStamina() - 20);
+                break;
+            case 9:
+                opponent.setStamina(opponent.getStamina() - 25);
                 break;
             default:
                 System.out.println("Invalid action choice!");

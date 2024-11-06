@@ -102,6 +102,7 @@ public class GameLogic2 {
                     } else if(choice == 2){
                         shop.showShop(false);
                         GameLogic.gameData.inputInventory(inventory.getInventoryItems());
+                        GameLogic.gameData.saveGame();
                     } else if(choice == 3){
                         break;
                     }

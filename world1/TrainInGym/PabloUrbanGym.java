@@ -22,13 +22,15 @@ public class PabloUrbanGym {
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
     public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
     public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Jab to the Body", "Lead Hook", "Rear Uppercut"};
-    public static StreetFighter opponent = new StreetFighter("Pablo Martínez", 130, 70, 0.2, 2, .30);
+    public static StreetFighter opponent = new StreetFighter("Pablo Martínez", 130, 70, 0.2, 2, .30, 2);
+    static VsPablo vsPablo;
     
     public static void setPlayer(Player p) {
         player = p;
     }
 
     public static void fightLoop2() {
+        vsPablo = new VsPablo(player, opponent);
         player.setStage(2);
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
@@ -38,8 +40,6 @@ public class PabloUrbanGym {
         System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
         System.out.println();
         GameLogic.printSeparator(40);
-        VsPablo.setPlayerOpponent(player);
-        VsPablo.setOpponent(opponent);
         player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
@@ -50,8 +50,12 @@ public class PabloUrbanGym {
                 System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
                 player.setIsLose(true);
                 playerProgress.setRound(playerProgress.getRound() + 1);
+                player.setHp(player.getMaxHp());
+                player.setStamina(player.getMaxStamina());
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
+                GameLogic.pressAnything();
+                return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
                 System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
@@ -63,9 +67,9 @@ public class PabloUrbanGym {
                 playerProgress.setShopStage(3);  
                 player.setStage(3);
                 GameLogic.gameData.saveGame();
+                return;
             }
         }
-        GameLogic.pressAnything();
     }
 
     static void printStats(){
@@ -272,16 +276,16 @@ public class PabloUrbanGym {
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                VsPablo.playerSuccessAction(choices[i], opponentChoices[i], false);
-                VsPablo.opponentFailedAction(opponentChoices[i]);
+                vsPablo.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsPablo.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                VsPablo.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                VsPablo.playerFailedAction(choices[i]);
+                vsPablo.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsPablo.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                VsPablo.drawAction(choices[i], opponentChoices[i]);
+                vsPablo.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -340,5 +344,6 @@ public class PabloUrbanGym {
         System.out.println("Visit the shop and use your points to buy items.");
         System.out.println(); 
         GameLogic.printSeparator(40);
+        GameLogic.pressAnything();
     }
 }

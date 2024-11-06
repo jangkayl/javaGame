@@ -4,7 +4,6 @@ import world1.interfaces.PlayerInterface;
 public class Player extends Boxer implements PlayerInterface {
     private String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};
     private String[] worlds = {"Urban Gym", "Underworld Rumble ", "Champ Arena"};
-    private String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION", "LEGEND", "HALL OF FAMER"};
     private int currentWorld;
     private int currentRank;
     private int playerPoints;
@@ -12,8 +11,8 @@ public class Player extends Boxer implements PlayerInterface {
     private int stage;
     static StreetFighter opponent;
 
-    public Player(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance, int playerPoints, int currentWorld, int currentRank, int stage, boolean isLose) {
-        super(name, hp, stamina, critChance, critMultiplier, dodgeChance);
+    public Player(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance, int playerPoints, int currentWorld, int currentRank, int stage, boolean isLose, int rank) {
+        super(name, hp, stamina, critChance, critMultiplier, dodgeChance, rank);
         this.playerPoints = playerPoints;
         this.currentWorld = currentWorld;
         this.currentRank = currentRank;
@@ -63,6 +62,38 @@ public class Player extends Boxer implements PlayerInterface {
         System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");
     }
 
+    @Override
+    public void elbowStrike(){
+        int damage = (int)Math.floor(40 * getDamageSetter());
+        int staminaReduced = 25;
+        int hpReduced = 10;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        this.setHp(this.getHp() - hpReduced);
+        System.out.println(this.getName() + " elbow strike " + opponent.getName() + " for " + damage + " damage!");
+    }
+    
+    @Override
+    public void headButt(){
+        int damage = (int)Math.floor(30 * getDamageSetter());
+        int staminaReduced = 20;
+        int hpReduced = 15;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        this.setHp(this.getHp() - hpReduced);
+        System.out.println(this.getName() + " head butt " + opponent.getName() + " for " + damage + " damage!");
+    }
+    
+    @Override
+    public void lowBlow(){
+        int damage = (int)Math.floor(40 * getDamageSetter());
+        int staminaReduced = 25;
+        int hpReduced = 20;
+        opponent.setHp(opponent.getHp() - damage);
+        this.setStamina(this.getStamina() - staminaReduced);
+        this.setHp(this.getHp() - hpReduced);
+        System.out.println(this.getName() + " low blow " + opponent.getName() + " for " + damage + " damage!");
+    }
 
     // Additional Combos
     public void leadBodyShot() {
@@ -142,20 +173,11 @@ public class Player extends Boxer implements PlayerInterface {
         return this.getStamina() >= requiredStamina;
     }
 
-    public void rankUp(){
-        if(currentRank > ranking.length - 1){
-            currentRank++;
-            System.out.println("na rankup naka!");
-        } else {
-            System.out.println("Nana kas pinakataas yati ra");
-        }
-    }
-
     public void setCurrentRank(int currentRank){
         this.currentRank = currentRank;
     }
 
-    public int getRank(){
+    public int getPlayerRank(){
         return currentRank;
     }
     

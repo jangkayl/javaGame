@@ -3,7 +3,7 @@ package world1.interfaces;
 public interface PlayerInterface {
     void chooseTrait();
     void setCurrentRank(int currentRank);
-    int getRank();
+    int getPlayerRank();
     String getCurrentRank();
     int getCurrentWorld();
     void setCurrentWorld(int currentWorld);
