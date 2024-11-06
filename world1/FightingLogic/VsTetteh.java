@@ -14,7 +14,7 @@ public class VsTetteh extends PlayerVsOpponent{
 
     @Override
     protected String[] getOpponentAttacks() {
-        return TettehTourna.playerAttacks;
+        return TettehTourna.opponentAttacks;
     }
     
     @Override

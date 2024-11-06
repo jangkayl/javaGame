@@ -14,7 +14,7 @@ public class VsPerez extends PlayerVsSpar{
 
     @Override
     protected String[] getOpponentAttacks() {
-        return TettehTourna.playerAttacks;
+        return TettehTourna.opponentAttacks;
     }
     
     @Override

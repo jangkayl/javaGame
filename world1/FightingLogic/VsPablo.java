@@ -14,7 +14,7 @@ public class VsPablo extends PlayerVsOpponent{
 
     @Override
     protected String[] getOpponentAttacks() {
-        return PabloUrbanGym.playerAttacks;
+        return PabloUrbanGym.opponentAttacks;
     }
     
     @Override

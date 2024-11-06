@@ -14,7 +14,7 @@ public class VsRamirez extends PlayerVsOpponent{
 
     @Override
     protected String[] getOpponentAttacks() {
-        return RamirezTourna.playerAttacks;
+        return RamirezTourna.opponentAttacks;
     }
 
     @Override
