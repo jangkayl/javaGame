@@ -1,24 +1,26 @@
-package world2.SparringOpponents;
+package world2.TournaUnderFight;
 
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
+import world2.TournamentUnderground;
 import world2.SparringLogic.SparFightLogic;
-import world2.SparringLogic.VsPitik;
+import world2.SparringLogic.VsRaul;
 
-public class PitikSparring extends SparFightLogic{
+public class RaulTourna extends SparFightLogic{
+    TournamentUnderground tournamentUnderground = new TournamentUnderground();
     public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};
-    static VsPitik vsPitik;
+    static VsRaul vsRaul;
     
-    public PitikSparring(Player player, StreetFighter opponent) {
+    public RaulTourna(Player player, StreetFighter opponent) {
         super(player, opponentAttacks);
         setOpponent(opponent);
-        vsPitik = new VsPitik(player, opponent);
+        vsRaul = new VsRaul(player, opponent);
     }
 
     @Override
     public String getOpponentName() {
-        return "Pitik";
+        return "Raul";
     }
 
     @Override
@@ -27,16 +29,16 @@ public class PitikSparring extends SparFightLogic{
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsPitik.playerSuccessAction(choices[i], opponentChoices[i], false);
-                vsPitik.opponentFailedAction(opponentChoices[i]);
+                vsRaul.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsRaul.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsPitik.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                vsPitik.playerFailedAction(choices[i]);
+                vsRaul.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsRaul.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                vsPitik.drawAction(choices[i], opponentChoices[i]);
+                vsRaul.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -162,7 +164,10 @@ public class PitikSparring extends SparFightLogic{
     protected void handleWin() {
         resetFighterStats();
         playerProgress.setRound(playerProgress.getRound() + 1);
-        winnerReward();
+        if(playerProgress.getPlayerWins() != 3){
+            playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
+        }
+        tournamentUnderground.printStanding();
         GameLogic.gameData.saveGame();
     }
 

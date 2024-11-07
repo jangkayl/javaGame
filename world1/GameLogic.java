@@ -1,15 +1,15 @@
 package world1;
-import java.util.Scanner;
 
 import world1.Inventory.Item;
+import world1.TrainInGym.CarlitoUrbanGym;
 import world1.TrainInGym.FredGym;
 import world1.TrainInGym.PabloUrbanGym;
-import world1.TrainInGym.CarlitoUrbanGym;
 import world1.database.GameDataManager;
 import world1.database.GameDatabase;
 import world2.GameLogic2;
 
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class GameLogic{
     public static Scanner scan = new Scanner(System.in);   
@@ -74,7 +74,6 @@ public class GameLogic{
     }
 
     public static String leftBox(String text, int boxWidth) {
-        int terminalWidth = 150;
         String boxPad = "";
         String horizontalBorder = "\u2554" + new String(new char[boxWidth]).replace("\0", "\u2550") + "\u2557";
 
@@ -332,7 +331,6 @@ public class GameLogic{
         if(player.getCurrentWorld() == 0){
             if(playerProgress.getShopStage() == 0){
                 if(player.getStage() == 0){
-                    printSeparator(40);
                     String[] worlds = player.getWorlds();
                     System.out.print(centerBox("Welcome to the " + worlds[player.getCurrentWorld()], 100));
                     UrbanStory.printUrban();
@@ -430,7 +428,6 @@ public class GameLogic{
                 UrbanStory.printTraining(player.getName());
                 player.chooseTrait();
                 player.setStage(1);
-                gameData.saveGame();
             } else {
                 clearConsole();
                 if(playerProgress.getShopStage() < 1){

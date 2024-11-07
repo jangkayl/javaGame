@@ -16,7 +16,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 5;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " jabs " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " jabs " + player.getName() + " for " + damage + " damage!"));
     }
 
     @Override
@@ -25,7 +25,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 7;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " hooks " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " hooks " + player.getName() + " for " + damage + " damage!"));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 10;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " uppercuts " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " uppercuts " + player.getName() + " for " + damage + " damage!"));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class StreetFighter extends Boxer {
         if (newStamina > this.getMaxStamina()) {
             newStamina = this.getMaxStamina();
         } else {
-            System.out.println(this.getName() + " blocks and gains 5 stamina!");
+            System.out.print(GameLogic.centerText(40,this.getName() + " blocks and gains 5 stamina!"));
         }
         this.setStamina(newStamina);
     }
@@ -56,7 +56,7 @@ public class StreetFighter extends Boxer {
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " elbow strike (-10 HP) " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " elbow strike (-10 HP) " + player.getName() + " for " + damage + " damage!"));
     }
     
     @Override
@@ -67,7 +67,7 @@ public class StreetFighter extends Boxer {
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " head butt (-15 HP) " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " head butt (-15 HP) " + player.getName() + " for " + damage + " damage!"));
     }
     
     @Override
@@ -80,7 +80,7 @@ public class StreetFighter extends Boxer {
         player.setStamina(player.getStamina() - damageStamina);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " low blow (-20 HP) " + player.getName() + " for " + damage + " damage and drains " + damageStamina + " stamina!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " low blow (-20 HP) " + player.getName() + " for " + damage + " damage and drains " + damageStamina + " stamina!"));
     }
 
     public boolean hasEnoughStamina(int requiredStamina) {
@@ -95,7 +95,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 7;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " jabs to the body " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " jabs to the body " + player.getName() + " for " + damage + " damage!"));
     }
 
     public void leadHook() {
@@ -103,7 +103,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 9;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " lead hooks " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " lead hooks " + player.getName() + " for " + damage + " damage!"));
     }
 
     public void rearUppercut() {
@@ -111,7 +111,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 14;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " rear uppercuts " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " rear uppercuts " + player.getName() + " for " + damage + " damage!"));
     }
 
     // Ramirez's COMBO
@@ -120,7 +120,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 7;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " cross " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " cross " + player.getName() + " for " + damage + " damage!"));
     }
 
     // Lopez COMBO
@@ -129,7 +129,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 9;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " quick jab " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " quick jab " + player.getName() + " for " + damage + " damage!"));
     }
 
     public void powerPunch() {
@@ -137,7 +137,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 14;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " power punch " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " power punch " + player.getName() + " for " + damage + " damage!"));
     }
 
     // Tetteh COMBO
@@ -146,7 +146,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 9;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " right uppercut " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " right uppercut " + player.getName() + " for " + damage + " damage!"));
     }
 
     public void leftHook() {
@@ -154,7 +154,7 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 10;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " left hook " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " left hook " + player.getName() + " for " + damage + " damage!"));
     }
 
     public void rightCross() {
@@ -162,6 +162,6 @@ public class StreetFighter extends Boxer {
         int staminaReduced = 14;
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " right cross " + player.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " right cross " + player.getName() + " for " + damage + " damage!"));
     }
 }

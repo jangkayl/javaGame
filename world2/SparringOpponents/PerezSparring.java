@@ -85,7 +85,7 @@ public class PerezSparring extends SparFightLogic{
                 if(playerMove == 2) return 2;
                 break;
             case 9:  // Low Blow
-                if(playerMove == 1) return 1;
+                if(playerMove == 1 || playerMove == 6) return 1;
                 if(playerMove == 2) return 2;
                 break;
             default:
@@ -156,6 +156,29 @@ public class PerezSparring extends SparFightLogic{
             }
             tempStamina -= staminaCost;
         }
+    }
+
+    @Override
+    protected void handleWin() {
+        resetFighterStats();
+        playerProgress.setRound(playerProgress.getRound() + 1);
+        winnerReward();
+        GameLogic.gameData.saveGame();
+    }
+
+    @Override
+    protected void handleLoss() {
+        resetFighterStats();
+        playerProgress.setRound(playerProgress.getRound() + 1);
+        GameLogic.printSeparator(40);
+        System.out.println(); 
+        System.out.println("You have been defeated!");
+        System.out.println("You lost 150 points");
+        player.setPlayerPoints(player.getPlayerPoints() - 150);
+        System.out.println("You now have " + player.getPlayerPoints() + " points.");
+        System.out.println();
+        GameLogic.pressAnything();
+        GameLogic.gameData.saveGame();
     }
 }
 

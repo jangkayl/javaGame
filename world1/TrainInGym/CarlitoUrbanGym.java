@@ -1,12 +1,9 @@
 package world1.TrainInGym;
-import java.util.Random;
 
-import world1.GameLogic;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.StreetFighter;
-import world1.UrbanStory;
 import world1.FightingLogic.VsCarlito;
+import world1.*;
+
+import java.util.Random;
 
 public class CarlitoUrbanGym {
     static Random rand = new Random();
@@ -35,7 +32,7 @@ public class CarlitoUrbanGym {
             printStats();
             if (player.getHp() <= 0) {
                 System.out.println();
-                System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
+                System.out.println(GameLogic.centerBox(player.getName() + " is knocked out! " + opponent.getName() + " wins!", 60));
                 player.setIsLose(true);
                 playerProgress.setRound(playerProgress.getRound() + 1);
                 player.setHp(player.getMaxHp());
@@ -47,7 +44,7 @@ public class CarlitoUrbanGym {
                 return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
-                System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
+                System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + player.getName() + " wins!", 60));
                 player.setIsLose(false);
                 winnerReward();
                 player.setHp(player.getMaxHp());
@@ -62,8 +59,8 @@ public class CarlitoUrbanGym {
 
     static void printStats(){
         System.out.println();
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns(player.getName(), opponent.getName(), 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP        " + player.getHp() + "/" + player.getMaxHp(), "HP        " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ player.getName() +"*" , "*"+ opponent.getName()+"*", 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + player.getHp() + "/" + player.getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
         System.out.println();
     }
@@ -83,10 +80,11 @@ public class CarlitoUrbanGym {
     
         while (isValidCombo(input, player.getStamina()) != 0) {
             if(isValidCombo(input, player.getStamina()) == 1){
-                System.out.println(GameLogic.centerText(40, "Please enter a valid combo (e.g., 123):"));
+                System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 60));
             } else if(isValidCombo(input, player.getStamina()) == 2) {
-                System.out.println(GameLogic.centerText(40, player.getName() + " doesn't have enough stamina for this combo!"));
-                System.out.println(GameLogic.centerText(40, "You may use 3 Blocks as your combo to regain stamina"));
+                String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
+                        "You may use 3 Blocks as your combo to regain stamina";
+                System.out.println(GameLogic.centerBox(message, 60));
             }
             input = GameLogic.scan.nextLine();
         }
@@ -100,9 +98,9 @@ public class CarlitoUrbanGym {
         }
 
         opponentValid(opponentChoices);
+        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(50, "You've selected:\t\tOpponent selected:"));
 
-        System.out.println();
-        System.out.print(GameLogic.centerText(40, "You've selected:\t\tOpponent selected:"));
         for(int i = 0; i < 3; i++){
             String playerAttack = attack[choices[i]][0];
             String opponentAttack = attack[opponentChoices[i]][0];
@@ -113,6 +111,7 @@ public class CarlitoUrbanGym {
         }
 
         System.out.println();
+        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         printFight(choices, opponentChoices);
     }
 
@@ -193,6 +192,7 @@ public class CarlitoUrbanGym {
     }
 
     static void printFight(int[] choices, int[] opponentChoices){
+        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         for(int i = 0; i < 3; i++){
             int countered = isCounter(opponentChoices[i], choices[i]);
             String playerAttack = player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName();
@@ -214,7 +214,7 @@ public class CarlitoUrbanGym {
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
             }
-            GameLogic.printSeparator(50);
+            System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         }
     }
 
@@ -229,19 +229,13 @@ public class CarlitoUrbanGym {
     }
 
     static void winnerReward() {
-        System.out.println(); 
-        GameLogic.printSeparator(40);
-        System.out.println(); 
-        System.out.println("Congratulations! You've won the match!");
-        System.out.println();  
-        System.out.println("Fred is giving you 100 points as a starter pack to get you started.");
-        GameLogic.addPoints(100);
-        System.out.println();
-        System.out.println("You now have " + player.getPlayerPoints() + " points.");
-        System.out.println();
-        System.out.println("You can now visit the shop and use your points to buy items.");
-        System.out.println(); 
-        GameLogic.printSeparator(40);
+        player.setPlayerPoints(player.getPlayerPoints() + 100);
+        String rewardMessage =
+                "Congratulations! You've won the match!\n" +
+                        "Fred is giving you 100 points as a starter pack to get you started.\n" +
+                        "You now have " + player.getPlayerPoints() + " points.\n" +
+                        "You can now visit the shop and use your points to buy items.";
+        System.out.println(GameLogic.centerBox(rewardMessage, 90));
         GameLogic.pressAnything();
     }
 }

@@ -1,19 +1,19 @@
 package world2;
 
-import world1.FightLogic;
 import world1.GameLogic;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Tournament;
-import world1.TournamentFight.LopezTourna;
-import world1.TournamentFight.RamirezTourna;
-import world1.TournamentFight.TettehTourna;
+import world2.SparringLogic.SparFightLogic;
+import world2.TournaUnderFight.NavarroTourna;
+import world2.TournaUnderFight.RaulTourna;
+import world2.TournaUnderFight.SalvahezTourna;
 
 public class TournamentUnderground {
     static StreetFighter opponent;
     static Player player = GameLogic.player;
-    static String[] opponents = {"El Tigre", "El Jablo", "El Taeh"};
+    static String[] opponents = {"The Reaper", "The Bullseye", "The Ghost"};
     static PlayerProgress playerProgress = GameLogic.playerProgress;
 
     public void setOpponent(StreetFighter enemy){
@@ -46,7 +46,11 @@ public class TournamentUnderground {
         GameLogic.clearConsole();
         GameLogic.printHeading("\t🏆 Underground Brawl Tournament 🏆");
 
-        if(player.getStage() < 10){
+        if(playerProgress.getPlayerWins() == 0 && playerProgress.getOpponentWins() == 0){
+            playerProgress.setRound(1);
+        }
+
+        if(player.getStage() < 12){
             System.out.println("Welcome, " + player.getName() + "! This is no ordinary fight - it's a battle for survival in the underground ring!");
             playerProgress.setDone(2);
             Tournament.printTournament();
@@ -56,6 +60,8 @@ public class TournamentUnderground {
                     if(offerRematch()){
                         resetMatchScores();
                         continue;
+                    } else {
+                        return;
                     }
                 }
     
@@ -112,21 +118,21 @@ public class TournamentUnderground {
                 opponent = new StreetFighter("Julio Navarro", 350, 100, 0.4, 2, 0.25, 4);
                 opponent.setPlayerOpponent(player);
                 StoryUnderground.tournaOpponentBackstory(opponent);
-                fightWithOpponent(new RamirezTourna(player, opponent));
+                fightWithOpponent(new NavarroTourna(player, opponent));
             }
             case 1 -> {
                 // The Bullseye
-                opponent = new StreetFighter("Raul Villanueva", 450, 120, 0.45, 2, 0.3, 4);
+                opponent = new StreetFighter("Raul Villanueva", 400, 120, 0.45, 2, 0.3, 4);
                 opponent.setPlayerOpponent(player);
                 StoryUnderground.tournaOpponentBackstory(opponent);
-                fightWithOpponent(new LopezTourna(player, opponent));
+                fightWithOpponent(new RaulTourna(player, opponent));
             }
             case 2 -> {
                 // The Ghost
                 opponent = new StreetFighter("Ralfo Salvahez", 500, 140, 0.5, 2.5, 0.40, 5);
                 opponent.setPlayerOpponent(player);
                 StoryUnderground.tournaOpponentBackstory(opponent);
-                fightWithOpponent(new TettehTourna(player, opponent));
+                fightWithOpponent(new SalvahezTourna(player, opponent));
             }
             default -> System.out.println("Invalid opponent index.");
         }
@@ -156,7 +162,7 @@ public class TournamentUnderground {
         return false;
     }
 
-    private static void fightWithOpponent(FightLogic fightLogic) {
+    private static void fightWithOpponent(SparFightLogic fightLogic) {
         while (!isMatchConcluded()) {
             fightLogic.fightLoop();
         }
@@ -176,7 +182,7 @@ public class TournamentUnderground {
         System.out.println();
         System.out.println("You lost your previous match. Would you like to:");
         System.out.println("1. Try the tournament again?");
-        System.out.println("2. Train with Fred or your coach to sharpen your skills and gain more stats!");
+        System.out.println("2. Boost your stats by sparring more!");
         System.out.println();
         System.out.print("Enter your choice (1 or 2): ");
         
@@ -184,7 +190,7 @@ public class TournamentUnderground {
         if (choice == 1) {
             playerProgress.setPlayerWins(0);
             playerProgress.setOpponentWins(0);
-            player.setStage(3);
+            player.setStage(9);
             return true;  
         } else {
             return false;
@@ -205,48 +211,32 @@ public class TournamentUnderground {
     }
 
     private static void concludeTournament() {
-        System.out.println();
-        System.out.println("🥊 Congratulations, Champion of the Ring! 🥊");
-        System.out.println("You've conquered the tournament, delivering knockout blows and proving you have the heart of a true fighter!");
-        System.out.println("The crowd roars, and your name is now legend. But the journey isn't over...\n");
+        GameLogic.clearConsole();
+        System.out.println("🥊 Champion of the Underground! 🥊");
+        System.out.println("You've dominated the Dirty Boxing Tournament, emerging as the fiercest fighter in the shadows.");
+        System.out.println("Your name strikes fear in the underground, but the chaos never ends...");
+        GameLogic.pressAnything();
+
+        GameLogic.printSeparator(100);
         
-        System.out.println("As you return home, you can still hear the echoes of cheering fans, the thrill of victory fresh in your mind.");
-        System.out.println("But your celebration is cut short when you see your childhood friend, Niko, waiting anxiously outside your door.");
+        System.out.println("\nAs you stand victorious, your father steps forward, his face filled with regret.");
+        System.out.println("He opens his mouth to confess why he abandoned you... but suddenly, chaos erupts.");
+        System.out.println("Gunshots echo, and you hear the shout: 'Police raid! Everybody down!' The room is thrown into chaos!");
+
+        System.out.println("\nChoose your path:");
+        System.out.println("(1) Run and escape the raid.");
+        System.out.println("(2) Stay and hear your father's confession, then fight the police.");
+        int choice = GameLogic.readInt("-> ", 1, 2);
+        if(choice == 1){
+
+        } else {
+            
+        }
+
         GameLogic.pressAnything();
 
-        GameLogic.printSeparator(70);
-        System.out.println();
-        System.out.println("Niko: \t\"Hey, I'm glad I found you. It's urgent... your mom has been taken to the hospital. She needs help, and it doesn't look good.\"");
-        System.out.println();
-        System.out.println("\t( Panic rises in your chest as you race to the hospital, each step heavier than the last. )");
-        System.out.println();
-        System.out.println("\tYou find your mother weak, hooked to machines. The doctors say the operation could save her life, but it's costly, your recent winnings barely cover it.\n");
-        GameLogic.pressAnything();
-    
-        System.out.println();
-        GameLogic.printSeparator(70);
-        System.out.println();
-        System.out.println("Niko: \t\"I know it's tough, but there's another way. It's risky and illegal... Fighters can earn big money in the underground ring.");
-        System.out.println("\tIt's brutal, but you could make what you need fast.\"");
-        System.out.println();
-        System.out.println("\t( Niko's eyes are serious, and you can see the weight of the decision settling in. )");
-        System.out.println();
-        System.out.println("\tYou take a deep breath, feeling the burden of your mother's health pressing down on you.");
-        System.out.println();
-        System.out.println("Niko: \t\"It's dangerous, but if you're as good as I think you are, you could pull this off. Just think about it...\"\n");
-        GameLogic.pressAnything();
-    
-        System.out.println();
-        GameLogic.printSeparator(70);
-        System.out.println();
-        System.out.println("\tWith your mother's life at stake, you know what you must do. You nod at Niko.");
-        System.out.println();
-        System.out.println("Niko: \t\"Alright, let's do this. I'll show you the ropes. Get ready for a new world of fighting!\"\n");
-        GameLogic.pressAnything();
-        GameLogic.printSeparator(70);
 
-        // Update the player's world/state to reflect the new story path.
-        player.setCurrentWorld(1);
+        player.setCurrentWorld(2);
     }
 
 }

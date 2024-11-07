@@ -1,24 +1,26 @@
-package world2.SparringOpponents;
+package world2.TournaUnderFight;
 
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
+import world2.TournamentUnderground;
 import world2.SparringLogic.SparFightLogic;
-import world2.SparringLogic.VsPitik;
+import world2.SparringLogic.VsNavarro;
 
-public class PitikSparring extends SparFightLogic{
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};
-    static VsPitik vsPitik;
+public class NavarroTourna extends SparFightLogic{
+    TournamentUnderground tournamentUnderground = new TournamentUnderground();
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Elbow Strike", "Head Butt", "Low Blow"};
+    static VsNavarro vsNavarro;
     
-    public PitikSparring(Player player, StreetFighter opponent) {
+    public NavarroTourna(Player player, StreetFighter opponent) {
         super(player, opponentAttacks);
         setOpponent(opponent);
-        vsPitik = new VsPitik(player, opponent);
+        vsNavarro = new VsNavarro(player, opponent);
     }
 
     @Override
     public String getOpponentName() {
-        return "Pitik";
+        return "Navarro";
     }
 
     @Override
@@ -27,16 +29,16 @@ public class PitikSparring extends SparFightLogic{
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsPitik.playerSuccessAction(choices[i], opponentChoices[i], false);
-                vsPitik.opponentFailedAction(opponentChoices[i]);
+                vsNavarro.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsNavarro.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsPitik.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                vsPitik.playerFailedAction(choices[i]);
+                vsNavarro.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsNavarro.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                vsPitik.drawAction(choices[i], opponentChoices[i]);
+                vsNavarro.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -65,16 +67,16 @@ public class PitikSparring extends SparFightLogic{
                 if(playerMove == 2) return 2;
                 break;
             case 4:
-                if(playerMove == 3) return 1;
-                if(playerMove == 0 || playerMove == 1 || playerMove == 8) return 2;
+                if(playerMove == 2) return 1;
+                if(playerMove == 0 || playerMove == 3 || playerMove == 8) return 2;
                 break;
             case 5:
-                if(playerMove == 2) return 1;
-                if(playerMove == 3 || playerMove == 0) return 2;
-                break;
-            case 6:
                 if(playerMove == 0) return 1;
                 if(playerMove == 1 || playerMove == 2) return 2;
+                break;
+            case 6:
+                if(playerMove == 3) return 1;
+                if(playerMove == 1 || playerMove == 0) return 2;
                 break;
             case 7:  // Elbow Strike
                 if(playerMove == 2) return 1;
@@ -104,7 +106,7 @@ public class PitikSparring extends SparFightLogic{
 
             while (!validChoice) {
                 switch (opponentChoice[i]) {
-                        case 1: // Jab
+                    case 1: // Jab
                         staminaCost = 5;
                         break;
                     case 2: // Hook
@@ -117,10 +119,10 @@ public class PitikSparring extends SparFightLogic{
                         staminaCost = 10;
                         break;
                     case 5:
-                        staminaCost = 7;
+                        staminaCost = 9;
                         break;
                     case 6:
-                        staminaCost = 9;
+                        staminaCost = 10;
                         break;
                     case 7:
                         staminaCost = 14;
@@ -160,25 +162,33 @@ public class PitikSparring extends SparFightLogic{
 
     @Override
     protected void handleWin() {
+        player.setIsLose(false);
+        if(playerProgress.getPlayerWins() != 3){
+            System.out.println(); 
+            GameLogic.printSeparator(40);
+            System.out.println(); 
+            System.out.println("Congratulations! You've won the match!");
+        }
         resetFighterStats();
         playerProgress.setRound(playerProgress.getRound() + 1);
-        winnerReward();
+        if(playerProgress.getPlayerWins() != 3){
+            playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
+        }
+        tournamentUnderground.printStanding();
         GameLogic.gameData.saveGame();
     }
 
     @Override
     protected void handleLoss() {
+        player.setIsLose(true);
         resetFighterStats();
         playerProgress.setRound(playerProgress.getRound() + 1);
-        GameLogic.printSeparator(40);
-        System.out.println(); 
-        System.out.println("You have been defeated!");
-        System.out.println("You lost 150 points");
-        player.setPlayerPoints(player.getPlayerPoints() - 150);
-        System.out.println("You now have " + player.getPlayerPoints() + " points.");
-        System.out.println();
-        GameLogic.pressAnything();
+        if (playerProgress.getOpponentWins() != 3) {
+            playerProgress.setOpponentWins(playerProgress.getOpponentWins() + 1);
+        }
+        tournamentUnderground.printStanding();
         GameLogic.gameData.saveGame();
     }
 
 }
+

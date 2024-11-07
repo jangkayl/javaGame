@@ -352,7 +352,7 @@ public class FredGym {
         addStats(choice);
         System.out.println();
         System.out.println("Fred: \"Stats added! Remember, you can train up to 5 times!\"");
-        GameLogic.printSeparator(40);
+        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
     }
 
     static void addStats(int choice){

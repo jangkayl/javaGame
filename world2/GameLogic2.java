@@ -1,8 +1,5 @@
 package world2;
 
-import java.text.DecimalFormat;
-import java.util.Scanner;
-
 import world1.GameLogic;
 import world1.Inventory;
 import world1.Player;
@@ -11,8 +8,6 @@ import world1.Shop;
 import world2.BetFight.BetFight;
 
 public class GameLogic2 {
-    public static Scanner scan = new Scanner(System.in);   
-    static DecimalFormat df = new DecimalFormat("#,###.00");   
     public static Player player = GameLogic.player;
     public static PlayerProgress playerProgress = GameLogic.playerProgress;
     public static Shop shop = GameLogic.shop;

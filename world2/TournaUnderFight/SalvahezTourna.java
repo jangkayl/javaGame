@@ -1,24 +1,26 @@
-package world2.SparringOpponents;
+package world2.TournaUnderFight;
 
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
+import world2.TournamentUnderground;
 import world2.SparringLogic.SparFightLogic;
-import world2.SparringLogic.VsPitik;
+import world2.SparringLogic.VsSalvahez;
 
-public class PitikSparring extends SparFightLogic{
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};
-    static VsPitik vsPitik;
+public class SalvahezTourna extends SparFightLogic{
+    TournamentUnderground tournamentUnderground = new TournamentUnderground();
+    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Quick Jab", "Cross", "Power Punch", "Elbow Strike", "Head Butt", "Low Blow"};
+    static VsSalvahez vsSalvahez;
     
-    public PitikSparring(Player player, StreetFighter opponent) {
+    public SalvahezTourna(Player player, StreetFighter opponent) {
         super(player, opponentAttacks);
         setOpponent(opponent);
-        vsPitik = new VsPitik(player, opponent);
+        vsSalvahez = new VsSalvahez(player, opponent);
     }
 
     @Override
     public String getOpponentName() {
-        return "Pitik";
+        return "Lopez";
     }
 
     @Override
@@ -27,16 +29,16 @@ public class PitikSparring extends SparFightLogic{
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsPitik.playerSuccessAction(choices[i], opponentChoices[i], false);
-                vsPitik.opponentFailedAction(opponentChoices[i]);
+                vsSalvahez.playerSuccessAction(choices[i], opponentChoices[i], false);
+                vsSalvahez.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsPitik.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                vsPitik.playerFailedAction(choices[i]);
+                vsSalvahez.opponentSuccessAction(opponentChoices[i], choices[i], false);
+                vsSalvahez.playerFailedAction(choices[i]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                vsPitik.drawAction(choices[i], opponentChoices[i]);
+                vsSalvahez.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -69,12 +71,12 @@ public class PitikSparring extends SparFightLogic{
                 if(playerMove == 0 || playerMove == 1 || playerMove == 8) return 2;
                 break;
             case 5:
-                if(playerMove == 2) return 1;
-                if(playerMove == 3 || playerMove == 0) return 2;
+                if(playerMove == 3) return 1;
+                if(playerMove == 0 || playerMove == 1) return 2;
                 break;
             case 6:
-                if(playerMove == 0) return 1;
-                if(playerMove == 1 || playerMove == 2) return 2;
+                if(playerMove == 2) return 1;
+                if(playerMove == 3 || playerMove == 0) return 2;
                 break;
             case 7:  // Elbow Strike
                 if(playerMove == 2) return 1;
@@ -85,7 +87,7 @@ public class PitikSparring extends SparFightLogic{
                 if(playerMove == 2) return 2;
                 break;
             case 9:  // Low Blow
-                if(playerMove == 1 || playerMove == 6) return 1;
+                if(playerMove == 1  || playerMove == 6) return 1;
                 if(playerMove == 2) return 2;
                 break;
             default:
@@ -117,10 +119,10 @@ public class PitikSparring extends SparFightLogic{
                         staminaCost = 10;
                         break;
                     case 5:
-                        staminaCost = 7;
+                        staminaCost = 9;
                         break;
                     case 6:
-                        staminaCost = 9;
+                        staminaCost = 7;
                         break;
                     case 7:
                         staminaCost = 14;
@@ -162,7 +164,10 @@ public class PitikSparring extends SparFightLogic{
     protected void handleWin() {
         resetFighterStats();
         playerProgress.setRound(playerProgress.getRound() + 1);
-        winnerReward();
+        if(playerProgress.getPlayerWins() != 3){
+            playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
+        }
+        tournamentUnderground.printStanding();
         GameLogic.gameData.saveGame();
     }
 
@@ -180,5 +185,4 @@ public class PitikSparring extends SparFightLogic{
         GameLogic.pressAnything();
         GameLogic.gameData.saveGame();
     }
-
 }

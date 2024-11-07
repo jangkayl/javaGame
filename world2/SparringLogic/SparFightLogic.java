@@ -259,29 +259,22 @@ public abstract class SparFightLogic {
         return 0;
     }
 
-    protected void handleWin() {
-        resetFighterStats();
-        playerProgress.setRound(playerProgress.getRound() + 1);
-        winnerReward();
-        GameLogic.gameData.saveGame();
-    }
-
-    void winnerReward() {
+    protected void winnerReward() {
         System.out.println(); 
         GameLogic.printSeparator(40);
         System.out.println(); 
         System.out.println("Congratulations! You've won the match!");
         System.out.println();
-        System.out.println("You've won 150 points.");
-        GameLogic.addPoints(150);
+        System.out.println("You've won 300 points.");
+        GameLogic.addPoints(300);
         System.out.println("You now have " + player.getPlayerPoints() + " points.");
         System.out.println();
         System.out.println("Choose what to add stats ( Choose only one ): ");
-        System.out.println("1. HP - Increase by +5% ");
-        System.out.println("2. Stamina - Increase by +5%");
-        System.out.println("3. Crit Chance - Increase by +3%");
-        System.out.println("4. Dodge Chance - Increase by +3%");
-        System.out.println("5. Crit Multiplier - Increase by +3%");
+        System.out.println("1. HP - Increase by +15% ");
+        System.out.println("2. Stamina - Increase by +15%");
+        System.out.println("3. Crit Chance - Increase by +7%");
+        System.out.println("4. Dodge Chance - Increase by +7%");
+        System.out.println("5. Crit Multiplier - Increase by +7%");
         System.out.print("\nEnter the number of the stat you'd like to upgrade: ");
         int choice = GameLogic.readInt("", 1, 5);
         addStats(choice);
@@ -293,42 +286,28 @@ public abstract class SparFightLogic {
 
     void addStats(int choice){
         if(choice == 1){
-            double hpMultiplier = 1 + 0.05;
+            double hpMultiplier = 1 + 0.15;
             int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);
             player.setHp(maxHp);
             player.setMaxHp(maxHp);
         } else if(choice == 2){
-            double staminaMultiplier = 1 + 0.05;
+            double staminaMultiplier = 1 + 0.15;
             int maxStamina = (int)Math.ceil(player.getMaxStamina() * staminaMultiplier);
             player.setStamina(maxStamina);
             player.setMaxStamina(maxStamina);
         } else if(choice == 3){
-            double newCrit = player.getCritChance() + 0.03;
+            double newCrit = player.getCritChance() + 0.07;
             player.setCritChance(newCrit);
         } else if(choice == 4){
-            double newDodge = player.getDodgeChance() + 0.03;
+            double newDodge = player.getDodgeChance() + 0.07;
             player.setDodgeChance(newDodge);
         } else if(choice == 5){
-            double newMulti = player.getCritMultiplier() + 0.03;
+            double newMulti = player.getCritMultiplier() + 0.07;
             player.setCritMultiplier(newMulti);
         }
     }
 
-    protected void handleLoss() {
-        resetFighterStats();
-        playerProgress.setRound(playerProgress.getRound() + 1);
-        GameLogic.printSeparator(40);
-        System.out.println(); 
-        System.out.println("You have been defeated!");
-        System.out.println("You lost 150 points");
-        player.setPlayerPoints(player.getPlayerPoints() - 150);
-        System.out.println("You now have " + player.getPlayerPoints() + " points.");
-        System.out.println();
-        GameLogic.pressAnything();
-        GameLogic.gameData.saveGame();
-    }
-
-    private void resetFighterStats() {
+    protected void resetFighterStats() {
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
         opponent.setHp(opponent.getMaxHp());
@@ -361,14 +340,35 @@ public abstract class SparFightLogic {
             System.err.println("(4) Elbow Strike < Block");
             System.err.println("(5) Head Butt < Hook");
             System.err.println("(6) Low Blow < Uppercut");
+        } else if(opponent.getName() == "Julio Navarro"){
+            GameLogic.printHeading("\tJulio Navarro Combo Counter:");
+            System.err.println("(1) Right Uppercut < Block");
+            System.err.println("(2) Left Hook < Jab");
+            System.err.println("(3) Right Cross < Uppercut");
+            System.err.println("(4) Elbow Strike < Block");
+            System.err.println("(5) Head Butt < Hook");
+            System.err.println("(6) Low Blow < Uppercut");
+        } else if(opponent.getName() == "Raul Villanueva"){
+            GameLogic.printHeading("\tRaul Villanueva Combo Counter:");
+            System.err.println("(1) Cross < Uppercut");
+            System.err.println("(2) Rear Uppercut < Block");
+            System.err.println("(3) Lead Hook < Jab");
+            System.err.println("(4) Elbow Strike < Block");
+            System.err.println("(5) Head Butt < Hook");
+            System.err.println("(6) Low Blow < Uppercut");
+        } else if(opponent.getName() == "Ralfo Salvahez"){
+            GameLogic.printHeading("\tRalfo Salvahez Combo Counter:");
+            System.err.println("(1) Quick Jab < Uppercut");
+            System.err.println("(2) Cross < Uppercut");
+            System.err.println("(3) Power Punch < Block");
+            System.err.println("(4) Elbow Strike < Block");
+            System.err.println("(5) Head Butt < Hook");
+            System.err.println("(6) Low Blow < Uppercut");
         }
-        // } else if(opponent.getName() == "Oscar Lopez"){
-        //     GameLogic.printHeading("\tOscar Lopez Combo Counter:");
-        //     System.err.println("(1) Quick Jab < Uppercut");
-        //     System.err.println("(2) Cross < Uppercut");
-        //     System.err.println("(3) Power Punch < Block");
-        
     }
+
+    protected abstract void handleWin();
+    protected abstract void handleLoss();
     
     protected abstract void printFight(int[] choices, int[] opponentChoices);
 

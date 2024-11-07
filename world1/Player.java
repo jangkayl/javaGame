@@ -30,7 +30,7 @@ public class Player extends Boxer implements PlayerInterface {
         int staminaReduced = 5;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " jabs " + opponent.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " jabs " + opponent.getName() + " for " + damage + " damage!"));
     }
     
     @Override
@@ -39,7 +39,7 @@ public class Player extends Boxer implements PlayerInterface {
         int staminaReduced = 7;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " hooks " + opponent.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " hooks " + opponent.getName() + " for " + damage + " damage!"));
     }
     
     @Override
@@ -48,7 +48,7 @@ public class Player extends Boxer implements PlayerInterface {
         if (newStamina > this.getMaxStamina()) {
             newStamina = this.getMaxStamina();
         } else {
-            System.out.println(this.getName() + " blocks and gains 5 stamina!");
+            System.out.print(GameLogic.centerText(40,this.getName() + " blocks and gains 5 stamina!"));
         }
         this.setStamina(newStamina);
     }
@@ -59,7 +59,7 @@ public class Player extends Boxer implements PlayerInterface {
         int staminaReduced = 10;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " uppercuts " + opponent.getName() + " for " + damage + " damage!"));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Player extends Boxer implements PlayerInterface {
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " elbow strike (-10 HP) " + opponent.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " elbow strike (-10 HP) " + opponent.getName() + " for " + damage + " damage!"));
     }
     
     @Override
@@ -81,7 +81,7 @@ public class Player extends Boxer implements PlayerInterface {
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " head butt (-15 HP) " + opponent.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " head butt (-15 HP) " + opponent.getName() + " for " + damage + " damage!"));
     }
     
     @Override
@@ -94,7 +94,7 @@ public class Player extends Boxer implements PlayerInterface {
         opponent.setStamina(opponent.getStamina() - damageStamina);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " low blow (-20 HP) " + opponent.getName() + " for " + damage + " damage and drains " + damageStamina + " stamina!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " low blow (-20 HP) " + opponent.getName() + " for " + damage + " damage and drains " + damageStamina + " stamina!"));
     }
 
     // Additional Combos
@@ -103,7 +103,7 @@ public class Player extends Boxer implements PlayerInterface {
         int staminaReduced = 7;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " lead body shots " + opponent.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " lead body shots " + opponent.getName() + " for " + damage + " damage!"));
     }
 
     public void crossToTheRibs() {
@@ -111,7 +111,7 @@ public class Player extends Boxer implements PlayerInterface {
         int staminaReduced = 9;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " rross to the ribs " + opponent.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " Crross to the ribs " + opponent.getName() + " for " + damage + " damage!"));
     }
 
     public void finishingUppercut() {
@@ -119,7 +119,7 @@ public class Player extends Boxer implements PlayerInterface {
         int staminaReduced = 14;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " Cross to the Ribs " + opponent.getName() + " for " + damage + " damage!");
+        System.out.print(GameLogic.centerText(40,this.getName() + " Cross to the Ribs " + opponent.getName() + " for " + damage + " damage!"));
     }
 
     public void chooseTrait(){

@@ -76,17 +76,20 @@ public class UrbanStory {
     }
 
     public static void tutorialMenu() {
+        System.out.println("\n");
+        System.out.println(GameLogic.centerBox("WELCOME TO THE TUTORIAL!", 60));
         System.out.println();
-        GameLogic.printSeparator(50);
-        System.out.println("WELCOME TO THE TUTORIAL!");
-        System.out.println();
-        System.out.println("In this tutorial, you'll get a quick overview of the basic mechanics and controls you'll need to succeed.");
-        System.out.println("You'll learn how to perform essential moves, manage your stamina, and make smart decisions in combat.");
-        System.out.println("Each section will guide you step-by-step to help you get comfortable with the controls and timing.");
-        System.out.println("Take your time, and remember: practice makes perfect.");
-        System.out.println();
+        System.out.println(GameLogic.centerText(50,
+                "In this tutorial, you'll get a quick overview of the basic mechanics and controls you'll need to succeed.\n" +
+                        "You'll learn how to perform essential moves, manage your stamina, and make smart decisions in combat.\n" +
+                        "Each section will guide you step-by-step to help you get comfortable with the controls and timing.\n" +
+                        "Take your time, and remember: practice makes perfect."
+        ));
+        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(100)));
+
+        System.out.println("\n\n");
         System.out.println("Are you ready to begin?");
-        System.out.println("(1) Yes, let's get started!  (2) No, I'd like to explore more options first.");
+        System.out.println("(1) Yes, let's get started!\n(2) No, I'd like to explore more options first.");
         GameLogic.printSeparator(50);
         int choice = GameLogic.readInt("-> ", 1, 2);
         if(choice == 2) return;
@@ -110,38 +113,52 @@ public class UrbanStory {
         }
         int success = 0;
 
-        space(70);
-        System.out.println("Fred: \t\"Alright, let's put your skills to the test. Try to counter my next punch.\"");
+        String message = "Fred: \"Alright, let's put your skills to the test. Try to counter my next punch.\"\n";
+        System.out.print(GameLogic.centerBox(message, 90));
+        System.out.println("\n");
+
         do {
-            int randomNum = 0 + (int)(Math.random() * ((3 - 0) + 1));
+            int randomNum = 0 + (int)(Math.random() * ((2 - 0) + 1));
             System.out.println();
-            if(randomNum == 2){
-                System.out.println("( Fred " + array[randomNum] + "s )");
-            } else if(randomNum == 3){
-                System.out.println("( Fred throws an " + array[randomNum] + " )");
+
+            if (randomNum == 2) {
+                System.out.println(GameLogic.centerBox("( Fred " + array[randomNum] + "s )", 50));
+            } else if (randomNum == 3) {
+                System.out.println(GameLogic.centerBox("( Fred throws an " + array[randomNum] + " )", 50));
             } else {
-                System.out.println("( Fred throws a " + array[randomNum] + " ) ");
+                System.out.println(GameLogic.centerBox("( Fred throws a " + array[randomNum] + " )", 50));
             }
 
-            System.out.println("Success: " + success + " / 5");
+            String successMessage = "Success: " + success + " / 5";
+            System.out.print(GameLogic.centerText(successMessage, 150));
+            System.out.println("\n");
             choice = punch();
             int countered = isCounter(randomNum+1, choice);
 
             System.out.println();
-            GameLogic.printSeparator(30);
+            GameLogic.printCenteredSeparator(30);
             System.out.println();
+
+            System.out.println("\n");
+            String responseMessage = "";
             if(countered == 1){
-                System.out.println("Great job!");
+                responseMessage = "Great job!";
                 success++;
             } else if(countered == 2){
-                System.out.println("No, you should try to counter punch it!");
+                responseMessage = "No, you should try to counter punch it!";
             } else {
-                System.out.println("Not bad, but I wanna see some counter punches!");
+                responseMessage = "Not bad, but I wanna see some counter punches!";
             }
+            System.out.print(GameLogic.centerBox(responseMessage, 50));
+
         } while(success < 5);
-        System.out.println("Congratulations, " + name + "! You've completed the tutorial!🤩");
-        System.out.println("Your fundamentals are solid, but remember: there's always more to learn.");
-        System.out.println("Keep training hard, and you'll be unstoppable in no time!");
+
+        System.out.println("\n");
+        String finalMessage = "Congratulations, " + name + "! You've completed the tutorial! " +
+                "Your fundamentals are solid,\nbut remember: there's always more to learn." +
+                "Keep training hard,\nand you'll be unstoppable in no time!";
+        System.out.print(GameLogic.centerBox(finalMessage, 100));
+        System.out.println("\n");
         GameLogic.pressAnything();
     }
 
@@ -504,48 +521,63 @@ public class UrbanStory {
         String[] combo = {"Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
         int success = 0;
         int choice;
-        
-        space(70);
-        System.out.println("Fred: \t\"Alright, let's put your skills to the test. Try to counter my next punch.\"");
+
+        System.out.println("\n");
+        String message = "Fred: \"Alright, let's put your skills to the test. Try to counter my next punch.\"\n";
+        System.out.print(GameLogic.centerBox(message, 90));
         do {
             int randomNum = 0 + (int)(Math.random() * ((2 - 0) + 1));
             System.out.println();
+
+            String skillMessage = "";
             if(randomNum == 2){
-                System.out.println("( Fred " + skill[randomNum] + "s )");
+                skillMessage = "( Fred " + skill[randomNum] + "s )";
             } else if(randomNum == 3){
-                System.out.println("( Fred throws an " + skill[randomNum] + " )");
+                skillMessage = "( Fred throws an " + skill[randomNum] + " )";
             } else {
-                System.out.println("( Fred throws a " + skill[randomNum] + " ) ");
+                skillMessage = "( Fred throws a " + skill[randomNum] + " ) ";
             }
 
-            System.out.println("Success: " + success + " / 5");
-            System.out.println("Select the counter punch:");
-            for(int i = 1; i <= 3; i++){
-                System.out.println("\t(" + i + ") \"" + combo[i-1] + "\"");
+            System.out.println(GameLogic.centerBox(skillMessage, 50));
+            System.out.println("\n");
+
+            System.out.println(GameLogic.centerText(150, "Success: " + success + " / 5"));
+
+            System.out.println(GameLogic.centerText(150, "Select the counter punch:"));
+            for (int i = 1; i <= 3; i++) {
+                System.out.print(GameLogic.centerText(150, "(" + i + ") \"" + combo[i-1] + "\""));
             }
+
             choice = GameLogic.readInt("-> ", 1, 3);
 
             System.out.println();
-            GameLogic.printSeparator(30);
+            GameLogic.printCenteredSeparator(30);
             System.out.println();
-            if(isCounter2(randomNum+1, choice)){
-                System.out.println("Great job!");
+
+            String message2;
+            if(isCounter2(randomNum + 1, choice)) {
+                message2 = "Great job!\n";
                 success++;
             } else {
-                System.out.println("No, you should try to counter punch it!");
+                message2 = "No, you should try to counter punch it!\n";
             }
+            System.out.println(GameLogic.centerBox(message2, 50));
+
         } while(success < 5);
 
-        space(70);
-        System.out.println("Fred:\t\"Great job with the 'The Body Breaker' combo, " + name + "! Now it's time to put those skills to the test.\"");
-        System.out.println("\tI've arranged a sparring match for you against one of the best Pablo 'El Tigre' Martínez!");
-        System.out.println("\tPablo's fast and skilled, so this will be a true test of what you've learned. Remember to stay focused and use your combo!\"");
-        System.out.println();
-        System.out.println("\t[ Fred gestures toward the sparring ring, where Pablo stands ready, his eyes sharp and confident. ]");
-        System.out.println();
-        System.out.println("Fred:\t\"Step into the ring, and show Pablo what you've got!\"");
-        System.out.println();
-        System.out.println("\t[ You take a deep breath, stepping into the ring to face Pablo 'El Tigre' Martínez, eager to prove your skills... ]");
+        System.out.println("\n");
+        String message1 = "Fred:\t\"Great job with the 'The Body Breaker' combo, " + name + "! Now it's time to put those skills to the test.\"\n" +
+                "\tI've arranged a sparring match for you against one of the best, Pablo 'El Tigre' Martínez!\n" +
+                "\tPablo's fast and skilled, so this will be a true test of what you've learned. \nRemember to stay focused and use your combo!\"\n" +
+                "\n" +
+                "\t[ Fred gestures toward the sparring ring, where Pablo stands ready, his eyes sharp and confident. ]\n" +
+                "\n" +
+                "Fred:\t\"Step into the ring, and show Pablo what you've got!\"\n" +
+                "\n" +
+                "\t[ You take a deep breath, stepping into the ring to face Pablo 'El Tigre' Martínez, \neager to prove your skills... ]";
+
+        System.out.println(GameLogic.centerBox(message1, 120));
+        System.out.println("\n");
         GameLogic.pressAnything();
         PabloUrbanGym.setPlayer(GameLogic.player);
         PabloUrbanGym.fightLoop2();

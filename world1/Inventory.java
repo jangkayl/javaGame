@@ -75,23 +75,23 @@ public class Inventory {
 
     public static void displayInventory(){
         shop = GameLogic.shop;
-        GameLogic.printHeading("\tInventory");
-        System.out.println("Equipped Items:");
-        System.out.println("\t1. Head: " + (slot[0] != null ? slot[0].name + " - " + slot[0].effect : "Empty"));
-        System.out.println("\t2. Body: " + (slot[1] != null ? slot[1].name + " - " + slot[1].effect : "Empty"));
-        System.out.println("\t3. Hands: " + (slot[2] != null ? slot[2].name + " - " + slot[2].effect : "Empty"));
-        System.out.println("\t4. Boots: " + (slot[3] != null ? slot[3].name + " - " + slot[3].effect : "Empty"));
-        System.out.println("Buff Items:");
-        System.out.println("\t"+ (slot[4] != null ? slot[4].name + " - " + slot[4].effect : "Empty"));
-        System.out.println(); 
-        System.out.println("Inventory Items:");
+        System.out.println(GameLogic.centerBox("Inventory", 30));
+        System.out.println(GameLogic.centerText(50, "\nEquipped Items:"));
+        System.out.print(GameLogic.centerText(50, "1. Head: " + (slot[0] != null ? slot[0].name + " - " + slot[0].effect : "Empty")));
+        System.out.print(GameLogic.centerText(50, "2. Body: " + (slot[1] != null ? slot[1].name + " - " + slot[1].effect : "Empty")));
+        System.out.print(GameLogic.centerText(50, "3. Hands: " + (slot[2] != null ? slot[2].name + " - " + slot[2].effect : "Empty")));
+        System.out.print(GameLogic.centerText(50, "4. Boots: " + (slot[3] != null ? slot[3].name + " - " + slot[3].effect : "Empty")));
+        System.out.print(GameLogic.centerText(50, "\nBuff Items:"));
+        System.out.print(GameLogic.centerText(50, (slot[4] != null ? slot[4].name + " - " + slot[4].effect : "Empty")));
+        System.out.print(GameLogic.centerText(50, "\nInventory Items:"));
         if (itemCount == 0) {
-            System.out.println("\tNO ITEM YET");
+            System.out.println(GameLogic.centerText(50, "NO ITEM YET"));
             return;
         }
+
         for (int j = 0; j < itemCount; j++) {
             Item currentItem = inventoryItems[j];
-            System.out.println((j + 1) + ". " + currentItem.name + " - " + currentItem.effect);
+            System.out.println(GameLogic.centerText(50,(j + 1) + ". " + currentItem.name + " - " + currentItem.effect));
         }
     }
 

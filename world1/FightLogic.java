@@ -117,11 +117,12 @@ public abstract class FightLogic {
             }
 
             if(isValidCombo(input, player.getStamina()) == 1){
-                System.out.println("Please enter a valid combo (e.g., 123):");
+                System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 50));
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
-                System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
-                System.out.println("You may use 3 Blocks as your combo to regain stamina");
+                String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
+                                                "You may use 3 Blocks as your combo to regain stamina";
+                System.out.println(GameLogic.centerBox(message, 60));
                 continue;
             }
             break;
@@ -212,10 +213,8 @@ public abstract class FightLogic {
 
     public void winnerReward(){
         if(playerProgress.getPlayerWins() != 3){
-            System.out.println(); 
-            GameLogic.printSeparator(40);
-            System.out.println(); 
-            System.out.println("Congratulations! You've won the match!");
+            System.out.println();
+            System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
         }
     }
     
