@@ -1,11 +1,15 @@
 package world2;
 
+import java.util.Random;
+
 import world1.GameLogic;
 
 public class BoxerHints {
+    private Random rand = new Random();
+
     private String[][] skillsWithHints = {
         {"Jab", 
-            "The Bruiser's fists hover in front, his stance loose, ready to test your guard.",
+            "His fists hover in front, his stance loose, ready to test your guard.",
             "He keeps his distance, his hands moving in quick feints to gauge your response."
         },
         {"Hook", 
@@ -17,7 +21,7 @@ public class BoxerHints {
             "He plants his feet firmly, guard high, waiting for your move."
         },
         {"Uppercut", 
-            "The Bruiser's body lowers slightly, fists clenched, ready to spring upward.",
+            "His body lowers slightly, fists clenched, ready to spring upward.",
             "He tightens his core, his stance compact, as if preparing for an explosive strike."
         },
         {"Elbow Strike", 
@@ -46,6 +50,17 @@ public class BoxerHints {
         }
         System.out.println("\n\t( You take in the lessons, ready to outsmart your opponents. )");
         GameLogic.pressAnything();
+    }
+
+    public String getRandomHint(String skillName) {
+        for (String[] skillHints : skillsWithHints) {
+            if (skillHints[0].equalsIgnoreCase(skillName)) {
+                int randomHintIndex = 1 + rand.nextInt(2); 
+                return skillHints[randomHintIndex];
+            }
+        }
+        String[] randomSkillHints = skillsWithHints[rand.nextInt(skillsWithHints.length)];
+        return randomSkillHints[1 + rand.nextInt(2)]; 
     }
 
 }

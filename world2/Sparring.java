@@ -7,6 +7,7 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world2.SparringOpponents.PerezSparring;
+import world2.SparringOpponents.PitikSparring;
 
 public class Sparring {
     static StreetFighter opponent;
@@ -59,46 +60,72 @@ public class Sparring {
     private static void startSparring(int opponentIndex) {
         GameLogic.clearConsole();
         PerezSparring perez = null;
+        PitikSparring pitik = null;
         int choice = 0;
     
-        StreetFighter opponent = generateRandomOpponent();  
-        perez = new PerezSparring(player, opponent);
+        boolean usePerez = new Random().nextBoolean(); 
+        if (usePerez) {
+            opponent = generateRandomOpponent("Joaquin Perez");
+            perez = new PerezSparring(player, opponent);
+            pitik = null;
+        } else {
+            opponent = generateRandomOpponent("Lando Pitik");
+            pitik = new PitikSparring(player, opponent);
+            perez = null;
+        }
     
-        while (choice != 1) {
+        while (true) {
             world1.Tournament.showOpStats(opponent);
     
             System.out.println("Select an option: ");
             System.out.println("\t\t(1) Fight now");
             System.out.println("\t\t(2) Check your Stats");
             System.out.println("\t\t(3) Change Opponent Stats");
+            System.out.println("\t\t(4) Go Back");
     
-            choice = GameLogic.readInt("-> ", 1, 3); 
+            choice = GameLogic.readInt("-> ", 1, 4); 
     
             if (choice == 1) {
+                playerProgress.setRound(1);
+                if(playerProgress.getAddStats() < 3){
+                    playerProgress.setAddStats(playerProgress.getAddStats() + 1);
+                }
                 break;
             } else if (choice == 2) {
                 GameLogic.printStats();
             } else if (choice == 3) {
-                opponent = generateRandomOpponent(); 
-                perez = new PerezSparring(player, opponent); 
+                usePerez = new Random().nextBoolean(); 
+                if (usePerez) {
+                    opponent = generateRandomOpponent("Joaquin Perez"); 
+                    perez = new PerezSparring(player, opponent);
+                    pitik = null; 
+                } else {
+                    opponent = generateRandomOpponent("Lando Pitik"); 
+                    pitik = new PitikSparring(player, opponent);
+                    perez = null;
+                }
                 System.out.println("New opponent generated!");
+            } else if(choice == 4){
+                return;
             }
         }
     
-        perez.fightLoop();
+        if (perez != null) {
+            perez.fightLoop();
+        } else if (pitik != null) {
+            pitik.fightLoop();
+        }
     }
     
-    private static StreetFighter generateRandomOpponent() {
-        Random rand = new Random();
-    
-        // Random Stats for Opponent
-        int hp = rand.nextInt(51) + 180; // HP between 180 and 230
-        int stamina = rand.nextInt(21) + 80; // Stamina between 80 and 101
+    // Random Stats for Opponent
+    private static StreetFighter generateRandomOpponent(String name) {
+        int hp = rand.nextInt(51) + player.getMaxHp() - 100; // HP between playersMaxHp
+        int stamina = rand.nextInt(21) + player.getMaxStamina() + 10; // Stamina between playersMaxStamina
         double critChance = 0.3 + (rand.nextDouble() * 0.3); // Crit chance between 0.3 and 0.6
         double critMulti = 2 + (rand.nextDouble() * 1); // Crit multi between 2 and 3
         double dodgeChance = 0.3 + (rand.nextDouble() * 0.2); // Dodge chance between 0.3 and 0.5
     
-        return new StreetFighter("Joaquin Perez", hp, stamina, critChance, critMulti, dodgeChance, 3);
+        return new StreetFighter(name, hp, stamina, critChance, critMulti, dodgeChance, 3);
     }
     
 }

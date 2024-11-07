@@ -124,7 +124,7 @@ public class GameLogic2 {
             } else if(choice == 2){
                 Sparring.enterSparring();
             } else if(choice == 3){
-                Tournament.attemptTournament(player.getStage());
+                TournamentUnderground.attemptTournament(playerProgress.getAddStats());
             } else if(choice == 4){
                 break;
             }

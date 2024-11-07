@@ -1,11 +1,16 @@
-package world1;
+package world2;
 
+import world1.FightLogic;
+import world1.GameLogic;
+import world1.Player;
+import world1.PlayerProgress;
+import world1.StreetFighter;
+import world1.Tournament;
 import world1.TournamentFight.LopezTourna;
 import world1.TournamentFight.RamirezTourna;
 import world1.TournamentFight.TettehTourna;
-import world2.GameLogic2;
 
-public class Tournament {
+public class TournamentUnderground {
     static StreetFighter opponent;
     static Player player = GameLogic.player;
     static String[] opponents = {"El Tigre", "El Jablo", "El Taeh"};
@@ -15,25 +20,23 @@ public class Tournament {
         opponent = enemy;
     }
 
-    public StreetFighter getOpponent(){
-        return opponent;
-    }
-
-    public static void attemptTournament(int playerStage) {
+    public static void attemptTournament(int playerAddStats) {
         GameLogic.clearConsole();
-        if (playerStage < 3) {
-            System.out.println("⚔️  Tournament Entry Attempt  ⚔️");
+        if (playerAddStats < 3) {
+            System.out.println("⚔️  UNDERGROUND TOURNAMENT ENTRY ⚔️");
             GameLogic.printSeparator(40);
-            System.out.println("You step forward, ready to face the toughest challengers...");
+            System.out.println("You enter a dimly lit arena, the air thick with sweat and smoke...");
             System.out.println();
             GameLogic.printSeparator(40);
-            System.out.println("[ But the tournament official stops with a grin ]");
-            System.out.println("Gatekeeper: \"Hold it right there! You're not ready for this arena yet. Step into the ring now, and one solid hit");
-            System.out.println("\t\t\tHead back to the Train in Gym, build your skills and get stronger will have you on the floor before you even know it!");
-            System.out.println("\t\t\tGo back to Coach Fred at the gym, work those muscles, and test your mettle in sparring. No pulling punches—this is where the real training begins!\"");
+            System.out.println("[ A grizzled official glares at you, a crooked grin forming ]");
+            System.out.println("Gatekeeper: \"Whoa there! You think you can just stroll in here? You ain't ready for this blood pit! One hit and you'll be begging for mercy.");
+            System.out.println("\t\t\tYou need to spar harder and toughen up! Earn your stripes before stepping into this ring!\"");
             System.out.println();
-            System.out.println("🏋️ Tip: Train hard, rank up, and grow stronger to unlock the tournament! 🏆");
+            System.out.println("🏋️ Tip: Train hard, spar fiercely, and build your strength to earn a shot at the underground brawls! 🏆");
+            System.out.println("🔥 Prove your worth in 3 sparring matches before stepping into the ring of legends! 🔥");
+            resetMatchScores();
             GameLogic.pressAnything();
+            GameLogic.gameData.saveGame();
         } else {
             startTournament();
         }
@@ -41,48 +44,45 @@ public class Tournament {
 
     public static void startTournament() {
         GameLogic.clearConsole();
-        GameLogic.printHeading("\t🏆 Champ Arena Tournament 🏆");
+        GameLogic.printHeading("\t🏆 Underground Brawl Tournament 🏆");
 
-        if(player.getStage() < 6){
-            System.out.println("Welcome, " + player.getName() + "! Prepare to fight your way to the top!");
-            playerProgress.setDone(1);
-            printTournament();
+        if(player.getStage() < 10){
+            System.out.println("Welcome, " + player.getName() + "! This is no ordinary fight - it's a battle for survival in the underground ring!");
+            playerProgress.setDone(2);
+            Tournament.printTournament();
 
             while(true){
                 if (playerProgress.getOpponentWins() == 3) {
                     if(offerRematch()){
                         resetMatchScores();
                         continue;
-                    } else {
-                        GameLogic.gymTraining();
-                        return;
                     }
                 }
     
                 // Before each major stage, encourage checking the shop or inventory
-                if (player.getStage() == 3) {
+                if (player.getStage() == 9) {
                     if (visitShopOrInventory()) {
                         startMatch(0);
                         if (playerProgress.getPlayerWins() == 3) {
-                            player.setStage(4);
+                            player.setStage(10);
                             resetMatchScores();
                             continue;
                         }
                     }
-                } else if (player.getStage() == 4) {
+                } else if (player.getStage() == 10) {
                     if (visitShopOrInventory()) {
                         startMatch(1);
                         if (playerProgress.getPlayerWins() == 3) {
-                            player.setStage(5);
+                            player.setStage(11);
                             resetMatchScores();
                             continue;
                         }
                     }
-                } else if (player.getStage() == 5) {
+                } else if (player.getStage() == 11) {
                     if (visitShopOrInventory()) {
                         startMatch(2);
                         if (playerProgress.getPlayerWins() == 3) {
-                            player.setStage(6);
+                            player.setStage(12);
                             resetMatchScores();
                             break;
                         }
@@ -91,7 +91,7 @@ public class Tournament {
             }
         }
         concludeTournament();
-        if(player.getCurrentWorld() == 1) {
+        if(player.getCurrentWorld() == 2) {
             GameLogic2.gameLoop();
         }
     }
@@ -108,27 +108,54 @@ public class Tournament {
         // Initialize opponent based on the index
         switch (opponentIndex) {
             case 0 -> {
-                opponent = new StreetFighter("Rico Ramirez", 150, 80, 0.2, 2, 0.30, 2);
+                // The Reaper
+                opponent = new StreetFighter("Julio Navarro", 350, 100, 0.4, 2, 0.25, 4);
                 opponent.setPlayerOpponent(player);
-                UrbanStory.tournaOpponentBackstory(opponent);
+                StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new RamirezTourna(player, opponent));
             }
             case 1 -> {
-                opponent = new StreetFighter("Oscar Lopez", 170, 100, 0.2, 2, 0.30, 2);
+                // The Bullseye
+                opponent = new StreetFighter("Raul Villanueva", 450, 120, 0.45, 2, 0.3, 4);
                 opponent.setPlayerOpponent(player);
-                UrbanStory.tournaOpponentBackstory(opponent);
+                StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new LopezTourna(player, opponent));
             }
             case 2 -> {
-                opponent = new StreetFighter("Ishmael Tetteh", 200, 120, 0.3, 2.5, 0.40, 3);
+                // The Ghost
+                opponent = new StreetFighter("Ralfo Salvahez", 500, 140, 0.5, 2.5, 0.40, 5);
                 opponent.setPlayerOpponent(player);
-                UrbanStory.tournaOpponentBackstory(opponent);
+                StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new TettehTourna(player, opponent));
             }
             default -> System.out.println("Invalid opponent index.");
         }
     }
-    
+
+    private static boolean visitShopOrInventory() {
+        System.out.println();
+        System.out.println("Before continuing, would you like to visit the shop or check your inventory?");
+        System.out.println("1. Visit Shop");
+        System.out.println("2. Check Inventory");
+        System.out.println("0. Continue Tournament");
+        System.out.println();
+        System.out.print("Enter your choice: ");
+        
+        int choice = GameLogic.readInt("", 0, 2);
+        if (choice == 0) {
+            return true;  
+        } else if(choice == 1){
+            GameLogic.shop.showShop(false);
+            GameLogic.gameData.inputInventory(GameLogic.inventory.getInventoryItems());
+        } else if(choice == 2){
+            GameLogic.gameData.getGameDataManager().getInventory();
+            GameLogic.gameData.getGameDataManager().getSlots();
+            GameLogic.inventory.inventoryMenu();
+            GameLogic.gameData.inputSlots(GameLogic.inventory.getSlots());
+        }
+        return false;
+    }
+
     private static void fightWithOpponent(FightLogic fightLogic) {
         while (!isMatchConcluded()) {
             fightLogic.fightLoop();
@@ -162,6 +189,19 @@ public class Tournament {
         } else {
             return false;
         }
+    }
+
+    public void printStanding(){
+        System.out.println();  
+        GameLogic.printSeparator(40);
+        System.out.println();  
+        System.out.println("\t ~ ~ ~ BEST OF 3 ~ ~ ~");
+        System.out.println();  
+        System.out.println(player.getName() + " - " + playerProgress.getPlayerWins() + "\t\t" + opponent.getName() + " - " + playerProgress.getOpponentWins());
+        System.out.println();  
+        GameLogic.printSeparator(40);
+        System.out.println();  
+        GameLogic.pressAnything();
     }
 
     private static void concludeTournament() {
@@ -208,74 +248,5 @@ public class Tournament {
         // Update the player's world/state to reflect the new story path.
         player.setCurrentWorld(1);
     }
-    
-    public static void showOpStats(StreetFighter opponent){
-        System.out.println();
-        System.out.print(GameLogic.centerText(" ", 48));
-        System.out.println(GameLogic.centerText(opponent.getName(), 28));
-        System.out.print(GameLogic.centerText(" ", 48));
-        System.out.println(GameLogic.centerText("* " + opponent.getRank() + " *", 27));
 
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" HP:",opponent.getHp() + " / " + opponent.getMaxHp(), 25));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" Stamina:",opponent.getStamina() + " / " + opponent.getMaxStamina(), 25));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" Critical Chance:", GameLogic.df.format(opponent.getCritChance() * 100) + "%", 25));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" Critical Multiplier:", GameLogic.df.format(opponent.getCritMultiplier()) + "x", 25));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" Dodge Chance:", GameLogic.df.format(opponent.getDodgeChance() * 100) + "%", 25));
-    }
-
-    public static void printTournament() {
-        System.out.println();
-        GameLogic.printHeading("\t\tTournament Rules");
-        System.out.println("1. You will face 3 opponents in this tournament.");
-        System.out.println("2. Each opponent match is a best-of-3 rounds.");
-        System.out.println("3. Win 3 rounds against each opponent to proceed.");
-        System.out.println("4. If you lose a best-of-3 match, you are out of the tournament and must return to training.");
-        System.out.println("5. Defeat all 3 opponents to claim victory in the tournament.");
-    }
-
-    private static boolean visitShopOrInventory() {
-        System.out.println();
-        System.out.println("Before continuing, would you like to visit the shop or check your inventory?");
-        System.out.println("1. Visit Shop");
-        System.out.println("2. Check Inventory");
-        System.out.println("0. Continue Tournament");
-        System.out.println();
-        System.out.print("Enter your choice: ");
-        
-        int choice = GameLogic.readInt("", 0, 2);
-        if (choice == 0) {
-            return true;  
-        } else if(choice == 1){
-            GameLogic.shop.showShop(false);
-            GameLogic.gameData.inputInventory(GameLogic.inventory.getInventoryItems());
-        } else if(choice == 2){
-            GameLogic.gameData.getGameDataManager().getInventory();
-            GameLogic.gameData.getGameDataManager().getSlots();
-            GameLogic.inventory.inventoryMenu();
-            GameLogic.gameData.inputSlots(GameLogic.inventory.getSlots());
-        }
-        return false;
-    }
-
-    public void printStanding(){
-        System.out.println();  
-        GameLogic.printSeparator(40);
-        System.out.println();  
-        System.out.println("\t ~ ~ ~ BEST OF 3 ~ ~ ~");
-        System.out.println();  
-        System.out.println(player.getName() + " - " + playerProgress.getPlayerWins() + "\t\t" + opponent.getName() + " - " + playerProgress.getOpponentWins());
-        System.out.println();  
-        GameLogic.printSeparator(40);
-        System.out.println();  
-        GameLogic.pressAnything();
-    }
 }

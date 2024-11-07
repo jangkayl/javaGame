@@ -14,10 +14,10 @@ public class Shop {
         new Item("Beginner's Boots", "Improves footwork and stamina.", 40, "+13% Stamina","false","BOOTS", 0, 0.13, 0, 0, 0),
 
         // World 2 Items
-        new Item("Reinforced Headband", "Tough headband that protects the skull and conceals small illegal items.", 200, "+10% HP, +5% Crit Chance, +15% Dodge Chance","false","HEAD", 0.1, 0, 0.05, 0, 0.15),
+        new Item("Reinforced Headband", "Tough headband that protects the skull and conceals small illegal items.", 400, "+10% HP, +5% Crit Chance, +15% Dodge Chance","false","HEAD", 0.1, 0, 0.05, 0, 0.15),
         new Item("Blood-Forged Knuckles", "Powerful knuckles for brutal punches, but reduce health over time due to strain on the hands.", 300, "-10% Health, +20% Crit Hit Chance","false","HAND", 0.1, 0, 0.2, 0, 0),
-        new Item("Shadowrunner Sneakers", "Lightweight shoes that improve agility but provide less protection.", 150, "+20% Stamina, +10% Dodge Chance, -10% HP","false","BOOTS", -0.1, 0.2, 0, 0, 0.1),
-        new Item("Tactical Combat Boots", "Sturdy boots that improve footwork and durability.", 150, "+10% Health, +10% Crit Hit Chance, +10% Stamina", "false", "BOOTS", 0.1, 0.1, 0.1, 0, 0),
+        new Item("Shadowrunner Sneakers", "Lightweight shoes that improve agility but provide less protection.", 250, "+20% Stamina, +10% Dodge Chance, -10% HP","false","BOOTS", -0.1, 0.2, 0, 0, 0.1),
+        new Item("Tactical Combat Boots", "Sturdy boots that improve footwork and durability.", 250, "+10% Health, +10% Crit Hit Chance, +10% Stamina", "false", "BOOTS", 0.1, 0.1, 0.1, 0, 0),
     };
 
     public Shop(Player p, PlayerProgress progress){
@@ -49,10 +49,11 @@ public class Shop {
         }
 
         public void displayItem() {
-            System.out.println("\t-> " + description);
-            System.out.println("\tCost:\tPHP " + cost);
-            System.out.println("\tEffect:\t" + effect);
-            System.out.println();
+            System.out.print(GameLogic.centerText(50, "-> " + description));
+            System.out.print(GameLogic.centerText(50, "Effect: " + effect));
+            System.out.println(GameLogic.centerText(50, "Cost: PHP " + cost));
+
+            System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
         }
 
         public boolean isSoldOut() {
@@ -130,35 +131,38 @@ public class Shop {
     
             System.out.println();
             if(player.getCurrentWorld() == 0){
-                GameLogic.printHeading("        Gym Shop");
+                System.out.println(GameLogic.centerBox("GYM SHOP", 40));
             } else if(player.getCurrentWorld() == 1){
-                GameLogic.printHeading("        Black Market");
+                System.out.println(GameLogic.centerBox("BLACK MARKET", 40));
             }
-            System.out.println();
-    
-            GameLogic.printSeparator(20);
-            System.out.println("Player Points: " + player.getPlayerPoints());
-            GameLogic.printSeparator(20);
-            System.out.println();
-    
+
+            System.out.print(GameLogic.centerBox("Player Points: " + player.getPlayerPoints(), 20));
+            System.out.println("\n");
+            System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
             // Display items for sale
             if(player.getCurrentWorld() == 0){
                 for (int i = 0; i < 4; i++) {
-                    System.out.println("(" + (i + 1) + ") " + items[i].name);
+                    System.out.println();
+                    String line = "(" + (i + 1) + ") " + items[i].name;
+                    System.out.println(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }
             } else if(player.getCurrentWorld() == 1){
                 for (int i = 4; i < items.length; i++) {
-                    System.out.println("(" + (i - 3) + ") " + items[i].name);
+                    System.out.println();
+                    String line = "(" + (i - 3) + ") " + items[i].name;
+                    System.out.println(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }
             }
-    
+
+
+            System.out.println("\n");
             System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
     
             // Training check before entering purchase loop
             if (playerProgress.getShopStage() < 1 && isTraining) {
-                choice = GameLogic.readInt("-> ", 0, items.length);
+                choice = GameLogic.readInt("-> ", 0, 8);
                 UrbanStory.urbanTraining7();
                 return;
             }
@@ -206,12 +210,15 @@ public class Shop {
 
     public void shop() {
         GameLogic.clearConsole();
-        GameLogic.printHeading("        Gym Shop");
+        System.out.println(GameLogic.centerBox("GYM SHOP", 40));
+        System.out.println();
 
-        System.out.println("Fred: \t\"Welcome to the shop. Here, you can buy all sorts of gear and items that'll");
-        System.out.println("\thelp boost your stats. You want more stamina? We've got special protein shakes for that.");
-        System.out.println("\tNeed a better chance to land critical hits? Try out our precision wraps. These items can");
-        System.out.println("\tbe real game-changers if you use them right.\"");
+        String message = "Fred: \"Welcome to the shop. Here, you can buy all sorts of gear and items that'll\n"
+                + "help boost your stats. You want more stamina? We've got special protein shakes for that.\n"
+                + "Need a better chance to land critical hits? Try out our precision wraps. These items can\n"
+                + "be real game-changers if you use them right.\"\n";
+
+        System.out.println(GameLogic.centerText(50, message));
 
         GameLogic.pressAnything();
         showShop(true);

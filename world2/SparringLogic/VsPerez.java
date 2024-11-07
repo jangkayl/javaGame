@@ -3,7 +3,7 @@ package world2.SparringLogic;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
-import world1.TournamentFight.TettehTourna;
+import world2.SparringOpponents.PerezSparring;
 
 public class VsPerez extends PlayerVsSpar{
     static Player player = GameLogic.player;
@@ -14,7 +14,7 @@ public class VsPerez extends PlayerVsSpar{
 
     @Override
     protected String[] getOpponentAttacks() {
-        return TettehTourna.opponentAttacks;
+        return PerezSparring.opponentAttacks;
     }
     
     @Override

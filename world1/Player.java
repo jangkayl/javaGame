@@ -70,7 +70,7 @@ public class Player extends Boxer implements PlayerInterface {
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " elbow strike " + opponent.getName() + " for " + damage + " damage!");
+        System.out.println(this.getName() + " elbow strike (-10 HP) " + opponent.getName() + " for " + damage + " damage!");
     }
     
     @Override
@@ -81,18 +81,20 @@ public class Player extends Boxer implements PlayerInterface {
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " head butt " + opponent.getName() + " for " + damage + " damage!");
+        System.out.println(this.getName() + " head butt (-15 HP) " + opponent.getName() + " for " + damage + " damage!");
     }
     
     @Override
     public void lowBlow(){
         int damage = (int)Math.floor(40 * getDamageSetter());
+        int damageStamina = (int)Math.floor(15 * getDamageSetter());
         int staminaReduced = 25;
         int hpReduced = 20;
         opponent.setHp(opponent.getHp() - damage);
+        opponent.setStamina(opponent.getStamina() - damageStamina);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " low blow " + opponent.getName() + " for " + damage + " damage!");
+        System.out.println(this.getName() + " low blow (-20 HP) " + opponent.getName() + " for " + damage + " damage and drains " + damageStamina + " stamina!");
     }
 
     // Additional Combos
@@ -109,7 +111,7 @@ public class Player extends Boxer implements PlayerInterface {
         int staminaReduced = 9;
         opponent.setHp(opponent.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
-        System.out.println(this.getName() + " Cross to the Ribs " + opponent.getName() + " for " + damage + " damage!");
+        System.out.println(this.getName() + " rross to the ribs " + opponent.getName() + " for " + damage + " damage!");
     }
 
     public void finishingUppercut() {
@@ -121,23 +123,26 @@ public class Player extends Boxer implements PlayerInterface {
     }
 
     public void chooseTrait(){
-        String[][] bonus = {{"+50% HP", "-10% Stamina", "15% Critical Hit Chance", "-5% Dodge Chance"}, 
-        {"+30% Stamina", "+10% Dodge Chance", "20% Critical Hit Chance", "-10% HP"},
-        {"20% Critical Hit Chance", "+50% Crit Damage Multiplier", "-10% Stamina", "-5% Dodge Chance"}};
-        
+        String[][] bonus = {{"+50% HP", "-10% Stamina", "-5% Dodge Chance" , "15% Critical Hit Chance"},
+                { "-10% HP", "+30% Stamina", "+10% Dodge Chance", "20% Critical Hit Chance"},
+                { "-10% Stamina", "-5% Dodge Chance", "20% Critical Hit Chance", "+50% Crit Damage Multiplier"}};
+
         GameLogic.clearConsole();
-        GameLogic.printHeading("Choose a trait:");
+        System.out.print(GameLogic.centerBox("CHOOSE A TRAIT", 50));
+        System.out.println();
         for(int i = 0; i < traits.length; i++){
-            System.out.print("(" + (i+1) + ") " + traits[i] + " - ");
-            if(i == 2) System.out.println("\t" + bonus[i][0]);
-            else System.out.println("\t\t" + bonus[i][0]);
+            System.out.print(GameLogic.centerText(50,"(" + (i+1) + ") " + traits[i]));
+            if(i == 2) System.out.print(GameLogic.centerText(50, bonus[i][0]));
+            else System.out.print(GameLogic.centerText(50, bonus[i][0]));
+
             for(int j = 1; j < 4; j++){
-                System.out.println("\t\t\t\t\t" + bonus[i][j]);
+                System.out.print(GameLogic.centerText(50, bonus[i][j]));
             }
+            System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(40)));
         }
         
         int input = GameLogic.readInt("-> ", 1, 3);
-        GameLogic.printHeading("You chose " + traits[input-1] + "!");
+        System.out.print(GameLogic.centerBox("You chose " + traits[input-1] + "!",50));
         if(input == 1){
             int newHp = getMaxHp() + (int)Math.floor(getMaxHp() * 0.5);
             int newStamina = getStamina() - (int)Math.floor(getStamina() * 0.1);
@@ -198,6 +203,9 @@ public class Player extends Boxer implements PlayerInterface {
     }
     
     public void setPlayerPoints(int playerPoints){
+        if(playerPoints < 0){
+            playerPoints = 0;
+        }
         this.playerPoints = playerPoints;
     }
    

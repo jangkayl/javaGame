@@ -1,20 +1,20 @@
-package world1.FightingLogic;
+package world2.SparringLogic;
 
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
-import world1.TournamentFight.RamirezTourna;
+import world2.SparringOpponents.PitikSparring;
 
-public class VsRamirez extends PlayerVsOpponent{
+public class VsPitik extends PlayerVsSpar{
     static Player player = GameLogic.player;
 
-    public VsRamirez(Player play, StreetFighter opponent){
+    public VsPitik(Player play, StreetFighter opponent){
         super(player, opponent);
     }
 
     @Override
     protected String[] getOpponentAttacks() {
-        return RamirezTourna.opponentAttacks;
+        return PitikSparring.opponentAttacks;
     }
 
     @Override
@@ -40,6 +40,15 @@ public class VsRamirez extends PlayerVsOpponent{
                 break;
             case 6:
                 if (opponent.hasEnoughStamina(14)) opponent.leadHook();
+                break;
+            case 7:
+                if (opponent.hasEnoughStamina(9)) opponent.elbowStrike();
+                break;
+            case 8:
+                if (opponent.hasEnoughStamina(10)) opponent.headButt();
+                break;
+            case 9:
+                if (opponent.hasEnoughStamina(14)) opponent.lowBlow();
                 break;
             default:
                 System.out.println("Invalid action choice!");
@@ -69,6 +78,15 @@ public class VsRamirez extends PlayerVsOpponent{
                 break;
             case 6:
                 opponent.setStamina(opponent.getStamina() - 14);
+                break;
+            case 7:
+                opponent.setStamina(opponent.getStamina() - 25);
+                break;
+            case 8:
+                opponent.setStamina(opponent.getStamina() - 20);
+                break;
+            case 9:
+                opponent.setStamina(opponent.getStamina() - 25);
                 break;
             default:
                 System.out.println("Invalid action choice!");

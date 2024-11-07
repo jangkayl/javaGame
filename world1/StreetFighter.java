@@ -56,7 +56,7 @@ public class StreetFighter extends Boxer {
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " elbow strike " + player.getName() + " for " + damage + " damage!");
+        System.out.println(this.getName() + " elbow strike (-10 HP) " + player.getName() + " for " + damage + " damage!");
     }
     
     @Override
@@ -67,18 +67,20 @@ public class StreetFighter extends Boxer {
         player.setHp(player.getHp() - damage);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " head butt " + player.getName() + " for " + damage + " damage!");
+        System.out.println(this.getName() + " head butt (-15 HP) " + player.getName() + " for " + damage + " damage!");
     }
     
     @Override
     public void lowBlow(){
         int damage = (int)Math.floor(40 * getDamageSetter());
+        int damageStamina = (int)Math.floor(15 * getDamageSetter());
         int staminaReduced = 25;
         int hpReduced = 20;
         player.setHp(player.getHp() - damage);
+        player.setStamina(player.getStamina() - damageStamina);
         this.setStamina(this.getStamina() - staminaReduced);
         this.setHp(this.getHp() - hpReduced);
-        System.out.println(this.getName() + " low blow " + player.getName() + " for " + damage + " damage!");
+        System.out.println(this.getName() + " low blow (-20 HP) " + player.getName() + " for " + damage + " damage and drains " + damageStamina + " stamina!");
     }
 
     public boolean hasEnoughStamina(int requiredStamina) {

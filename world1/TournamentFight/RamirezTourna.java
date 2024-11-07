@@ -118,7 +118,7 @@ public class RamirezTourna extends FightLogic{
                 if (tempStamina - staminaCost >= 0) {
                     validChoice = true;
                 } else {
-                    if(rand.nextDouble() > 0.3)
+                    if(rand.nextDouble() > 0.3) 
                         opponentChoice[i] = rand.nextInt(7);
                         if (opponentChoice[i] >= 4) {
                             if(tempStamina - 30 < 0){

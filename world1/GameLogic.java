@@ -73,6 +73,85 @@ public class GameLogic{
         scan.nextLine();
     }
 
+    public static String leftBox(String text, int boxWidth) {
+        int terminalWidth = 150;
+        String boxPad = "";
+        String horizontalBorder = "\u2554" + new String(new char[boxWidth]).replace("\0", "\u2550") + "\u2557";
+
+        String[] lines = text.split("\n");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(boxPad).append(horizontalBorder).append("\n");
+
+        for (String line : lines) {
+            int paddingSizeText = (boxWidth - line.length()) / 2;
+            String paddingText = new String(new char[Math.max(0, paddingSizeText)]).replace("\0", " ");
+            sb.append(boxPad).append("\u2551").append(paddingText).append(line).append(paddingText);
+            if ((line.length() % 2) != (boxWidth % 2)) {
+                sb.append(" ");
+            }
+            sb.append("\u2551").append("\n");
+        }
+        sb.append(boxPad).append("\u255A").append(new String(new char[boxWidth]).replace("\0", "\u2550")).append("\u255D");
+        return sb.toString();
+    }
+
+    public static String rightBox(String text, int boxWidth) {
+        int terminalWidth = 150;
+
+        int boxPadding = terminalWidth - boxWidth;
+        String boxPad = new String(new char[boxPadding]).replace("\0", " ");
+        String horizontalBorder = "\u2554" + new String(new char[boxWidth]).replace("\0", "\u2550") + "\u2557";
+
+        String[] lines = text.split("\n");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(boxPad).append(horizontalBorder).append("\n");
+        for (String line : lines) {
+            int paddingSizeText = (boxWidth - line.length()) / 2;
+            String paddingText = new String(new char[Math.max(0, paddingSizeText)]).replace("\0", " ");
+            sb.append(boxPad).append("\u2551").append(paddingText).append(line).append(paddingText);
+
+            if ((line.length() % 2) != (boxWidth % 2)) {
+                sb.append(" ");
+            }
+            sb.append("\u2551").append("\n");
+        }
+        sb.append(boxPad).append("\u255A").append(new String(new char[boxWidth]).replace("\0", "\u2550")).append("\u255D");
+        return sb.toString();
+    }
+
+    public static String centerBox(String text, int width) {
+        int boxWidth = width;
+        int terminalWidth = 150;
+
+        int boxPadding = (terminalWidth - boxWidth) / 2;
+        String boxPad = new String(new char[boxPadding]).replace("\0", " ");
+
+        // Using thick box-drawing characters
+        String horizontalBorder = "\u2554" + new String(new char[boxWidth]).replace("\0", "\u2550") + "\u2557";
+
+        String[] lines = text.split("\n");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(boxPad).append(horizontalBorder).append("\n");
+
+        for (String line : lines) {
+            int paddingSizeText = (boxWidth - line.length()) / 2;
+            String paddingText = new String(new char[Math.max(0, paddingSizeText)]).replace("\0", " ");
+            sb.append(boxPad).append("\u2551").append(paddingText).append(line).append(paddingText);
+
+            // Adjust padding if line length and box width have different parity
+            if ((line.length() % 2) != (boxWidth % 2)) {
+                sb.append(" ");
+            }
+            sb.append("\u2551").append("\n");
+        }
+        sb.append(boxPad).append("\u255A").append(new String(new char[boxWidth]).replace("\0", "\u2550")).append("\u255D");
+
+        return sb.toString();
+    }
+
     public static String formatColumns(String leftText, String rightText, int columnWidth) {
 		StringBuilder formattedLine = new StringBuilder();
 
@@ -84,6 +163,19 @@ public class GameLogic{
 
 		return formattedLine.toString();
 	}
+
+    public static String centerText(int size, String text) {
+        int terminalWidth = 150;
+        StringBuilder sb = new StringBuilder();
+
+        for (String line : text.split("\n")) {
+            int paddingSizeText = (terminalWidth - line.length()) / 2;
+            String paddingText = new String(new char[Math.max(0, paddingSizeText)]).replace("\0", " ");
+            sb.append(paddingText).append(line).append("\n");
+        }
+
+        return sb.toString();
+    }
 
     public static String centerText(String text, int totalWidth) {
         if (text == null || text.length() >= totalWidth) {
@@ -104,15 +196,27 @@ public class GameLogic{
         return centeredText.toString();
     }
 
+    // Add centered separator -----
+    public static String printCenteredSeparator(int width) {
+        StringBuilder separator = new StringBuilder();
+        int terminalWidth = 40;
+        int paddingSize = (terminalWidth - width) / 6;
+        String padding = new String(new char[Math.max(0, paddingSize)]).replace("\0", " ");
+
+        for (int i = 0; i < width; i++) {
+            separator.append("-");
+        }
+
+        return padding + separator.toString(); // Center the separator
+    }
+
     // Starting the game
     public static void startGame() {
         boolean nameSet = false;
         String name;
 
         clearConsole();
-        printSeparator(40);
-        printHeading("\t\tFIST OF FURY\n     DEVELOPED BY NWORLD");
-        printSeparator(40);
+        System.out.println(centerBox("FIST OF FURY\nDEVELOPED BY NWORLD",100));
         pressAnything();
         System.out.println();
         printSeparator(40);
@@ -175,16 +279,15 @@ public class GameLogic{
     static void printMenu(){
         gameData.saveGame();
         clearConsole();
-        printHeading(centerText("MENU", 30));
-        System.out.println("Choose an action:");
-        printSeparator(20);
-        System.out.println("(0) Exit Game");
-        System.out.println("(1) Continue on your journey");
-        System.out.println("(2) Check your Stats");
-        System.out.println("(3) Tutorial");
+        System.out.println(centerBox("MENU", 30));
+        System.out.print(centerText(20, "Choose an action:"));
+        System.out.print(centerText(20, "(0) Exit Game"));
+        System.out.print(centerText(20, "(1) Continue on your journey"));
+        System.out.print(centerText(20, "(2) Check your Stats"));
+        System.out.print(centerText(20, "(3) Tutorial"));
         if(playerProgress.getShopStage() > 0){
-            System.out.println("(4) Inventory");
-            System.out.println("(5) Shop");
+            System.out.println(centerText(20, "(4) Inventory"));
+            System.out.println(centerText(20, "(5) Shop"));
         }
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
@@ -231,8 +334,7 @@ public class GameLogic{
                 if(player.getStage() == 0){
                     printSeparator(40);
                     String[] worlds = player.getWorlds();
-                    printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
-                    printSeparator(40);
+                    System.out.print(centerBox("Welcome to the " + worlds[player.getCurrentWorld()], 100));
                     UrbanStory.printUrban();
                     printSeparator(50);
                     System.out.println("Are you ready to start your journey?");
@@ -271,24 +373,25 @@ public class GameLogic{
     // Checks players stats
     public static void printStats(){
         clearConsole();
-        printHeading(centerText("CHARACTER STATS", 30));
-        System.out.print("\t\t");
-        printSeparator(10);
-        System.out.println(centerText(player.getName(), 28));
-        System.out.println(centerText("* " + player.getCurrentRank() + " *", 27));
-        System.out.print(centerText(" ", 6));
-        printSeparator(15);
-        System.out.print(centerText(" ", 8));
-        printSeparator(10);
-        System.out.println(formatColumns(" HP:",player.getHp() + " / " + player.getMaxHp(), 25));
-        printSeparator(35);
-        System.out.println(formatColumns(" Stamina:",player.getStamina() + " / " + player.getMaxStamina(), 25));
-        printSeparator(35);
-        System.out.println(formatColumns(" Critical Chance:", df.format(player.getCritChance() * 100) + "%", 25));
-        printSeparator(35);
-        System.out.println(formatColumns(" Critical Multiplier:", df.format(player.getCritMultiplier()) + "x", 25));
-        printSeparator(35);
-        System.out.println(formatColumns(" Dodge Chance:", df.format(player.getDodgeChance() * 100) + "%", 25));
+        String statsOutput =
+                        centerText("CHARACTER STATS", 50) + "\n" +
+                        printCenteredSeparator(30) + "\n" +
+                        centerText(player.getName(), 30) + "\n" +
+                        centerText("* " + player.getCurrentRank() + " *",30) + "\n" +
+                        printCenteredSeparator(30) + "\n" + "\n" +
+
+                        formatColumns("HP:", player.getHp() + " / " + player.getMaxHp(), 27) + "\n" +
+                        printCenteredSeparator(45) + "\n" +
+                        formatColumns("Stamina:", player.getStamina() + " / " + player.getMaxStamina(), 28) + "\n" +
+                        printCenteredSeparator(45) + "\n" +
+                        formatColumns("Critical Chance:", df.format(player.getCritChance() * 100) + "%", 29) + "\n" +
+                        printCenteredSeparator(45) + "\n" +
+                        formatColumns("Critical Multiplier:", df.format(player.getCritMultiplier()) + "x", 30) + "\n" +
+                        printCenteredSeparator(45) + "\n" +
+                        formatColumns("Dodge Chance:", df.format(player.getDodgeChance() * 100) + "%", 29) + "\n";
+
+        String centeredBox = centerBox(statsOutput, 50);
+        System.out.println(centeredBox);
         pressAnything();
     }
 
@@ -386,6 +489,4 @@ public class GameLogic{
         currentPoints += points;
         player.setPlayerPoints(currentPoints);
     }
-
-
 }

@@ -64,9 +64,12 @@ public class UrbanStory {
     }
 
     static int punch(){
-        System.out.println("Select the counter punch:");
+        String prompt = "Select the counter punch:";
+        System.out.print(GameLogic.centerText(prompt, 150));
+        System.out.println();
         for(int i = 1; i <= 4; i++){
-            System.out.println("\t(" + i + ") \"" + array[i-1] + "\"");
+            String option = " (" + i + ")\"" + array[i-1] + "\"";
+            System.out.println(GameLogic.centerText(option, 150));
         }
         int choice = GameLogic.readInt("-> ", 1, 4);
         return choice;
@@ -144,13 +147,15 @@ public class UrbanStory {
 
     public static void printUrban(){
         System.out.println();
-        System.out.println("Welcome to the Urban Gym, a tough, inner-city training ground.");
-        System.out.println("Here, local fighters sharpen their skills and compete in underground matches.");
-        System.out.println();
-        System.out.println("Under the watchful eye of Coach Fred, you train rigorously to hone your skills.");
-        System.out.println("Every punch, every dodge, and every strategy counts as you prepare for the battles ahead.");
-        System.out.println("Once you're ready, prove your strength by winning a tournament.");
-        System.out.println("Victory will grant you the opportunity to advance to the next world. Keep striving for greatness!");
+        String content ="Welcome to the Urban Gym, a tough, inner-city training ground.\n" +
+                        "Here, local fighters sharpen their skills and compete in underground matches.\n\n" +
+                        "Under the watchful eye of Coach Fred, you train rigorously to hone your skills.\n" +
+                        "Every punch, every dodge, and every strategy counts as you prepare for the battles ahead.\n" +
+                        "Once you're ready, prove your strength by winning a tournament.\n" +
+                        "Victory will grant you the opportunity to advance to the next world. Keep striving for greatness!\n";
+
+        String centeredContent = GameLogic.centerText(100, content);
+        System.out.println(centeredContent);
         System.out.println();
     }
 
@@ -189,202 +194,238 @@ public class UrbanStory {
         train(name);
     }
 
-    static void urbanTraining1(String name){
-        System.out.println();
-        System.out.println("Fred: \t\"Welcome to the Urban Gym, " + name + ". It may not look like much, but this place has");
-        System.out.println("\tmade champions. Today, it's gonna make you better. But first...\"");
-        System.out.println();
-        System.out.println("\t( He pauses, giving you a serious look. )");
-        System.out.println();
-        System.out.println("Fred: \t\"Training here isn't just about hitting harder. It's about discipline, control, and endurance. Think you've got it?");
-        System.out.println();
+    static void urbanTraining1(String name) {
+        String message = "Fred: \"Welcome to the Urban Gym, " + name + ". It may not look like much, but this place has\n"
+                + "made champions. Today, it's gonna make you better. But first...\"\n\n"
+                + "( He pauses, giving you a serious look. )\n\n"
+                + "Fred: \"Training here isn't just about hitting harder. It's about discipline, control,\n"
+                + "and endurance. Think you've got it?\"\n\n";
+
+        System.out.print(GameLogic.centerBox(message, 90));
+
+        System.out.println("\n");
         reply("I'm ready. Let's do this!", "Not sure... Never trained in a real gym.");
+        System.out.println("\n");
     }
 
-    static void response(String name){
-        space(70);
-        System.out.println("\t( Fred nods with approval. )");
-        System.out.println();
-        System.out.println("Fred: \t\"That's the spirit. Confidence is good, but keep your head in the game.\"");
-        System.out.println();
-        System.out.println(name + ": \t\"Let's go!\"");
+    static void response(String name) {
+        System.out.println("\n");
+        String responseText = "( Fred nods with approval. )\n\n"
+                + "Fred: \"That's the spirit. Confidence is good, \nbut keep your head in the game.\"\n\n";
+
+        System.out.println(GameLogic.leftBox(responseText, 50));
+
+        System.out.println("\n");
+        String playerResponse = name + ": \"Let's go!\"";
+        System.out.println(GameLogic.rightBox(playerResponse, 40));
+        System.out.println("\n");
     }
 
-    static void response2(String name){
-        space(70);
-        System.out.println("\t( Fred claps a hand on your shoulder, his grip firm but reassuring. )");
-        System.out.println();
-        System.out.println("Fred: \t\"Don't worry. Everyone starts somewhere, kid. You've got the heart for this, and that's what counts.");
-        System.out.println("\tThe rest? I'll teach you. Keep your head in the game, and let's see what you've got.\"");
-        System.out.println();
-        System.out.println(name + ": \t\"Thanks, Fred. I'll give it my all.\"");
+    static void response2(String name) {
+        System.out.println("\n");
+        String message = "( Fred claps a hand on your shoulder, his grip firm but reassuring. )\n\n"
+                + "Fred: \"Don't worry. Everyone starts somewhere, kid. You've got the heart for this,\n and that's what counts."
+                + "The rest? I'll teach you. \nKeep your head in the game, and let's see what you've got.\"\n\n";
+
+        System.out.println(GameLogic.leftBox(message, 100));
+
+        System.out.println("\n");
+        String playerResponse = name + ": \"Thanks, Fred. I'll give it my all.\"\n";
+        System.out.println(GameLogic.rightBox(playerResponse, 60));
+        System.out.println("\n");
     }
 
     static void urbanTraining2(){
-        space(70);
-        System.out.println("\t[ Inside the gym, you take in the smell of sweat and leather. Fred hands you old gloves. ]");
-        System.out.println();
-        System.out.println("Fred: \t\"First things first. Let's see your stance. You've got power, but power's no good without balance.\"");
-        System.out.println();
-        System.out.println("\t( Fred demonstrates the proper stance. )");
-        System.out.println();
+        System.out.println("\n\n");
+        String message = "[ Inside the gym, you take in the smell of sweat and leather. Fred hands you old gloves. ]\n\n" +
+                        "Fred: \"First things first. Let's see your stance. You've got power, \nbut power's no good without balance.\"" +
+                        "\n\n ( Fred demonstrates the proper stance. )";
+
+        System.out.print(GameLogic.centerBox(message, 95));
+
+        System.out.println("\n");
         reply("Got it. Let's do this!", "This feels a little awkward...");
+        System.out.println("\n");
     }
 
-    static void response3(){
-        space(70);
-        System.out.println("Fred: \t\"Good. Now, let's see those jabs—quick, sharp, back to guard. Ready?\"");
+    static void response3() {
+        System.out.println("\n");
+        String message = "Fred: \"Good. Now, let's see those jabs—quick, sharp, back to guard. Ready?\"\n";
+        System.out.print(GameLogic.centerBox(message, 80));
+        System.out.println("\n");
     }
     
-    static void response4(){
-        space(70);
-        System.out.println("Fred: \t\"It always feels weird at first, but trust me, it'll become second nature.");
-        System.out.println("\tJust keep practicing, and it'll click.\"");
+    static void response4() {
+        System.out.println("\n");
+        String message = "Fred: \"It always feels weird at first, but trust me, it'll become second nature.\n"
+                        + "Just keep practicing, and it'll click.\"\n";
+        System.out.print(GameLogic.centerBox(message, 85));
+        System.out.println("\n");
     }
 
-    static void urbanTraining3(String name){
-        space(70);
-        System.out.println("\t[ Fred takes you through a series of drills: jabs, hooks, uppercuts, and footwork. ]");
-        System.out.println();
-        System.out.println("Fred: \t\"You've got potential, " + name + ". But remember, boxing isn't just about strength. It's about outsmarting your");
-        System.out.println("\topponent. When you're in the ring, you have to think two steps ahead. Now, let's see what you've really got.\"");
-        System.out.println();
-        System.out.println("\t[ " + name + " nods, ready for the challenge. ]");
-        System.out.println();
-        System.out.println("Fred: \t\"Alright, let's start with the basics. Boxing is a dance of timing, precision, and knowing when to use the right move.");
-        System.out.println("\tEvery move has a counter, and knowing that will give you the edge. Here's how it works...\"");
+    static void urbanTraining3(String name) {
+        System.out.println("\n");
+        String message = "[ Fred takes you through a series of drills: jabs, hooks, uppercuts, and footwork. ]\n\n"
+                + "Fred: \"You've got potential, " + name + ". But remember, boxing isn't just about strength. \nIt's about outsmarting your"
+                + "opponent. When you're in the ring, \nyou have to think two steps ahead. Now, let's see what you've really got.\"\n\n"
+                + "[ " + name + " nods, ready for the challenge. ]\n\n"
+                + "Fred: \"Alright, let's start with the basics. Boxing is a dance of timing, precision, \nand knowing when to use the right move."
+                + "Every move has a counter, \nand knowing that will give you the edge. Here's how it works...\"\n";
+        System.out.print(GameLogic.centerBox(message, 95));
+        System.out.println("\n");
         GameLogic.pressAnything();
+        System.out.println("\n");
     }
 
-    static void urbanTraining4(){
-        space(70);
-        System.out.println("\t( Fred throws a quick Jab )");
-        System.out.println();
-        System.out.println("Fred: \t\"This is your Jab. It's fast and hits first. If your opponent tries a big Uppercut, you can beat them to the punch.");
-        System.out.println("\tSo remember, a Jab will always stop an Uppercut in its tracks.\"");
-        System.out.println("\t[ Jab > Uppercut ]");
-        System.out.println();
-        System.out.println("Fred: \t\"Now, after I demonstrate, I want you to follow my lead.\"");
-        System.out.println();
+    static void urbanTraining4() {
+        System.out.println("\n");
+        String message = "( Fred throws a quick Jab )\n\n"
+                + "Fred: \"This is your Jab. It's fast and hits first. If your opponent tries a big Uppercut, \nyou can beat them to the punch."
+                + "So remember, a Jab will always stop an Uppercut in its tracks.\""
+                + "\n\n[ Jab > Uppercut ]\n\n"
+                + "Fred: \"Now, after I demonstrate, I want you to follow my lead.\"\n";
+        System.out.print(GameLogic.centerBox(message, 100));
+        System.out.println("\n");
         reply(1, "Jab");
+        System.out.println("\n");
     }
     
-    static void response5(){
-        space(70);
-        System.out.println("\t( Fred swings a wide Hook )");
-        System.out.println();
-        System.out.println("Fred: \t\"But watch out! A Hook is stronger than a Jab. When someone throws a Jab at you,");
-        System.out.println("\tanswer with a Hook to overpower them.\"");
-        System.out.println("\t[ Hook > Jab ]");
-        System.out.println();
+    static void response5() {
+        String message = "( Fred swings a wide Hook )\n\n"
+                + "Fred: \"But watch out! A Hook is stronger than a Jab. When someone throws a Jab at you,\n"
+                + "answer with a Hook to overpower them.\""
+                + "\n\n[ Hook > Jab ]\n\n";
+        System.out.print(GameLogic.centerBox(message, 100));
+        System.out.println("\n");
         reply(2, "Hook");
+        System.out.println("\n");
     }
 
-    static void response6(){
-        space(70);
-        System.out.println("\t( Fred pulls back and guards with a Block )");
-        System.out.println();
-        System.out.println("Fred: \t\"Now, a good Block can stop a lot of punches, especially a heavy Hook. If you see that coming, ");
-        System.out.println("\tget ready to Block. It'll protect you from a nasty hit.\"");
-        System.out.println("\t[ Block > Hook ]");
-        System.out.println();
+    static void response6() {
+        String message = "( Fred pulls back and guards with a Block )\n\n"
+                + "Fred: \"Now, a good Block can stop a lot of punches, especially a heavy Hook. If you see that coming,\n"
+                + "get ready to Block. It'll protect you from a nasty hit.\""
+                + "\n\n[ Block > Hook ]\n\n";
+        System.out.print(GameLogic.centerBox(message, 100));
+        System.out.println("\n");
         reply(3, "Block");
+        System.out.println("\n");
     }
 
-    static void response7(){
-        space(70);
-        System.out.println("\t( Fred drops his guard and launches an Uppercut )");
-        System.out.println();
-        System.out.println("Fred: \t\"But don't get too comfortable behind that guard! A well-placed Uppercut can break through a Block.");
-        System.out.println("\tIf they're just standing there guarding, hit them hard with an Uppercut.\"");
-        System.out.println("\t[ Uppercut > Block ]");
-        System.out.println();
+    static void response7() {
+        String message = "( Fred drops his guard and launches an Uppercut )\n\n"
+                + "Fred: \"But don't get too comfortable behind that guard! A well-placed Uppercut can break through a Block.\n"
+                + "If they're just standing there guarding, hit them hard with an Uppercut.\""
+                + "\n\n[ Uppercut > Block ]\n\n";
+        System.out.print(GameLogic.centerBox(message, 110));
+        System.out.println("\n");
         reply(4, "Uppercut");
+        System.out.println("\n");
     }
 
-    static void response8(String name){
-        space(70);
-        System.out.println("\t( Fred takes a step back, his eyes sharp )");
-        System.out.println();
-        System.out.println("Fred: \t\"Remember, " + name + ", it's all about knowing what's coming and how to counter.");
-        System.out.println("\tJAB stops UPPERCUT, HOOK overpowers JAB, BLOCK defends against HOOK, and UPPERCUT breaks through BLOCK.");
-        System.out.println("\tGet these counters down, and you'll be ready for anything!\"");
+    static void response8(String name) {
+        String message = "( Fred takes a step back, his eyes sharp )\n\n"
+                + "Fred: \"Remember, " + name + ", it's all about knowing what's coming and how to counter.\n"
+                + "JAB stops UPPERCUT, HOOK overpowers JAB, BLOCK defends against HOOK, and UPPERCUT breaks through BLOCK.\n"
+                + "Get these counters down, and you'll be ready for anything!\"\n";
+        System.out.print(GameLogic.centerBox(message, 110));
+        System.out.println("\n");
         GameLogic.pressAnything();
+        System.out.println("\n");
     }
 
-    static void urbanTraining5(String name){
-        space(70);
-        System.out.println("\t( " + name + " smiles, absorbing the lesson )");
-        System.out.println();
-        System.out.println("Fred: \t\"Think before striking. Outsmart your opponent. Ready to test it out?\"");
+    static void urbanTraining5(String name) {
+        String message = "( " + name + " smiles, absorbing the lesson )\n\n"
+                + "Fred: \"Think before striking. Outsmart your opponent. Ready to test it out?\"\n";
+        System.out.print(GameLogic.centerBox(message, 80));
+        System.out.println("\n");
         GameLogic.pressAnything();
     }
 
     static void train(String name){
         int success = 0;
         int choice;
-        
-        space(70);
-        System.out.println("Fred: \t\"Alright, let's put your skills to the test. Try to counter my next punch.\"");
+
+        String message = "Fred: \"Alright, let's put your skills to the test. Try to counter my next punch.\"\n";
+        System.out.print(GameLogic.centerBox(message, 90));
+
         do {
             int randomNum = 0 + (int)(Math.random() * ((3 - 0) + 1));
-            System.out.println();
+            System.out.println("\n");
+
+            String punchMessage = "";
             if(randomNum == 2){
-                System.out.println("( Fred " + array[randomNum] + "s )");
+                punchMessage = "( Fred " + array[randomNum] + "s )";
             } else if(randomNum == 3){
-                System.out.println("( Fred throws an " + array[randomNum] + " )");
+                punchMessage = "( Fred throws an " + array[randomNum] + " )";
             } else {
-                System.out.println("( Fred throws a " + array[randomNum] + " ) ");
+                punchMessage = "( Fred throws a " + array[randomNum] + " ) ";
             }
+            System.out.print(GameLogic.centerBox(punchMessage, 50));
 
-            System.out.println("Success: " + success + " / 5");
+            System.out.println("\n");
+            String successMessage = "Success: " + success + " / 5";
+            System.out.print(GameLogic.centerText(successMessage, 150));
+            System.out.println("\n");
             choice = punch();
-            int countered = isCounter(randomNum+1, choice);
+            int countered = isCounter(randomNum + 1, choice); // Check if the punch was countered
 
             System.out.println();
-            GameLogic.printSeparator(30);
+            GameLogic.printCenteredSeparator(30);
             System.out.println();
+
+            System.out.println("\n");
+            String responseMessage = "";
             if(countered == 1){
-                System.out.println("Great job!");
+                responseMessage = "Great job!";
                 success++;
             } else if(countered == 2){
-                System.out.println("No, you should try to counter punch it!");
+                responseMessage = "No, you should try to counter punch it!";
             } else {
-                System.out.println("Not bad, but I wanna see some counter punches!");
+                responseMessage = "Not bad, but I wanna see some counter punches!";
             }
+            System.out.print(GameLogic.centerBox(responseMessage, 50));
+
         } while(success < 5);
 
-        space(70);
-        System.out.println("Fred: \t\"Good work, " + name + "! You've got some real potential. Remember, practice makes perfect.");
-        System.out.println("\tI hope to see you again tomorrow for another session. Keep your guard up and stay sharp!\"");
+        System.out.println("\n");
+        String finalMessage = "Fred: \"Good work, " + name + "! You've got some real potential. Remember, practice makes perfect.\n"
+                + "\tI hope to see you again tomorrow for another session. Keep your guard up and stay sharp!\"";
+        System.out.print(GameLogic.centerBox(finalMessage, 100));
+        System.out.println("\n");
+
         GameLogic.pressAnything();
     }
 
-    public static void urbanTraining6(String name){
-        space(70);
-        System.out.println("Fred: \t\"Good to see you back, " + name + ". You've made some progress, but there's still work to do.");
-        System.out.println("\tI want you to know that training is important, but so is preparation. I've opened up a shop here");
-        System.out.println("\tin the gym where you can buy gear and supplements. This will help boost your stats whether it's");
-        System.out.println("\tyour strength, speed, or resilience. Spend your winnings wisely.\"");
-        System.out.println();
-        System.out.println("Select 1 to go to Shop");
-        System.out.println("\t(1) - Shop");
+    public static void urbanTraining6(String name) {
+        String message = "Fred: \"Good to see you back, " + name + ". You've made some progress, but there's still work to do.\"\n"
+                + "I want you to know that training is important, but so is preparation. I've opened up a shop here\n"
+                + "in the gym where you can buy gear and supplements. This will help boost your stats whether it's\n"
+                + "your strength, speed, or resilience. Spend your winnings wisely.\"\n\n";
+
+        System.out.print(GameLogic.centerBox(message, 110));
+        System.out.println("\n");
+        String shopMessage = "Select 1 to go to Shop\n"
+                            + "\t(1) - Shop\n";
+        System.out.print(GameLogic.centerText(150, shopMessage));
     }
 
-    public static void urbanTraining7(){
-        space(70);
-        System.out.println("Fred: \t\"But before you start spending your hard-earned cash, I've got a task for you. Consider it a ");
-        System.out.println("\tchallenge to prove you're ready to take the next step.\"");
-        System.out.println();
-        System.out.println("\t( Fred leans in with a serious expression )");
-        System.out.println();
-        System.out.println("Fred: \t\"Head over to the ringside and spar with one of our top fighters, Carlito 'The Phantom' Cortez.");
-        System.out.println("\tBeat him, and I'll let you purchase some exclusive items in the shop only the best get access to.");
-        System.out.println("\tIt's not gonna be easy, but I know you've got it in you.\"");
-        System.out.println();
-        System.out.println("\t( He pats the player on the shoulder and steps back )");
-        System.out.println();
-        System.out.println("Fred: \t\"Go on, show me what you've got. And remember \"train hard, shop smart\".");
+    public static void urbanTraining7() {
+        String dialogue = "Fred: \"But before you start spending your hard-earned cash, I've got a task for you. \nConsider it a "
+                + "challenge to prove you're ready to take the next step.\"\n"
+                + "\n"
+                + "( Fred leans in with a serious expression )\n"
+                + "\n"
+                + "Fred: \"Head over to the ringside and spar with one of our top fighters, Carlito 'The Phantom' Cortez. \n"
+                + "Beat him, and I'll let you purchase some exclusive items in the shop only the best get access to. \n"
+                + "It's not gonna be easy, but I know you've got it in you.\"\n"
+                + "\n"
+                + "( He pats the player on the shoulder and steps back )\n"
+                + "\n"
+                + "Fred: \"Go on, show me what you've got. And remember \"train hard, shop smart\".\n";
+
+        System.out.println(GameLogic.centerBox(dialogue, 110));
+
         GameLogic.pressAnything();
         shop.showMenu();
     }
