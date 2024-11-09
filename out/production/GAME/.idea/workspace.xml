@@ -8,7 +8,37 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gameData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/gameData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightLogic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/PlayerVsOpponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/PlayerVsOpponent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsCarlito.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsPablo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/GameLogic.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Story.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/StreetFighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/StreetFighter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/CarlitoUrbanGym.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/FredGym.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PabloUrbanGym.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/UrbanGymFight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/UrbanStory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDataManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/GameLogic2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/Sparring.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringLogic/PlayerVsSpar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringLogic/SparFightLogic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringLogic/VsPerez.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringLogic/VsPitik.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PerezSparring.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PitikSparring.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/StoryUnderground.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/Tournament.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TrainWithJakester.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/FightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/FightingLogic/PlayerVsOpponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightingLogic/PlayerVsOpponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/GameLogic.java" afterDir="false" />
@@ -65,7 +95,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Debug",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -89,6 +119,17 @@
       <updated>1729435315649</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/GAME$Main.ic" NAME="Main Coverage Results" MODIFIED="1729473651394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />

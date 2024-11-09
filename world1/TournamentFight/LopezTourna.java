@@ -26,19 +26,19 @@ public class LopezTourna extends FightLogic{
         for(int i = 0; i < 3; i++){
             int countered = isCounter(opponentChoices[i], choices[i]);
             if(countered == 1){
-                System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
+                System.out.println(getPlayer().getName() + " throws a " + getPlayerAttackByChoice(choices[i]) + " to " + getOpponentName());
                 vsLopez.playerSuccessAction(choices[i], opponentChoices[i], false);
                 vsLopez.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
-                System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
+                System.out.println(getPlayer().getName() + " throws a " + getPlayerAttackByChoice(choices[i]) + " to " + getOpponentName());
                 vsLopez.opponentSuccessAction(opponentChoices[i], choices[i], false);
                 vsLopez.playerFailedAction(choices[i]);
             } else {
-                System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
+                System.out.println(getPlayer().getName() + " throws a " + getPlayerAttackByChoice(choices[i]) + " to " + getOpponentName());
+                System.out.println(getOpponentName() + " draws " + getPlayer().getName() + " with " + opponentAttacks[choices[i]]);
                 vsLopez.drawAction(choices[i], opponentChoices[i]);
             }
-            if(player.getHp() <= 0 || opponent.getHp() <= 0){
+            if(getPlayer().getHp() <= 0 || getOpponent().getHp() <= 0){
                 return;
             }
             GameLogic.printSeparator(50);
@@ -84,7 +84,7 @@ public class LopezTourna extends FightLogic{
 
     @Override
     protected void opponentValid(int[] opponentChoice) {
-        int tempStamina = opponent.getStamina();
+        int tempStamina = getOpponent().getStamina();
         
         for (int i = 0; i < opponentChoice.length; i++) {
             int staminaCost = 0;
@@ -122,10 +122,12 @@ public class LopezTourna extends FightLogic{
                         opponentChoice[i] = rand.nextInt(7);
                         if (opponentChoice[i] >= 4) {
                             if(tempStamina - 30 < 0){
-                                opponentChoices = new int[]{2, 2, 2}; 
+                                int[] opChoices = {2, 2, 2};
+                                setOpponentChoices(opChoices); 
                                 return;
                             } else {
-                                opponentChoices = new int[]{4, 5, 6}; 
+                                int[] opChoices = {4, 5, 6};
+                                setOpponentChoices(opChoices);
                                 return;
                             }
                         }

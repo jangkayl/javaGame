@@ -1,23 +1,33 @@
 package world1.TrainInGym;
 
 import world1.FightingLogic.VsCarlito;
+import world1.Skill.SkillsRegistry;
 import world1.*;
 
 import java.util.Random;
 
 public class CarlitoUrbanGym {
-    static Random rand = new Random();
-    static PlayerProgress playerProgress = GameLogic.playerProgress;
-    public static Player player;
-    public static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -5"}, 
+    private static Random rand = new Random();
+    private static PlayerProgress playerProgress = GameLogic.playerProgress;
+    private static Player player;
+    private static SkillsRegistry skills = new SkillsRegistry();
+    private static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -5"}, 
                                 {"Hook", "Damage: 15 | Stamina: -7"}, 
                                 {"Block", "Stamina: +5"}, 
                                 {"Uppercut", "Damage: 20 | Stamina: -10"}};
-    public static StreetFighter opponent = new StreetFighter("Carlito Cortez", 120, 80, 0.2, 2, .20, 1);
-    static VsCarlito vsCarlito;
+    private static StreetFighter opponent = new StreetFighter("Carlito Cortez", 120, 80, 0.2, 2, .20, 1);
+    private static VsCarlito vsCarlito;
 
     public static void setPlayer(Player p) {
         player = p;
+    }
+
+    public static String getOpponentName(){
+        return opponent.getName();
+    }
+
+    public static String[][] getAttacks(){
+        return attack;
     }
 
     public static void fightLoop() {
@@ -68,13 +78,13 @@ public class CarlitoUrbanGym {
     static void selectAttack() {
         System.out.println();
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
-        System.out.print(GameLogic.centerText(30,"Select 3 combos:"));
-    
+        
         for (int i = 0; i < attack.length; i++) {
             String attackInfo = (i + 1) + ") " + attack[i][0] + " - " + attack[i][1];
-            System.out.println(GameLogic.centerText(40, attackInfo));
+            System.out.print(GameLogic.centerText(40, attackInfo));
         }
-    
+        
+        System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
         System.out.print("-> ");
         String input = GameLogic.scan.nextLine();
     
@@ -98,20 +108,22 @@ public class CarlitoUrbanGym {
         }
 
         opponentValid(opponentChoices);
+
+
+        System.out.println();
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
-        System.out.print(GameLogic.centerText(50, "You've selected:\t\tOpponent selected:"));
+
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("You've selected:", "Opponent selected:", 30)));
 
         for(int i = 0; i < 3; i++){
             String playerAttack = attack[choices[i]][0];
             String opponentAttack = attack[opponentChoices[i]][0];
 
-            String line = playerAttack + "  \t\t\t\t" + opponentAttack;
-
-            System.out.print(GameLogic.centerText(40, line));
+            String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
+            System.out.print(GameLogic.centerText(30, line));
         }
 
         System.out.println();
-        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         printFight(choices, opponentChoices);
     }
 
@@ -192,40 +204,38 @@ public class CarlitoUrbanGym {
     }
 
     static void printFight(int[] choices, int[] opponentChoices){
-        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         for(int i = 0; i < 3; i++){
-            int countered = isCounter(opponentChoices[i], choices[i]);
+            int countered = isCounter(attack[opponentChoices[i]][0], attack[choices[i]][0]);
             String playerAttack = player.getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName();
             
             if(countered == 1){
-                System.out.println(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.centerText(50, playerAttack));
                 vsCarlito.playerSuccessAction(choices[i], opponentChoices[i], false);
                 vsCarlito.opponentFailedAction(opponentChoices[i]);
             } else if(countered == 2){
-                System.out.println(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.centerText(50, playerAttack));
                 vsCarlito.opponentSuccessAction(opponentChoices[i], choices[i], false);
                 vsCarlito.playerFailedAction(choices[i]);
             } else {
-                System.out.println(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.centerText(50, playerAttack));
                 String opponentAttack = opponent.getName() + " draws " + player.getName() + " with " + attack[opponentChoices[i]][0];
-                System.out.println(GameLogic.centerText(50, opponentAttack));
+                System.out.print(GameLogic.centerText(50, opponentAttack));
                 vsCarlito.drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
             }
-            System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+            System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         }
     }
 
-    static int isCounter(int opponentMove, int playerMove) {
-        return switch (opponentMove) {
-            case 0 -> (playerMove == 1) ? 1 : (playerMove == 3) ? 2 : 0;
-            case 1 -> (playerMove == 2) ? 1 : (playerMove == 0) ? 2 : 0;
-            case 2 -> (playerMove == 3) ? 1 : (playerMove == 1) ? 2 : 0;
-            case 3 -> (playerMove == 0) ? 1 : (playerMove == 2) ? 2 : 0;
-            default -> -1;
-        };
+    static int isCounter(String opponentMove, String playerMove) {
+        if(skills.getSkillByName(opponentMove).counters(playerMove))
+            return 2;
+        else if(skills.getSkillByName(playerMove).counters(opponentMove))
+            return 1;
+        return 0;
     }
 
     static void winnerReward() {

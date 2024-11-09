@@ -16,7 +16,7 @@ public class VsCarlito extends PlayerVsOpponent{
     protected String[] getOpponentAttacks() {
         String[] attacks = new String[4];
         for(int i = 0; i < 4; i++){
-            attacks[i] = CarlitoUrbanGym.attack[i][0];
+            attacks[i] = CarlitoUrbanGym.getAttacks()[i][0];
         }
         return attacks;
     }

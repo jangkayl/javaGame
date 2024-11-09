@@ -432,7 +432,7 @@ public class GameLogic{
                 clearConsole();
                 if(playerProgress.getShopStage() < 1){
                     if(player.getIsLose()){
-                        UrbanStory.urbanTrainingLose(player.getName(), CarlitoUrbanGym.opponent.getName());
+                        UrbanStory.urbanTrainingLose(player.getName(), CarlitoUrbanGym.getOpponentName());
                     } else {
                         UrbanStory.urbanTraining6(player.getName());
                         choice = readInt("-> ", 1, 1);

@@ -2,7 +2,6 @@ package world1.FightingLogic;
 
 import java.util.Random;
 
-import world1.FightLogic;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
@@ -13,6 +12,7 @@ public abstract class PlayerVsOpponent {
     protected static Player player;
     protected static boolean playerDodged = false;
     protected static boolean opponentDodged = false;
+    private String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
     
     protected abstract String[] getOpponentAttacks();
     protected abstract void opponentPerformAction(int choice);
@@ -37,7 +37,7 @@ public abstract class PlayerVsOpponent {
 
         if (critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged) {
             player.setDamageSetter(player.getCritMultiplier());
-            System.out.println(GameLogic.centerText(40,player.getName() + "'s " + FightLogic.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.centerText(40,player.getName() + "'s " + playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
         }
 
         if (dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw) {
@@ -46,36 +46,30 @@ public abstract class PlayerVsOpponent {
 
         if (opponentDodged) {
             player.setDamageSetter(0);
-            System.out.println(GameLogic.centerText(40,opponent.getName() + " dodges " + player.getName() + "'s punch!"));
+            System.out.print(GameLogic.centerText(40,opponent.getName() + " dodges " + player.getName() + "'s punch!"));
         }
 
         switch (choice) {
             case 0:
                 if (player.hasEnoughStamina(5)) player.jab();
-                else System.out.println(GameLogic.centerText(40,player.getName() + " doesn't have enough stamina to jab!"));
                 break;
             case 1:
                 if (player.hasEnoughStamina(7)) player.hook();
-                else System.out.println(GameLogic.centerText(40,player.getName() + " doesn't have enough stamina to hook!"));
                 break;
             case 2:
                 player.block();
                 break;
             case 3:
                 if (player.hasEnoughStamina(10)) player.uppercut();
-                else System.out.println(GameLogic.centerText(40,player.getName() + " doesn't have enough stamina to uppercut!"));
                 break;
             case 4:
                 if (player.hasEnoughStamina(7)) player.leadBodyShot();
-                else System.out.println(GameLogic.centerText(40,player.getName() + " doesn't have enough stamina to lead body shot!"));
                 break;
             case 5:
                 if (player.hasEnoughStamina(9)) player.crossToTheRibs();
-                else System.out.println(GameLogic.centerText(40,player.getName() + " doesn't have enough stamina to cross to the ribs!"));
                 break;
             case 6:
                 if (player.hasEnoughStamina(14)) player.finishingUppercut();
-                else System.out.println(GameLogic.centerText(40,player.getName() + " doesn't have enough stamina to finishing uppercut!"));
                 break;
             default:
                 System.out.println("Invalid action choice!");
@@ -104,7 +98,7 @@ public abstract class PlayerVsOpponent {
 
         if (critChance < opponent.getCritChance() && choice != 2 && !isDraw) {
             opponent.setDamageSetter(opponent.getCritMultiplier());
-            System.out.println(GameLogic.centerText(40,opponent.getName() + "'s " + getOpponentAttacks()[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.centerText(40,opponent.getName() + "'s " + getOpponentAttacks()[choice] + " hit the weak spot! CRITICAL HIT!"));
         }
 
         if (dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw) {
@@ -113,7 +107,7 @@ public abstract class PlayerVsOpponent {
 
         if (playerDodged) {
             opponent.setDamageSetter(0);
-            System.out.println(GameLogic.centerText(40,player.getName() + " dodges " + opponent.getName() + "'s punch!"));
+            System.out.print(GameLogic.centerText(40,player.getName() + " dodges " + opponent.getName() + "'s punch!"));
         }
 
         opponentPerformAction(choice);

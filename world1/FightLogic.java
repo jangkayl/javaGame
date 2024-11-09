@@ -3,32 +3,52 @@ package world1;
 import java.util.Random;
 
 public abstract class FightLogic {
-    protected static Random rand = new Random();
-    protected static PlayerProgress playerProgress = GameLogic.playerProgress;
-    protected static Player player;
-    protected static StreetFighter opponent;
-    protected static Tournament tournament = new Tournament();
-    protected static int[] opponentChoices = new int[3];
-    protected static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
+    protected Random rand = new Random();
+    private PlayerProgress playerProgress = GameLogic.playerProgress;
+    private Player player;
+    private StreetFighter opponent;
+    private Tournament tournament = new Tournament();
+    private int[] opponentChoices = new int[3];
+    private String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
                                     {"Hook", "Damage: 15 | Stamina: -7"}, 
                                     {"Block", "Stamina: +5"}, 
                                     {"Uppercut", "Damage: 20 | Stamina: -10"},
                                     {"The Body Breaker", ""}};
-    protected static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
+    private String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
-    public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
-    private static String[] opponentAttacks;
+    private String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
+    private String[] opponentAttacks;
 
     public FightLogic(Player player, String[] opponentAttacks) {
-        FightLogic.player = player;
-        FightLogic.opponentAttacks = opponentAttacks;
+        this.player = player;
+        this.opponentAttacks = opponentAttacks;
     }
 
     public abstract String getOpponentName();
 
+    public Player getPlayer(){
+        return player;
+    }
+
+    public StreetFighter getOpponent(){
+        return opponent;
+    }
+
+    public int[] getOpponentChoices(){
+        return opponentChoices;
+    }
+
+    public void setOpponentChoices(int[] opponentChoices){
+        this.opponentChoices = opponentChoices;
+    }
+
     public void setOpponent(StreetFighter opponent) {
-        FightLogic.opponent = opponent;
+        this.opponent = opponent;
+    }
+
+    public String getPlayerAttackByChoice(int choice){
+        return playerAttacks[choice];
     }
     
     public void fightLoop() {
@@ -248,11 +268,11 @@ public abstract class FightLogic {
         opponent.setStamina(opponent.getMaxStamina());
     }
 
-    protected void printStats() {
+    private void printStats(){
         System.out.println();
-        System.out.println(GameLogic.formatColumns(player.getName(), opponent.getName(), 30));
-        System.out.println(GameLogic.formatColumns("HP        " + player.getHp() + "/" + player.getMaxHp(), "HP        " + opponent.getHp() + "/" + opponent.getMaxHp(), 30));
-        System.out.println(GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ player.getName() +"*" , "*"+ opponent.getName()+"*", 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + player.getHp() + "/" + player.getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
         System.out.println();
     }
 

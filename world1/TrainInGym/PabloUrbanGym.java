@@ -37,9 +37,9 @@ public class PabloUrbanGym {
         GameLogic.clearConsole();
         System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
         System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
+        player.setOpponent(opponent);
         System.out.println();
         GameLogic.printSeparator(40);
-        player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
             selectAttack();

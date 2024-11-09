@@ -1,30 +1,24 @@
 [player]
- name=Kyle
- hp=441
- maxHp=441
- stamina=78
- maxStamina=78
- critChance=0.79
- critMultiplier=2.0
- dodgeChance=0.4
- playerPoints=100
- currentWorld=1
- currentRank=0
- stage=12
- isLose=false
+name=Kyle
+hp=150
+maxHp=150
+stamina=45
+maxStamina=45
+critChance=0.15
+critMultiplier=2.0
+dodgeChance=0.095
+playerPoints=0
+currentWorld=0
+currentRank=0
+stage=1
+isLose=false
 
- [progress]
- round=1
- shopStage=3
- done=2
- playerWins=0
- opponentWins=0
- addStats=3
+[progress]
+round=1
+shopStage=0
+done=0
+playerWins=0
+opponentWins=0
+addStats=0
 
- [inventory]
- item=0
- item=1
- item=2
- HEAD=4
- HAND=5
- BOOTS=3
+[inventory]

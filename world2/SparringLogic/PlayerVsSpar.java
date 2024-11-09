@@ -35,7 +35,7 @@ public abstract class PlayerVsSpar {
 
         if (critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged) {
             player.setDamageSetter(player.getCritMultiplier());
-            System.out.println(player.getName() + "'s " + SparFightLogic.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
+            System.out.print(player.getName() + "'s " + SparFightLogic.playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if (dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw) {
@@ -44,7 +44,7 @@ public abstract class PlayerVsSpar {
 
         if (opponentDodged) {
             player.setDamageSetter(0);
-            System.out.println(opponent.getName() + " dodges " + player.getName() + "'s punch!");
+            System.out.print(opponent.getName() + " dodges " + player.getName() + "'s punch!");
         }
 
         switch (choice) {
@@ -117,7 +117,7 @@ public abstract class PlayerVsSpar {
 
         if (critChance < opponent.getCritChance() && choice != 2 && !isDraw) {
             opponent.setDamageSetter(opponent.getCritMultiplier());
-            System.out.println(opponent.getName() + "'s " + getOpponentAttacks()[choice] + " hit the weak spot! CRITICAL HIT!");
+            System.out.print(opponent.getName() + "'s " + getOpponentAttacks()[choice] + " hit the weak spot! CRITICAL HIT!");
         }
 
         if (dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw) {
@@ -126,7 +126,7 @@ public abstract class PlayerVsSpar {
 
         if (playerDodged) {
             opponent.setDamageSetter(0);
-            System.out.println(player.getName() + " dodges " + opponent.getName() + "'s punch!");
+            System.out.print(player.getName() + " dodges " + opponent.getName() + "'s punch!");
         }
 
         opponentPerformAction(choice);
