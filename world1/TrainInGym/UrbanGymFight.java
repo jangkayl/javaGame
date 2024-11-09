@@ -5,7 +5,6 @@ import world1.GameLogic;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
-import world1.FightingLogic.VsPablo;
 
 public abstract class UrbanGymFight {
     protected Random rand = new Random();
@@ -13,7 +12,6 @@ public abstract class UrbanGymFight {
     protected PlayerProgress playerProgress = GameLogic.playerProgress;
     protected Player player;
     protected StreetFighter opponent;
-    protected VsPablo vsPablo; 
 
     public abstract void setOpponent(StreetFighter opponent);
     protected abstract void selectAttack();
@@ -34,7 +32,6 @@ public abstract class UrbanGymFight {
     };
 
     public void fightLoop() {
-        vsPablo = new VsPablo(player, opponent);
         player.setStage(2);
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();

@@ -1,6 +1,12 @@
 package world1;
+
+import world1.Skill.SkillsRegistry;
+
 public class StreetFighter extends Boxer {
-    static Player player = GameLogic.player;
+    private static Player player = GameLogic.player;
+    private SkillsRegistry skills = new SkillsRegistry();
+
+    
     public StreetFighter(String name, int hp, int stamina, double critChance, double critMultiplier,
             double dodgeChance, int rank) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance, rank);
@@ -8,6 +14,24 @@ public class StreetFighter extends Boxer {
 
     public void setPlayerOpponent(Player play) {
         player = play;
+    }
+
+    public void useSkill(String skillName){
+        if(skillName == "Block"){
+            int newStamina = this.getStamina() + 5;
+            if (newStamina > this.getMaxStamina()) {
+                newStamina = this.getMaxStamina();
+            } else {
+                System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " and gains 5 stamina!"));
+            }
+            this.setStamina(newStamina);
+        } else {
+            int damage = (int)Math.floor(skills.getSkillByName(skillName).getHpDamage() * 1);
+            int staminaReduced = skills.getSkillByName(skillName).getStaminaCost();
+            player.setHp(player.getHp() - damage);
+            this.setStamina(this.getStamina() - staminaReduced);
+            System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " " + player.getName() + " for " + damage + " damage!"));
+        }
     }
 
     @Override

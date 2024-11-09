@@ -120,8 +120,8 @@ public class Shop {
     }
     
     public void showMenu(){
-        CarlitoUrbanGym.setPlayer(player);
-        CarlitoUrbanGym.fightLoop();
+        CarlitoUrbanGym carlito = new CarlitoUrbanGym(player);
+        carlito.fightLoop();
     }
 
     public void showShop(boolean isTraining) {

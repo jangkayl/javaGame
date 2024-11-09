@@ -16,8 +16,8 @@ public class GameLogic{
     public static DecimalFormat df = new DecimalFormat("#,###.00");   
     public static Player player;
     public static PlayerProgress playerProgress;
-    static Item[] inventoryItems;
-    static Item[] slots;
+    private static Item[] inventoryItems;
+    private static Item[] slots;
     public static Inventory inventory = new Inventory();
     public static Shop shop = new Shop(player, playerProgress);
     public static boolean isRunning;
@@ -402,8 +402,9 @@ public class GameLogic{
             if(playerProgress.getOpponentWins() == 3 && playerProgress.getAddStats() != 5){
                 if(UrbanStory.tournaLoseTraining(player.getName())){
                     while(playerProgress.getAddStats() != 5){
-                        FredGym.setPlayer(GameLogic.player);
-                        FredGym.fightLoop2();
+                        FredGym fred = new FredGym(player);
+                        fred.setPlayer(GameLogic.player);
+                        fred.fightLoop2();
                         clearConsole();
                         System.out.println("Fred: \t\"Want to train more to gain more stats?\"");
                         System.out.println();
@@ -432,7 +433,8 @@ public class GameLogic{
                 clearConsole();
                 if(playerProgress.getShopStage() < 1){
                     if(player.getIsLose()){
-                        UrbanStory.urbanTrainingLose(player.getName(), CarlitoUrbanGym.getOpponentName());
+                        CarlitoUrbanGym carlito = new CarlitoUrbanGym(player);
+                        UrbanStory.urbanTrainingLose(player.getName(), carlito.getOpponentName());
                     } else {
                         UrbanStory.urbanTraining6(player.getName());
                         choice = readInt("-> ", 1, 1);
@@ -441,8 +443,10 @@ public class GameLogic{
                 } else {
                     if(player.getStage() == 1) UrbanStory.urbanTraining8(player.getName());  
                     else if(player.getStage() == 2){
-                        PabloUrbanGym.setPlayer(GameLogic.player);
-                        PabloUrbanGym.fightLoop2();
+                        player.setStage(2);
+                        PabloUrbanGym pablo = new PabloUrbanGym(player);
+                        pablo.setPlayer(GameLogic.player);
+                        pablo.fightLoop();
                     }
                     if(player.getStage() >= 3){
                         if(playerProgress.getDone() != 1){

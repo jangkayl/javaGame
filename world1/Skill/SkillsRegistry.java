@@ -14,13 +14,13 @@ public class SkillsRegistry {
 
     private void initializeSkills() {
         registerSkill(new Skill("Jab", "jabs", 5, 10, 0, 0,
-                            Arrays.asList("Hook", "Left Hook", "Right Uppercut"),
+                            Arrays.asList("Hook", "Left Hook", "Right Uppercut", "Jab to the Body", "Quick Jab"),
                             Arrays.asList("Uppercut", "Right Cross")));
         registerSkill(new Skill("Hook", "hooks", 7, 15, 0, 0,
                             Arrays.asList("Block", "Right Cross", "Left Hook"),
-                            Arrays.asList("Jab", "Right Uppercut")));
+                            Arrays.asList("Jab", "Right Uppercut", "Jab to the Body", "Quick Jab")));
         registerSkill(new Skill("Block", "blocks", 0, 5, 0, 0,
-                            Arrays.asList("Uppercut", "Right Uppercut"),
+                            Arrays.asList("Uppercut", "Right Uppercut", "Jab to the Body", "Quick Jab"),
                             Arrays.asList("Hook", "Right Cross", "Left Hook")));
         registerSkill(new Skill("Uppercut", "uppercuts", 10, 20, 0, 0, 
                             Arrays.asList("Jab", "Right Uppercut", "Right Cross"), 
@@ -55,6 +55,17 @@ public class SkillsRegistry {
         registerSkill(new Skill("Lead Hook", "lead hooks", 9, 20, 0, 0, 
                             Arrays.asList("Jab"), 
                             Arrays.asList("Hook", "Block")));
+
+        registerSkill(new Skill("Jab to the Body", "jab to the body", 7, 15, 0, 0, 
+                            Arrays.asList("Uppercut"), 
+                            Arrays.asList("Jab", "Hook")));
+
+        registerSkill(new Skill("Quick Jab", "quick jab", 9, 25, 0, 0, 
+                            Arrays.asList("Uppercut"), 
+                            Arrays.asList("Jab", "Hook")));
+        registerSkill(new Skill("Power Punch", "power punch", 7, 15, 0, 0, 
+                            Arrays.asList("Uppercut"), 
+                            Arrays.asList("Jab", "Hook")));   
     }
 
     public void registerSkill(Skill skill) {

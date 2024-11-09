@@ -1,10 +1,14 @@
-package world1;
+package world1.TrainInGym;
 
 import java.util.Random;
 
+import world1.GameLogic;
+import world1.Player;
+import world1.PlayerProgress;
+import world1.StreetFighter;
 import world1.Skill.SkillsRegistry;
 
-public abstract class FightLogic {
+public abstract class PlayerVsOpponent2 {
     protected Random rand = new Random();
     private PlayerProgress playerProgress = GameLogic.playerProgress;
     private Player player;
@@ -12,7 +16,6 @@ public abstract class FightLogic {
     private StreetFighter opponent;
     private boolean playerDodged = false;
     private boolean opponentDodged = false;
-    private Tournament tournament = new Tournament();
     private int[] opponentChoices = new int[3];
     private String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
                                     {"Hook", "Damage: 15 | Stamina: -7"}, 
@@ -25,13 +28,16 @@ public abstract class FightLogic {
     private String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
     private String[] opponentAttacks;
 
-    public FightLogic(Player player, String[] opponentAttacks, StreetFighter opponent) {
+    public PlayerVsOpponent2(Player player, String[] opponentAttacks, StreetFighter opponent) {
         this.player = player;
         this.opponentAttacks = opponentAttacks;
         this.opponent = opponent;
     }
 
     public abstract String getOpponentName();
+    protected abstract void handleWin();
+    protected abstract void handleLoss();
+    protected abstract void winnerReward();
 
     public Player getPlayer(){
         return player;
@@ -81,13 +87,9 @@ public abstract class FightLogic {
             selectAttack();
             printStats();
             if (player.getHp() <= 0) {
-                System.out.println();
-                System.out.println(GameLogic.centerBox(getPlayer().getName() + " is knocked out! " + opponent.getName() + " wins!", 60));
                 handleLoss();
                 return;
             } else if (opponent.getHp() <= 0) {
-                System.out.println();
-                System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + getPlayer().getName() + " wins!", 60));
                 handleWin();
                 return;
             }
@@ -97,7 +99,6 @@ public abstract class FightLogic {
 
     private void selectAttack() {
         int[] choices = new int[3];
-        String input = "";
 
         System.out.println();
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
@@ -119,7 +120,8 @@ public abstract class FightLogic {
 
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
         System.out.print("-> ");
-    
+        String input;
+        
         while (true) {
             input = GameLogic.scan.nextLine();
 
@@ -366,42 +368,13 @@ public abstract class FightLogic {
         opponent.setHp(opponent.getMaxHp());
         opponent.setStamina(opponent.getMaxStamina());
     }
-    
+
     private void printStats(){
         System.out.println();
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)));
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
         System.out.println();
-    }
-    
-    private void winnerReward(){
-        if(playerProgress.getPlayerWins() != 3){
-            System.out.println();
-            System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
-        }
-    }
-    
-    private void handleWin() {
-        player.setIsLose(false);
-        winnerReward();
-        resetFighterStats();
-        playerProgress.setRound(playerProgress.getRound() + 1);
-        if(playerProgress.getPlayerWins() != 3){
-            playerProgress.setPlayerWins(playerProgress.getPlayerWins() + 1);
-        }
-        tournament.printStanding();
-    }
-
-    private void handleLoss() {
-        player.setIsLose(true);
-        resetFighterStats();
-        playerProgress.setRound(playerProgress.getRound() + 1);
-        if (playerProgress.getOpponentWins() != 3) {
-            playerProgress.setOpponentWins(playerProgress.getOpponentWins() + 1);
-        }
-        tournament.printStanding();
-        GameLogic.gameData.saveGame();
     }
 
     private void counterInfos(String name){

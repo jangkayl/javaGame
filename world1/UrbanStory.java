@@ -3,8 +3,8 @@ package world1;
 import world1.TrainInGym.PabloUrbanGym;
 
 public class UrbanStory {
-    static Inventory inventory = new Inventory();
-    static Shop shop = GameLogic.shop;
+    private static Player player = GameLogic.player;
+    private static Shop shop = GameLogic.shop;
     private static String[] array = {"Jab", "Hook", "Block", "Uppercut"};
 
     static void reply(int num, String reply){
@@ -516,7 +516,7 @@ public class UrbanStory {
         train2(name);
     }
 
-    static void train2(String name){
+    private static void train2(String name){
         String[] skill = {"Jab", "Hook", "Block"};
         String[] combo = {"Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
         int success = 0;
@@ -566,21 +566,22 @@ public class UrbanStory {
         } while(success < 5);
 
         System.out.println("\n");
-        String message1 = "Fred:\t\"Great job with the 'The Body Breaker' combo, " + name + "! Now it's time to put those skills to the test.\"\n" +
-                "\tI've arranged a sparring match for you against one of the best, Pablo 'El Tigre' Martínez!\n" +
-                "\tPablo's fast and skilled, so this will be a true test of what you've learned. \nRemember to stay focused and use your combo!\"\n" +
+        String message1 = "Fred:\"    Great job with the 'The Body Breaker' combo, " + name + "! Now it's time to put those skills to the test.\"\n" +
+                "I've arranged a sparring match for you against one of the best, Pablo 'El Tigre' Martínez!\n" +
+                "Pablo's fast and skilled, so this will be a true test of what you've learned. \nRemember to stay focused and use your combo!\"\n" +
                 "\n" +
-                "\t[ Fred gestures toward the sparring ring, where Pablo stands ready, his eyes sharp and confident. ]\n" +
+                "[ Fred gestures toward the sparring ring, where Pablo stands ready, his eyes sharp and confident. ]\n" +
                 "\n" +
-                "Fred:\t\"Step into the ring, and show Pablo what you've got!\"\n" +
+                "Fred:\"    Step into the ring, and show Pablo what you've got!\"\n" +
                 "\n" +
-                "\t[ You take a deep breath, stepping into the ring to face Pablo 'El Tigre' Martínez, \neager to prove your skills... ]";
+                "[ You take a deep breath, stepping into the ring to face Pablo 'El Tigre' Martínez, \neager to prove your skills... ]";
 
         System.out.println(GameLogic.centerBox(message1, 120));
         System.out.println("\n");
         GameLogic.pressAnything();
-        PabloUrbanGym.setPlayer(GameLogic.player);
-        PabloUrbanGym.fightLoop2();
+        PabloUrbanGym pablo = new PabloUrbanGym(player);
+        pablo.setPlayer(GameLogic.player);
+        pablo.fightLoop();
     }
 
     static boolean isCounter2(int fredMove, int playerMove) {

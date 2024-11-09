@@ -5,43 +5,43 @@ import world1.GameLogic;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
-import world1.FightingLogic.VsPablo;
 
-public class FredGym {
-    static Random rand = new Random();
-    static int[] opponentChoices = new int[3];
-    static PlayerProgress playerProgress = GameLogic.playerProgress;
-    public static Player player;
-    static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
+public class FredGym extends PlayerVsOpponent{
+    private static Random rand = new Random();
+    private static int[] opponentChoices = new int[3];
+    private static PlayerProgress playerProgress = GameLogic.playerProgress;
+    private static Player player;
+    private static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
                                 {"Hook", "Damage: 15 | Stamina: -7"}, 
                                 {"Block", "Stamina: +5"}, 
                                 {"Uppercut", "Damage: 20 | Stamina: -10"},
                                 {"The Body Breaker", ""}};
-    static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
+    private static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
-    public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Jab to the Body", "Lead Hook", "Rear Uppercut"};
-    public static StreetFighter opponent = new StreetFighter("Fred", 130, 70, 0.2, 2, .30, 2);
-    static VsPablo vsPablo;
+    private static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
+    private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Jab to the Body", "Lead Hook", "Rear Uppercut"};
+    private static StreetFighter opponent = new StreetFighter("Fred", 130, 70, 0.2, 2, .30, 2);
     
-    public static void setPlayer(Player p) {
+    public FredGym(Player player){
+        super(player, opponent);
+        setOpponentAttacks(opponentAttacks);
+    }
+
+    public String getOpponentName(){
+        return opponent.getName();
+    }
+
+    public void setPlayer(Player p) {
         player = p;
     }
 
-    public static void fightLoop2() {
-        vsPablo = new VsPablo(player, opponent);
+    public void fightLoop2() {
         playerProgress.setRound(1);
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
-        GameLogic.printSeparator(40);
-        System.out.println(GameLogic.centerText("Round " + playerProgress.getAddStats(), 40));
-        GameLogic.printSeparator(40);
-        System.out.println(GameLogic.centerText("You are fighting " + opponent.getName() + "!", 40));
-        System.out.println();
-        GameLogic.printSeparator(40);
-        VsPablo.setPlayerOpponent(player);
-        VsPablo.setOpponent(opponent);
+        System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+        System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
         player.setOpponent(opponent);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
@@ -49,7 +49,7 @@ public class FredGym {
             printStats();
             if (player.getHp() <= 0) {
                 System.out.println();
-                System.out.println(player.getName() + " is knocked out! " + opponent.getName() + " wins!");
+                System.out.println(GameLogic.centerBox(player.getName() + " is knocked out! " + opponent.getName() + " wins!",60));
                 playerProgress.setRound(playerProgress.getRound() + 1);
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
@@ -59,7 +59,7 @@ public class FredGym {
                 return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
-                System.out.println(opponent.getName() + " is knocked out! " + player.getName() + " wins!");
+                System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + player.getName() + " wins!",60));
                 winnerReward();
                 player.setHp(player.getMaxHp());
                 player.setStamina(player.getMaxStamina());
@@ -74,32 +74,35 @@ public class FredGym {
         }
     }
 
-    static void printStats(){
+    private void printStats(){
         System.out.println();
-        System.out.println(GameLogic.formatColumns(player.getName(), opponent.getName(), 30));
-        System.out.println(GameLogic.formatColumns("HP        " + player.getHp() + "/" + player.getMaxHp(), "HP        " + opponent.getHp() + "/" + opponent.getMaxHp(), 30));
-        System.out.println(GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
         System.out.println();
     }
 
-    static void selectAttack() {
+    private void selectAttack() {
         int[] choices = new int[3];
         String input = "";
 
         System.out.println();
-        System.out.println("You're the first one to attack!");
-        System.out.println("Select 3 combos:");
+        System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
+        System.out.print(GameLogic.centerText(30,"Select 3 combos:"));
+        System.out.println("\n");
     
         for (int i = 0; i < attackOption.length; i++) {
             if(i < attackOption.length - 1){
-                System.out.println((i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1]);
+                String attackInfo = (i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1];
+                System.out.print(GameLogic.centerText(40, attackInfo));
             } else {
-                System.out.println((i + 1) + ") " + attackOption[i][0]);
+                String attackInfo = (i + 1) + ") " + attackOption[i][0];
+                System.out.print(GameLogic.centerText(40, attackInfo));
             }
         }
 
         for (int i = 0; i < comboOption.length; i++) {
-            System.out.println("\t\t- " + comboOption[i][0] + " - " + comboOption[i][1]);
+            System.out.print(GameLogic.centerText(40," - " + comboOption[i][0] + " - " + comboOption[i][1]));
         }
     
         System.out.print("-> ");
@@ -112,24 +115,28 @@ public class FredGym {
                     choices = new int[]{5, 6, 7}; 
                     break;
                 } else {
-                    System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
-                    System.out.println("You may use 3 Blocks as your combo to regain stamina");
+                    String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
+                            "You may use 3 Blocks as your combo to regain stamina";
+                    System.out.println(GameLogic.centerBox(message, 60));
                     continue;
                 }
             } else if (input.contains("5") || input.contains("6") || input.contains("7")) {
                 System.out.println();
-                System.out.println("You can use your special combo by entering '5'!");
-                System.out.println("If you want to proceed with the combo, just enter '5'.");
+                String message = "You can use your special combo by entering '5'!\n" +
+                        "If you want to proceed with the combo, just enter '5'.\n";
+
+                System.out.println(GameLogic.centerBox(message, 50));
                 System.out.println();
                 continue; 
             }
 
             if(isValidCombo(input, player.getStamina()) == 1){
-                System.out.println("Please enter a valid combo (e.g., 123):");
+                System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 60));
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
-                System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
-                System.out.println("You may use 3 Blocks as your combo to regain stamina");
+                String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
+                        "You may use 3 Blocks as your combo to regain stamina";
+                System.out.println(GameLogic.centerBox(message, 60));
                 continue;
             }
             break;
@@ -161,16 +168,23 @@ public class FredGym {
         opponentValid(opponentChoices);
 
         System.out.println();
-        System.out.println("You've selected:\t\tOpponent selected:");
+        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("You've selected:", "Opponent selected:", 30)));
+
         for(int i = 0; i < 3; i++){
-            System.out.println(playerAttacks[choices[i]] + "     \t\t\t" + opponentAttacks[opponentChoices[i]]);
+            String playerAttack = playerAttacks[choices[i]];
+            String opponentAttack = opponentAttacks[opponentChoices[i]];
+
+            String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
+            System.out.print(GameLogic.centerText(30, line));
         }
 
         System.out.println();
+        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         printFight(choices, opponentChoices);
     }
 
-    static int isValidCombo(String input, int stamina) {
+    private int isValidCombo(String input, int stamina) {
         if (input.length() != 3) {
             return 1;
         }
@@ -184,31 +198,7 @@ public class FredGym {
             int move = Character.getNumericValue(c);
             int staminaCost;
             
-            switch (move) {
-                case 1: // Jab
-                    staminaCost = 5;
-                    break;
-                case 2: // Hook
-                    staminaCost = 7;
-                    break;
-                case 3: // Block (assuming no stamina cost)
-                    staminaCost = 0;
-                    break;
-                case 4:  // Uppercut 
-                    staminaCost = 10;
-                    break;
-                case 5:
-                    staminaCost = 7;
-                    break;
-                case 6:
-                    staminaCost = 9;
-                    break;
-                case 7:
-                    staminaCost = 14;
-                    break;
-                default:
-                    return 1;
-            }
+            staminaCost = getSkills().getSkillByName(opponentAttacks[move]).getStaminaCost();
 
             if (tempStamina - staminaCost < 0) {
                 return 2;
@@ -218,7 +208,7 @@ public class FredGym {
         return 0;
     }
 
-    static void opponentValid(int[] opponentChoice) {
+    private void opponentValid(int[] opponentChoice) {
         int tempStamina = opponent.getStamina();
         
         for (int i = 0; i < opponentChoice.length; i++) {
@@ -226,30 +216,7 @@ public class FredGym {
             boolean validChoice = false;
 
             while (!validChoice) {
-                switch (opponentChoice[i]) {
-                        case 1: // Jab
-                        staminaCost = 5;
-                        break;
-                    case 2: // Hook
-                        staminaCost = 7;
-                        break;
-                    case 3: // Block (assuming no stamina cost)
-                        staminaCost = 0;
-                        break;
-                    case 4:  // Uppercut 
-                        staminaCost = 10;
-                        break;
-                    case 5:
-                        staminaCost = 9;
-                        break;
-                    case 6:
-                        staminaCost = 7;
-                        break;
-                    case 7:
-                        staminaCost = 14;
-                        break;
-                }
-    
+                staminaCost = getSkills().getSkillByName(opponentAttacks[opponentChoice[i]]).getStaminaCost();
                 if (tempStamina - staminaCost >= 0) {
                     validChoice = true;
                 } else {
@@ -273,21 +240,21 @@ public class FredGym {
         }
     }
 
-    static void printFight(int[] choices, int[] opponentChoices){
+    private void printFight(int[] choices, int[] opponentChoices){
         for(int i = 0; i < 3; i++){
-            int countered = isCounter(opponentChoices[i], choices[i]);
+            int countered = isCounter(opponentAttacks[opponentChoices[i]], playerAttacks[choices[i]]);
             if(countered == 1){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsPablo.playerSuccessAction(choices[i], opponentChoices[i], false);
-                vsPablo.opponentFailedAction(opponentChoices[i]);
+                playerSuccessAction(choices[i], opponentChoices[i], false);
+                opponentFailedAction(opponentAttacks[opponentChoices[i]]);
             } else if(countered == 2){
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
-                vsPablo.opponentSuccessAction(opponentChoices[i], choices[i], false);
-                vsPablo.playerFailedAction(choices[i]);
+                opponentSuccessAction(opponentChoices[i], choices[i], false);
+                playerFailedAction(playerAttacks[choices[i]]);
             } else {
                 System.out.println(player.getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName());
                 System.out.println(opponent.getName() + " draws " + player.getName() + " with " + opponentAttacks[choices[i]]);
-                vsPablo.drawAction(choices[i], opponentChoices[i]);
+                drawAction(choices[i], opponentChoices[i]);
             }
             if(player.getHp() <= 0 || opponent.getHp() <= 0){
                 return;
@@ -296,43 +263,7 @@ public class FredGym {
         }
     }
 
-    static int isCounter(int opponentMove, int playerMove) {
-        switch (opponentMove) {
-            case 0:
-                if(playerMove == 1 || playerMove == 5 || playerMove == 4) return 1;
-                if(playerMove == 3 || playerMove == 6) return 2;
-                break;
-            case 1:
-                if(playerMove == 2 || playerMove == 6 || playerMove == 5) return 1;
-                if(playerMove == 0 || playerMove == 4) return 2;
-                break;
-            case 2:
-                if(playerMove == 3 || playerMove == 4) return 1;
-                if(playerMove == 1 || playerMove == 6 || playerMove == 5) return 2;
-                break;
-            case 3:
-                if(playerMove == 0 || playerMove == 4 || playerMove == 6) return 1;
-                if(playerMove == 2) return 2;
-                break;
-            case 4:
-                if(playerMove == 3) return 1;
-                if(playerMove == 0 || playerMove == 1) return 2;
-                break;
-            case 5:
-                if(playerMove == 0) return 1;
-                if(playerMove == 1 || playerMove == 2) return 2;
-                break;
-            case 6:
-                if(playerMove == 2) return 1;
-                if(playerMove == 3 || playerMove == 0) return 2;
-                break;
-            default:
-                break;
-        }
-        return 0;
-    }
-
-    static void winnerReward() {
+    private void winnerReward() {
         System.out.println(); 
         GameLogic.printSeparator(40);
         System.out.println(); 
@@ -355,7 +286,7 @@ public class FredGym {
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
     }
 
-    static void addStats(int choice){
+    private void addStats(int choice){
         if(choice == 1){
             double hpMultiplier = 1 + 0.20;
             int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);

@@ -5,55 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/PlayerVsOpponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/PlayerVsOpponent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsCarlito.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightingLogic/VsPablo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/GameLogic.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Story.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/StreetFighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/StreetFighter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/CarlitoUrbanGym.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/FredGym.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PabloUrbanGym.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/UrbanGymFight.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/UrbanStory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDataManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/GameLogic2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/Sparring.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringLogic/PlayerVsSpar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringLogic/SparFightLogic.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringLogic/VsPerez.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringLogic/VsPitik.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PerezSparring.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PitikSparring.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/StoryUnderground.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/Tournament.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TrainWithJakester.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/FightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/PlayerVsOpponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightingLogic/PlayerVsOpponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/PlayerVsOpponent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsCarlito.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsLopez.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsPablo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsRamirez.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsTetteh.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/GameLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Inventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/Skill/SkillsRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Skill/SkillsRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/StreetFighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/StreetFighter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/LopezTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/LopezTourna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/RamirezTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/RamirezTourna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/TettehTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/TettehTourna.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/TrainInGym/CarlitoUrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/CarlitoUrbanGym.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/TrainInGym/FredGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/FredGym.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/UrbanGymFight.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/UrbanGymFight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/UrbanStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/UrbanStory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/GameLogic2.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/GameLogic2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/SparringLogic/SparFightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/SparringLogic/SparFightLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/SparringOpponents/PerezSparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/SparringOpponents/PerezSparring.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/SparringOpponents/PitikSparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/SparringOpponents/PitikSparring.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/TournamentUnderground.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TournamentUnderground.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,22 +66,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ToolWindow.Run.ShowToolbar": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Music/GAME",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindow.Run.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Music/GAME&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

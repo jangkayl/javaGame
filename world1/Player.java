@@ -1,15 +1,17 @@
 package world1;
+import world1.Skill.SkillsRegistry;
 import world1.interfaces.PlayerInterface;
 
 public class Player extends Boxer implements PlayerInterface {
     private String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};
     private String[] worlds = {"Urban Gym", "Underworld Rumble ", "Champ Arena"};
+    private SkillsRegistry skills = new SkillsRegistry();
     private int currentWorld;
     private int currentRank;
     private int playerPoints;
     private boolean isLose;
     private int stage;
-    static StreetFighter opponent;
+    private StreetFighter opponent;
 
     public Player(String name, int hp, int stamina, double critChance, double critMultiplier, double dodgeChance, int playerPoints, int currentWorld, int currentRank, int stage, boolean isLose, int rank) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance, rank);
@@ -21,7 +23,29 @@ public class Player extends Boxer implements PlayerInterface {
     }
 
     public void setOpponent(StreetFighter opponent) {
-        Player.opponent = opponent;
+        this.opponent = opponent;
+    }
+
+    public StreetFighter getOpponent(){
+        return opponent;
+    }
+
+    public void useSkill(String skillName){
+        if(skillName == "Block"){
+            int newStamina = this.getStamina() + 5;
+            if (newStamina > this.getMaxStamina()) {
+                newStamina = this.getMaxStamina();
+            } else {
+                System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " and gains 5 stamina!"));
+            }
+        this.setStamina(newStamina);
+        } else {
+            int damage = (int)Math.floor(skills.getSkillByName(skillName).getHpDamage() * 1);
+            int staminaReduced = skills.getSkillByName(skillName).getStaminaCost();
+            opponent.setHp(opponent.getHp() - damage);
+            this.setStamina(this.getStamina() - staminaReduced);
+            System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " " + getOpponent().getName() + " for " + damage + " damage!"));
+        }
     }
     
     @Override
