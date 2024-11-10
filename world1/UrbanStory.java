@@ -4,6 +4,7 @@ import world1.TrainInGym.PabloUrbanGym;
 
 public class UrbanStory {
     private static Player player = GameLogic.player;
+    private static PlayerProgress playerProgress = GameLogic.playerProgress;
     private static Shop shop = GameLogic.shop;
     private static String[] array = {"Jab", "Hook", "Block", "Uppercut"};
 
@@ -287,7 +288,7 @@ public class UrbanStory {
                 + "opponent. When you're in the ring, \nyou have to think two steps ahead. Now, let's see what you've really got.\"\n\n"
                 + "[ " + name + " nods, ready for the challenge. ]\n\n"
                 + "Fred: \"Alright, let's start with the basics. Boxing is a dance of timing, precision, \nand knowing when to use the right move."
-                + "Every move has a counter, \nand knowing that will give you the edge. Here's how it works...\"\n";
+                + " Every move has a counter, \nand knowing that will give you the edge. Here's how it works...\"\n";
         System.out.print(GameLogic.centerBox(message, 95));
         System.out.println("\n");
         GameLogic.pressAnything();
@@ -298,7 +299,7 @@ public class UrbanStory {
         System.out.println("\n");
         String message = "( Fred throws a quick Jab )\n\n"
                 + "Fred: \"This is your Jab. It's fast and hits first. If your opponent tries a big Uppercut, \nyou can beat them to the punch."
-                + "So remember, a Jab will always stop an Uppercut in its tracks.\""
+                + " So remember, a Jab will always stop an Uppercut in its tracks.\""
                 + "\n\n[ Jab > Uppercut ]\n\n"
                 + "Fred: \"Now, after I demonstrate, I want you to follow my lead.\"\n";
         System.out.print(GameLogic.centerBox(message, 100));
@@ -323,7 +324,7 @@ public class UrbanStory {
                 + "Fred: \"Now, a good Block can stop a lot of punches, especially a heavy Hook. If you see that coming,\n"
                 + "get ready to Block. It'll protect you from a nasty hit.\""
                 + "\n\n[ Block > Hook ]\n\n";
-        System.out.print(GameLogic.centerBox(message, 100));
+        System.out.print(GameLogic.centerBox(message, 105));
         System.out.println("\n");
         reply(3, "Block");
         System.out.println("\n");
@@ -600,24 +601,21 @@ public class UrbanStory {
         }
     }
 
-    public static void inviteToTournament(String name) {
+    public static boolean inviteToTournament(String name) {
+        System.out.println("\nFred: \"Great work, " + name + "! Your progress is impressive, but there's a big tournament coming up.");
+        System.out.println("\tIt's a tough challenge, but it could be your time to shine. If you're not ready, you can");
+        System.out.println("\ttrain with me some more to sharpen your skills and build your stats before deciding.\"");
         System.out.println();
-        System.out.println("\nFred: \t\"You've really impressed me today, " + name + ". I've seen the way you've put in the work, and");
-        System.out.println("\tI've got to say, it's paying off. Those punches, the footwork... you've got the makings of");
-        System.out.println("\tsomeone who can go the distance.\"");
-        System.out.println();
-        System.out.println("\t( He claps his hands in approval, a proud smile spreading across his face. )");
-        System.out.println();
-        System.out.println("Fred: \t\"Now, here's the thing. There's a tournament coming up. It's tough, no doubt about it, but");
-        System.out.println("\tit's also the kind of challenge that'll push you to the next level. You've earned the right");
-        System.out.println("\tto be there if you want it. Just say the word, and I'll get you signed up.\"");
-        System.out.println();
-        reply("I'm in! Let's do this.", "I'll think about it, Fred. Not sure if I'm ready yet.");
+        reply("I'm ready for the tournament.", "I want to train more first.");
         int choice = GameLogic.readInt("-> ", 1, 2);
-        if(choice == 1){
+        if (choice == 1) {
             GameLogic.enterTournament();
+            return true;
         } else {
-            return;
+            System.out.println("\nFred: \"No sweat! Let's keep working on your skills.\"");
+            playerProgress.setOpponentWins(3);
+            GameLogic.pressAnything();
+            return false;
         }
     }
 

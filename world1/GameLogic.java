@@ -396,70 +396,92 @@ public class GameLogic{
     // Enter gym and train with coach
     static void gymTraining(){
         int choice = 0;
-        if(player.getCurrentWorld() == 0){
-            
-            // Train with Fred after losing in the Tournament
-            if(playerProgress.getOpponentWins() == 3 && playerProgress.getAddStats() != 5){
-                if(UrbanStory.tournaLoseTraining(player.getName())){
-                    while(playerProgress.getAddStats() != 5){
+        while(true){
+            if(player.getCurrentWorld() == 0){
+
+                // Train with Fred after losing in the Tournament
+                if(playerProgress.getOpponentWins() == 3 && playerProgress.getAddStats() != 5){
+                    if(player.getIsLose() == false){
                         FredGym fred = new FredGym(player);
                         fred.setPlayer(GameLogic.player);
                         fred.fightLoop();
                         clearConsole();
-                        System.out.println("Fred: \t\"Want to train more to gain more stats?\"");
-                        System.out.println();
-                        System.out.println("(1) Sure, lets go for another round!");
-                        System.out.println("(2) I'll take a break first.");
-                        choice = readInt("-> ", 1, 2);
-                        if(choice == 1 && playerProgress.getAddStats() == 5){
+                            System.out.println("Fred: \t\"Want to train more to gain more stats?\"");
                             System.out.println();
-                            System.out.println("\nFred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n");
-                            GameLogic.pressAnything();
-                        }
-                        if(choice == 2) break;
-                        continue;
-                    }
-                }
-                return;
-            }
-
-            // Train with Fred
-            if(player.getStage() == 0){
-                clearConsole();
-                UrbanStory.printTraining(player.getName());
-                player.chooseTrait();
-                player.setStage(1);
-            } else {
-                clearConsole();
-                if(playerProgress.getShopStage() < 1){
-                    if(player.getIsLose()){
-                        CarlitoUrbanGym carlito = new CarlitoUrbanGym(player);
-                        UrbanStory.urbanTrainingLose(player.getName(), carlito.getOpponentName());
-                    } else {
-                        UrbanStory.urbanTraining6(player.getName());
-                        choice = readInt("-> ", 1, 1);
-                        if(choice == 1) shop.shop();
-                    }
-                } else {
-                    if(player.getStage() == 1) UrbanStory.urbanTraining8(player.getName());  
-                    else if(player.getStage() == 2){
-                        player.setStage(2);
-                        PabloUrbanGym pablo = new PabloUrbanGym(player);
-                        pablo.setPlayer(GameLogic.player);
-                        pablo.fightLoop();
-                    }
-                    if(player.getStage() >= 3){
-                        if(playerProgress.getDone() != 1){
-                            UrbanStory.inviteToTournament(player.getName());
-                        } else {
-                            if(playerProgress.getAddStats() == 5){
-                                System.out.println("Fred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"");
-                                pressAnything();
-                                return;
+                            System.out.println("(1) Sure, lets go for another round!");
+                            System.out.println("(2) I'll take a break first.");
+                            choice = readInt("-> ", 1, 2);
+                            if(choice == 1 && playerProgress.getAddStats() == 5){
+                                System.out.println();
+                                System.out.println("\nFred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n");
+                                GameLogic.pressAnything();
                             }
-                            System.out.println("Go to tournament and continue fighting your opponent!");
+                            if(choice == 2) break;
+                            continue;
+                    } else if(UrbanStory.tournaLoseTraining(player.getName())){
+                        while(playerProgress.getAddStats() != 5){
+                            FredGym fred = new FredGym(player);
+                            fred.setPlayer(GameLogic.player);
+                            fred.fightLoop();
+                            clearConsole();
+                            System.out.println("Fred: \t\"Want to train more to gain more stats?\"");
+                            System.out.println();
+                            System.out.println("(1) Sure, lets go for another round!");
+                            System.out.println("(2) I'll take a break first.");
+                            choice = readInt("-> ", 1, 2);
+                            if(choice == 1 && playerProgress.getAddStats() == 5){
+                                System.out.println();
+                                System.out.println("\nFred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n");
+                                GameLogic.pressAnything();
+                            }
+                            if(choice == 2) break;
+                            continue;
                         }
-                        pressAnything();
+                    }
+                    return;
+                }
+    
+                // Train with Fred
+                if(player.getStage() == 0){
+                    clearConsole();
+                    UrbanStory.printTraining(player.getName());
+                    player.chooseTrait();
+                    player.setStage(1);
+                } else {
+                    clearConsole();
+                    if(playerProgress.getShopStage() < 1){
+                        if(player.getIsLose()){
+                            CarlitoUrbanGym carlito = new CarlitoUrbanGym(player);
+                            UrbanStory.urbanTrainingLose(player.getName(), carlito.getOpponentName());
+                        } else {
+                            UrbanStory.urbanTraining6(player.getName());
+                            choice = readInt("-> ", 1, 1);
+                            if(choice == 1) shop.shop();
+                        }
+                    } else {
+                        if(player.getStage() == 1) UrbanStory.urbanTraining8(player.getName());  
+                        else if(player.getStage() == 2){
+                            player.setStage(2);
+                            PabloUrbanGym pablo = new PabloUrbanGym(player);
+                            pablo.setPlayer(GameLogic.player);
+                            pablo.fightLoop();
+                        }
+                        if(player.getStage() >= 3){
+                            if(playerProgress.getDone() != 1){
+                                if(!UrbanStory.inviteToTournament(player.getName())){
+                                    continue;
+                                }
+                            } else {
+                                if(playerProgress.getAddStats() == 5){
+                                    System.out.println("Fred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"");
+                                    pressAnything();
+                                    return;
+                                }
+                                System.out.println("Go to tournament and continue fighting your opponent!");
+                            }
+                            pressAnything();
+                        }
+                        return;
                     }
                 }
             }

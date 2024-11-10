@@ -72,6 +72,7 @@ public class FredGym extends PlayerVsOpponent2{
         System.out.println();
         System.out.println("Fred: \"Stats added! Remember, you can train up to 5 times!\"");
         GameLogic.printCenteredSeparator(50);
+        GameLogic.pressAnything();
     }
 
     private void addStats(int choice){

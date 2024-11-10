@@ -5,27 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/PlayerVsOpponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsCarlito.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsLopez.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsPablo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsRamirez.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/FightingLogic/VsTetteh.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/GameLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Skill/SkillsRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Skill/SkillsRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/StreetFighter.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/StreetFighter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/LopezTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/LopezTourna.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/RamirezTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/RamirezTourna.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TournamentFight/TettehTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TournamentFight/TettehTourna.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/CarlitoUrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/CarlitoUrbanGym.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/FredGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/FredGym.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/UrbanGymFight.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/UrbanGymFight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/UrbanStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/UrbanStory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

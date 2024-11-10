@@ -26,7 +26,7 @@ public class StreetFighter extends Boxer {
             }
             this.setStamina(newStamina);
         } else {
-            int damage = (int)Math.floor(skills.getSkillByName(skillName).getHpDamage() * 1);
+            int damage = (int)Math.floor(skills.getSkillByName(skillName).getHpDamage() * getDamageSetter());
             int staminaReduced = skills.getSkillByName(skillName).getStaminaCost();
             player.setHp(player.getHp() - damage);
             this.setStamina(this.getStamina() - staminaReduced);

@@ -6,15 +6,19 @@ import world1.GameLogic;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
+import world1.Skill.SkillsRegistry;
 import world2.BoxerHints;
 
 public abstract class SparFightLogic {
-    protected static Random rand = new Random();
-    protected static PlayerProgress playerProgress = GameLogic.playerProgress;
-    protected static Player player;
+    protected Random rand = new Random();
+    private PlayerProgress playerProgress = GameLogic.playerProgress;
+    private Player player;
+    private SkillsRegistry skills = new SkillsRegistry();
+    private StreetFighter opponent;
+    private boolean playerDodged = false;
+    private boolean opponentDodged = false;
     protected static BoxerHints boxerHints;
-    protected static StreetFighter opponent;
-    protected static int[] opponentChoices = new int[3];
+    private int[] opponentChoices = new int[3];
     protected static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
                                 {"Hook", "Damage: 15 | Stamina: -7"}, 
                                 {"Block", "Stamina: +5"}, 
@@ -28,17 +32,56 @@ public abstract class SparFightLogic {
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
     public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut", "Elbow Strike", "Head Butt", "Low Blow"};
-    private static String[] opponentAttacks;
+    private String[] opponentAttacks;
 
-    public SparFightLogic(Player player, String[] opponentAttacks) {
-        SparFightLogic.player = player;
-        SparFightLogic.opponentAttacks = opponentAttacks;
+    public SparFightLogic(Player player, String[] opponentAttacks, StreetFighter opponent) {
+        this.player = player;
+        this.opponentAttacks = opponentAttacks;
+        this.opponent = opponent;
     }
 
     public abstract String getOpponentName();
+    protected abstract void handleLoss();
+    protected abstract void handleWin();
+
+    public Player getPlayer(){
+        return player;
+    }
+
+    public StreetFighter getOpponent(){
+        return opponent;
+    }
+
+    public PlayerProgress getPlayerProgress(){
+        return playerProgress;
+    }
+
+    public int[] getOpponentChoices(){
+        return opponentChoices;
+    }
+
+    public void setOpponentChoices(int[] opponentChoices){
+        this.opponentChoices = opponentChoices;
+    }
 
     public void setOpponent(StreetFighter opponent) {
-        SparFightLogic.opponent = opponent;
+        this.opponent = opponent;
+    }
+
+    public String getPlayerAttackByChoice(int choice){
+        return playerAttacks[choice];
+    }
+
+    public SkillsRegistry getSkills(){
+        return skills;
+    }
+
+    private int isCounter(String opponentMove, String playerMove) {
+        if(skills.getSkillByName(opponentMove).counters(playerMove))
+            return 1;
+        if(skills.getSkillByName(opponentMove).isEffectiveAgainst(playerMove))
+            return 2;
+        return 0;
     }
     
     public void fightLoop() {
@@ -46,22 +89,20 @@ public abstract class SparFightLogic {
         GameLogic.gameData.saveGame();
         player.setOpponent(opponent);
         GameLogic.clearConsole();
-        GameLogic.printSeparator(40);
-        System.out.println(GameLogic.centerText("Round " + playerProgress.getRound(), 40));
-        GameLogic.printSeparator(40);
-        System.out.println(GameLogic.centerText("You are fighting " + getOpponentName() + "!", 40));
-        System.out.println();
-        GameLogic.printSeparator(40);
+        System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+        System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
             selectAttack();
             printStats();
             if (player.getHp() <= 0) {
-                System.out.println("\n" + player.getName() + " is knocked out! " + getOpponentName() + " wins!");
+                System.out.println();
+                System.out.println(GameLogic.centerBox(getPlayer().getName() + " is knocked out! " + opponent.getName() + " wins!", 60));
                 handleLoss();
                 return;
             } else if (opponent.getHp() <= 0) {
-                System.out.println("\n" + getOpponentName() + " is knocked out! " + player.getName() + " wins!");
+                System.out.println();
+                System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + getPlayer().getName() + " wins!", 60));
                 handleWin();
                 return;
             }
@@ -69,7 +110,7 @@ public abstract class SparFightLogic {
         GameLogic.pressAnything();
     }
 
-    protected void selectAttack() {
+    private void selectAttack() {
         int[] choices = new int[3];
         String input = "";
         boxerHints = new BoxerHints();
@@ -99,29 +140,31 @@ public abstract class SparFightLogic {
 
         // Player selects a move
         System.out.println();
-        System.out.println("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~");
-        System.out.println();
-        System.out.println("You're the first one to attack!");
-        System.out.println("Select 3 combos:");
-    
+        System.out.println(GameLogic.centerText(30, ("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~")));
+        System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
+
         for (int i = 0; i < attackOption.length - 3; i++) {
+            String attackInfo;
             if(i < attackOption.length - 4){
-                System.out.println((i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1]);
+                attackInfo = (i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1];
             } else {
-                System.out.println((i + 1) + ") " + attackOption[i][0]);
+                attackInfo = (i + 1) + ") " + attackOption[i][0];
             }
+            System.out.print(GameLogic.centerText(40, attackInfo));
         }
 
         for (int i = 0; i < comboOption.length; i++) {
-            System.out.println("\t\t- " + comboOption[i][0] + " - " + comboOption[i][1]);
+            String attackInfo = (comboOption[i][0] + " - " + comboOption[i][1]);
+            System.out.print(GameLogic.centerText(40, attackInfo));
         }
 
         for (int i = attackOption.length - 3; i < attackOption.length; i++) {
-            System.out.println((i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1]);
+            System.out.println(GameLogic.centerText(40, ((i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1])));
         }
+        
+        System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
-        System.out.println("\n(0) Check " + opponent.getName() + "'s combo counters");
-    
+        System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
         System.out.print("-> ");
         while (true) {
             input = GameLogic.scan.nextLine();
@@ -130,12 +173,8 @@ public abstract class SparFightLogic {
                 counterInfos(opponent.getName());
                 GameLogic.pressAnything();
                 GameLogic.clearConsole();
-                GameLogic.printSeparator(40);
-                System.out.println(GameLogic.centerText("Round " + playerProgress.getRound(), 40));
-                GameLogic.printSeparator(40);
-                System.out.println(GameLogic.centerText("You are fighting " + getOpponentName() + "!", 40));
-                System.out.println();
-                GameLogic.printSeparator(40);
+                System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+                System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
                 return;
             }
 
@@ -145,15 +184,16 @@ public abstract class SparFightLogic {
                     choices = new int[]{5, 6, 7}; 
                     break;
                 } else {
-                    System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
-                    System.out.println("You may use 3 Blocks as your combo to regain stamina");
+                    String message = getPlayer().getName() + " doesn't have enough stamina for this combo!\n" +
+                        "You may use 3 Blocks as your combo to regain stamina";
+                    System.out.println(GameLogic.centerBox(message, 60));
                     continue;
                 }
             } else if (input.contains("5")) {
                 System.out.println();
-                System.out.println("You can use your special combo by entering '5'!");
-                System.out.println("If you want to proceed with the combo, just enter '5'.");
-                System.out.println();
+                String message = "You can use your special combo by entering '5'!\n" +
+                        "If you want to proceed with the combo, just enter '5'.";
+                System.out.println(GameLogic.centerBox(message, 60));
                 continue; 
             }
 
@@ -173,11 +213,12 @@ public abstract class SparFightLogic {
             input = mappedInput.toString();
 
             if(isValidCombo(input, player.getStamina()) == 1){
-                System.out.println("Please enter a valid combo (e.g., 123):");
+                System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 50));
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
-                System.out.println(player.getName() + " doesn't have enough stamina for this combo!");
-                System.out.println("You may use 3 Blocks as your combo to regain stamina");
+                String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
+                                                "You may use 3 Blocks as your combo to regain stamina";
+                System.out.println(GameLogic.centerBox(message, 60));
                 continue;
             }
             break;
@@ -192,64 +233,97 @@ public abstract class SparFightLogic {
             }
         }
 
-        GameLogic.clearConsole();
-        System.out.println("You've selected:\t\tOpponent selected:");
+        System.out.println();
+        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("You've selected:", "Opponent selected:", 30)));
+
         for(int i = 0; i < 3; i++){
-            System.out.println(playerAttacks[choices[i]] + "     \t\t\t" + opponentAttacks[opponentChoices[i]]);
+            String playerAttack = playerAttacks[choices[i]];
+            String opponentAttack = opponentAttacks[opponentChoices[i]];
+
+            String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
+            System.out.print(GameLogic.centerText(30, line));
         }
 
         System.out.println();
         printFight(choices, opponentChoices);
     }
 
-    protected int isValidCombo(String input, int stamina) {
+    private void printFight(int[] choices, int[] opponentChoices) {
+        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        for(int i = 0; i < 3; i++){
+            int countered = isCounter(opponentAttacks[opponentChoices[i]], playerAttacks[choices[i]]);
+            String playerAttack = getPlayer().getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName();
+
+            if(countered == 1){
+                System.out.print(GameLogic.centerText(50, playerAttack));
+                playerSuccessAction(choices[i], opponentChoices[i], false);
+                opponentFailedAction(opponentAttacks[opponentChoices[i]]);
+            } else if(countered == 2){
+                System.out.print(GameLogic.centerText(50, playerAttack));
+                opponentSuccessAction(opponentChoices[i], choices[i], false);
+                playerFailedAction(playerAttacks[choices[i]]);
+            } else {
+                System.out.print(GameLogic.centerText(50, playerAttack));
+                String opponentAttack = opponent.getName() + " draws " + getPlayer().getName() + " with " + opponentAttacks[opponentChoices[i]];
+                System.out.print(GameLogic.centerText(50, opponentAttack));
+                drawAction(choices[i], opponentChoices[i]);
+            }
+            if(getPlayer().getHp() <= 0 || getOpponent().getHp() <= 0){
+                return;
+            }
+            System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        }
+    }
+
+    private void opponentValid(int[] opponentChoice) {
+        int tempStamina = getOpponent().getStamina();
+        
+        for (int i = 0; i < opponentChoice.length; i++) {
+            int staminaCost = 0;
+            boolean validChoice = false;
+
+            while (!validChoice) {
+                staminaCost = getSkills().getSkillByName(opponentAttacks[opponentChoice[i]]).getStaminaCost();
+                if (tempStamina - staminaCost >= 0) {
+                    validChoice = true;
+                } else {
+                    if(rand.nextDouble() > 0.3)
+                        opponentChoice[i] = rand.nextInt(7);
+                        if (opponentChoice[i] >= 4) {
+                            if(tempStamina - 30 < 0){
+                                int[] opChoices = {2, 2, 2};
+                                setOpponentChoices(opChoices); 
+                                return;
+                            } else {
+                                int[] opChoices = {4, 5, 6};
+                                setOpponentChoices(opChoices);
+                                return;
+                            }
+                        }
+                    else 
+                        opponentChoice[i] = 2;
+                }
+            }
+            tempStamina -= staminaCost;
+        }
+    }
+
+    private int isValidCombo(String input, int stamina) {
         if (input.length() != 3) {
             return 1;
         }
 
         int tempStamina = stamina;
         for (char c : input.toCharArray()) {
-            if (!Character.isDigit(c) || c < '0' || c > '9') {
+            if (!Character.isDigit(c) || c < '1' || c > '7') {
                 return 1;
             }
             
             int move = Character.getNumericValue(c);
             int staminaCost;
             
-            switch (move) {
-                case 1: // Jab
-                    staminaCost = 5;
-                    break;
-                case 2: // Hook
-                    staminaCost = 7;
-                    break;
-                case 3: // Block (assuming no stamina cost)
-                    staminaCost = 0;
-                    break;
-                case 4:  // Uppercut 
-                    staminaCost = 10;
-                    break;
-                case 5:
-                    staminaCost = 7;
-                    break;
-                case 6:
-                    staminaCost = 9;
-                    break;
-                case 7:
-                    staminaCost = 14;
-                    break;
-                case 8:
-                    staminaCost = 25;
-                    break;
-                case 9:
-                    staminaCost = 20;
-                    break;
-                case 0:
-                    staminaCost = 25;
-                    break;
-                default:
-                    return 1;
-            }
+            staminaCost = getSkills().getSkillByName(opponentAttacks[move-1]).getStaminaCost();
 
             if (tempStamina - staminaCost < 0) {
                 return 2;
@@ -259,29 +333,98 @@ public abstract class SparFightLogic {
         return 0;
     }
 
-    protected void winnerReward() {
-        System.out.println(); 
-        GameLogic.printSeparator(40);
-        System.out.println(); 
-        System.out.println("Congratulations! You've won the match!");
+    private void playerSuccessAction(int choice, int opponentChoice, boolean isDraw) {
+        double critChance = rand.nextDouble();
+        double dodgeChance = rand.nextDouble();
+
+        if (critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged) {
+            player.setDamageSetter(player.getCritMultiplier());
+            System.out.print(GameLogic.centerText(40,player.getName() + "'s " + playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+        }
+
+        if (dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw) {
+            playerDodged = true;
+        }
+
+        if (opponentDodged) {
+            player.setDamageSetter(0);
+            System.out.print(GameLogic.centerText(40,opponent.getName() + " dodges " + player.getName() + "'s punch!"));
+        }
+
+        player.useSkill(playerAttacks[choice]);
+
+        player.setDamageSetter(1);
+        opponentDodged = false;
+    }
+
+    private void playerFailedAction(String attack) {
+        player.setStamina(player.getStamina() - skills.getSkillByName(attack).getStaminaCost());
+    }
+
+    private void opponentSuccessAction(int choice, int playerChoice, boolean isDraw) {
+        double critChance = rand.nextDouble();
+        double dodgeChance = rand.nextDouble();
+
+        if (critChance < opponent.getCritChance() && choice != 2 && !isDraw) {
+            opponent.setDamageSetter(opponent.getCritMultiplier());
+            System.out.print(GameLogic.centerText(40,opponent.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+        }
+
+        if (dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw) {
+            opponentDodged = true;
+        }
+
+        if (playerDodged) {
+            opponent.setDamageSetter(0);
+            System.out.print(GameLogic.centerText(40,player.getName() + " dodges " + opponent.getName() + "'s punch!"));
+        }
+
+        opponentPerformAction(opponentAttacks[choice]);
+
+        opponent.setDamageSetter(1);
+        playerDodged = false;
+    }
+
+    private void opponentFailedAction(String attack) {
+        opponent.setStamina(opponent.getStamina() - skills.getSkillByName(attack).getStaminaCost());
+    }
+
+    private void opponentPerformAction(String attack) {
+        opponent.useSkill(attack);
+        opponent.setDamageSetter(1);
+        playerDodged = false;
+    }
+
+    private void drawAction(int choice, int opponentChoice) {
+        player.setDamageSetter(0.5);
+        playerSuccessAction(choice, opponentChoice, false);
+        player.setDamageSetter(1);
+
+        opponent.setDamageSetter(0.5);
+        opponentSuccessAction(opponentChoice, choice, false);
+        opponent.setDamageSetter(1);
+    }
+
+    protected void resetFighterStats() {
+        player.setHp(player.getMaxHp());
+        player.setStamina(player.getMaxStamina());
+        opponent.setHp(opponent.getMaxHp());
+        opponent.setStamina(opponent.getMaxStamina());
+    }
+    
+    private void printStats(){
         System.out.println();
-        System.out.println("You've won 300 points.");
-        GameLogic.addPoints(300);
-        System.out.println("You now have " + player.getPlayerPoints() + " points.");
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
         System.out.println();
-        System.out.println("Choose what to add stats ( Choose only one ): ");
-        System.out.println("1. HP - Increase by +15% ");
-        System.out.println("2. Stamina - Increase by +15%");
-        System.out.println("3. Crit Chance - Increase by +7%");
-        System.out.println("4. Dodge Chance - Increase by +7%");
-        System.out.println("5. Crit Multiplier - Increase by +7%");
-        System.out.print("\nEnter the number of the stat you'd like to upgrade: ");
-        int choice = GameLogic.readInt("", 1, 5);
-        addStats(choice);
-        System.out.println();
-        System.out.println("Stats successfully updated!");
-        GameLogic.printSeparator(40);
-        GameLogic.pressAnything();
+    }
+    
+    protected void winnerReward(){
+        if(playerProgress.getPlayerWins() != 3){
+            System.out.println();
+            System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
+        }
     }
 
     void addStats(int choice){
@@ -305,21 +448,6 @@ public abstract class SparFightLogic {
             double newMulti = player.getCritMultiplier() + 0.07;
             player.setCritMultiplier(newMulti);
         }
-    }
-
-    protected void resetFighterStats() {
-        player.setHp(player.getMaxHp());
-        player.setStamina(player.getMaxStamina());
-        opponent.setHp(opponent.getMaxHp());
-        opponent.setStamina(opponent.getMaxStamina());
-    }
-
-    protected void printStats() {
-        System.out.println();
-        System.out.println(GameLogic.formatColumns(player.getName(), opponent.getName(), 30));
-        System.out.println(GameLogic.formatColumns("HP        " + player.getHp() + "/" + player.getMaxHp(), "HP        " + opponent.getHp() + "/" + opponent.getMaxHp(), 30));
-        System.out.println(GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30));
-        System.out.println();
     }
 
     private void counterInfos(String name){
@@ -366,13 +494,4 @@ public abstract class SparFightLogic {
             System.err.println("(6) Low Blow < Uppercut");
         }
     }
-
-    protected abstract void handleWin();
-    protected abstract void handleLoss();
-    
-    protected abstract void printFight(int[] choices, int[] opponentChoices);
-
-    protected abstract void opponentValid(int[] opponentChoice);
-
-    protected abstract int isCounter(int opponentMove, int playerMove);
 }

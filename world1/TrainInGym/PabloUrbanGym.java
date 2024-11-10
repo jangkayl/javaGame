@@ -34,7 +34,6 @@ public class PabloUrbanGym extends PlayerVsOpponent2{
         playerProgress.setRound(1);  
         playerProgress.setShopStage(3);  
         player.setStage(3);
-        GameLogic.gameData.saveGame();
     }
     
     @Override

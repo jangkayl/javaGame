@@ -7,15 +7,15 @@ maxStamina=45
 critChance=0.15
 critMultiplier=2.0
 dodgeChance=0.095
-playerPoints=100
+playerPoints=225
 currentWorld=0
 currentRank=0
-stage=1
-isLose=false
+stage=2
+isLose=true
 
 [progress]
-round=1
-shopStage=2
+round=3
+shopStage=3
 done=0
 playerWins=0
 opponentWins=0

@@ -14,14 +14,14 @@ public class SkillsRegistry {
 
     private void initializeSkills() {
         registerSkill(new Skill("Jab", "jabs", 5, 10, 0, 0,
-                            Arrays.asList("Hook", "Left Hook", "Right Uppercut", "Jab to the Body", "Quick Jab"),
+                            Arrays.asList("Hook", "Left Hook", "Right Uppercut", "Jab to the Body", "Quick Jab", "Elbow Strike"),
                             Arrays.asList("Uppercut", "Right Cross", "Power Punch")));
         registerSkill(new Skill("Hook", "hooks", 7, 15, 0, 0,
-                            Arrays.asList("Block", "Right Cross", "Left Hook"),
-                            Arrays.asList("Jab", "Right Uppercut", "Jab to the Body", "Quick Jab", "Power Punch")));
+                            Arrays.asList("Block", "Right Cross", "Left Hook", "Elbow Strike", "Head Butt"),
+                            Arrays.asList("Jab", "Right Uppercut", "Jab to the Body", "Quick Jab", "Power Punch", "Low Blow")));
         registerSkill(new Skill("Block", "blocks", 0, 5, 0, 0,
-                            Arrays.asList("Uppercut", "Right Uppercut", "Jab to the Body", "Quick Jab"),
-                            Arrays.asList("Hook", "Right Cross", "Left Hook")));
+                            Arrays.asList("Uppercut", "Right Uppercut", "Jab to the Body", "Quick Jab", "Low Blow"),
+                            Arrays.asList("Hook", "Right Cross", "Left Hook", "Elbow Strike")));
         registerSkill(new Skill("Uppercut", "uppercuts", 10, 20, 0, 0, 
                             Arrays.asList("Jab", "Right Uppercut", "Right Cross", "Quick Jab"), 
                             Arrays.asList("Block", "Power Punch")));
@@ -38,7 +38,7 @@ public class SkillsRegistry {
 
         registerSkill(new Skill("Right Uppercut", "right uppercuts", 9, 20, 0, 0, 
                             Arrays.asList("Block"), 
-                            Arrays.asList("Jab", "Uppercut")));
+                            Arrays.asList("Jab", "Uppercut", "Head Butt")));
         registerSkill(new Skill("Left Hook", "left hooks", 10, 25, 0, 0, 
                             Arrays.asList("Jab"), 
                             Arrays.asList("Hook", "Block")));
@@ -57,7 +57,7 @@ public class SkillsRegistry {
                             Arrays.asList("Hook", "Block")));
 
         registerSkill(new Skill("Jab to the Body", "jab to the body", 7, 15, 0, 0, 
-                            Arrays.asList("Uppercut"), 
+                            Arrays.asList("Uppercut", "Right Cross"), 
                             Arrays.asList("Jab", "Hook")));
 
         registerSkill(new Skill("Quick Jab", "quick jab", 9, 25, 0, 0, 
@@ -66,6 +66,16 @@ public class SkillsRegistry {
         registerSkill(new Skill("Power Punch", "power punch", 7, 15, 0, 0, 
                             Arrays.asList("Hook"), 
                             Arrays.asList("Uppercut", "Jab")));   
+
+        registerSkill(new Skill("Elbow Strike", "elbow strikes (-10 HP)", 25, 40, 10, 0, 
+                            Arrays.asList("Block"), 
+                            Arrays.asList("Jab", "Hook", "Right Uppercut", "Left Hook")));
+        registerSkill(new Skill("Head Butt", "head butts (-15 HP)", 20, 30, 10, 0, 
+                            Arrays.asList("Uppercut"), 
+                            Arrays.asList("Block")));  
+        registerSkill(new Skill("Low Blow", "low blows (-20 HP)", 25, 40, 20, 15, 
+                            Arrays.asList("Hook"), 
+                            Arrays.asList("Block")));  
     }
 
     public void registerSkill(Skill skill) {

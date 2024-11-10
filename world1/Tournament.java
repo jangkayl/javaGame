@@ -49,7 +49,7 @@ public class Tournament {
             printTournament();
 
             while(true){
-                if (playerProgress.getOpponentWins() == 3) {
+                if (playerProgress.getOpponentWins() == 3 && player.getIsLose() == true) {
                     if(offerRematch()){
                         resetMatchScores();
                         continue;
@@ -253,6 +253,10 @@ public class Tournament {
         
         int choice = GameLogic.readInt("", 0, 2);
         if (choice == 0) {
+            if(playerProgress.getOpponentWins() == 3 && player.getIsLose() == false){
+                resetMatchScores();
+                GameLogic.gameData.saveGame();
+            }
             return true;  
         } else if(choice == 1){
             GameLogic.shop.showShop(false);
