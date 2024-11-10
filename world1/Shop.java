@@ -144,14 +144,14 @@ public class Shop {
                 for (int i = 0; i < 4; i++) {
                     System.out.println();
                     String line = "(" + (i + 1) + ") " + items[i].name;
-                    System.out.println(GameLogic.centerText(50, line));
+                    System.out.print(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }
             } else if(player.getCurrentWorld() == 1){
                 for (int i = 4; i < items.length; i++) {
                     System.out.println();
                     String line = "(" + (i - 3) + ") " + items[i].name;
-                    System.out.println(GameLogic.centerText(50, line));
+                    System.out.print(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }
             }

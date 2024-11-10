@@ -117,6 +117,7 @@ public abstract class PlayerVsOpponent2 {
             String attackInfo = (comboOption[i][0] + " - " + comboOption[i][1]);
             System.out.print(GameLogic.centerText(40, attackInfo));
         }
+        System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
         System.out.print("-> ");

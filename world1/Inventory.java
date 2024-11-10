@@ -91,7 +91,7 @@ public class Inventory {
 
         for (int j = 0; j < itemCount; j++) {
             Item currentItem = inventoryItems[j];
-            System.out.println(GameLogic.centerText(50,(j + 1) + ". " + currentItem.name + " - " + currentItem.effect));
+            System.out.print(GameLogic.centerText(50,(j + 1) + ". " + currentItem.name + " - " + currentItem.effect));
         }
     }
 

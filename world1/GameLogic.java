@@ -404,7 +404,7 @@ public class GameLogic{
                     while(playerProgress.getAddStats() != 5){
                         FredGym fred = new FredGym(player);
                         fred.setPlayer(GameLogic.player);
-                        fred.fightLoop2();
+                        fred.fightLoop();
                         clearConsole();
                         System.out.println("Fred: \t\"Want to train more to gain more stats?\"");
                         System.out.println();
