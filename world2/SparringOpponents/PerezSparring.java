@@ -3,7 +3,7 @@ package world2.SparringOpponents;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
-import world2.SparringLogic.SparFightLogic;
+import world2.SparFightLogic;
 
 public class PerezSparring extends SparFightLogic{
     public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Elbow Strike", "Head Butt", "Low Blow"};

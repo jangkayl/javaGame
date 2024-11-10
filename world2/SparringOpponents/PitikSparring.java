@@ -3,7 +3,7 @@ package world2.SparringOpponents;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
-import world2.SparringLogic.SparFightLogic;
+import world2.SparFightLogic;
 
 public class PitikSparring extends SparFightLogic{
     public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};

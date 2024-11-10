@@ -1,4 +1,4 @@
-package world2.SparringLogic;
+package world2;
 
 import java.util.Random;
 
@@ -7,7 +7,6 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Skill.SkillsRegistry;
-import world2.BoxerHints;
 
 public abstract class SparFightLogic {
     protected Random rand = new Random();
@@ -158,8 +157,9 @@ public abstract class SparFightLogic {
             System.out.print(GameLogic.centerText(40, attackInfo));
         }
 
+        System.out.println();
         for (int i = attackOption.length - 3; i < attackOption.length; i++) {
-            System.out.println(GameLogic.centerText(40, ((i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1])));
+            System.out.print(GameLogic.centerText(40, ((i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1])));
         }
         
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
@@ -316,14 +316,16 @@ public abstract class SparFightLogic {
 
         int tempStamina = stamina;
         for (char c : input.toCharArray()) {
-            if (!Character.isDigit(c) || c < '1' || c > '7') {
+            if (!Character.isDigit(c) || c < '0' || c > '9') {
                 return 1;
             }
             
             int move = Character.getNumericValue(c);
             int staminaCost;
+
+            if(move == 0) move = 1;
             
-            staminaCost = getSkills().getSkillByName(opponentAttacks[move-1]).getStaminaCost();
+            staminaCost = getSkills().getSkillByName(move-1 == 0 ? "Low Blow" : opponentAttacks[move-1]).getStaminaCost();
 
             if (tempStamina - staminaCost < 0) {
                 return 2;

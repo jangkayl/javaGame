@@ -18,14 +18,6 @@ public abstract class Boxer {
         this.rank = rank;
     }
 
-    public abstract void jab();
-    public abstract void hook();
-    public abstract void uppercut();
-    public abstract void block();
-    public abstract void elbowStrike();
-    public abstract void headButt();
-    public abstract void lowBlow();
-    
     public String getName(){
         return this.name;
     }

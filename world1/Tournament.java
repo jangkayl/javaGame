@@ -206,6 +206,7 @@ public class Tournament {
         GameLogic.printSeparator(70);
 
         // Update the player's world/state to reflect the new story path.
+        playerProgress.setAddStats(0);
         player.setCurrentWorld(1);
     }
     

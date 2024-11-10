@@ -90,7 +90,7 @@ public class GameLogic2 {
                         if(player.getStage() == 7){
                             TrainWithJakester.teachDirtyBoxingMoves();
                         } else if(player.getStage() >= 8){
-                            journeyMeny();
+                            journeyMenu();
                         }
                     } else if (choice == 1){
                         BetFight.betFight();
@@ -106,7 +106,7 @@ public class GameLogic2 {
         }
     }
 
-    static void journeyMeny(){
+    static void journeyMenu(){
         while(true){
             GameLogic.clearConsole();
             System.out.println("(1) Review Move Hints");
