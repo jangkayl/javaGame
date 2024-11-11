@@ -21,9 +21,8 @@ public class StreetFighter extends Boxer {
             int newStamina = this.getStamina() + 5;
             if (newStamina > this.getMaxStamina()) {
                 newStamina = this.getMaxStamina();
-            } else {
-                System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " and gains 5 stamina!"));
             }
+            System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " and gains 5 stamina!"));
             this.setStamina(newStamina);
         } else {
             int damage = (int)Math.floor(skills.getSkillByName(skillName).getHpDamage() * getDamageSetter());
