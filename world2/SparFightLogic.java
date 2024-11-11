@@ -323,9 +323,9 @@ public abstract class SparFightLogic {
             int move = Character.getNumericValue(c);
             int staminaCost;
 
-            if(move == 0) move = 1;
-            
-            staminaCost = getSkills().getSkillByName(move-1 == 0 ? "Low Blow" : opponentAttacks[move-1]).getStaminaCost();
+            // staminaCost = getSkills().getSkillByName(move-1 == 0 ? "Low Blow" : opponentAttacks[move-1]).getStaminaCost();
+            // staminaCost = getSkills().getSkillByName(move == 0 ? "Low Blow" : opponentAttacks[move-1]).getStaminaCost();
+            staminaCost = getSkills().getSkillByName(opponentAttacks[move-1]).getStaminaCost();
 
             if (tempStamina - staminaCost < 0) {
                 return 2;
