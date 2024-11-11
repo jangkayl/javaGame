@@ -10,13 +10,12 @@ import world2.SparringOpponents.PerezSparring;
 import world2.SparringOpponents.PitikSparring;
 
 public class Sparring {
-    static StreetFighter opponent;
-    static Random rand = new Random();
-    static Player player = GameLogic.player;
-    static String[] opponents = {"El Tigre", "El Jablo", "El Taeh"};
-    static PlayerProgress playerProgress = GameLogic.playerProgress;
+    private StreetFighter opponent;
+    private Random rand = new Random();
+    private Player player = GameLogic.player;
+    private PlayerProgress playerProgress = GameLogic.playerProgress;
 
-    public static void enterSparring() {
+    public void enterSparring() {
         if(player.getStage() == 8){
             playerProgress.setAddStats(0);
             player.setStage(9);
@@ -57,7 +56,7 @@ public class Sparring {
         GameLogic.pressAnything();
     }
     
-    private static void startSparring(int opponentIndex) {
+    private void startSparring(int opponentIndex) {
         GameLogic.clearConsole();
         PerezSparring perez = null;
         PitikSparring pitik = null;
@@ -118,7 +117,7 @@ public class Sparring {
     }
     
     // Random Stats for Opponent
-    private static StreetFighter generateRandomOpponent(String name) {
+    private StreetFighter generateRandomOpponent(String name) {
         int hp = rand.nextInt(51) + player.getMaxHp() - 100; // HP between playersMaxHp
         int stamina = rand.nextInt(21) + player.getMaxStamina() + 10; // Stamina between playersMaxStamina
         double critChance = 0.3 + (rand.nextDouble() * 0.3); // Crit chance between 0.3 and 0.6

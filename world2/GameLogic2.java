@@ -93,7 +93,8 @@ public class GameLogic2 {
                             journeyMenu();
                         }
                     } else if (choice == 1){
-                        BetFight.betFight();
+                        BetFight betFight = new BetFight();
+                        betFight.betFight();
                     } else if(choice == 2){
                         shop.showShop(false);
                         GameLogic.gameData.inputInventory(inventory.getInventoryItems());
@@ -117,7 +118,8 @@ public class GameLogic2 {
             if(choice == 1){
                 BoxerHints.teachHints();
             } else if(choice == 2){
-                Sparring.enterSparring();
+                Sparring sparring = new Sparring();
+                sparring.enterSparring();
             } else if(choice == 3){
                 TournamentUnderground.attemptTournament(playerProgress.getAddStats());
             } else if(choice == 4){
