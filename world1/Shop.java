@@ -3,9 +3,9 @@ package world1;
 import world1.TrainInGym.CarlitoUrbanGym;
 
 public class Shop {
-    static Player player;
-    static Inventory inventory = new Inventory();
-    static PlayerProgress playerProgress = GameLogic.playerProgress;
+    private static Player player;
+    private static Inventory inventory = new Inventory();
+    private static PlayerProgress playerProgress = GameLogic.playerProgress;
     public static Item[] items = {
         // World 1 Items
         new Item("Wrist Wraps", "Protects hands during training, boosting strength and critical hit chance.", 75, "+10% Health, +5% Critical Hit Chance","false","HAND", 0.1, 0, 0.05, 0, 0),

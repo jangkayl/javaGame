@@ -6,10 +6,10 @@ import world1.StreetFighter;
 import world2.SparFightLogic;
 
 public class PitikSparring extends SparFightLogic{
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};
-    
-    public PitikSparring(Player player, StreetFighter opponent) {
-        super(player, opponentAttacks, opponent);
+    private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};
+        
+        public PitikSparring(Player player, StreetFighter opponent) {
+            super(player, opponentAttacks, opponent);
     }
 
     @Override

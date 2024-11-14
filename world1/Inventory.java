@@ -4,8 +4,8 @@ public class Inventory {
     private static final int MAX_ITEMS = 10;  
     private static Item[] inventoryItems = new Item[MAX_ITEMS];  
     private static int itemCount = 0;
-    static Shop shop; 
-    static boolean isEmpty = true;
+    private static Shop shop; 
+    private static boolean isEmpty = true;
     private static String[] slotName = {"HEAD","BODY","HAND","BOOTS","FOOD"};
     private static Item[] slot = new Item[5];
 

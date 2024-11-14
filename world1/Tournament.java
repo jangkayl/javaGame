@@ -6,10 +6,10 @@ import world1.TournamentFight.TettehTourna;
 import world2.GameLogic2;
 
 public class Tournament {
-    static StreetFighter opponent;
-    static Player player = GameLogic.player;
-    static String[] opponents = {"El Tigre", "El Jablo", "El Taeh"};
-    static PlayerProgress playerProgress = GameLogic.playerProgress;
+    private static StreetFighter opponent;
+    private static Player player = GameLogic.player;
+    private static String[] opponents = {"El Tigre", "El Jablo", "El Taeh"};
+    private static PlayerProgress playerProgress = GameLogic.playerProgress;
 
     public void setOpponent(StreetFighter enemy){
         opponent = enemy;

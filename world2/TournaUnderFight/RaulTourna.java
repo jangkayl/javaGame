@@ -8,7 +8,7 @@ import world2.TournamentUnderground;
 
 public class RaulTourna extends SparFightLogic{
     TournamentUnderground tournamentUnderground = new TournamentUnderground();
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};
+    private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};
     
     public RaulTourna(Player player, StreetFighter opponent) {
         super(player, opponentAttacks, opponent);

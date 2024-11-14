@@ -6,7 +6,6 @@ import world1.GameLogic;
 
 public class BoxerHints {
     private Random rand = new Random();
-
     private String[][] skillsWithHints = {
         {"Jab", 
             "His fists hover in front, his stance loose, ready to test your guard.",

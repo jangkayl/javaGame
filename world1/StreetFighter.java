@@ -6,7 +6,6 @@ public class StreetFighter extends Boxer {
     private static Player player = GameLogic.player;
     private SkillsRegistry skills = new SkillsRegistry();
 
-    
     public StreetFighter(String name, int hp, int stamina, double critChance, double critMultiplier,
             double dodgeChance, int rank) {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance, rank);
@@ -38,6 +37,36 @@ public class StreetFighter extends Boxer {
             System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " " + player.getName() + " for " + damage + (staminaMinus != 0 ? " damage and drains " + staminaMinus + " stamina!" : " damage!")));
         }
     }
+
+    public void useSkill(String skillName, StreetFighter target) {
+        if (skillName.equals("Block")) {
+            int newStamina = this.getStamina() + 5;
+            if (newStamina > this.getMaxStamina()) {
+                newStamina = this.getMaxStamina();
+            }
+            System.out.println(this.getName() + " blocks and gains 5 stamina!");
+            this.setStamina(newStamina);
+        } else {
+            int damage = (int) Math.floor(skills.getSkillByName(skillName).getHpDamage() * this.getDamageSetter());
+            int staminaReduced = skills.getSkillByName(skillName).getStaminaCost();
+            int hpReduced = skills.getSkillByName(skillName).getHpReduced();
+            int staminaMinus = skills.getSkillByName(skillName).getStaminaReduced();
+    
+            if (hpReduced != 0) {
+                this.setHp(this.getHp() - hpReduced);
+            }
+            if (staminaMinus != 0) {
+                target.setStamina(target.getStamina() - staminaMinus);
+            }
+            target.setHp(target.getHp() - damage);
+            this.setStamina(this.getStamina() - staminaReduced);
+    
+            System.out.println(this.getName() + " uses " + skills.getSkillByName(skillName).getAttackName() +
+                    " on " + target.getName() + " for " + damage +
+                    (staminaMinus != 0 ? " damage and drains " + staminaMinus + " stamina!" : " damage!"));
+        }
+    }
+    
 
     public boolean hasEnoughStamina(int requiredStamina) {
         return this.getStamina() >= requiredStamina;

@@ -6,7 +6,7 @@ import world1.StreetFighter;
 import world2.SparFightLogic;
 
 public class PerezSparring extends SparFightLogic{
-    public static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Elbow Strike", "Head Butt", "Low Blow"};
+    private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Elbow Strike", "Head Butt", "Low Blow"};
 
     public PerezSparring(Player player, StreetFighter opponent) {
         super(player, opponentAttacks, opponent);

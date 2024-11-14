@@ -93,6 +93,8 @@ public class GameLogic2 {
                             journeyMenu();
                         }
                     } else if (choice == 1){
+                        // BetFight betFight = new BetFight();
+                        // betFight.betFight();
                         BetFight betFight = new BetFight();
                         betFight.betFight();
                     } else if(choice == 2){
