@@ -44,7 +44,7 @@ public class StreetFighter extends Boxer {
             if (newStamina > this.getMaxStamina()) {
                 newStamina = this.getMaxStamina();
             }
-            System.out.println(this.getName() + " blocks and gains 5 stamina!");
+            System.out.print(GameLogic.centerText(40, this.getName() + " blocks and gains 5 stamina!"));
             this.setStamina(newStamina);
         } else {
             int damage = (int) Math.floor(skills.getSkillByName(skillName).getHpDamage() * this.getDamageSetter());
@@ -61,12 +61,11 @@ public class StreetFighter extends Boxer {
             target.setHp(target.getHp() - damage);
             this.setStamina(this.getStamina() - staminaReduced);
     
-            System.out.println(this.getName() + " uses " + skills.getSkillByName(skillName).getAttackName() +
+            System.out.print(GameLogic.centerText(40, this.getName() + " uses " + skills.getSkillByName(skillName).getAttackName() +
                     " on " + target.getName() + " for " + damage +
-                    (staminaMinus != 0 ? " damage and drains " + staminaMinus + " stamina!" : " damage!"));
+                    (staminaMinus != 0 ? " damage and drains " + staminaMinus + " stamina!" : " damage!")));
         }
     }
-    
 
     public boolean hasEnoughStamina(int requiredStamina) {
         return this.getStamina() >= requiredStamina;

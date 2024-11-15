@@ -21,6 +21,13 @@ public class SalvahezTourna extends SparFightLogic{
 
     @Override
     protected void handleWin() {
+        getPlayer().setIsLose(false);
+        if(getPlayerProgress().getPlayerWins() != 3){
+            System.out.println(); 
+            GameLogic.printSeparator(40);
+            System.out.println(); 
+            System.out.println("Congratulations! You've won the match!");
+        }
         resetFighterStats();
         getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);
         if(getPlayerProgress().getPlayerWins() != 3){
@@ -32,16 +39,13 @@ public class SalvahezTourna extends SparFightLogic{
 
     @Override
     protected void handleLoss() {
+        getPlayer().setIsLose(true);
         resetFighterStats();
         getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);
-        GameLogic.printSeparator(40);
-        System.out.println(); 
-        System.out.println("You have been defeated!");
-        System.out.println("You lost 150 points");
-        getPlayer().setPlayerPoints(getPlayer().getPlayerPoints() - 150);
-        System.out.println("You now have " + getPlayer().getPlayerPoints() + " points.");
-        System.out.println();
-        GameLogic.pressAnything();
+        if (getPlayerProgress().getOpponentWins() != 3) {
+            getPlayerProgress().setOpponentWins(getPlayerProgress().getOpponentWins() + 1);
+        }
+        tournamentUnderground.printStanding();
         GameLogic.gameData.saveGame();
     }
 }

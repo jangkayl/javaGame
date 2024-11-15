@@ -70,7 +70,7 @@ public class SkillsRegistry {
         registerSkill(new Skill("Elbow Strike", "elbow strikes (-10 HP)", 25, 40, 10, 0, 
                             Arrays.asList("Block"), 
                             Arrays.asList("Jab", "Hook", "Right Uppercut", "Left Hook")));
-        registerSkill(new Skill("Head Butt", "head butts (-15 HP)", 20, 30, 10, 0, 
+        registerSkill(new Skill("Head Butt", "head butts (-15 HP)", 20, 30, 15, 0, 
                             Arrays.asList("Uppercut"), 
                             Arrays.asList("Block")));  
         registerSkill(new Skill("Low Blow", "low blows (-20 HP)", 25, 40, 20, 15, 

@@ -427,7 +427,7 @@ public abstract class SparFightLogic {
         }
     }
 
-    void addStats(int choice){
+    protected void addStats(int choice){
         if(choice == 1){
             double hpMultiplier = 1 + 0.15;
             int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);

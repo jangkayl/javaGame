@@ -269,6 +269,8 @@ public class GameLogic{
         
         if(player.getCurrentWorld() == 1){
             GameLogic2.gameLoop();
+        } else if(player.getCurrentWorld() == 2){
+            // GameLogic3.gameLoop();
         } else {
             gameLoop();
         }

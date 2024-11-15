@@ -86,8 +86,8 @@ public class Sparring {
     
             if (choice == 1) {
                 playerProgress.setRound(1);
-                if(playerProgress.getAddStats() < 3){
-                    playerProgress.setAddStats(playerProgress.getAddStats() + 1);
+                if(playerProgress.getShopStage() < 6){
+                    playerProgress.setShopStage(playerProgress.getShopStage() + 1);
                 }
                 break;
             } else if (choice == 2) {
