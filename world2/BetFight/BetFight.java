@@ -5,13 +5,15 @@ import java.util.Random;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
+import world1.Skill.SkillsRegistry;
 
 public class BetFight {
     private StreetFighter fighter1;
     private Player player = GameLogic.player;
     private StreetFighter fighter2;
     private Random rand = new Random();
-    private static String[] opponent1Attacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Elbow Strike", "Head Butt", "Low Blow"};
+    private SkillsRegistry skills = new SkillsRegistry();
+    private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Elbow Strike", "Head Butt", "Low Blow"};
     private static String[] opponent2Attacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};
 
     public void betFight() {
@@ -78,22 +80,27 @@ public class BetFight {
         while (fighter1.getHp() > 0 && fighter2.getHp() > 0) {
             System.out.println("Round " + round + ":");
     
-            // Fighter 1 attacks Fighter 2 using a skill
-            String skill1 = chooseSkill(fighter1); // Choose skill for Fighter 1
-            fighter1.useSkill(skill1, fighter2);
-            if (fighter2.getHp() <= 0) {
-                System.out.println(fighter2.getName() + " is knocked out!");
-                displayStats(fighter1, fighter2);
-                return fighter1;
+            // Fighter 1 selects 3 skills and uses them in sequence
+            String[] fighter1Skills = chooseSkill(fighter1);
+            for (String skill : fighter1Skills) {
+                fighter1.useSkill(skill, fighter2);
+                if (fighter2.getHp() <= 0) {
+                    System.out.println(fighter2.getName() + " is knocked out!");
+                    displayStats(fighter1, fighter2);
+                    return fighter1;
+                }
             }
     
-            // Fighter 2 attacks Fighter 1 using a skill
-            String skill2 = chooseSkill(fighter2); // Choose skill for Fighter 2
-            fighter2.useSkill(skill2, fighter1);
-            if (fighter1.getHp() <= 0) {
-                System.out.println(fighter1.getName() + " is knocked out!");
-                displayStats(fighter1, fighter2);
-                return fighter2;
+            // Fighter 2 selects 3 skills and uses them in sequence
+            String[] fighter2Skills = chooseSkill(fighter2);
+            for (String skill : fighter2Skills) {
+                System.out.println(fighter2.getName() + " uses " + skill + "!");
+                fighter2.useSkill(skill, fighter1);
+                if (fighter1.getHp() <= 0) {
+                    System.out.println(fighter1.getName() + " is knocked out!");
+                    displayStats(fighter1, fighter2);
+                    return fighter2;
+                }
             }
     
             // Display updated stats after each round
@@ -103,12 +110,76 @@ public class BetFight {
             System.out.println();
             GameLogic.pressAnything();
         }
+
+        System.out.println();
+        printFight(choices, opponentChoices);
         return null; // Should never reach here
     }
+    
 
-    private String chooseSkill(StreetFighter streetFighter) {
-        // Randomly select an attack from the opponentAttacks array
-        return opponent1Attacks[rand.nextInt(opponent1Attacks.length)];
+    private String[] chooseSkill(StreetFighter fighter) {
+        int[] opponentChoices = new int[3];  
+        int tempStamina = fighter.getStamina(); 
+    
+        for (int i = 0; i < 3; i++) {
+            boolean validChoice = false;
+    
+            while (!validChoice) {
+                int skillIndex;
+                if (rand.nextInt(10) < 5) {  // 50% chance for lower-cost skills
+                    skillIndex = rand.nextInt(4);  // Skills with indices 0 to 3
+                } else {  // 50% chance for higher-cost skills
+                    skillIndex = 4 + rand.nextInt(6);  // Skills with indices 4 to 9
+                }
+    
+                int staminaCost = skills.getSkillByName(opponentAttacks[skillIndex]).getStaminaCost();
+                if (tempStamina - staminaCost >= 0) {
+                    opponentChoices[i] = skillIndex;
+                    tempStamina -= staminaCost;
+                    validChoice = true;
+                } else {
+                    // If skill is unaffordable, retry with a 30% chance to pick a fallback skill
+                    if (rand.nextDouble() > 0.3) {
+                        skillIndex = 2;  // Default to a lower-cost skill if stamina is too low
+                    }
+                }
+            }
+        }
+    
+        // Convert the indices of chosen skills to skill names for easier usage in battle
+        String[] chosenSkills = new String[3];
+        for (int i = 0; i < 3; i++) {
+            chosenSkills[i] = opponentAttacks[opponentChoices[i]];
+        }
+        
+        return chosenSkills;
+    }
+
+    private void printFight(int[] opponent1Choices, int[] opponent2Choices) {
+        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        for(int i = 0; i < 3; i++){
+            int countered = isCounter(opponentAttacks[opponentChoices[i]], playerAttacks[choices[i]]);
+            String playerAttack = getPlayer().getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName();
+
+            if(countered == 1){
+                System.out.print(GameLogic.centerText(50, playerAttack));
+                playerSuccessAction(choices[i], opponentChoices[i], false);
+                opponentFailedAction(opponentAttacks[opponentChoices[i]]);
+            } else if(countered == 2){
+                System.out.print(GameLogic.centerText(50, playerAttack));
+                opponentSuccessAction(opponentChoices[i], choices[i], false);
+                playerFailedAction(playerAttacks[choices[i]]);
+            } else {
+                System.out.print(GameLogic.centerText(50, playerAttack));
+                String opponentAttack = opponent.getName() + " draws " + getPlayer().getName() + " with " + opponentAttacks[opponentChoices[i]];
+                System.out.print(GameLogic.centerText(50, opponentAttack));
+                drawAction(choices[i], opponentChoices[i]);
+            }
+            if(getPlayer().getHp() <= 0 || getOpponent().getHp() <= 0){
+                return;
+            }
+            System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        }
     }
 
     private void displayStats(StreetFighter fighter1, StreetFighter fighter2) {
