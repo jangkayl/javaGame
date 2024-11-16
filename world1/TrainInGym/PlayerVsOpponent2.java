@@ -382,19 +382,29 @@ public abstract class PlayerVsOpponent2 {
         GameLogic.clearConsole();
         if(opponent.getName() == "Rico Ramirez"){
             GameLogic.printHeading("\tRico Ramirez Combo Counter:");
-            System.err.println("(1) Cross < Uppercut");
-            System.err.println("(2) Rear Uppercut < Block");
-            System.err.println("(3) Lead Hook < Jab");
+            System.out.println("(1) Cross < Uppercut");
+            System.out.println("(2) Rear Uppercut < Block");
+            System.out.println("(3) Lead Hook < Jab");
         } else if(opponent.getName() == "Oscar Lopez"){
             GameLogic.printHeading("\tOscar Lopez Combo Counter:");
-            System.err.println("(1) Quick Jab < Uppercut");
-            System.err.println("(2) Cross < Uppercut");
-            System.err.println("(3) Power Punch < Block");
+            System.out.println("(1) Quick Jab < Uppercut");
+            System.out.println("(2) Cross < Uppercut");
+            System.out.println("(3) Power Punch < Block");
         } else if(opponent.getName() == "Ishmael Tetteh"){
             GameLogic.printHeading("\tIshmael Tetteh Combo Counter:");
-            System.err.println("(1) Right Uppercut < Block");
-            System.err.println("(2) Left Hook < Jab");
-            System.err.println("(3) Right Cross < Uppercut");
+            System.out.println("(1) Right Uppercut < Block");
+            System.out.println("(2) Left Hook < Jab");
+            System.out.println("(3) Right Cross < Uppercut");
+        } else if(opponent.getName() == "Pablo Martínez"){
+            GameLogic.printHeading("\tPablo Martínez Combo Counter:");
+            System.out.println("(1) Jab to the Body < Uppercut");
+            System.out.println("(2) Lead Hook < Jab");
+            System.out.println("(3) Rear Uppercut < Block");
+        } else if(opponent.getName() == "Fred"){
+            GameLogic.printHeading("\tFred Combo Counter:");
+            System.out.println("(1) Jab to the Body < Uppercut");
+            System.out.println("(2) Lead Hook < Jab");
+            System.out.println("(3) Rear Uppercut < Block");
         }
     }
 }

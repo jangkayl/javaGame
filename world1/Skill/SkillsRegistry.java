@@ -29,7 +29,7 @@ public class SkillsRegistry {
         registerSkill(new Skill("Lead Body Shot", "lead body shots", 7, 15, 0, 0, 
                             Arrays.asList("Hook", "Power Punch"), 
                             Arrays.asList("Jab", "Block", "Uppercut")));
-        registerSkill(new Skill("Cross To The Ribs", "cross to the ribs", 9, 20, 0, 0, 
+        registerSkill(new Skill("Cross to the Ribs", "cross to the ribs", 9, 20, 0, 0, 
                             Arrays.asList("Block"), 
                             Arrays.asList("Jab", "Hook")));
         registerSkill(new Skill("Finishing Uppercut", "finishing uppercuts", 14, 25, 0, 0, 

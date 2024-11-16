@@ -7,6 +7,7 @@ import world1.TrainInGym.PabloUrbanGym;
 import world1.database.GameDataManager;
 import world1.database.GameDatabase;
 import world2.GameLogic2;
+import world3.GameLogic3;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -270,7 +271,7 @@ public class GameLogic{
         if(player.getCurrentWorld() == 1){
             GameLogic2.gameLoop();
         } else if(player.getCurrentWorld() == 2){
-            // GameLogic3.gameLoop();
+            GameLogic3.gameLoop();
         } else {
             gameLoop();
         }

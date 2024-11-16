@@ -156,7 +156,6 @@ public class Shop {
                 }
             }
 
-
             System.out.println("\n");
             System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
     

@@ -454,44 +454,49 @@ public abstract class SparFightLogic {
         GameLogic.clearConsole();
         if(opponent.getName() == "Joaquin Perez"){
             GameLogic.printHeading("\tJoaquin Perez Combo Counter:");
-            System.err.println("(1) Right Uppercut < Block");
-            System.err.println("(2) Left Hook < Jab");
-            System.err.println("(3) Right Cross < Uppercut");
-            System.err.println("(4) Elbow Strike < Block");
-            System.err.println("(5) Head Butt < Hook");
-            System.err.println("(6) Low Blow < Uppercut");
+            System.out.println("(1) Right Uppercut < Block");
+            System.out.println("(2) Left Hook < Jab");
+            System.out.println("(3) Right Cross < Uppercut");
+            System.out.println();
+            System.out.println("(4) Elbow Strike < Block");
+            System.out.println("(5) Head Butt < Hook");
+            System.out.println("(6) Low Blow < Uppercut");
         } else if(opponent.getName() == "Lando Pitik"){
             GameLogic.printHeading("\tLando Pitik Combo Counter:");
-            System.err.println("(1) Cross < Uppercut");
-            System.err.println("(2) Rear Uppercut < Block");
-            System.err.println("(3) Lead Hook < Jab");
-            System.err.println("(4) Elbow Strike < Block");
-            System.err.println("(5) Head Butt < Hook");
-            System.err.println("(6) Low Blow < Uppercut");
+            System.out.println("(1) Cross < Uppercut");
+            System.out.println("(2) Rear Uppercut < Block");
+            System.out.println("(3) Lead Hook < Jab");
+            System.out.println();
+            System.out.println("(4) Elbow Strike < Block");
+            System.out.println("(5) Head Butt < Hook");
+            System.out.println("(6) Low Blow < Uppercut");
         } else if(opponent.getName() == "Julio Navarro"){
             GameLogic.printHeading("\tJulio Navarro Combo Counter:");
-            System.err.println("(1) Right Uppercut < Block");
-            System.err.println("(2) Left Hook < Jab");
-            System.err.println("(3) Right Cross < Uppercut");
-            System.err.println("(4) Elbow Strike < Block");
-            System.err.println("(5) Head Butt < Hook");
-            System.err.println("(6) Low Blow < Uppercut");
+            System.out.println("(1) Right Uppercut < Block");
+            System.out.println("(2) Left Hook < Jab");
+            System.out.println("(3) Right Cross < Uppercut");
+            System.out.println();
+            System.out.println("(4) Elbow Strike < Block");
+            System.out.println("(5) Head Butt < Hook");
+            System.out.println("(6) Low Blow < Uppercut");
         } else if(opponent.getName() == "Raul Villanueva"){
             GameLogic.printHeading("\tRaul Villanueva Combo Counter:");
-            System.err.println("(1) Cross < Uppercut");
-            System.err.println("(2) Rear Uppercut < Block");
-            System.err.println("(3) Lead Hook < Jab");
-            System.err.println("(4) Elbow Strike < Block");
-            System.err.println("(5) Head Butt < Hook");
-            System.err.println("(6) Low Blow < Uppercut");
+            System.out.println("(1) Cross < Uppercut");
+            System.out.println("(2) Rear Uppercut < Block");
+            System.out.println("(3) Lead Hook < Jab");
+            System.out.println();
+            System.out.println("(4) Elbow Strike < Block");
+            System.out.println("(5) Head Butt < Hook");
+            System.out.println("(6) Low Blow < Uppercut");
         } else if(opponent.getName() == "Ralfo Salvahez"){
             GameLogic.printHeading("\tRalfo Salvahez Combo Counter:");
-            System.err.println("(1) Quick Jab < Uppercut");
-            System.err.println("(2) Cross < Uppercut");
-            System.err.println("(3) Power Punch < Block");
-            System.err.println("(4) Elbow Strike < Block");
-            System.err.println("(5) Head Butt < Hook");
-            System.err.println("(6) Low Blow < Uppercut");
+            System.out.println("(1) Quick Jab < Uppercut");
+            System.out.println("(2) Cross < Uppercut");
+            System.out.println("(3) Power Punch < Block");
+            System.out.println();
+            System.out.println("(4) Elbow Strike < Block");
+            System.out.println("(5) Head Butt < Hook");
+            System.out.println("(6) Low Blow < Uppercut");
         }
     }
 }
