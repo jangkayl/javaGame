@@ -325,7 +325,6 @@ public class TournamentUnderground {
                         "\nYou've lost 10% of your health and stamina. The harsh reality of confinement has left its mark.";
         System.out.print(GameLogic.centerBox(message, 115));
         System.out.println();
-        GameLogic.pressAnything();
 
         player.setMaxStamina(player.getMaxStamina() - (int)(player.getMaxStamina() * 0.10));
         player.setStamina(player.getMaxStamina());

@@ -1,16 +1,16 @@
 [player]
 name=Kyle
-hp=207
-maxHp=207
-stamina=59
-maxStamina=59
+hp=229
+maxHp=229
+stamina=65
+maxStamina=65
 critChance=0.9100000000000001
 critMultiplier=2.07
 dodgeChance=0.345
 playerPoints=1100
 currentWorld=2
 currentRank=0
-stage=12
+stage=14
 isLose=false
 
 [progress]

@@ -19,6 +19,12 @@ public class Shop implements ShopInterface{
         new Item("Blood-Forged Knuckles", "Powerful knuckles for brutal punches, but reduce health over time due to strain on the hands.", 300, "-10% Health, +20% Crit Hit Chance","false","HAND", 0.1, 0, 0.2, 0, 0),
         new Item("Shadowrunner Sneakers", "Lightweight shoes that improve agility but provide less protection.", 250, "+20% Stamina, +10% Dodge Chance, -10% HP","false","BOOTS", -0.1, 0.2, 0, 0, 0.1),
         new Item("Tactical Combat Boots", "Sturdy boots that improve footwork and durability.", 250, "+10% Health, +10% Crit Hit Chance, +10% Stamina", "false", "BOOTS", 0.1, 0.1, 0.1, 0, 0),
+
+        // World 3 Items
+        new Item("Iron Jaw Mouthguard", "A shock-absorbing mouthguard designed to reduce damage from heavy punches.", 400, "+15% HP, +10% Stamina","false","HEAD", 0.15, 0.1, 0, 0, 0),
+        new Item("Lightning Grip Gloves", "Gloves crafted for unmatched speed and precision.", 300, "+20% Stamina, +10% Crit Hit Chance","false","HAND", 0, 0.2, 0.1, 0, 0),
+        new Item("Victory Crest Belt", "A belt signifying champions, offering balanced stats for sustained fights.", 250, "+10% HP, +10% Stamina","false","BODY", 0.1, 0.1, 0, 0, 0),
+        new Item("Shadowstep Shoes", "Sneakers that enhance agility, allowing for quick evasive maneuvers.", 250, "+10% Dodge Chance, +10% Stamina", "false", "BOOTS", 0, 0.1, 0, 0, 0.1),
     };
 
     public Shop(Player p, PlayerProgress progress){
@@ -135,9 +141,11 @@ public class Shop implements ShopInterface{
                 System.out.println(GameLogic.centerBox("GYM SHOP", 40));
             } else if(player.getCurrentWorld() == 1){
                 System.out.println(GameLogic.centerBox("BLACK MARKET", 40));
+            } else if(player.getCurrentWorld() == 2){
+                System.out.println(GameLogic.centerBox("BOXING ARSENAL", 40));
             }
 
-            System.out.print(GameLogic.centerBox("Player Points: " + player.getPlayerPoints(), 20));
+            System.out.print(GameLogic.centerBox(" Player Points: " + player.getPlayerPoints() + " ", 25));
             System.out.println("\n");
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
             // Display items for sale
@@ -149,9 +157,16 @@ public class Shop implements ShopInterface{
                     items[i].displayItem();
                 }
             } else if(player.getCurrentWorld() == 1){
-                for (int i = 4; i < items.length; i++) {
+                for (int i = 4; i < 7; i++) {
                     System.out.println();
                     String line = "(" + (i - 3) + ") " + items[i].name;
+                    System.out.print(GameLogic.centerText(50, line));
+                    items[i].displayItem();
+                }
+            } else if(player.getCurrentWorld() == 2){
+                for (int i = 8; i < items.length; i++) {
+                    System.out.println();
+                    String line = "(" + (i - 6) + ") " + items[i].name;
                     System.out.print(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }

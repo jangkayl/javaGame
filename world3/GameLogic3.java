@@ -25,7 +25,7 @@ public class GameLogic3 {
             if(input == 0){
                 GameLogic.isRunning = false;
             } else if(input == 1){
-                // continueJourney();
+                continueJourney();
             } else if(input == 2){
                 GameLogic.printStats();
             } else if(input == 3){
@@ -41,7 +41,7 @@ public class GameLogic3 {
     static void printMenu(){
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
-        GameLogic.printHeading(GameLogic.centerText("MENU SA WORLD 3", 30));
+        GameLogic.printHeading(GameLogic.centerText("MENU", 30));
         System.out.println("Choose an action:");
         GameLogic.printSeparator(20);
         System.out.println("(0) Exit Game");
@@ -50,5 +50,57 @@ public class GameLogic3 {
         System.out.println("(3) Inventory");
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
+    }
+
+    // Continues players journey
+    private static void continueJourney() {
+        TrainWithFred trainWithFred = new TrainWithFred();
+        SparringRing sparringRing = new SparringRing();
+
+        GameLogic.clearConsole();
+        if(player.getCurrentWorld() == 2) {
+            if(player.getStage() == 12){
+                GameLogic.printSeparator(40);
+                String[] worlds = player.getWorlds();
+                GameLogic.printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
+                GameLogic.printSeparator(40);
+                StoryChampsArena.printChampsArena();
+                GameLogic.printSeparator(50);
+                System.out.println();
+                System.out.println("Are you ready to start your journey?");
+                System.out.println("(1) Yes\n(2) No");
+                int choice2 = GameLogic.readInt("-> ", 1, 2);
+                if(choice2 == 2){
+                    return;
+                }
+                StoryChampsArena.printChampsArena();
+                StoryChampsArena.printIntroduction(player.getName());
+                player.setStage(13);
+                trainWithFred.teachPassiveSkills();
+            } else {
+                while (true) {
+                    GameLogic.clearConsole();
+                    System.out.println("(1) Sparring Ring");
+                    System.out.println("(2) Boxing Arsenal");
+                    System.out.println("(3) Enter Tournament");
+                    System.out.println("(4) Go back");
+                    int choice = GameLogic.readInt("-> ", 1, 4);
+                    if(choice == 1){
+                        if(player.getStage() == 13)
+                            trainWithFred.teachPassiveSkills();
+                        else 
+                            sparringRing.start();
+                    } else if(choice == 2){
+                        shop.showShop(false);
+                        GameLogic.gameData.inputInventory(inventory.getInventoryItems());
+                        GameLogic.gameData.saveGame();
+                    } else if(choice == 3){
+
+                    } else if(choice == 4){
+                        break;
+                    } 
+                }
+            }
+        }
     }
 }

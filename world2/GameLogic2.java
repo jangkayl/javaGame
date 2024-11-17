@@ -39,7 +39,7 @@ public class GameLogic2 {
     }
 
     // Prints the menu options
-    static void printMenu(){
+    private static void printMenu(){
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
         GameLogic.printHeading(GameLogic.centerText("MENU", 30));
@@ -54,7 +54,7 @@ public class GameLogic2 {
     }
 
     // Continues players journey
-    static void continueJourney() {
+    private static void continueJourney() {
         GameLogic.clearConsole();
         if(player.getCurrentWorld() == 1) {
             if(player.getStage() == 6){
@@ -93,8 +93,6 @@ public class GameLogic2 {
                             journeyMenu();
                         }
                     } else if (choice == 1){
-                        // BetFight betFight = new BetFight();
-                        // betFight.betFight();
                         BetFight betFight = new BetFight();
                         betFight.betFight();
                     } else if(choice == 2){
@@ -109,7 +107,7 @@ public class GameLogic2 {
         }
     }
 
-    static void journeyMenu(){
+    private static void journeyMenu(){
         while(true){
             GameLogic.clearConsole();
             System.out.println("(1) Review Move Hints");

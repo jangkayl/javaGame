@@ -37,7 +37,6 @@ public class TrainWithJakester {
         GameLogic.pressAnything();
         train(GameLogic2.player.getName());
     }
-    
 
     static void space(int separator){
         System.out.println();
