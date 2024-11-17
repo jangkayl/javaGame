@@ -7,8 +7,9 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Skill.SkillsRegistry;
+import world2.interfaces.SparFightLogicInterface;
 
-public abstract class SparFightLogic {
+public abstract class SparFightLogic implements SparFightLogicInterface{
     protected Random rand = new Random();
     private PlayerProgress playerProgress = GameLogic.playerProgress;
     private Player player;

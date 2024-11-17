@@ -1,8 +1,9 @@
 package world1;
 
 import world1.TrainInGym.CarlitoUrbanGym;
+import world1.interfaces.ShopInterface;
 
-public class Shop {
+public class Shop implements ShopInterface{
     private static Player player;
     private static Inventory inventory = new Inventory();
     private static PlayerProgress playerProgress = GameLogic.playerProgress;

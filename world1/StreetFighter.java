@@ -1,8 +1,9 @@
 package world1;
 
 import world1.Skill.SkillsRegistry;
+import world1.interfaces.StreetFighterInterface;
 
-public class StreetFighter extends Boxer {
+public class StreetFighter extends Boxer implements StreetFighterInterface{
     private static Player player = GameLogic.player;
     private SkillsRegistry skills = new SkillsRegistry();
 

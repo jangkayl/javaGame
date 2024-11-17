@@ -3,8 +3,9 @@ package world1;
 import java.util.Random;
 
 import world1.Skill.SkillsRegistry;
+import world1.interfaces.FightLogicInterface;
 
-public abstract class FightLogic {
+public abstract class FightLogic implements FightLogicInterface{
     protected Random rand = new Random();
     private PlayerProgress playerProgress = GameLogic.playerProgress;
     private Player player;

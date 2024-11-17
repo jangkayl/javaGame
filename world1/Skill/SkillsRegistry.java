@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SkillsRegistry {
+import world1.interfaces.SkillsRegistryInterface;
+
+public class SkillsRegistry implements SkillsRegistryInterface{
     private final Map<String, Skill> skills;
 
     public SkillsRegistry() {

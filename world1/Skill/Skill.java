@@ -2,7 +2,9 @@ package world1.Skill;
 
 import java.util.List;
 
-public class Skill {
+import world1.interfaces.SkillInterface;
+
+public class Skill implements SkillInterface {
     private final String name;                 
     private final String attackName;                 
     private final int staminaCost;            

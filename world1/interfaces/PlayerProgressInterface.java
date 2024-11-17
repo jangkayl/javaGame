@@ -5,4 +5,12 @@ public interface PlayerProgressInterface {
     int getRound();
     void setShopStage(int shopStage);
     int getShopStage();
+    void setDone(int done);
+    int getDone();
+    void setOpponentWins(int wins);
+    int getOpponentWins();
+    void setPlayerWins(int wins);
+    int getPlayerWins();
+    void setAddStats(int stats);
+    int getAddStats();
 }

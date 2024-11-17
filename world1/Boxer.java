@@ -1,5 +1,8 @@
 package world1;
-public abstract class Boxer {
+
+import world1.interfaces.BoxerInterface;
+
+public abstract class Boxer implements BoxerInterface{
     private String name;
     protected String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION", "LEGEND", "HALL OF FAMER"};
     private int maxHp, hp, stamina, maxStamina, rank;
