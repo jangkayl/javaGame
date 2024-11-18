@@ -6,8 +6,8 @@ import world1.GameLogic;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
-import world2.SparringOpponents.PerezSparring;
-import world2.SparringOpponents.PitikSparring;
+import world3.SparringOpponents.ArcegaSparring;
+import world3.SparringOpponents.MagsilosSparring;
 
 public class SparringRing {
     private StreetFighter opponent;
@@ -27,25 +27,26 @@ public class SparringRing {
                         "\nStep into the ring, face opponents of varying difficulty, and emerge stronger and ready to conquer!";
         System.out.print(GameLogic.centerBox(prompt, 130));
         System.out.println();
+        GameLogic.pressAnything();
     
         int randomNum = rand.nextInt(3) + 1;
         startSparring(randomNum);
     }
 
     private void startSparring(int opponentIndex) {
-        PerezSparring perez = null;
-        PitikSparring pitik = null;
+        ArcegaSparring arcega = null;
+        MagsilosSparring magsilos = null;
         int choice = 0;
     
         boolean usePerez = new Random().nextBoolean(); 
         if (usePerez) {
-            opponent = generateRandomOpponent("Joaquin Perez");
-            perez = new PerezSparring(player, opponent);
-            pitik = null;
+            opponent = generateRandomOpponent("Junjun Arcega");
+            arcega = new ArcegaSparring(player, opponent);
+            magsilos = null;
         } else {
-            opponent = generateRandomOpponent("Lando Pitik");
-            pitik = new PitikSparring(player, opponent);
-            perez = null;
+            opponent = generateRandomOpponent("Kargado Magsilos");
+            magsilos = new MagsilosSparring(player, opponent);
+            arcega = null;
         }
     
         while (true) {
@@ -61,22 +62,19 @@ public class SparringRing {
     
             if (choice == 1) {
                 playerProgress.setRound(1);
-                if(playerProgress.getShopStage() < 6){
-                    playerProgress.setShopStage(playerProgress.getShopStage() + 1);
-                }
                 break;
             } else if (choice == 2) {
                 GameLogic.printStats();
             } else if (choice == 3) {
                 usePerez = new Random().nextBoolean(); 
                 if (usePerez) {
-                    opponent = generateRandomOpponent("Joaquin Perez"); 
-                    perez = new PerezSparring(player, opponent);
-                    pitik = null; 
+                    opponent = generateRandomOpponent("Junjun Arcega");
+                    arcega = new ArcegaSparring(player, opponent);
+                    magsilos = null;
                 } else {
-                    opponent = generateRandomOpponent("Lando Pitik"); 
-                    pitik = new PitikSparring(player, opponent);
-                    perez = null;
+                    opponent = generateRandomOpponent("Kargado Magsilos");
+                    magsilos = new MagsilosSparring(player, opponent);
+                    arcega = null;
                 }
                 System.out.println("New opponent generated!");
             } else if(choice == 4){
@@ -84,10 +82,10 @@ public class SparringRing {
             }
         }
     
-        if (perez != null) {
-            perez.fightLoop();
-        } else if (pitik != null) {
-            pitik.fightLoop();
+        if (arcega != null) {
+            arcega.fightLoop();
+        } else if (magsilos != null) {
+            magsilos.fightLoop();
         }
     }
     
