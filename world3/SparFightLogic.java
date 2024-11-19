@@ -202,13 +202,13 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
                 continue; 
             }
             
-            if (input.equals("6")) {
+            if (input.equals("6") || input.equals("7") || input.equals("8")) {
                 if(playerHasPassive){
 
                 } else {
-                    String message = getPlayer().getName() + " doesn't have enough stamina for this combo!\n" +
-                        "You may use 3 Blocks as your combo to regain stamina";
-                    System.out.println(GameLogic.centerBox(message, 60));
+                    String message = getPlayer().getName() + " needs 3 successful consecutive hits to activate this combo!\n" +
+                        "Try to land more hits before using your passive skill.";
+                    System.out.println(GameLogic.centerBox(message, 70));
                     continue;
                 }
             } else if (input.contains("6") || input.contains("7") || input.contains("8")) {
