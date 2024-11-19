@@ -3,7 +3,7 @@ package world3.SparringOpponents;
 import world1.GameLogic;
 import world1.Player;
 import world1.StreetFighter;
-import world2.SparFightLogic;
+import world3.SparFightLogic;
 
 public class MagsilosSparring extends SparFightLogic{
     private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Cross", "Rear Uppercut", "Lead Hook", "Elbow Strike", "Head Butt", "Low Blow"};

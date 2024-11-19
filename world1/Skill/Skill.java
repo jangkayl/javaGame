@@ -64,10 +64,4 @@ public class Skill implements SkillInterface {
     public List<String> getEffectiveAgainst() {
         return effectiveAgainst;
     }
-
-    @Override
-    public String toString() {
-        return String.format("Skill{\nname='%s', \nstaminaCost=%d, \ncounters=%s, \neffectiveAgainst=%s, \nhpDamage=%s, \nstaminaReduced=%s, \nhpReduced=%s}", 
-                             name, staminaCost, counters, effectiveAgainst, hpDamage, staminaReduced, hpReduced, staminaReduced);
-    }
 }

@@ -16,12 +16,12 @@ public class TrainWithFred {
         System.out.print(GameLogic.centerBox(prompt, 130));
         System.out.println();
         
-        prompt = "\"Iron Guard - Block all incoming damage for your next turn.\"" + 
-                "\n*Best used when you're on the defensive." + 
-                "\n\n\"Adrenaline Rush - Boost your crit chance by 25% for your next turn.\"" +
+        prompt = "\"Flow State - 100% Dodge Chance, blocks all damage next turn.\"" + 
+                "\n*Best used when you're on defensive." + 
+                "\n\n\"Adrenaline Rush - Boost your Crit Chance by 100% next turn.\"" +
                 "\n*Perfect for finishing off your opponent." + 
-                "\n\n\"Vital Surge - Regain 20% of your health and stamina.\"" +
-                "\n*Use this skill to stay in the fight longer and keep your stamina up for crucial moves.";
+                "\n\n\"Sixth Sense - Reveals the opponent's next 3 moves.\"" +
+                "\n*Plan ahead and conserve stamina.";
         System.out.print(GameLogic.centerBox(prompt, 130));
         System.out.println();
         

@@ -5,13 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/temp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/temp.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/GameLogic2.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/GameLogic2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/TrainWithJakester.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TrainWithJakester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world3/GameLogic3.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/GameLogic3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/GameLogic2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/GameLogic2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparFightLogic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TournamentUnderground.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/TournamentUnderground.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/GameLogic3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/GameLogic3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/TrainWithFred.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/TrainWithFred.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/Skill/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Skill/Skill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world3/SparFightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/SparFightLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world3/SparringOpponents/ArcegaSparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/SparringOpponents/ArcegaSparring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world3/SparringOpponents/MagsilosSparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/SparringOpponents/MagsilosSparring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world3/SparringRing.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/SparringRing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world3/TrainWithFred.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/TrainWithFred.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +69,7 @@
     &quot;ToolWindow.Run.ShowToolbar&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/L12X14W01/Downloads/javaGame&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Downloads/Crystal-of-JAVA-v1278365&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,

@@ -55,7 +55,7 @@ public class SparringRing {
             System.out.println("Select an option: ");
             System.out.println("\t\t(1) Fight now");
             System.out.println("\t\t(2) Check your Stats");
-            System.out.println("\t\t(3) Change Opponent Stats");
+            System.out.println("\t\t(3) Change Opponent & Stats");
             System.out.println("\t\t(4) Go Back");
     
             choice = GameLogic.readInt("-> ", 1, 4); 
@@ -97,7 +97,7 @@ public class SparringRing {
         double critMulti = 2 + (rand.nextDouble() * 1); // Crit multi between 2 and 3
         double dodgeChance = 0.3 + (rand.nextDouble() * 0.2); // Dodge chance between 0.3 and 0.5
     
-        return new StreetFighter(name, hp, stamina, critChance, critMulti, dodgeChance, 3);
+        return new StreetFighter(name, hp, stamina, critChance, critMulti, dodgeChance, 4);
     }
     
 }

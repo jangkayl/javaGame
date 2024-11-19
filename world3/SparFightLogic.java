@@ -1,4 +1,4 @@
-package world2;
+package world3;
 
 import java.util.Random;
 
@@ -7,14 +7,18 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Skill.SkillsRegistry;
+import world2.BoxerHints;
 import world2.interfaces.SparFightLogicInterface;
+import world3.PassiveSkill.PassiveSkillRegistry;
 
 public abstract class SparFightLogic implements SparFightLogicInterface{
     protected Random rand = new Random();
     private PlayerProgress playerProgress = GameLogic.playerProgress;
     private Player player;
-    private SkillsRegistry skills = new SkillsRegistry();
     private StreetFighter opponent;
+    private SkillsRegistry skills = new SkillsRegistry();
+    private PassiveSkillRegistry passiveSkills = new PassiveSkillRegistry();
+    private boolean playerHasPassive = false;
     private boolean playerDodged = false;
     private boolean opponentDodged = false;
     protected static BoxerHints boxerHints;
@@ -24,14 +28,14 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
                                 {"Block", "Stamina: +5"}, 
                                 {"Uppercut", "Damage: 20 | Stamina: -10"},
                                 {"The Body Breaker", ""},
-                                {"Elbow Strike", "Damage: 40 | Stamina: -25 | HP: -10"},
-                                {"Head Butt", "Damage: 30 | Stamina: -20 | HP: -15"},
-                                {"Low Blow", "Damage: 40 | Stamina: -25 | HP: -20"},
                             };
     protected static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
-    public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut", "Elbow Strike", "Head Butt", "Low Blow"};
+    protected static String[][] passiveSkill = {{"Flow State", "100% Dodge Chance, blocks all damage next turn."},
+                                                {"Adrenaline Rush", "Boost your Crit Chance by 100% next turn."},
+                                                {"Sixth Sense", "Reveals the opponent's next 3 moves."}};
+    public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut", "Flow State", "Adrenaline Rush", "Sixth Sense"};
     private String[] opponentAttacks;
 
     public SparFightLogic(Player player, String[] opponentAttacks, StreetFighter opponent) {
@@ -143,9 +147,9 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         System.out.println(GameLogic.centerText(30, ("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~")));
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
 
-        for (int i = 0; i < attackOption.length - 3; i++) {
+        for (int i = 0; i < attackOption.length; i++) {
             String attackInfo;
-            if(i < attackOption.length - 4){
+            if(i < attackOption.length - 1){
                 attackInfo = (i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1];
             } else {
                 attackInfo = (i + 1) + ") " + attackOption[i][0];
@@ -159,8 +163,8 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         }
 
         System.out.println();
-        for (int i = attackOption.length - 3; i < attackOption.length; i++) {
-            System.out.print(GameLogic.centerText(40, ((i + 1) + ") " + attackOption[i][0] + " - " + attackOption[i][1])));
+        for (int i = 0; i < passiveSkill.length; i++) {
+            System.out.print(GameLogic.centerText(40, ((i + 6) + ") " + passiveSkill[i][0] + " - " + passiveSkill[i][1])));
         }
         
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
@@ -197,6 +201,23 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
                 System.out.println(GameLogic.centerBox(message, 60));
                 continue; 
             }
+            
+            if (input.equals("6")) {
+                if(playerHasPassive){
+
+                } else {
+                    String message = getPlayer().getName() + " doesn't have enough stamina for this combo!\n" +
+                        "You may use 3 Blocks as your combo to regain stamina";
+                    System.out.println(GameLogic.centerBox(message, 60));
+                    continue;
+                }
+            } else if (input.contains("6") || input.contains("7") || input.contains("8")) {
+                System.out.println();
+                String message = "You can use your passive skill by entering '6' | '7' | '8'!\n" +
+                        "If you want to proceed, just enter '6' | '7' | '8'.";
+                System.out.println(GameLogic.centerBox(message, 65));
+                continue; 
+            }
 
             // Map 6 -> 8, 7 -> 9, and 8 -> 0
             StringBuilder mappedInput = new StringBuilder();
@@ -213,7 +234,9 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             }
             input = mappedInput.toString();
 
-            if(isValidCombo(input, player.getStamina()) == 1){
+            if(input.contains("6") || input.contains("7") || input.contains("8")){
+                System.out.println("HALO");
+            } else if(isValidCombo(input, player.getStamina()) == 1){
                 System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 50));
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
@@ -317,14 +340,20 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
 
         int tempStamina = stamina;
         for (char c : input.toCharArray()) {
-            if (!Character.isDigit(c) || c < '0' || c > '9') {
+            if (!Character.isDigit(c) || c < '1' || c > '7') {
                 return 1;
             }
             
             int move = Character.getNumericValue(c);
             int staminaCost;
 
-            staminaCost = getSkills().getSkillByName(move-1 == -1 ? "Low Blow" : opponentAttacks[move-1]).getStaminaCost();
+            // staminaCost = getSkills().getSkillByName(move-1 == -1 ? "Low Blow" : opponentAttacks[move-1]).getStaminaCost();
+
+            if(move-1 == -1 || move == 8 || move == 9){
+                staminaCost = 0;
+            } else {
+                staminaCost = getSkills().getSkillByName(opponentAttacks[move-1]).getStaminaCost();
+            }
 
             if (tempStamina - staminaCost < 0) {
                 return 2;
