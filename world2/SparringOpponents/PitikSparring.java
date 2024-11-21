@@ -19,8 +19,8 @@ public class PitikSparring extends SparFightLogic{
 
     @Override
     protected void handleWin() {
-        winnerReward();
-        System.out.println(); 
+        winnerRewardPoints();
+        System.out.println();
         
         if(getPlayerProgress().getAddStats() < 5){
             GameLogic.printSeparator(40);
@@ -30,9 +30,9 @@ public class PitikSparring extends SparFightLogic{
             System.out.println("\nHere are your choices: ( Select one only )");
             System.out.println("1. HP - Increase by +15% ");
             System.out.println("2. Stamina - Increase by +15%");
-            System.out.println("3. Crit Chance - Increase by +7%");
-            System.out.println("4. Dodge Chance - Increase by +7%");
-            System.out.println("5. Crit Multiplier - Increase by +7%");
+            System.out.println("3. Crit Chance - Increase by +5%");
+            System.out.println("4. Dodge Chance - Increase by +5%");
+            System.out.println("5. Crit Multiplier - Increase by +5%");
             System.out.print("\nEnter the number of the stat you'd like to upgrade: ");
             int choice = GameLogic.readInt("", 1, 5);
             addStats(choice);

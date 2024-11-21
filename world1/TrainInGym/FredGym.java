@@ -61,11 +61,11 @@ public class FredGym extends PlayerVsOpponent2{
         System.out.println("Fred: \t\"Great job! Now, choose what stats you want to upgrade.\"");
         
         System.out.println("\nHere are your choices: ( Select one only )");
-        System.out.println("1. HP - Increase by +20% ");
-        System.out.println("2. Stamina - Increase by +20%");
-        System.out.println("3. Crit Chance - Increase by +10%");
-        System.out.println("4. Dodge Chance - Increase by +10%");
-        System.out.println("5. Crit Multiplier - Increase by +10%");
+        System.out.println("1. HP - Increase by +10% ");
+        System.out.println("2. Stamina - Increase by +10%");
+        System.out.println("3. Crit Chance - Increase by +5%");
+        System.out.println("4. Dodge Chance - Increase by +5%");
+        System.out.println("5. Crit Multiplier - Increase by +5%");
         System.out.print("\nEnter the number of the stat you'd like to upgrade: ");
         int choice = GameLogic.readInt("", 1, 5);
         addStats(choice);
@@ -77,23 +77,23 @@ public class FredGym extends PlayerVsOpponent2{
 
     private void addStats(int choice){
         if(choice == 1){
-            double hpMultiplier = 1 + 0.20;
+            double hpMultiplier = 1 + 0.10;
             int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);
             player.setHp(maxHp);
             player.setMaxHp(maxHp);
         } else if(choice == 2){
-            double staminaMultiplier = 1 + 0.20;
+            double staminaMultiplier = 1 + 0.10;
             int maxStamina = (int)Math.ceil(player.getMaxStamina() * staminaMultiplier);
             player.setStamina(maxStamina);
             player.setMaxStamina(maxStamina);
         } else if(choice == 3){
-            double newCrit = player.getCritChance() + 0.10;
+            double newCrit = player.getCritChance() + 0.05;
             player.setCritChance(newCrit);
         } else if(choice == 4){
-            double newDodge = player.getDodgeChance() + 0.10;
+            double newDodge = player.getDodgeChance() + 0.05;
             player.setDodgeChance(newDodge);
         } else if(choice == 5){
-            double newMulti = player.getCritMultiplier() + 0.10;
+            double newMulti = player.getCritMultiplier() + 0.05;
             player.setCritMultiplier(newMulti);
         }
     }

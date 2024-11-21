@@ -121,9 +121,9 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             int randomValue = rand.nextInt(10); // Generate a random number between 0 and 9
         
             // Higher probability for numbers 1 to 4
-            if (randomValue < 5) { // 50% chance
+            if (randomValue < 8) { // 70% chance
                 opponentChoices[i] = rand.nextInt(4); // 0, 1, 2, or 3 (which correspond to 1 to 4)
-            } else { // 50% chance
+            } else { // 20% chance
                 opponentChoices[i] = 4 + rand.nextInt(6); // 4, 5, or 6
             }
         }
@@ -428,6 +428,17 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         }
     }
 
+    protected void winnerRewardPoints(){
+        System.out.println();
+        player.setPlayerPoints(player.getPlayerPoints() + 200);
+        String message = "Congratulations! You've won the match!\n\n" +
+            "You won 200 points.\n\n" +
+            "You now have " + player.getPlayerPoints() + " points.\n\n" +
+            "Visit the shop and use your points to buy items.\n";
+
+        System.out.println(GameLogic.centerBox(message, 90));
+    }
+
     protected void addStats(int choice){
         if(choice == 1){
             double hpMultiplier = 1 + 0.15;
@@ -440,13 +451,13 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             player.setStamina(maxStamina);
             player.setMaxStamina(maxStamina);
         } else if(choice == 3){
-            double newCrit = player.getCritChance() + 0.07;
+            double newCrit = player.getCritChance() + 0.05;
             player.setCritChance(newCrit);
         } else if(choice == 4){
-            double newDodge = player.getDodgeChance() + 0.07;
+            double newDodge = player.getDodgeChance() + 0.05;
             player.setDodgeChance(newDodge);
         } else if(choice == 5){
-            double newMulti = player.getCritMultiplier() + 0.07;
+            double newMulti = player.getCritMultiplier() + 0.05;
             player.setCritMultiplier(newMulti);
         }
     }

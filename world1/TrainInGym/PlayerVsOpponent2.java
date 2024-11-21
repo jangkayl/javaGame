@@ -176,7 +176,7 @@ public abstract class PlayerVsOpponent2 {
             // Higher probability for numbers 1 to 4
             if (randomValue < 8) { // 80% chance
                 opponentChoices[i] = rand.nextInt(4); // 0, 1, 2, or 3 (which correspond to 1 to 4)
-            } else { // 40% chance
+            } else { // 20% chance
                 opponentChoices[i] = 4 + rand.nextInt(3); // 4, 5, or 6
             }
         }

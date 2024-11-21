@@ -5,7 +5,6 @@ public class PassiveSkill {
     private String description;
     private boolean isCrit;
     private boolean isDodge;
-    private boolean isActive;        
     private boolean revealEnemyMoves; 
 
     // Constructor
@@ -15,7 +14,6 @@ public class PassiveSkill {
         this.isCrit = isCrit;
         this.isDodge = isDodge;
         this.revealEnemyMoves = revealEnemyMoves;
-        this.isActive = false;
     }
 
     // Getters and Setters
@@ -43,10 +41,6 @@ public class PassiveSkill {
         this.isDodge = isDodge;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
     public void setRevealEnemyMoves(boolean revealEnemyMoves){
         this.revealEnemyMoves = revealEnemyMoves;
     }
@@ -55,18 +49,4 @@ public class PassiveSkill {
         return revealEnemyMoves;
     }
 
-    // Methods
-    public void activate() {
-        if (!isActive) {
-            System.out.println(name + " is now active!");
-            isActive = true;
-        }
-    }
-
-    public void deactivate() {
-        if (isActive) {
-            System.out.println(name + " has worn off.");
-            isActive = false;
-        }
-    }
 }

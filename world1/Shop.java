@@ -16,7 +16,7 @@ public class Shop implements ShopInterface{
 
         // World 2 Items
         new Item("Reinforced Headband", "Tough headband that protects the skull and conceals small illegal items.", 400, "+10% HP, +5% Crit Chance, +15% Dodge Chance","false","HEAD", 0.1, 0, 0.05, 0, 0.15),
-        new Item("Blood-Forged Knuckles", "Powerful knuckles for brutal punches, but reduce health over time due to strain on the hands.", 300, "-10% Health, +20% Crit Hit Chance","false","HAND", 0.1, 0, 0.2, 0, 0),
+        new Item("Blood-Forged Knuckles", "Powerful knuckles for brutal punches, but reduce health over time due to strain on the hands.", 300, "-10% Health, +10% Crit Hit Chance","false","HAND", 0.1, 0, 0.1, 0, 0),
         new Item("Shadowrunner Sneakers", "Lightweight shoes that improve agility but provide less protection.", 250, "+20% Stamina, +10% Dodge Chance, -10% HP","false","BOOTS", -0.1, 0.2, 0, 0, 0.1),
         new Item("Tactical Combat Boots", "Sturdy boots that improve footwork and durability.", 250, "+10% Health, +10% Crit Hit Chance, +10% Stamina", "false", "BOOTS", 0.1, 0.1, 0.1, 0, 0),
 

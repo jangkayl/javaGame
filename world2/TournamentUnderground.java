@@ -33,7 +33,7 @@ public class TournamentUnderground {
             System.out.println("\t\t\tYou need to spar harder and toughen up! Earn your stripes before stepping into this ring!\"");
             System.out.println();
             System.out.println("🏋️ Tip: Train hard, spar fiercely, and build your strength to earn a shot at the underground brawls! 🏆");
-            System.out.println("🔥 Prove your worth in 3 sparring matches before stepping into the ring of legends! 🔥");
+            System.out.println("🔥 Prove your worth in 5 sparring matches before stepping into the ring of legends! 🔥");
             resetMatchScores();
             GameLogic.pressAnything();
             GameLogic.gameData.saveGame();

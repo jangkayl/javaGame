@@ -8,18 +8,18 @@ critChance=0.9100000000000001
 critMultiplier=2.07
 dodgeChance=0.345
 playerPoints=1100
-currentWorld=1
+currentWorld=2
 currentRank=0
-stage=11
+stage=14
 isLose=false
 
 [progress]
-round=5
+round=1
 shopStage=6
 done=2
-playerWins=3
-opponentWins=1
-addStats=5
+playerWins=0
+opponentWins=0
+addStats=0
 
 [inventory]
 item=2

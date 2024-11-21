@@ -6,7 +6,7 @@ import world1.StreetFighter;
 import world3.SparFightLogic;
 
 public class ArcegaSparring extends SparFightLogic{
-    private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Elbow Strike", "Head Butt", "Low Blow"};
+    private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Right Uppercut", "Left Hook", "Right Cross", "Flow State", "Adrenaline Rush", "Sixth Sense"};
 
     public ArcegaSparring(Player player, StreetFighter opponent) {
         super(player, opponentAttacks, opponent);
@@ -14,7 +14,7 @@ public class ArcegaSparring extends SparFightLogic{
 
     @Override
     public String getOpponentName() {
-        return "Perez";
+        return "Arcega";
     }
 
     @Override
@@ -30,9 +30,9 @@ public class ArcegaSparring extends SparFightLogic{
             System.out.println("\nHere are your choices: ( Select one only )");
             System.out.println("1. HP - Increase by +15% ");
             System.out.println("2. Stamina - Increase by +15%");
-            System.out.println("3. Crit Chance - Increase by +7%");
-            System.out.println("4. Dodge Chance - Increase by +7%");
-            System.out.println("5. Crit Multiplier - Increase by +7%");
+            System.out.println("3. Crit Chance - Increase by +5%");
+            System.out.println("4. Dodge Chance - Increase by +5%");
+            System.out.println("5. Crit Multiplier - Increase by +5%");
             System.out.print("\nEnter the number of the stat you'd like to upgrade: ");
             int choice = GameLogic.readInt("", 1, 5);
             addStats(choice);
@@ -51,13 +51,13 @@ public class ArcegaSparring extends SparFightLogic{
     protected void handleLoss() {
         resetFighterStats();
         getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);
-        GameLogic.printSeparator(40);
-        System.out.println(); 
-        System.out.println("You have been defeated!");
-        System.out.println("You lost 150 points");
-        getPlayer().setPlayerPoints(getPlayer().getPlayerPoints() - 150);
-        System.out.println("You now have " + getPlayer().getPlayerPoints() + " points.");
-        System.out.println();
+        // GameLogic.printSeparator(40);
+        // System.out.println(); 
+        // System.out.println("You have been defeated!");
+        // System.out.println("You lost 150 points");
+        // getPlayer().setPlayerPoints(getPlayer().getPlayerPoints() - 150);
+        // System.out.println("You now have " + getPlayer().getPlayerPoints() + " points.");
+        // System.out.println();
         GameLogic.pressAnything();
         GameLogic.gameData.saveGame();
     }
