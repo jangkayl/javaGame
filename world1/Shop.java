@@ -194,18 +194,17 @@ public class Shop implements ShopInterface{
                 }
     
                 if (soldChecker(choice)) {
-                    System.out.println(items[choice - 1].name + " is already sold. Choose another item.");
+                    System.out.print(GameLogic.centerText(50,items[choice - 1].name + " is already sold. Choose another item."));
                 } else if (notEnoughPoints(choice)) {
-                    System.out.println("You don't have enough points to buy " + items[choice - 1].name + ". Please choose another item or earn more points.");
+                    System.out.print(GameLogic.centerBox("You don't have enough points to buy " + items[choice - 1].name + ". \nPlease choose another item or earn more points.",100));
+                    System.out.println();
                 } else {
                     // Successful purchase
                     System.out.println();
                     player.setPlayerPoints(player.getPlayerPoints() - items[choice - 1].cost);
-                    GameLogic.printSeparator(35);
-                    System.out.println("You've purchased " + items[choice - 1].name);
-                    GameLogic.printSeparator(35);
+                    System.out.print(GameLogic.centerBox("You've purchased " + items[choice - 1].name,80));
                     System.out.println();
-    
+                    
                     // Add item to inventory
                     inventory.setInventory(items[choice - 1].name, items[choice - 1].description, items[choice - 1].body, items[choice - 1].effect);
     

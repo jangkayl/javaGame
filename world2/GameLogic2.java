@@ -43,6 +43,7 @@ public class GameLogic2 {
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
         System.out.print(GameLogic.centerBox("MENU", 30));
+        System.out.println();
         System.out.print(GameLogic.centerText(50,"Choose an action:"));
         System.out.print(GameLogic.centerText(50,"(0) Exit Game"));
         System.out.print(GameLogic.centerText(50,"(1) Continue on your journey"));
@@ -57,26 +58,25 @@ public class GameLogic2 {
         GameLogic.clearConsole();
         if(player.getCurrentWorld() == 1) {
             if(player.getStage() == 6){
-                GameLogic.printSeparator(40);
                 String[] worlds = player.getWorlds();
                 System.out.print(GameLogic.centerBox("Welcome to the " + worlds[player.getCurrentWorld()],100));
                 StoryUnderground.printUnderground();
+                System.out.println("\n");
                 System.out.print(GameLogic.centerText(50,"Are you ready to start your journey?"));
                 System.out.print(GameLogic.centerText(50,"(1) Yes\n(2) No"));
                 int choice2 = GameLogic.readInt("-> ", 1, 2);
                 if(choice2 == 2){
                     return;
                 }
-                StoryUnderground.printUnderground();
                 StoryUnderground.printIntroduction(player.getName());
                 player.setStage(7);
             } else {
                 while (true) {
                     GameLogic.clearConsole();
                     if(player.getStage() == 7){
-                        System.out.println("(0) Train with Jakester");
+                        System.out.print(GameLogic.centerText(50,"(0) Train with Jakester"));
                     } else if(player.getStage() >= 8){
-                        System.out.println("(0) Continue Journey");
+                        System.out.print(GameLogic.centerText(50,"(0) Continue Journey"));
                     }
                     System.out.print(GameLogic.centerText(50,"(1) Bet on Matches"));
                     System.out.print(GameLogic.centerText(50,"(2) Black Market"));

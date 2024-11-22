@@ -21,56 +21,54 @@ public class BetFight {
     public void betFight() {
         System.out.println();
         GameLogic.clearConsole();
-        System.out.println("🎲 Welcome to the Underground BetFight Arena 🎲");
-        GameLogic.printSeparator(40);
-        System.out.println("The dim glow of flickering neon lights illuminates the smoky hall. The crowd's cheers and jeers create a chaotic symphony of excitement.");
-        System.out.println();
-        GameLogic.printSeparator(40);
-        System.out.println("[ A shadowy figure approaches, cloaked in mystery, their voice a raspy growl. ]");
-        System.out.println("Bookie: \"Two champions will clash. Who's your pick? Place your bets and watch the carnage!\"");
-        System.out.println();
+        System.out.print(GameLogic.centerBox("🎲 Welcome to the Underground BetFight Arena 🎲\n", 100));
+        System.out.println("\n");
+        System.out.println(GameLogic.centerText(50,
+                "The dim glow of flickering neon lights illuminates the smoky hall. The crowd's cheers and jeers create a chaotic symphony of excitement.\n" + "[ A shadowy figure approaches, cloaked in mystery, their voice a raspy growl. ]\n" +
+                        "Bookie: \"Two champions will clash. Who's your pick? Place your bets and watch the carnage!\"\n"));
 
         fighter1 = generateRandomOpponent(null);
         fighter2 = generateRandomOpponent(fighter1.getName());
 
-        System.out.println("Meet the fighters:");
-        System.out.println("Fighter 1: " + fighter1.getName());
+        System.out.print(GameLogic.centerText(50,"Meet the fighters:"));
+        System.out.print(GameLogic.centerText(50,"Fighter 1: " + fighter1.getName()));
         world1.Tournament.showOpStats(fighter1);
         System.out.println();
-        System.out.println("Fighter 2: " + fighter2.getName());
+        System.out.print(GameLogic.centerText(50,"Fighter 2: " + fighter2.getName()));
         world1.Tournament.showOpStats(fighter2);
         System.out.println();
 
-        System.out.println("Place your bet! (1) " + fighter1.getName() + " or (2) " + fighter2.getName() + " | (0) Go Back:");
+        System.out.print(GameLogic.centerText(50,"Place your bet! (1) " + fighter1.getName() + " or (2) " + fighter2.getName() + " | (0) Go Back:"));
         int betChoice = GameLogic.readInt("-> ", 0, 2);
         if(betChoice == 0) return;
         int betAmount = 0;
         do {
-            System.out.println("\nEnter your bet amount (minimum 100 points) | (0) Go Back:");
-            System.out.println("Available Points: " + player.getPlayerPoints());
+            System.out.print(GameLogic.centerText(50,"\nEnter your bet amount (minimum 100 points) | (0) Go Back:"));
+            System.out.print(GameLogic.centerText(50,"Available Points: " + player.getPlayerPoints()));
             betAmount = GameLogic.readInt("-> ", 0, Integer.MAX_VALUE);
             if(betAmount == 0) return;
         
             if (betAmount < 100){
-                System.out.println("\nMinimum bet is 100 points. Please try again.");
+                System.out.print(GameLogic.centerText(50,"\nMinimum bet is 100 points. Please try again."));
             } else if (betAmount > player.getPlayerPoints()) {
-                System.out.println("\nYou don't have enough points to place this bet. Please try again.");
+                System.out.print(GameLogic.centerText(50,"\nYou don't have enough points to place this bet. Please try again."));
             }
         } while (betAmount > player.getPlayerPoints() || betAmount < 100);
 
-        System.out.println("\nThe fight begins...");
+        System.out.println(GameLogic.centerText(50,"\nThe fight begins..."));
         GameLogic.pressAnything();
 
         StreetFighter winner = simulateFight(fighter1, fighter2);
 
-        System.out.println("The winner is: " + winner.getName());
+        System.out.print(GameLogic.centerText(50,"The winner is: " + winner.getName()));
         if ((betChoice == 1 && winner == fighter1) || (betChoice == 2 && winner == fighter2)) {
-            System.out.println("🎉 Congratulations! You've doubled your bet " + betAmount + " and earned " + (2 * betAmount) + " points!");
+            System.out.print(GameLogic.centerText(50,"🎉 Congratulations! You've doubled your bet " + betAmount + " and earned " + (2 * betAmount) + " points!"));
             GameLogic.player.setPlayerPoints(GameLogic.player.getPlayerPoints() + betAmount);
-            System.out.println("Current Points: " + player.getPlayerPoints());
+            System.out.print(GameLogic.centerText(50,"Current Points: " + player.getPlayerPoints()));
         } else {
-            System.out.println("😢 Tough luck! You lost " + betAmount + " points.");
+            System.out.print(GameLogic.centerText(50,"😢 Tough luck! You lost " + betAmount + " points."));
             GameLogic.player.setPlayerPoints(GameLogic.player.getPlayerPoints() - betAmount);
+            System.out.print(GameLogic.centerText(50,"Current Points: " + player.getPlayerPoints()));
         }
 
         GameLogic.pressAnything();

@@ -34,11 +34,11 @@ public class GameLogic{
                 input = scan.nextInt();
             } catch(Exception e){
                 input = -1;
-                System.out.println("Please enter a valid number of choice!");
+                System.out.println(GameLogic.centerBox("Please enter a valid number of choice!", 50));
                 scan.next();
             }
             if(input > max || input < min){
-                System.out.println("Please enter valid choice number!");
+                System.out.println(GameLogic.centerBox("Please enter valid choice number!", 50));
             }
             scan.nextLine();
         } while(input < min || input > max);

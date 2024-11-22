@@ -23,17 +23,16 @@ public class TournamentUnderground {
     public static void attemptTournament(int playerAddStats) {
         GameLogic.clearConsole();
         if (playerAddStats < 5) {
-            System.out.println("⚔️  UNDERGROUND TOURNAMENT ENTRY ⚔️");
-            GameLogic.printSeparator(40);
-            System.out.println("You enter a dimly lit arena, the air thick with sweat and smoke...");
-            System.out.println();
-            GameLogic.printSeparator(40);
-            System.out.println("[ A grizzled official glares at you, a crooked grin forming ]");
-            System.out.println("Gatekeeper: \"Whoa there! You think you can just stroll in here? You ain't ready for this blood pit! One hit and you'll be begging for mercy.");
-            System.out.println("\t\t\tYou need to spar harder and toughen up! Earn your stripes before stepping into this ring!\"");
-            System.out.println();
-            System.out.println("🏋️ Tip: Train hard, spar fiercely, and build your strength to earn a shot at the underground brawls! 🏆");
-            System.out.println("🔥 Prove your worth in 5 sparring matches before stepping into the ring of legends! 🔥");
+            System.out.println(GameLogic.centerBox(
+                    "⚔️ UNDERGROUND TOURNAMENT ENTRY ⚔️\n" +
+                            "You enter a dimly lit arena, the air thick with sweat and smoke...\n\n" +
+                            "[ A grizzled official glares at you, a crooked grin forming ]\n" +
+                            "Gatekeeper: \"Whoa there! You think you can just stroll in here? You ain't ready for this blood pit!\n" +
+                            "One hit and you'll be begging for mercy. You need to spar harder and toughen up! \n" 
+                            + "Earn your stripes before stepping into this ring!\"\n\n" +
+                            "🏋️ Tip: Train hard, spar fiercely, and build your strength to earn a shot at the underground brawls! 🏆\n" +
+                            "🔥 Prove your worth in 3 sparring matches before stepping into the ring of legends! 🔥", 110));
+
             resetMatchScores();
             GameLogic.pressAnything();
             GameLogic.gameData.saveGame();
@@ -44,14 +43,14 @@ public class TournamentUnderground {
 
     public static void startTournament() {
         GameLogic.clearConsole();
-        GameLogic.printHeading("\t🏆 Underground Brawl Tournament 🏆");
+        System.out.print(GameLogic.centerBox("🏆 Underground Brawl Tournament 🏆",60));
 
         if(playerProgress.getPlayerWins() == 0 && playerProgress.getOpponentWins() == 0){
             playerProgress.setRound(1);
         }
 
         if(player.getStage() < 12){
-            System.out.println("Welcome, " + player.getName() + "! This is no ordinary fight - it's a battle for survival in the underground ring!");
+            System.out.print(GameLogic.centerText(50,"Welcome, " + player.getName() + "! This is no ordinary fight - it's a battle for survival in the underground ring!"));
             playerProgress.setDone(2);
             Tournament.printTournament();
 
@@ -107,8 +106,7 @@ public class TournamentUnderground {
         System.out.println();
     
         String opponentName = opponents[opponentIndex];
-        System.out.print(opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: ");
-        System.out.print(opponentName);
+        System.out.print(GameLogic.centerBox(opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: " + opponentName, 50));
     
         
         // Initialize opponent based on the index
@@ -134,18 +132,18 @@ public class TournamentUnderground {
                 StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new SalvahezTourna(player, opponent));
             }
-            default -> System.out.println("Invalid opponent index.");
+            default -> System.out.print(GameLogic.centerBox("Invalid opponent index.",50));
         }
     }
 
     private static boolean visitShopOrInventory() {
-        System.out.println();
-        System.out.println("Before continuing, would you like to visit the shop or check your inventory?");
-        System.out.println("1. Visit Shop");
-        System.out.println("2. Check Inventory");
-        System.out.println("0. Continue Tournament");
-        System.out.println();
-        System.out.print("Enter your choice: ");
+        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(80)));
+        System.out.print(GameLogic.centerText(80,"Before continuing, would you like to visit the shop or check your inventory?"));
+        System.out.print(GameLogic.centerText(80,"1. Visit Shop"));
+        System.out.print(GameLogic.centerText(80,"2. Check Inventory"));
+        System.out.print(GameLogic.centerText(80,"0. Continue Tournament"));
+        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(30)));
+        System.out.print(GameLogic.centerText(80,"Enter your choice: "));
         
         int choice = GameLogic.readInt("", 0, 2);
         if (choice == 0) {
@@ -180,11 +178,11 @@ public class TournamentUnderground {
 
     private static boolean offerRematch() {
         System.out.println();
-        System.out.println("You lost your previous match. Would you like to:");
-        System.out.println("1. Try the tournament again?");
-        System.out.println("2. Boost your stats by sparring more!");
-        System.out.println();
-        System.out.print("Enter your choice (1 or 2): ");
+        System.out.print(GameLogic.centerText("You lost your previous match. Would you like to:",50));
+        System.out.print(GameLogic.centerText("1. Try the tournament again?",50));
+        System.out.print(GameLogic.centerText("2. Boost your stats by sparring more!",50));
+        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(60)));
+        System.out.print(GameLogic.centerText("Enter your choice (1 or 2): ",50));
         
         int choice = GameLogic.readInt("", 1, 2);
         if (choice == 1) {
@@ -198,34 +196,31 @@ public class TournamentUnderground {
     }
 
     public void printStanding(){
-        System.out.println();  
-        GameLogic.printSeparator(40);
-        System.out.println();  
-        System.out.println("\t ~ ~ ~ BEST OF 3 ~ ~ ~");
-        System.out.println();  
-        System.out.println(player.getName() + " - " + playerProgress.getPlayerWins() + "\t\t" + opponent.getName() + " - " + playerProgress.getOpponentWins());
-        System.out.println();  
-        GameLogic.printSeparator(40);
-        System.out.println();  
+        System.out.println("\n");
+        System.out.print(GameLogic.centerBox(" ~ ~ ~ BEST OF 3 ~ ~ ~\n" +
+                "      " + player.getName() + " - " + playerProgress.getPlayerWins() + "   ||   " +
+                opponent.getName() + " - " + playerProgress.getOpponentWins(), 50));
         GameLogic.pressAnything();
     }
 
     private static void concludeTournament() {
-        GameLogic.clearConsole();
-        System.out.println("🥊 Champion of the Underground! 🥊");
-        System.out.println("You've dominated the Dirty Boxing Tournament, emerging as the fiercest fighter in the shadows.");
-        System.out.println("Your name strikes fear in the underground, but the chaos never ends...");
+        System.out.println("\n\n");
+        System.out.println(GameLogic.centerBox(
+                "🥊 Champion of the Underground! 🥊\n" +
+                        "You've dominated the Dirty Boxing Tournament, emerging as the fiercest fighter in the shadows.\n" +
+                        "Your name strikes fear in the underground, but the chaos never ends...", 110));
+
         GameLogic.pressAnything();
+        System.out.println("\n");
+        System.out.println(GameLogic.centerBox(
+                "As you stand victorious, your father steps forward, his face filled with regret.\n" +
+                        "He opens his mouth to confess why he abandoned you... but suddenly, chaos erupts.\n" +
+                        "Gunshots echo, and you hear the shout: 'Police raid! Everybody down!' The room is thrown into chaos!", 110));
 
-        GameLogic.printSeparator(100);
-        
-        System.out.println("\nAs you stand victorious, your father steps forward, his face filled with regret.");
-        System.out.println("He opens his mouth to confess why he abandoned you... but suddenly, chaos erupts.");
-        System.out.println("Gunshots echo, and you hear the shout: 'Police raid! Everybody down!' The room is thrown into chaos!");
-
-        System.out.println("\nChoose your path:");
-        System.out.println("(1) Run and escape the raid.");
-        System.out.println("(2) Stay and hear your father's confession, then fight the police.");
+        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
+        System.out.print(GameLogic.centerText("Choose your path:",50));
+        System.out.print(GameLogic.centerText("(1) Run and escape the raid.",50));
+        System.out.print(GameLogic.centerText("(2) Stay and hear your father's confession, then fight the police.",50));
         int choice = GameLogic.readInt("-> ", 1, 2);
         if(choice == 1){
             runAndEscape();

@@ -8,32 +8,23 @@ public class TrainWithJakester {
 
     public static void teachDirtyBoxingMoves() {
         GameLogic.clearConsole();
-        GameLogic.printSeparator(50);
-        System.out.println();
-        System.out.println("Coach Jakester: \t\"Listen up, Kyle. Down here, you need more than just jabs and hooks. I'm gonna teach you a few moves that break the rules but win fights.\"");
-        System.out.println();
-    
-        // Elbow Strike
-        System.out.println("Coach Jakester: \t\"Elbow Strike - Fast and brutal, it dazes them but is countered by a solid block.\"");
-        System.out.println("\t\t*Effective Against: Jab & Hook - Quickly closes distance, disrupting their attacks.");
-        System.out.println("\t\t*Counter: Block - Absorbs the impact and prevents the dazing effect.");
-        System.out.println();
-    
-        // Head Butt
-        System.out.println("Coach Jakester: \t\"Head Butt - Breaks through blocks and slows their reflexes. Watch out, though an uppercut can counter it.\"");
-        System.out.println("\t\t*Effective Against: Block - Forces them back, lowering their reflexes.");
-        System.out.println("\t\t*Counter: Uppercut - Strong enough to knock you back and interrupt your attack.");
-        System.out.println();
-    
-        // Low Blow
-        System.out.println("Coach Jakester: \t\"Low Blow - Drains their stamina if they're guarding high, but a quick hook can stop it.\"");
-        System.out.println("\t\t*Effective Against: Block - Hits under their guard, draining their stamina.");
-        System.out.println("\t\t*Counter: Hook - Quick enough to intercept the low blow and keep them on defense.");
-        System.out.println();
-    
-        System.out.println("\t\t( You take note, understanding how each move gives you an advantage against specific attacks. )");
-        System.out.println();
-        GameLogic.printSeparator(50);
+        System.out.println(GameLogic.centerBox(
+                "\nCoach Jakester: \"Listen up, Kyle. Down here, you need more than just jabs and hooks. \nI'm gonna teach you a few moves that break the rules but win fights.\"\n" +
+                        "\n" +
+                        "Coach Jakester: \"Elbow Strike - Fast and brutal, it dazes them but is countered by a solid block.\"\n" +
+                        "*Effective Against: Jab & Hook - Quickly closes distance, disrupting their attacks.\n" +
+                        "*Counter: Block - Absorbs the impact and prevents the dazing effect.\n\n" + GameLogic.printCenteredSeparator(60) +
+                        "\n\n" +
+                        "Coach Jakester: \"Head Butt - Breaks through blocks and slows their reflexes. \nWatch out, though an uppercut can counter it.\"\n" +
+                        "*Effective Against: Block - Forces them back, lowering their reflexes.\n" +
+                        "*Counter: Uppercut - Strong enough to knock you back and interrupt your attack.\n\n" + GameLogic.printCenteredSeparator(60) +
+                        "\n\n" +
+                        "Coach Jakester: \"Low Blow - Drains their stamina if they're guarding high, but a quick hook can stop it.\"\n" +
+                        "*Effective Against: Block - Hits under their guard, draining their stamina.\n" +
+                        "*Counter: Hook - Quick enough to intercept the low blow and keep them on defense.\n\n" + GameLogic.printCenteredSeparator(60) +
+                        "\n\n" +
+                        "( You take note, understanding how each move gives you an advantage against specific attacks. )\n", 110));
+
         GameLogic.pressAnything();
         train(GameLogic2.player.getName());
     }
@@ -45,9 +36,9 @@ public class TrainWithJakester {
     }
 
     static int punch(){
-        System.out.println("Select the counter punch:");
+        System.out.print(GameLogic.centerText(50,"Select the counter punch:"));
         for(int i = 1; i <= 3; i++){
-            System.out.println("\t(" + i + ") \"" + dirtyMoves[i-1] + "\"");
+            System.out.print(GameLogic.centerText(50,"\t(" + i + ") \"" + dirtyMoves[i-1] + "\""));
         }
         int choice = GameLogic.readInt("-> ", 1, 3);
         return choice;
@@ -79,45 +70,43 @@ public class TrainWithJakester {
         int success = 0;
         int choice;
 
-        space(70);
-        System.out.println("Jakester: \t\"Alright, let's put your skills to the test. Try to counter my next punch.\"");
+        GameLogic.clearConsole();
+        System.out.print(GameLogic.centerBox("Jakester: \"Alright, let's put your skills to the test. Try to counter my next punch.\"",100));
         do {
             int randomNum = 0 + (int)(Math.random() * ((2 - 0) + 1));
             System.out.println();
             if(randomNum == 2){
-                System.out.println("( Jakester " + array[randomNum] + "s )");
+                System.out.print(GameLogic.centerText(50,"( Jakester " + array[randomNum] + "s )"));
             } else {
-                System.out.println("( Jakester throws a " + array[randomNum] + " ) ");
+                System.out.print(GameLogic.centerText(50,"( Jakester throws a " + array[randomNum] + " ) "));
             }
 
-            System.out.println("Success: " + success + " / 5");
+            System.out.print(GameLogic.centerText(50,"Success: " + success + " / 5"));
             choice = punch();
             boolean countered = isCounter(randomNum+1, choice);
 
-            System.out.println();
-            GameLogic.printSeparator(30);
-            System.out.println();
+            System.out.println("\n\n");
             if(countered){
-                System.out.println("Great job!");
+                System.out.print(GameLogic.centerBox("Great job!",50));
                 success++;
             } else {
-                System.out.println("No, you should try to counter punch it!");
+                System.out.print(GameLogic.centerBox("No, you should try to counter punch it!",50));
             }
         } while(success < 5);
 
-        space(70);
-        System.out.println("Coach Jakester: \t\"Great job, " + name + "! Remember, in the underground, it's not just about dirty moves.");
-        System.out.println("\t\tReal strength lies in reading your opponent's first move; it reveals their strategy cautious or reckless.\"");
         System.out.println();
-        System.out.println("\t\t\"Let's dive into how to read their moves effectively.\"");
-        System.out.println();
-        System.out.println("\t\t( You nod, realizing that survival hinges not just on tricks, but on outsmarting your opponent. )");
+        System.out.print(GameLogic.centerBox("Coach Jakester: \"Great job, " + name + "! Remember, in the underground, it's not just about dirty moves.\n" +
+                        "Real strength lies in reading your opponent's first move; it reveals their strategy—cautious or reckless.\"\n" +
+                        "\n" +
+                        "\"Let's dive into how to read their moves effectively.\"\n" +
+                        "\n" +
+                        "( You nod, realizing that survival hinges not just on tricks, but on outsmarting your opponent. )", 110));
+
         GameLogic.pressAnything();
         GameLogic.clearConsole();
-        space(70);
-        System.out.println("Coach Jakester: \t\"Listen up, " + name + "! In the ring, your opponent's first move reveals their strategy. Let me show you how to read them.\"");
+        System.out.print(GameLogic.centerBox("Coach Jakester: \"Listen up, " + name + "! In the ring, your opponent's first move reveals their strategy. \nLet me show you how to read them.\"",100));
         System.out.println();
-        System.out.println("(1) Check Hints");
+        System.out.print(GameLogic.centerText(50,"(1) Check Hints"));
         choice = GameLogic.readInt("-> ", 1, 1);
         System.out.println();
         if(choice == 1){
@@ -127,11 +116,11 @@ public class TrainWithJakester {
     }
 
     static void readyToSpar(String name) {
-        space(70);
-        System.out.println("Coach Jakester: \t\"Listen up, " + name + "! You've learned the ropes, and now it's time to put that knowledge to the test.");
-        System.out.println("\tSparring is your chance to gain stats and prove yourself in the ring!");
-        System.out.println("\tBut remember, success hinges on how well you've memorized those hints. Trust your instincts, and let's see what you've got!\"");
-        System.out.println();
+        GameLogic.clearConsole();
+        System.out.println(GameLogic.centerBox(
+                "Coach Jakester: \"Listen up, " + name + "! You've learned the ropes, and now it's time to put that knowledge to the test.\n" +
+                        "Sparring is your chance to gain stats and prove yourself in the ring!\n" +
+                        "But remember, success hinges on how well you've memorized those hints. Trust your instincts, and let's see what you've got!\"\n", 140));
         GameLogic.player.setStage(8);
         GameLogic.pressAnything();
     }

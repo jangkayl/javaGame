@@ -10,7 +10,7 @@ dodgeChance=0.095
 playerPoints=225
 currentWorld=1
 currentRank=0
-stage=6
+stage=8
 isLose=false
 
 [progress]

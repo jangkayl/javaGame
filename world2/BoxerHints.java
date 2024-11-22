@@ -39,15 +39,17 @@ public class BoxerHints {
 
     public static void teachHints() {
         BoxerHints boxerHints = new BoxerHints(); 
-        GameLogic.printSeparator(100);
-        System.out.println("\n\t*** Read Opponent's First Move Hints ***");
+        GameLogic.clearConsole();
+        System.out.print(GameLogic.centerBox("*** Read Opponent's First Move Hints ***",50));
         System.out.println();
         for (String[] skillWithHints : boxerHints.skillsWithHints) {
-            System.out.println("\t" + skillWithHints[0] + ":");
-            System.out.println("\t\t\t- " + skillWithHints[1]);
-            System.out.println("\t\t\t- " + skillWithHints[2]);
+            System.out.println();
+            System.out.print(GameLogic.centerText(50, "✊🏿 " + skillWithHints[0] + " ✊🏿"));
+            System.out.print(GameLogic.centerText(50, skillWithHints[1]));
+            System.out.print(GameLogic.centerText(50, skillWithHints[2]));
         }
-        System.out.println("\n\t( You take in the lessons, ready to outsmart your opponents. )");
+        System.out.println();
+        System.out.print(GameLogic.centerBox("( You take in the lessons, ready to outsmart your opponents. )",80));
         GameLogic.pressAnything();
     }
 
