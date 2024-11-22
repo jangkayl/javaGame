@@ -52,25 +52,22 @@ public class FredGym extends PlayerVsOpponent2{
 
     @Override
     protected void winnerReward() {
-        System.out.println(); 
-        GameLogic.printSeparator(40);
-        System.out.println(); 
         playerProgress.setAddStats(playerProgress.getAddStats() + 1);
-        System.out.println("Congratulations! You've won " + playerProgress.getAddStats() + " / 5 matches");
-        System.out.println();  
-        System.out.println("Fred: \t\"Great job! Now, choose what stats you want to upgrade.\"");
-        
-        System.out.println("\nHere are your choices: ( Select one only )");
-        System.out.println("1. HP - Increase by +10% ");
-        System.out.println("2. Stamina - Increase by +10%");
-        System.out.println("3. Crit Chance - Increase by +5%");
-        System.out.println("4. Dodge Chance - Increase by +5%");
-        System.out.println("5. Crit Multiplier - Increase by +5%");
-        System.out.print("\nEnter the number of the stat you'd like to upgrade: ");
+        System.out.println(GameLogic.centerBox("* Congratulations! You've won " + playerProgress.getAddStats() + " / 5 matches. *\n\n" +
+                        "Fred: \"Great job! Now, choose what stats you want to upgrade.\"",90));
+
+        System.out.print(GameLogic.centerText(50,
+                "Here are your choices: ( Select one only )\n" +
+                        "1. HP - Increase by +10%\n" +
+                        "2. Stamina - Increase by +10%\n" +
+                        "3. Crit Chance - Increase by +5%\n" +
+                        "4. Dodge Chance - Increase by +5%\n" +
+                        "5. Crit Multiplier - Increase by +5%\n" +
+                        "\nEnter the number of the stat you'd like to upgrade: "));
+
         int choice = GameLogic.readInt("", 1, 5);
         addStats(choice);
-        System.out.println();
-        System.out.println("Fred: \"Stats added! Remember, you can train up to 5 times!\"");
+        System.out.println(GameLogic.centerBox("Fred: \"Stats added! Remember, you can train up to 5 times!\"",70));
         GameLogic.printCenteredSeparator(50);
         GameLogic.pressAnything();
     }

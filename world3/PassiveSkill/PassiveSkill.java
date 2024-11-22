@@ -1,19 +1,17 @@
 package world3.PassiveSkill;
 
+import world1.GameLogic;
+
 public class PassiveSkill {
     private String name;
     private String description;
-    private boolean isCrit;
-    private boolean isDodge;
-    private boolean revealEnemyMoves; 
+    private int roundsActive;
 
     // Constructor
-    public PassiveSkill(String name, String description, boolean isCrit, boolean isDodge, boolean revealEnemyMoves) {
+    public PassiveSkill(String name, String description, int roundsActive) {
         this.name = name;
         this.description = description;
-        this.isCrit = isCrit;
-        this.isDodge = isDodge;
-        this.revealEnemyMoves = revealEnemyMoves;
+        this.roundsActive = roundsActive;
     }
 
     // Getters and Setters
@@ -25,28 +23,25 @@ public class PassiveSkill {
         return description;
     }
 
-    public boolean getIsCrit() {
-        return isCrit;
+    public int getRoundActive(){
+        return roundsActive;
     }
 
-    public void setIsCrit(boolean isCrit) {
-        this.isCrit = isCrit;
+    public void setRoundActive(int rounds){
+        this.roundsActive = rounds;
     }
 
-    public boolean getIsDodge() {
-        return isDodge;
+    public void activatePassive(){
+        String message = this.getName() + " activated!";
+        System.out.println(GameLogic.centerBox(message, 50));
     }
 
-    public void setIsDodge(boolean isDodge) {
-        this.isDodge = isDodge;
-    }
-
-    public void setRevealEnemyMoves(boolean revealEnemyMoves){
-        this.revealEnemyMoves = revealEnemyMoves;
-    }
-
-    public boolean getRevealEnemyMoves(){
-        return revealEnemyMoves;
+    public void deactivatePassive(){
+        roundsActive--;
+        if (roundsActive == 0) {
+            String message = this.getName() + " has worn out!";
+            System.out.println(GameLogic.centerBox(message, 50));
+        }
     }
 
 }

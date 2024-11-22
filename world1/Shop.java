@@ -58,7 +58,7 @@ public class Shop implements ShopInterface{
         public void displayItem() {
             System.out.print(GameLogic.centerText(50, "-> " + description));
             System.out.print(GameLogic.centerText(50, "Effect: " + effect));
-            System.out.println(GameLogic.centerText(50, "Cost: PHP " + cost));
+            System.out.print(GameLogic.centerText(50, "Cost: PHP " + cost));
 
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
         }
@@ -151,29 +151,25 @@ public class Shop implements ShopInterface{
             // Display items for sale
             if(player.getCurrentWorld() == 0){
                 for (int i = 0; i < 4; i++) {
-                    System.out.println();
                     String line = "(" + (i + 1) + ") " + items[i].name;
                     System.out.print(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }
             } else if(player.getCurrentWorld() == 1){
                 for (int i = 4; i < 7; i++) {
-                    System.out.println();
                     String line = "(" + (i - 3) + ") " + items[i].name;
                     System.out.print(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }
             } else if(player.getCurrentWorld() == 2){
                 for (int i = 8; i < items.length; i++) {
-                    System.out.println();
                     String line = "(" + (i - 6) + ") " + items[i].name;
                     System.out.print(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }
             }
 
-            System.out.println("\n");
-            System.out.println("Enter the number of the item you wish to buy or 0 to exit.");
+            System.out.println(GameLogic.centerBox("Enter the number of the item you wish to buy or 0 to exit.",100));
     
             // Training check before entering purchase loop
             if (playerProgress.getShopStage() < 1 && isTraining) {

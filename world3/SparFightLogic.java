@@ -12,29 +12,30 @@ import world2.interfaces.SparFightLogicInterface;
 import world3.PassiveSkill.PassiveSkillRegistry;
 
 public abstract class SparFightLogic implements SparFightLogicInterface{
-    protected Random rand = new Random();
+    private Random rand = new Random();
     private PlayerProgress playerProgress = GameLogic.playerProgress;
     private Player player;
     private StreetFighter opponent;
     private SkillsRegistry skills = new SkillsRegistry();
-    private PassiveSkillRegistry passiveSkills = new PassiveSkillRegistry();
+    private PassiveSkillRegistry playerPassiveSkills = new PassiveSkillRegistry();
+    private PassiveSkillRegistry opponentPassiveSkills = new PassiveSkillRegistry();
     private String playerPassive = "";
     private boolean playerHasPassive = true;
     private boolean opponentHasPassive = false;
     private boolean playerDodged = false;
     private boolean opponentDodged = false;
-    protected static BoxerHints boxerHints;
+    private static BoxerHints boxerHints;
     private int[] opponentChoices = new int[3];
-    protected static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
+    private static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
                                 {"Hook", "Damage: 15 | Stamina: -7"}, 
                                 {"Block", "Stamina: +5"}, 
                                 {"Uppercut", "Damage: 20 | Stamina: -10"},
                                 {"The Body Breaker", ""},
                             };
-    protected static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
+    private static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
                                     {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
                                     {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
-    protected static String[][] passiveSkill = {{"Flow State", "100% Dodge Chance, blocks all damage next turn."},
+    private static String[][] passiveSkill = {{"Flow State", "100% Dodge Chance, blocks all damage next turn."},
                                                 {"Adrenaline Rush", "Boost your Crit Chance by 100% next turn."},
                                                 {"Sixth Sense", "Reveals the opponent's next 3 moves."}};
     public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut", "Flow State", "Adrenaline Rush", "Sixth Sense"};
@@ -121,10 +122,6 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         String input = "";
         boxerHints = new BoxerHints();
 
-        if(playerPassive != ""){
-            playerDeactivatePassive();
-        }
-
         // Opponent selects a move
         for (int i = 0; i < 3; i++) {
             // Generate opponentChoices with higher probability for 1 to 10
@@ -148,7 +145,6 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         opponentValid(opponentChoices);
 
         // Player selects a move
-        System.out.println();
         System.out.println(GameLogic.centerText(30, ("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~")));
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
 
@@ -254,16 +250,22 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             String opponentAttack = opponentAttacks[opponentChoices[i]];
 
             String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
-            System.out.print(GameLogic.centerText(30, line));
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
         }
 
         System.out.println();
         printFight(choices, opponentChoices);
+        
     }
 
     private void printFight(int[] choices, int[] opponentChoices) {
         System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+
         for(int i = 0; i < 3; i++){
+            
+            if(playerPassive == "Flow State") playerDodged = true;
+            else playerDodged = false;
+
             int countered = isCounter(opponentAttacks[opponentChoices[i]], playerAttacks[choices[i]]);
             String playerAttack = getPlayer().getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName();
 
@@ -286,20 +288,31 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             }
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         }
+        
+        if(playerPassive != ""){
+            playerDeactivatePassive();
+        }
     }
 
     private void playerActivatePassive(String input){
         int num = Character.getNumericValue(input.charAt(0)); 
-        String message = playerAttacks[num + 1] + " activated!";
-        System.out.println(GameLogic.centerBox(message, 50));
         playerPassive = playerAttacks[num + 1];
-        playerHasPassive = false;
+        playerPassiveSkills.getSkillByName(playerPassive).activatePassive();
+        // playerHasPassive = false;
     }
 
     private void playerDeactivatePassive(){
-        String message = playerPassive + " has worn out!";
-        System.out.println(GameLogic.centerBox(message, 50));
-        playerPassive = "";
+        if(playerPassive != ""){
+            playerPassiveSkills.getSkillByName(playerPassive).deactivatePassive();
+            if(playerPassiveSkills.getSkillByName(playerPassive).getRoundActive() == 0){
+                playerPassiveSkills.getSkillByName(playerPassive).setRoundActive(3);
+                playerPassive = "";
+            }
+        }
+        System.out.println("Player passive: " + playerPassive);
+        if(playerPassive != ""){
+            System.out.println("Player rounds active " + playerPassiveSkills.getSkillByName(playerPassive).getRoundActive());
+        }
     }
 
     private void opponentValid(int[] opponentChoice) {
@@ -363,7 +376,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         double critChance = rand.nextDouble();
         double dodgeChance = rand.nextDouble();
 
-        if(playerPassive == "Flow State") critChance = 0;
+        if(playerPassive == "Adrenaline Rush") critChance = 0;
         else critChance = rand.nextDouble();
 
         if (critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged) {
@@ -456,6 +469,17 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         }
     }
 
+    protected void winnerRewardPoints(){
+        System.out.println();
+        player.setPlayerPoints(player.getPlayerPoints() + 100);
+        String message = "Congratulations! You've won the match!\n\n" +
+            "You have been given 100 points.\n\n" +
+            "You now have " + player.getPlayerPoints() + " points.\n\n" +
+            "Visit the shop and use your points to buy items.\n";
+
+        System.out.println(GameLogic.centerBox(message, 90));
+    }
+
     protected void addStats(int choice){
         if(choice == 1){
             double hpMultiplier = 1 + 0.15;
@@ -480,52 +504,52 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
     }
 
     private void counterInfos(String name){
-        GameLogic.clearConsole();
-        if(opponent.getName() == "Joaquin Perez"){
-            GameLogic.printHeading("\tJoaquin Perez Combo Counter:");
-            System.out.println("(1) Right Uppercut < Block");
-            System.out.println("(2) Left Hook < Jab");
-            System.out.println("(3) Right Cross < Uppercut");
-            System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
-        } else if(opponent.getName() == "Lando Pitik"){
-            GameLogic.printHeading("\tLando Pitik Combo Counter:");
-            System.out.println("(1) Cross < Uppercut");
-            System.out.println("(2) Rear Uppercut < Block");
-            System.out.println("(3) Lead Hook < Jab");
-            System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
-        } else if(opponent.getName() == "Julio Navarro"){
-            GameLogic.printHeading("\tJulio Navarro Combo Counter:");
-            System.out.println("(1) Right Uppercut < Block");
-            System.out.println("(2) Left Hook < Jab");
-            System.out.println("(3) Right Cross < Uppercut");
-            System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
-        } else if(opponent.getName() == "Raul Villanueva"){
-            GameLogic.printHeading("\tRaul Villanueva Combo Counter:");
-            System.out.println("(1) Cross < Uppercut");
-            System.out.println("(2) Rear Uppercut < Block");
-            System.out.println("(3) Lead Hook < Jab");
-            System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
-        } else if(opponent.getName() == "Ralfo Salvahez"){
-            GameLogic.printHeading("\tRalfo Salvahez Combo Counter:");
-            System.out.println("(1) Quick Jab < Uppercut");
-            System.out.println("(2) Cross < Uppercut");
-            System.out.println("(3) Power Punch < Block");
-            System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
-        }
+        // GameLogic.clearConsole();
+        // if(opponent.getName() == "Joaquin Perez"){
+        //     GameLogic.printHeading("\tJoaquin Perez Combo Counter:");
+        //     System.out.println("(1) Right Uppercut < Block");
+        //     System.out.println("(2) Left Hook < Jab");
+        //     System.out.println("(3) Right Cross < Uppercut");
+        //     System.out.println();
+        //     System.out.println("(4) Elbow Strike < Block");
+        //     System.out.println("(5) Head Butt < Hook");
+        //     System.out.println("(6) Low Blow < Uppercut");
+        // } else if(opponent.getName() == "Lando Pitik"){
+        //     GameLogic.printHeading("\tLando Pitik Combo Counter:");
+        //     System.out.println("(1) Cross < Uppercut");
+        //     System.out.println("(2) Rear Uppercut < Block");
+        //     System.out.println("(3) Lead Hook < Jab");
+        //     System.out.println();
+        //     System.out.println("(4) Elbow Strike < Block");
+        //     System.out.println("(5) Head Butt < Hook");
+        //     System.out.println("(6) Low Blow < Uppercut");
+        // } else if(opponent.getName() == "Julio Navarro"){
+        //     GameLogic.printHeading("\tJulio Navarro Combo Counter:");
+        //     System.out.println("(1) Right Uppercut < Block");
+        //     System.out.println("(2) Left Hook < Jab");
+        //     System.out.println("(3) Right Cross < Uppercut");
+        //     System.out.println();
+        //     System.out.println("(4) Elbow Strike < Block");
+        //     System.out.println("(5) Head Butt < Hook");
+        //     System.out.println("(6) Low Blow < Uppercut");
+        // } else if(opponent.getName() == "Raul Villanueva"){
+        //     GameLogic.printHeading("\tRaul Villanueva Combo Counter:");
+        //     System.out.println("(1) Cross < Uppercut");
+        //     System.out.println("(2) Rear Uppercut < Block");
+        //     System.out.println("(3) Lead Hook < Jab");
+        //     System.out.println();
+        //     System.out.println("(4) Elbow Strike < Block");
+        //     System.out.println("(5) Head Butt < Hook");
+        //     System.out.println("(6) Low Blow < Uppercut");
+        // } else if(opponent.getName() == "Ralfo Salvahez"){
+        //     GameLogic.printHeading("\tRalfo Salvahez Combo Counter:");
+        //     System.out.println("(1) Quick Jab < Uppercut");
+        //     System.out.println("(2) Cross < Uppercut");
+        //     System.out.println("(3) Power Punch < Block");
+        //     System.out.println();
+        //     System.out.println("(4) Elbow Strike < Block");
+        //     System.out.println("(5) Head Butt < Hook");
+        //     System.out.println("(6) Low Blow < Uppercut");
+        // }
     }
 }

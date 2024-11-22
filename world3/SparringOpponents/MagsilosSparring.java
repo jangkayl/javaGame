@@ -19,7 +19,7 @@ public class MagsilosSparring extends SparFightLogic{
 
     @Override
     protected void handleWin() {
-        winnerReward();
+        winnerRewardPoints();
         System.out.println(); 
         
         if(getPlayerProgress().getAddStats() < 5){
@@ -51,13 +51,10 @@ public class MagsilosSparring extends SparFightLogic{
     protected void handleLoss() {
         resetFighterStats();
         getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);
-        // GameLogic.printSeparator(40);
-        // System.out.println(); 
-        // System.out.println("You have been defeated!");
-        // System.out.println("You lost 150 points");
-        // getPlayer().setPlayerPoints(getPlayer().getPlayerPoints() - 150);
-        // System.out.println("You now have " + getPlayer().getPlayerPoints() + " points.");
-        // System.out.println();
+        GameLogic.printSeparator(40);
+        System.out.println(); 
+        System.out.println("You have been defeated!");
+        System.out.println();
         GameLogic.pressAnything();
         GameLogic.gameData.saveGame();
     }

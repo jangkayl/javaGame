@@ -223,9 +223,9 @@ public class GameLogic{
 
         while (true) { 
             clearConsole();
-            System.out.println("Have you ever played this game?");
-            System.out.println("1) Yep!");
-            System.out.println("2) Not yet");
+            System.out.print(centerText(20,"Have you ever played this game?"));
+            System.out.print(centerText(20,"1) Yep!"));
+            System.out.print(centerText(20,"2) Not yet"));
             int choice = readInt("-> ", 1, 2);
             
             if (choice == 2) {
@@ -234,9 +234,9 @@ public class GameLogic{
                     printHeading("Enter your name:");
                     System.out.print("-> ");
                     name = scan.nextLine();
-                    printHeading("You are " + name + " right?");
-                    System.out.println("(1) Yes");
-                    System.out.println("(2) No");
+                    System.out.print(centerText(20,"You are " + name + " right?"));
+                    System.out.print(centerText(20,"(1) Yes"));
+                    System.out.print(centerText(20,"(2) No"));
                     int input = readInt("-> ", 1, 2);
                     if (input == 1) nameSet = true;
                 } while (!nameSet);
@@ -337,9 +337,9 @@ public class GameLogic{
                     String[] worlds = player.getWorlds();
                     System.out.print(centerBox("Welcome to the " + worlds[player.getCurrentWorld()], 100));
                     UrbanStory.printUrban();
-                    printSeparator(50);
-                    System.out.println("Are you ready to start your journey?");
-                    System.out.println("(1) Yes\n(2) No");
+                    System.out.print(centerText(20,"Are you ready to start your journey?"));
+                    System.out.print(centerText(20,"(1) Yes"));
+                    System.out.print(centerText(19,"(2) No"));
                     int choice2 = GameLogic.readInt("-> ", 1, 2);
                     if(choice2 == 1){
                         gymTraining();
@@ -352,9 +352,9 @@ public class GameLogic{
             } else {
                 while(true){
                     clearConsole();
-                    System.out.println("(1) Train with Fred");
-                    System.out.println("(2) Enter Tournament");
-                    System.out.println("(3) Go Back");
+                    System.out.print(centerText(20,"(1) Train with Fred"));
+                    System.out.print(centerText(20,"(2) Enter Tournament"));
+                    System.out.print(centerText(20,"(3) Go Back"));
                     int choice2 = GameLogic.readInt("-> ", 1, 3);
                     if(choice2 == 1){
                         gymTraining();
@@ -409,32 +409,32 @@ public class GameLogic{
                         fred.setPlayer(GameLogic.player);
                         fred.fightLoop();
                         clearConsole();
-                            System.out.println("Fred: \t\"Want to train more to gain more stats?\"");
-                            System.out.println();
-                            System.out.println("(1) Sure, lets go for another round!");
-                            System.out.println("(2) I'll take a break first.");
-                            choice = readInt("-> ", 1, 2);
-                            if(choice == 1 && playerProgress.getAddStats() == 5){
-                                System.out.println();
-                                System.out.println("\nFred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n");
-                                GameLogic.pressAnything();
-                            }
-                            if(choice == 2) break;
-                            continue;
+                        System.out.print(centerBox("Fred: \"Want to train more to gain more stats?\"",50));
+                        System.out.println();
+                        System.out.print(centerText(50,"(1) Sure, lets go for another round!"));
+                        System.out.print(centerText(50,"(2) I'll take a break first."));
+                        choice = readInt("-> ", 1, 2);
+                        if(choice == 1 && playerProgress.getAddStats() == 5){
+                            System.out.print(centerBox("Fred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n",110));
+                            System.out.println("\n");
+                            GameLogic.pressAnything();
+                        }
+                        if(choice == 2) break;
+                        continue;
                     } else if(UrbanStory.tournaLoseTraining(player.getName())){
                         while(playerProgress.getAddStats() != 5){
                             FredGym fred = new FredGym(player);
                             fred.setPlayer(GameLogic.player);
                             fred.fightLoop();
                             clearConsole();
-                            System.out.println("Fred: \t\"Want to train more to gain more stats?\"");
+                            System.out.print(centerBox("Fred: \"Want to train more to gain more stats?\"",50));
                             System.out.println();
-                            System.out.println("(1) Sure, lets go for another round!");
-                            System.out.println("(2) I'll take a break first.");
+                            System.out.print(centerText(50,"(1) Sure, lets go for another round!"));
+                            System.out.print(centerText(50,"(2) I'll take a break first."));
                             choice = readInt("-> ", 1, 2);
                             if(choice == 1 && playerProgress.getAddStats() == 5){
-                                System.out.println();
-                                System.out.println("\nFred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n");
+                                System.out.print(centerBox("\nFred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n",110));
+                                System.out.println("\n");
                                 GameLogic.pressAnything();
                             }
                             if(choice == 2) break;
@@ -462,10 +462,17 @@ public class GameLogic{
                             if(choice == 1) shop.shop();
                         }
                     } else {
-                        if(player.getStage() == 1) UrbanStory.urbanTraining8(player.getName());  
+                        if(player.getStage() == 1){ 
+                            if(player.getIsLose()){
+                                PabloUrbanGym pablo = new PabloUrbanGym(player);
+                                UrbanStory.urbanTrainingLose(player.getName(), pablo.getOpponentName());
+                            } else {
+                                UrbanStory.urbanTraining8(player.getName());    
+                            }
+                        }
                         else if(player.getStage() == 2){
-                            player.setStage(2);
                             PabloUrbanGym pablo = new PabloUrbanGym(player);
+                            player.setStage(2);
                             pablo.setPlayer(GameLogic.player);
                             pablo.fightLoop();
                         }
@@ -476,11 +483,12 @@ public class GameLogic{
                                 }
                             } else {
                                 if(playerProgress.getAddStats() == 5){
-                                    System.out.println("Fred: \t\"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"");
+                                    System.out.print(centerBox("Fred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"",110));
+                                    System.out.println("\n");
                                     pressAnything();
                                     return;
                                 }
-                                System.out.println("Go to tournament and continue fighting your opponent!");
+                                System.out.print(centerBox("Go to tournament and continue fighting your opponent!",100));
                             }
                             pressAnything();
                         }

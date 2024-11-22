@@ -118,7 +118,7 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
             String opponentAttack = attack[opponentChoices[i]][0];
 
             String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
-            System.out.print(GameLogic.centerText(30, line));
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
         }
 
         System.out.println();

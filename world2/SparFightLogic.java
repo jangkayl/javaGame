@@ -139,7 +139,6 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         opponentValid(opponentChoices);
 
         // Player selects a move
-        System.out.println();
         System.out.println(GameLogic.centerText(30, ("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~")));
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
 
@@ -243,7 +242,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             String opponentAttack = opponentAttacks[opponentChoices[i]];
 
             String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
-            System.out.print(GameLogic.centerText(30, line));
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
         }
 
         System.out.println();

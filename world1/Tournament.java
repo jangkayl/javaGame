@@ -41,10 +41,12 @@ public class Tournament {
 
     public static void startTournament() {
         GameLogic.clearConsole();
-        GameLogic.printHeading("\t🏆 Champ Arena Tournament 🏆");
+        System.out.print(GameLogic.centerBox("🏆 Champ Arena Tournament 🏆",60));
 
         if(player.getStage() < 6){
-            System.out.println("Welcome, " + player.getName() + "! Prepare to fight your way to the top!");
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"Welcome, " + player.getName() + "! Prepare to fight your way to the top!"));
+            System.out.println();
             playerProgress.setDone(1);
             printTournament();
 
@@ -101,8 +103,7 @@ public class Tournament {
         System.out.println();
     
         String opponentName = opponents[opponentIndex];
-        System.out.print(opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: ");
-        System.out.print(opponentName);
+        System.out.print(GameLogic.centerBox((opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: ") + opponentName, 50));
     
         
         // Initialize opponent based on the index
@@ -147,11 +148,14 @@ public class Tournament {
 
     private static boolean offerRematch() {
         System.out.println();
-        System.out.println("You lost your previous match. Would you like to:");
-        System.out.println("1. Try the tournament again?");
-        System.out.println("2. Train with Fred or your coach to sharpen your skills and gain more stats!");
+        System.out.print("\t\t\t\t\t\t");
+        GameLogic.printSeparator(100);
         System.out.println();
-        System.out.print("Enter your choice (1 or 2): ");
+        System.out.print(GameLogic.centerText(80, "You lost your previous match. Would you like to:"));
+        System.out.print(GameLogic.centerText(80, "1. Try the tournament again?"));
+        System.out.print(GameLogic.centerText(80, "2. Train with Fred or your coach to sharpen your skills and gain more stats!"));
+        System.out.println();
+        System.out.print(GameLogic.centerText(80, "Enter your choice (1 or 2): "));
         
         int choice = GameLogic.readInt("", 1, 2);
         if (choice == 1) {
@@ -165,45 +169,35 @@ public class Tournament {
     }
 
     private static void concludeTournament() {
-        System.out.println();
-        System.out.println("🥊 Congratulations, Champion of the Ring! 🥊");
-        System.out.println("You've conquered the tournament, delivering knockout blows and proving you have the heart of a true fighter!");
-        System.out.println("The crowd roars, and your name is now legend. But the journey isn't over...\n");
-        
-        System.out.println("As you return home, you can still hear the echoes of cheering fans, the thrill of victory fresh in your mind.");
-        System.out.println("But your celebration is cut short when you see your childhood friend, Niko, waiting anxiously outside your door.");
+        System.out.println("\n\n");
+        System.out.println(GameLogic.centerBox("🥊 Congratulations, Champion of the Ring! 🥊\n" +
+                "You've conquered the tournament, delivering knockout blows and proving you have the heart of a true fighter!\n" +
+                "The crowd roars, and your name is now legend. \nBut the journey isn't over...\n\n" +
+                "As you return home, you can still hear the echoes of cheering fans, the thrill of victory fresh in your mind.\n" +
+                "But your celebration is cut short when you see your childhood friend, \nNiko, waiting anxiously outside your door.", 115));
         GameLogic.pressAnything();
 
-        GameLogic.printSeparator(70);
-        System.out.println();
-        System.out.println("Niko: \t\"Hey, I'm glad I found you. It's urgent... your mom has been taken to the hospital. She needs help, and it doesn't look good.\"");
-        System.out.println();
-        System.out.println("\t( Panic rises in your chest as you race to the hospital, each step heavier than the last. )");
-        System.out.println();
-        System.out.println("\tYou find your mother weak, hooked to machines. The doctors say the operation could save her life, but it's costly, your recent winnings barely cover it.\n");
+        System.out.println("\n\n");
+        System.out.println(GameLogic.centerBox(
+                "Niko: \"Hey, I'm glad I found you. It's urgent... your mom has been taken to the hospital. \nShe needs help, and it doesn't look good.\"\n\n" +
+                "( Panic rises in your chest as you race to the hospital, each step heavier than the last. )\n\n" +
+                "You find your mother weak, hooked to machines. The doctors say the operation could save her life, \nbut it's costly, your recent winnings barely cover it.\n", 100));
         GameLogic.pressAnything();
     
-        System.out.println();
-        GameLogic.printSeparator(70);
-        System.out.println();
-        System.out.println("Niko: \t\"I know it's tough, but there's another way. It's risky and illegal... Fighters can earn big money in the underground ring.");
-        System.out.println("\tIt's brutal, but you could make what you need fast.\"");
-        System.out.println();
-        System.out.println("\t( Niko's eyes are serious, and you can see the weight of the decision settling in. )");
-        System.out.println();
-        System.out.println("\tYou take a deep breath, feeling the burden of your mother's health pressing down on you.");
-        System.out.println();
-        System.out.println("Niko: \t\"It's dangerous, but if you're as good as I think you are, you could pull this off. Just think about it...\"\n");
+        System.out.println("\n\n");
+        System.out.println(GameLogic.centerBox(
+                "Niko: \"I know it's tough, but there's another way. It's risky and illegal... \nFighters can earn big money in the underground ring.\"\n" +
+                        "It's brutal, but you could make what you need fast.\"\n\n" +
+                        "( Niko's eyes are serious, and you can see the weight of the decision settling in. )\n\n" +
+                        "You take a deep breath, feeling the burden of your mother's health pressing down on you.\n\n" +
+                        "Niko: \"It's dangerous, but if you're as good as I think you are, you could pull this off. \nJust think about it...\"\n", 100));
         GameLogic.pressAnything();
     
-        System.out.println();
-        GameLogic.printSeparator(70);
-        System.out.println();
-        System.out.println("\tWith your mother's life at stake, you know what you must do. You nod at Niko.");
-        System.out.println();
-        System.out.println("Niko: \t\"Alright, let's do this. I'll show you the ropes. Get ready for a new world of fighting!\"\n");
+        System.out.println("\n\n");
+        System.out.println(GameLogic.centerBox(
+                "With your mother's life at stake, you know what you must do. You nod at Niko.\n\n" +
+                        "Niko: \"Alright, let's do this. I'll show you the ropes. \nGet ready for a new world of fighting!\"\n", 100));
         GameLogic.pressAnything();
-        GameLogic.printSeparator(70);
 
         // Update the player's world/state to reflect the new story path.
         playerProgress.setAddStats(0);
@@ -211,46 +205,45 @@ public class Tournament {
     }
     
     public static void showOpStats(StreetFighter opponent){
-        System.out.println();
-        System.out.print(GameLogic.centerText(" ", 48));
-        System.out.println(GameLogic.centerText(opponent.getName(), 28));
-        System.out.print(GameLogic.centerText(" ", 48));
-        System.out.println(GameLogic.centerText("* " + opponent.getRank() + " *", 27));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" HP:",opponent.getHp() + " / " + opponent.getMaxHp(), 25));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" Stamina:",opponent.getStamina() + " / " + opponent.getMaxStamina(), 25));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" Critical Chance:", GameLogic.df.format(opponent.getCritChance() * 100) + "%", 25));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" Critical Multiplier:", GameLogic.df.format(opponent.getCritMultiplier()) + "x", 25));
-
-        System.out.print(GameLogic.centerText(" ", 45));
-        System.out.println(GameLogic.formatColumns(" Dodge Chance:", GameLogic.df.format(opponent.getDodgeChance() * 100) + "%", 25));
+        System.out.println("\n");
+        System.out.print(GameLogic.centerText(" ", 50));
+        System.out.println(GameLogic.centerText(opponent.getName(), 50));
+        System.out.print(GameLogic.centerText(" ", 50));
+        System.out.println(GameLogic.centerText("* " + opponent.getRank() + " *", 50));
+        System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.println(GameLogic.formatColumns(" HP:",opponent.getHp() + " / " + opponent.getMaxHp(), 30));
+        System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.println(GameLogic.formatColumns(" Stamina:",opponent.getStamina() + " / " + opponent.getMaxStamina(), 30));
+        System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.println(GameLogic.formatColumns(" Critical Chance:", GameLogic.df.format(opponent.getCritChance() * 100) + "%", 30));
+        System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.println(GameLogic.formatColumns(" Critical Multiplier:", GameLogic.df.format(opponent.getCritMultiplier()) + "x", 30));
+        System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
+        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.println(GameLogic.formatColumns(" Dodge Chance:", GameLogic.df.format(opponent.getDodgeChance() * 100) + "%", 30));
     }
 
     public static void printTournament() {
-        System.out.println();
-        GameLogic.printHeading("\t\tTournament Rules");
-        System.out.println("1. You will face 3 opponents in this tournament.");
-        System.out.println("2. Each opponent match is a best-of-3 rounds.");
-        System.out.println("3. Win 3 rounds against each opponent to proceed.");
-        System.out.println("4. If you lose a best-of-3 match, you are out of the tournament and must return to training.");
-        System.out.println("5. Defeat all 3 opponents to claim victory in the tournament.");
+        System.out.print(GameLogic.centerBox("Tournament Rules", 50));
+        System.out.print(GameLogic.centerText(80, "\n\n1. You will face 3 opponents in this tournament."));
+        System.out.print(GameLogic.centerText(80, "2. Each opponent match is a best-of-3 rounds."));
+        System.out.print(GameLogic.centerText(80, "3. Win 3 rounds against each opponent to proceed."));
+        System.out.print(GameLogic.centerText(80, "4. If you lose a best-of-3 match, you are out of the tournament \nand must return to training."));
+        System.out.print(GameLogic.centerText(80, "5. Defeat all 3 opponents to claim victory in the tournament."));
     }
 
     private static boolean visitShopOrInventory() {
         System.out.println();
-        System.out.println("Before continuing, would you like to visit the shop or check your inventory?");
-        System.out.println("1. Visit Shop");
-        System.out.println("2. Check Inventory");
-        System.out.println("0. Continue Tournament");
+        System.out.print(GameLogic.centerText(80,"Before continuing, would you like to visit the shop or check your inventory?"));
+        System.out.print(GameLogic.centerText(80,"1. Visit Shop"));
+        System.out.print(GameLogic.centerText(80,"2. Check Inventory"));
+        System.out.print(GameLogic.centerText(80,"0. Continue Tournament"));
         System.out.println();
-        System.out.print("Enter your choice: ");
+        System.out.print(GameLogic.centerText(80,"Enter your choice: "));
         
         int choice = GameLogic.readInt("", 0, 2);
         if (choice == 0) {
@@ -272,15 +265,10 @@ public class Tournament {
     }
 
     public void printStanding(){
-        System.out.println();  
-        GameLogic.printSeparator(40);
-        System.out.println();  
-        System.out.println("\t ~ ~ ~ BEST OF 3 ~ ~ ~");
-        System.out.println();  
-        System.out.println(player.getName() + " - " + playerProgress.getPlayerWins() + "\t\t" + opponent.getName() + " - " + playerProgress.getOpponentWins());
-        System.out.println();  
-        GameLogic.printSeparator(40);
-        System.out.println();  
+        System.out.println("\n");
+        System.out.print(GameLogic.centerBox(" ~ ~ ~ BEST OF 3 ~ ~ ~\n" +
+                "      " + player.getName() + " - " + playerProgress.getPlayerWins() + "   ||   " +
+                opponent.getName() + " - " + playerProgress.getOpponentWins(), 50));
         GameLogic.pressAnything();
     }
 }
