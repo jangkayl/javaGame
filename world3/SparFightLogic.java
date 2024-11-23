@@ -20,7 +20,8 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
     private PassiveSkillRegistry playerPassiveSkills = new PassiveSkillRegistry();
     private PassiveSkillRegistry opponentPassiveSkills = new PassiveSkillRegistry();
     private String playerPassive = "";
-    private boolean playerHasPassive = true;
+    private String opponentPassive = "";
+    private boolean playerHasPassive = false;
     private boolean opponentHasPassive = false;
     private boolean playerDodged = false;
     private boolean opponentDodged = false;
@@ -154,7 +155,6 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         } else {
             System.out.println(GameLogic.centerText(30, ("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~")));
         }
-
  
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
 
@@ -173,7 +173,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             System.out.print(GameLogic.centerText(40, attackInfo));
         }
 
-        System.out.println();
+        System.out.print(GameLogic.centerText(20, "Passive: " + (playerHasPassive ? "✅" : "❌")));
         for (int i = 0; i < passiveSkill.length; i++) {
             System.out.print(GameLogic.centerText(40, ((i + 6) + ") " + passiveSkill[i][0] + " - " + passiveSkill[i][1])));
         }
@@ -271,14 +271,14 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
 
         System.out.println();
         printFight(choices, opponentChoices);
-        
     }
 
     private void printFight(int[] choices, int[] opponentChoices) {
+        int playerStreak = 0, opponentStreak = 0;
+
         System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
 
         for(int i = 0; i < 3; i++){
-            
             if(playerPassive == "Flow State") playerDodged = true;
             else playerDodged = false;
 
@@ -286,10 +286,14 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             String playerAttack = getPlayer().getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName();
 
             if(countered == 1){
+                if(playerPassive != "Sixth Sense"){
+                    playerStreak++;
+                }
                 System.out.print(GameLogic.centerText(50, playerAttack));
                 playerSuccessAction(choices[i], opponentChoices[i], false);
                 opponentFailedAction(opponentAttacks[opponentChoices[i]]);
             } else if(countered == 2){
+                opponentStreak++;
                 System.out.print(GameLogic.centerText(50, playerAttack));
                 opponentSuccessAction(opponentChoices[i], choices[i], false);
                 playerFailedAction(playerAttacks[choices[i]]);
@@ -299,10 +303,22 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
                 System.out.print(GameLogic.centerText(50, opponentAttack));
                 drawAction(choices[i], opponentChoices[i]);
             }
+
             if(getPlayer().getHp() <= 0 || getOpponent().getHp() <= 0){
                 return;
             }
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
+        }
+
+        System.out.println("Player Streak: " + playerStreak);
+        System.out.println("Opponent Streak: " + opponentStreak);
+
+        if(playerStreak == 3){
+            playerHasPassive = true;
+        }
+
+        if(opponentStreak == 3){
+            opponentHasPassive = true;
         }
         
         if(playerPassive != ""){
@@ -314,7 +330,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         int num = Character.getNumericValue(input.charAt(0)); 
         playerPassive = playerAttacks[num + 1];
         playerPassiveSkills.getSkillByName(playerPassive).activatePassive();
-        // playerHasPassive = false;
+        playerHasPassive = false;
     }
 
     private void playerDeactivatePassive(){
@@ -323,6 +339,23 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             if(playerPassiveSkills.getSkillByName(playerPassive).getRoundActive() == 0){
                 playerPassiveSkills.getSkillByName(playerPassive).setRoundActive(3);
                 playerPassive = "";
+            }
+        }
+    }
+
+    private void opponentActivatePassive(String input){
+        int num = Character.getNumericValue(input.charAt(0)); 
+        opponentPassive = opponentAttacks[num + 1];
+        opponentPassiveSkills.getSkillByName(opponentPassive).activatePassive();
+        opponentHasPassive = false;
+    }
+
+    private void opponentDeactivatePassive(){
+        if(opponentPassive != ""){
+            opponentPassiveSkills.getSkillByName(opponentPassive).deactivatePassive();
+            if(opponentPassiveSkills.getSkillByName(opponentPassive).getRoundActive() == 0){
+                opponentPassiveSkills.getSkillByName(opponentPassive).setRoundActive(3);
+                opponentPassive = "";
             }
         }
     }
