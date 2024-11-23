@@ -546,8 +546,8 @@ public class GameLogic{
         System.out.println();
         System.out.print(centerText(50,
                 "Here are your choices: ( Select one only )\n" +
-                        "1. HP - Increase by +20%\n" +
-                        "2. Stamina - Increase by +20%\n" +
+                        "1. HP - Increase by +10%\n" +
+                        "2. Stamina - Increase by +10%\n" +
                         "3. Crit Chance - Increase by +5%\n" +
                         "4. Dodge Chance - Increase by +5%\n" +
                         "5. Crit Multiplier - Increase by +5%\n" +
@@ -558,10 +558,10 @@ public class GameLogic{
 
         switch (choice) {
             case 1:
-                prompt1 = "Your HP has been increased by 20%!";
+                prompt1 = "Your HP has been increased by 10%!";
                 break;
             case 2:
-                prompt1 = "Your Stamina has been increased by 20%!";
+                prompt1 = "Your Stamina has been increased by 10%!";
                 break;
             case 3:
                 prompt1 = "Your Critical Hit Chance has been increased by 5%!";
@@ -586,12 +586,12 @@ public class GameLogic{
 
     private static void addStats(int choice){
         if(choice == 1){
-            double hpMultiplier = 1 + 0.20;
+            double hpMultiplier = 1 + 0.10;
             int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);
             player.setHp(maxHp);
             player.setMaxHp(maxHp);
         } else if(choice == 2){
-            double staminaMultiplier = 1 + 0.20;
+            double staminaMultiplier = 1 + 0.10;
             int maxStamina = (int)Math.ceil(player.getMaxStamina() * staminaMultiplier);
             player.setStamina(maxStamina);
             player.setMaxStamina(maxStamina);

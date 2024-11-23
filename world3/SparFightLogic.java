@@ -504,7 +504,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             player.setStamina(maxStamina);
             player.setMaxStamina(maxStamina);
         } else if(choice == 3){
-            double newCrit = player.getCritChance() + 0.05;
+            double newCrit = player.getCritChance() + 0.05; 
             player.setCritChance(newCrit);
         } else if(choice == 4){
             double newDodge = player.getDodgeChance() + 0.05;

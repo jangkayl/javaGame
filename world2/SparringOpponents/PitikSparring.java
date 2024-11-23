@@ -28,8 +28,8 @@ public class PitikSparring extends SparFightLogic{
             System.out.println(); 
             System.out.print(GameLogic.centerText(50,
                     "Here are your choices: ( Select one only )\n" +
-                            "1. HP - Increase by +15%\n" +
-                            "2. Stamina - Increase by +15%\n" +
+                            "1. HP - Increase by +10%\n" +
+                            "2. Stamina - Increase by +10%\n" +
                             "3. Crit Chance - Increase by +5%\n" +
                             "4. Dodge Chance - Increase by +5%\n" +
                             "5. Crit Multiplier - Increase by +5%\n" +

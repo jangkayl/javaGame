@@ -6,7 +6,6 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Tournament;
-import world1.database.GameDataManager;
 import world2.TournaUnderFight.NavarroTourna;
 import world2.TournaUnderFight.RaulTourna;
 import world2.TournaUnderFight.SalvahezTourna;
@@ -18,7 +17,6 @@ public class TournamentUnderground {
     private static String[] opponents = {"The Reaper", "The Bullseye", "The Ghost"};
     private static PlayerProgress playerProgress = GameLogic.playerProgress;
     private static Inventory inventory = GameLogic2.inventory;
-    private static GameDataManager gameDataManager = GameLogic.gameDataManager;
 
     public void setOpponent(StreetFighter enemy){
         opponent = enemy;

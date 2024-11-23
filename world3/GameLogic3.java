@@ -70,7 +70,6 @@ public class GameLogic3 {
                 if(choice2 == 2){
                     return;
                 }
-                StoryChampsArena.printChampsArena();
                 StoryChampsArena.printIntroduction(player.getName());
                 player.setStage(13);
                 trainWithFred.teachPassiveSkills();

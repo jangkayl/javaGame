@@ -440,12 +440,12 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
 
     protected void addStats(int choice){
         if(choice == 1){
-            double hpMultiplier = 1 + 0.15;
+            double hpMultiplier = 1 + 0.10;
             int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);
             player.setHp(maxHp);
             player.setMaxHp(maxHp);
         } else if(choice == 2){
-            double staminaMultiplier = 1 + 0.15;
+            double staminaMultiplier = 1 + 0.10;
             int maxStamina = (int)Math.ceil(player.getMaxStamina() * staminaMultiplier);
             player.setStamina(maxStamina);
             player.setMaxStamina(maxStamina);
