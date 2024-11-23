@@ -262,8 +262,7 @@ public class GameLogic{
                 if (player != null) {
                     break; 
                 } else {
-                    System.out.println();
-                    System.out.println("No player found in the database. Please create a new player.");
+                    System.out.println(GameLogic.centerBox("No player found in the database. Please create a new player.", 70));
                     pressAnything();
                 }
             }
