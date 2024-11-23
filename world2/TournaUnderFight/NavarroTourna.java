@@ -23,10 +23,8 @@ public class NavarroTourna extends SparFightLogic{
     protected void handleWin() {
         getPlayer().setIsLose(false);
         if(getPlayerProgress().getPlayerWins() != 3){
-            System.out.println(); 
-            GameLogic.printSeparator(40);
-            System.out.println(); 
-            System.out.println("Congratulations! You've won the match!");
+            System.out.println();
+            System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
         }
         resetFighterStats();
         getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);

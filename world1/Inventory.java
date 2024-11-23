@@ -283,6 +283,11 @@ public class Inventory implements InvetoryInterface{
         GameLogic.pressAnything();
     }
 
+    public void deleteAllInventoryItems(){
+        inventoryItems = new Item[MAX_ITEMS];  
+        slot = new Item[5];
+    }
+
     public void inventoryRemove(String equipmentSlot) {
         Item removedItem = null;
         System.out.println();

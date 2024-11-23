@@ -1,10 +1,12 @@
 package world2;
 
 import world1.GameLogic;
+import world1.Inventory;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Tournament;
+import world1.Inventory.Item;
 import world2.TournaUnderFight.NavarroTourna;
 import world2.TournaUnderFight.RaulTourna;
 import world2.TournaUnderFight.SalvahezTourna;
@@ -15,6 +17,7 @@ public class TournamentUnderground {
     private static Player player = GameLogic.player;
     private static String[] opponents = {"The Reaper", "The Bullseye", "The Ghost"};
     private static PlayerProgress playerProgress = GameLogic.playerProgress;
+    private static Inventory inventory = GameLogic2.inventory;
 
     public void setOpponent(StreetFighter enemy){
         opponent = enemy;
@@ -31,7 +34,7 @@ public class TournamentUnderground {
                             "One hit and you'll be begging for mercy. You need to spar harder and toughen up! \n" 
                             + "Earn your stripes before stepping into this ring!\"\n\n" +
                             "🏋️ Tip: Train hard, spar fiercely, and build your strength to earn a shot at the underground brawls! 🏆\n" +
-                            "🔥 Prove your worth in 3 sparring matches before stepping into the ring of legends! 🔥", 110));
+                            "🔥 Prove your worth in 5 sparring matches before stepping into the ring of legends! 🔥", 110));
 
             resetMatchScores();
             GameLogic.pressAnything();
@@ -44,6 +47,7 @@ public class TournamentUnderground {
     public static void startTournament() {
         GameLogic.clearConsole();
         System.out.print(GameLogic.centerBox("🏆 Underground Brawl Tournament 🏆",60));
+        System.out.println();
 
         if(playerProgress.getPlayerWins() == 0 && playerProgress.getOpponentWins() == 0){
             playerProgress.setRound(1);
@@ -51,6 +55,7 @@ public class TournamentUnderground {
 
         if(player.getStage() < 12){
             System.out.print(GameLogic.centerText(50,"Welcome, " + player.getName() + "! This is no ordinary fight - it's a battle for survival in the underground ring!"));
+            System.out.println();
             playerProgress.setDone(2);
             Tournament.printTournament();
 
@@ -127,7 +132,7 @@ public class TournamentUnderground {
             }
             case 2 -> {
                 // The Ghost
-                opponent = new StreetFighter("Ralfo Salvahez", 350, 140, 0.5, 2.5, 0.40, 5);
+                opponent = new StreetFighter("Ralfo Salvahez", 350, 140, 0.5, 2, 0.35, 5);
                 opponent.setPlayerOpponent(player);
                 StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new SalvahezTourna(player, opponent));
@@ -137,12 +142,14 @@ public class TournamentUnderground {
     }
 
     private static boolean visitShopOrInventory() {
+        System.out.println();
         System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(80)));
+        System.out.println();
         System.out.print(GameLogic.centerText(80,"Before continuing, would you like to visit the shop or check your inventory?"));
         System.out.print(GameLogic.centerText(80,"1. Visit Shop"));
         System.out.print(GameLogic.centerText(80,"2. Check Inventory"));
         System.out.print(GameLogic.centerText(80,"0. Continue Tournament"));
-        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(30)));
+        System.out.println();
         System.out.print(GameLogic.centerText(80,"Enter your choice: "));
         
         int choice = GameLogic.readInt("", 0, 2);
@@ -178,11 +185,14 @@ public class TournamentUnderground {
 
     private static boolean offerRematch() {
         System.out.println();
-        System.out.print(GameLogic.centerText("You lost your previous match. Would you like to:",50));
-        System.out.print(GameLogic.centerText("1. Try the tournament again?",50));
-        System.out.print(GameLogic.centerText("2. Boost your stats by sparring more!",50));
-        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(60)));
-        System.out.print(GameLogic.centerText("Enter your choice (1 or 2): ",50));
+        System.out.print("\t\t\t\t\t\t");
+        GameLogic.printSeparator(100);
+        System.out.println();
+        System.out.print(GameLogic.centerText(80, "You lost your previous match. Would you like to:"));
+        System.out.print(GameLogic.centerText(80,"1. Try the tournament again?"));
+        System.out.print(GameLogic.centerText(80,"2. Boost your stats by sparring more!"));
+        System.out.println();
+        System.out.print(GameLogic.centerText(80, "Enter your choice (1 or 2): "));
         
         int choice = GameLogic.readInt("", 1, 2);
         if (choice == 1) {
@@ -217,10 +227,11 @@ public class TournamentUnderground {
                         "He opens his mouth to confess why he abandoned you... but suddenly, chaos erupts.\n" +
                         "Gunshots echo, and you hear the shout: 'Police raid! Everybody down!' The room is thrown into chaos!", 110));
 
-        System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
-        System.out.print(GameLogic.centerText("Choose your path:",50));
-        System.out.print(GameLogic.centerText("(1) Run and escape the raid.",50));
-        System.out.print(GameLogic.centerText("(2) Stay and hear your father's confession, then fight the police.",50));
+        System.out.println();
+        System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
+        System.out.print(GameLogic.centerText(50, "Choose your path:"));
+        System.out.print(GameLogic.centerText(50, "(1) Run and escape the raid."));
+        System.out.print(GameLogic.centerText(50, "(2) Stay and hear your father's confession, then fight the police."));
         int choice = GameLogic.readInt("-> ", 1, 2);
         if(choice == 1){
             runAndEscape();
@@ -317,9 +328,13 @@ public class TournamentUnderground {
 
         GameLogic.clearConsole();
         message = "[ After spending 5 long years in prison, the toll it took on your body is undeniable." +
-                        "\nYou've lost 10% of your health and stamina. The harsh reality of confinement has left its mark.";
+                        "\nYou've lost 10% of your health and stamina and lost all your belongings and points." + 
+                        "\nThe harsh reality of confinement has left its mark.";
         System.out.print(GameLogic.centerBox(message, 115));
         System.out.println();
+
+        inventory.deleteAllInventoryItems();
+        player.setPlayerPoints(0);
 
         player.setMaxStamina(player.getMaxStamina() - (int)(player.getMaxStamina() * 0.10));
         player.setStamina(player.getMaxStamina());

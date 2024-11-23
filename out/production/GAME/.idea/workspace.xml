@@ -9,10 +9,20 @@
       <change beforePath="$PROJECT_DIR$/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gameData.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/BetFight/BetFight.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/BetFight/BetFight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/GameLogic2.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/GameLogic2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/StoryUnderground.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/StoryUnderground.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/TrainWithJakester.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TrainWithJakester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparFightLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/SparFightLogic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PerezSparring.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PerezSparring.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PitikSparring.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PitikSparring.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TournamentUnderground.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/TournamentUnderground.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Tournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/SparFightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/SparFightLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/Sparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/Sparring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/SparringOpponents/PerezSparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/SparringOpponents/PerezSparring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/SparringOpponents/PitikSparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/SparringOpponents/PitikSparring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/TournaUnderFight/NavarroTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TournaUnderFight/NavarroTourna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/TournaUnderFight/RaulTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TournaUnderFight/RaulTourna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/TournaUnderFight/SalvahezTourna.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TournaUnderFight/SalvahezTourna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/TournamentUnderground.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TournamentUnderground.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

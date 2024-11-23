@@ -464,50 +464,55 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
     private void counterInfos(String name){
         GameLogic.clearConsole();
         if(opponent.getName() == "Joaquin Perez"){
-            GameLogic.printHeading("\tJoaquin Perez Combo Counter:");
-            System.out.println("(1) Right Uppercut < Block");
-            System.out.println("(2) Left Hook < Jab");
-            System.out.println("(3) Right Cross < Uppercut");
+            System.out.print(GameLogic.centerBox("Joaquin Perez Combo Counter:",50));
             System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
+            System.out.print(GameLogic.centerText(50,"(1) Right Uppercut < Block"));
+            System.out.print(GameLogic.centerText(50,"(2) Left Hook < Jab"));
+            System.out.print(GameLogic.centerText(50,"(3) Right Cross < Uppercut"));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(4) Elbow Strike < Block"));
+            System.out.print(GameLogic.centerText(50,"(5) Head Butt < Hook"));
+            System.out.print(GameLogic.centerText(50,"(6) Low Blow < Uppercut"));
         } else if(opponent.getName() == "Lando Pitik"){
-            GameLogic.printHeading("\tLando Pitik Combo Counter:");
-            System.out.println("(1) Cross < Uppercut");
-            System.out.println("(2) Rear Uppercut < Block");
-            System.out.println("(3) Lead Hook < Jab");
+            System.out.print(GameLogic.centerBox("Lando Pitik Combo Counter:",50));
             System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
+            System.out.print(GameLogic.centerText(50,"(1) Cross < Uppercut"));
+            System.out.print(GameLogic.centerText(50, "(2) Rear Uppercut < Block"));
+            System.out.print(GameLogic.centerText(50,"(3) Lead Hook < Jab"));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(4) Elbow Strike < Block"));
+            System.out.print(GameLogic.centerText(50,"(5) Head Butt < Hook"));
+            System.out.print(GameLogic.centerText(50,"(6) Low Blow < Uppercut"));
         } else if(opponent.getName() == "Julio Navarro"){
-            GameLogic.printHeading("\tJulio Navarro Combo Counter:");
-            System.out.println("(1) Right Uppercut < Block");
-            System.out.println("(2) Left Hook < Jab");
-            System.out.println("(3) Right Cross < Uppercut");
+            System.out.print(GameLogic.centerBox("Julio Navarro Combo Counter:",50));
             System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
+            System.out.print(GameLogic.centerText(50,"(1) Right Uppercut < Block"));
+            System.out.print(GameLogic.centerText(50,"(2) Left Hook < Jab"));
+            System.out.print(GameLogic.centerText(50,"(3) Right Cross < Uppercut"));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(4) Elbow Strike < Block"));
+            System.out.print(GameLogic.centerText(50,"(5) Head Butt < Hook"));
+            System.out.print(GameLogic.centerText(50,"(6) Low Blow < Uppercut"));
         } else if(opponent.getName() == "Raul Villanueva"){
-            GameLogic.printHeading("\tRaul Villanueva Combo Counter:");
-            System.out.println("(1) Cross < Uppercut");
-            System.out.println("(2) Rear Uppercut < Block");
-            System.out.println("(3) Lead Hook < Jab");
+            System.out.print(GameLogic.centerBox("Raul Villanueva Combo Counter:",50));
             System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
+            System.out.print(GameLogic.centerText(50,"(1) Cross < Uppercut"));
+            System.out.print(GameLogic.centerText(50, "(2) Rear Uppercut < Block"));
+            System.out.print(GameLogic.centerText(50,"(3) Lead Hook < Jab"));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(4) Elbow Strike < Block"));
+            System.out.print(GameLogic.centerText(50,"(5) Head Butt < Hook"));
+            System.out.print(GameLogic.centerText(50,"(6) Low Blow < Uppercut"));
         } else if(opponent.getName() == "Ralfo Salvahez"){
-            GameLogic.printHeading("\tRalfo Salvahez Combo Counter:");
-            System.out.println("(1) Quick Jab < Uppercut");
-            System.out.println("(2) Cross < Uppercut");
-            System.out.println("(3) Power Punch < Block");
+            System.out.print(GameLogic.centerBox("Ralfo Salvahez Combo Counter:",50));
             System.out.println();
-            System.out.println("(4) Elbow Strike < Block");
-            System.out.println("(5) Head Butt < Hook");
-            System.out.println("(6) Low Blow < Uppercut");
+            System.out.print(GameLogic.centerText(50,"1) Quick Jab < Uppercut"));
+            System.out.print(GameLogic.centerText(50, "(2) Cross < Uppercut"));
+            System.out.print(GameLogic.centerText(50,"(3) Power Punch < Block"));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(4) Elbow Strike < Block"));
+            System.out.print(GameLogic.centerText(50,"(5) Head Butt < Hook"));
+            System.out.print(GameLogic.centerText(50,"(6) Low Blow < Uppercut"));
         }
     }
 }

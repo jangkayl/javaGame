@@ -20,16 +20,14 @@ public class Sparring {
             playerProgress.setAddStats(0);
             player.setStage(9);
             GameLogic.clearConsole();
-            System.out.println("🥊  SPARRING ARENA - DIRTY BOXING FIGHT 🥊");
-            GameLogic.printSeparator(40);
-            System.out.println("You step into the gritty sparring arena, the atmosphere thick with tension and excitement...");
-            System.out.println();
-            GameLogic.printSeparator(40);
-            System.out.println("Fighters around you are placing bets, eager to double their cash while proving their strength in the ring!");
-            System.out.println("Prepare yourself for a dirty boxing match where anything goes. Victory means not just glory, but also cash and valuable points to boost your stats!");
-            System.out.println("But beware: losing a fight can cost you hard-earned stats! Are you ready to risk it all for fame and fortune? Show the world your skills!");
-            System.out.println();
-            System.out.println("💰 Tip: Fight fiercely, win rewards, and enhance your abilities with every match. But remember, losses can hurt your stats! 💰");
+            System.out.print(GameLogic.centerBox("🥊  SPARRING ARENA - DIRTY BOXING FIGHT 🥊",70));
+            System.out.println("\n");
+            System.out.print(GameLogic.centerText(50,
+                    "You step into the gritty sparring arena, the atmosphere thick with tension and excitement...\n\n" +
+                            "Fighters around you are placing bets, eager to double their cash while proving their strength in the ring!\n" +
+                            "Prepare yourself for a dirty boxing match where anything goes. Victory means not just glory, but also cash and valuable points to boost your stats!\n" +
+                            "But beware: losing a fight can cost you hard-earned stats! Are you ready to risk it all for fame and fortune? Show the world your skills!\n\n" +
+                            "💰 Tip: Fight fiercely, win rewards, and enhance your abilities with every match. But remember, losses can hurt your stats! 💰"));
             GameLogic.pressAnything();
             GameLogic.gameData.saveGame();
         }
@@ -41,18 +39,16 @@ public class Sparring {
 
     private static void sparRules() {
         GameLogic.clearConsole();
-        System.out.println("🥊  SPARRING ARENA - DIRTY BOXING FIGHT 🥊");
-        GameLogic.printSeparator(40);
-        System.out.println("Mechanics: ");
-        GameLogic.printSeparator(40);
-        System.out.println("Fighters are betting cash to prove their strength. Victory means glory, cash, and stat boosts.");
-        System.out.println("But losing a fight will cost you valuable stats, so be cautious!");
+        System.out.print(GameLogic.centerBox("🥊  SPARRING ARENA - DIRTY BOXING FIGHT 🥊",70));
         System.out.println();
-        System.out.println("⚠️ Only 1 round to WIN or LOSE");
-        System.out.println("💪 **Win**: Gain points and boost your stats.");
-        System.out.println("💔 **Lose**: Lose stats, making future fights tougher.");
-        System.out.println();
-        System.out.println("💰 Tip: Win rewards, lose stats. Choose wisely!");
+        System.out.print(GameLogic.centerText(50,
+                "Mechanics: \n" +
+                        "Fighters are betting cash to prove their strength. Victory means glory, cash, and stat boosts.\n" +
+                        "But losing a fight will cost you valuable stats, so be cautious!\n\n" +
+                        "⚠️ Only 1 round to WIN or LOSE\n" +
+                        "💪 **Win**: Gain points and boost your stats.\n" +
+                        "💔 **Lose**: Lose stats, making future fights tougher.\n\n" +
+                        "💰 Tip: Win rewards, lose stats. Choose wisely!"));
         GameLogic.pressAnything();
     }
     
@@ -75,12 +71,12 @@ public class Sparring {
     
         while (true) {
             world1.Tournament.showOpStats(opponent);
-    
-            System.out.println("Select an option: ");
-            System.out.println("\t\t(1) Fight now");
-            System.out.println("\t\t(2) Check your Stats");
-            System.out.println("\t\t(3) Change Opponent Stats");
-            System.out.println("\t\t(4) Go Back");
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"Select an option: "));
+            System.out.print(GameLogic.centerText(50,"(1) Fight now"));
+            System.out.print(GameLogic.centerText(50,"(2) Check your Stats"));
+            System.out.print(GameLogic.centerText(50,"(3) Change Opponent Stats"));
+            System.out.print(GameLogic.centerText(50,"(4) Go Back"));
     
             choice = GameLogic.readInt("-> ", 1, 4); 
     
@@ -103,7 +99,7 @@ public class Sparring {
                     pitik = new PitikSparring(player, opponent);
                     perez = null;
                 }
-                System.out.println("New opponent generated!");
+                System.out.println(GameLogic.centerBox("New opponent generated!", 50));
             } else if(choice == 4){
                 return;
             }

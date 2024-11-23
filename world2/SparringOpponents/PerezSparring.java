@@ -23,22 +23,21 @@ public class PerezSparring extends SparFightLogic{
         System.out.println();
         
         if(getPlayerProgress().getAddStats() < 5){
-            GameLogic.printSeparator(40);
-            System.out.println(); 
             getPlayerProgress().setAddStats(getPlayerProgress().getAddStats() + 1);
-            System.out.println("Congratulations! You've won " + getPlayerProgress().getAddStats() + " / 5 matches");
-            System.out.println("\nHere are your choices: ( Select one only )");
-            System.out.println("1. HP - Increase by +15% ");
-            System.out.println("2. Stamina - Increase by +15%");
-            System.out.println("3. Crit Chance - Increase by +5%");
-            System.out.println("4. Dodge Chance - Increase by +5%");
-            System.out.println("5. Crit Multiplier - Increase by +5%");
-            System.out.print("\nEnter the number of the stat you'd like to upgrade: ");
+            System.out.print(GameLogic.centerBox("Congratulations! You've won " + getPlayerProgress().getAddStats() + " / 5 matches", 90));
+            System.out.println(); 
+            System.out.print(GameLogic.centerText(50,
+                    "Here are your choices: ( Select one only )\n" +
+                            "1. HP - Increase by +15%\n" +
+                            "2. Stamina - Increase by +15%\n" +
+                            "3. Crit Chance - Increase by +5%\n" +
+                            "4. Dodge Chance - Increase by +5%\n" +
+                            "5. Crit Multiplier - Increase by +5%\n" +
+                            "\nEnter the number of the stat you'd like to upgrade: "));
             int choice = GameLogic.readInt("", 1, 5);
             addStats(choice);
             System.out.println();
-            System.out.println("Stats added! Remember, you can gain stats up to 5 times!");
-            GameLogic.printCenteredSeparator(50);
+            System.out.print(GameLogic.centerBox("Stats added! Remember, you can gain stats up to 5 times!",70));
         }
 
         resetFighterStats();
@@ -51,13 +50,10 @@ public class PerezSparring extends SparFightLogic{
     protected void handleLoss() {
         resetFighterStats();
         getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);
-        GameLogic.printSeparator(40);
-        System.out.println(); 
-        System.out.println("You have been defeated!");
-        System.out.println("You lost 150 points");
+        System.out.print(GameLogic.centerBox("You have been defeated!\nYou lost 150 points", 70));
         getPlayer().setPlayerPoints(getPlayer().getPlayerPoints() - 150);
-        System.out.println("You now have " + getPlayer().getPlayerPoints() + " points.");
         System.out.println();
+        System.out.print(GameLogic.centerBox("You now have " + getPlayer().getPlayerPoints() + " points.",70));
         GameLogic.pressAnything();
         GameLogic.gameData.saveGame();
     }
