@@ -138,11 +138,17 @@ public class Shop implements ShopInterface{
     
             System.out.println();
             if(player.getCurrentWorld() == 0){
+                System.out.println(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("GYM SHOP", 40));
+                System.out.println(GameLogic.reset);
             } else if(player.getCurrentWorld() == 1){
+                System.out.println(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("BLACK MARKET", 40));
+                System.out.println(GameLogic.reset);
             } else if(player.getCurrentWorld() == 2){
+                System.out.println(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("BOXING ARSENAL", 40));
+                System.out.println(GameLogic.reset);
             }
 
             System.out.print(GameLogic.centerBox(" Player Points: " + player.getPlayerPoints() + " ", 25));
@@ -220,7 +226,9 @@ public class Shop implements ShopInterface{
 
     public void shop() {
         GameLogic.clearConsole();
+        System.out.println(GameLogic.greenText);
         System.out.println(GameLogic.centerBox("GYM SHOP", 40));
+        System.out.println(GameLogic.reset);
         System.out.println();
 
         String message = "Fred: \"Welcome to the shop. Here, you can buy all sorts of gear and items that'll\n"

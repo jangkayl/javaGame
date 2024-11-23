@@ -1,6 +1,10 @@
 package world1;
 public class Story {
     public static void introStory() {
+        System.out.println();
+        System.out.print(GameLogic.redText + "The Fist of Fury" + GameLogic.reset);
+        System.out.println();
+
         System.out.println("\nThe ring isn't just a place, it's a proving ground. Here, every punch thrown tells a story of sacrifice, hunger, and ambition.");
         GameLogic.printWithDelay("Boxing is more than a sport; it's a way of life, where only the bold rise and the weak fall.");
         GameLogic.printWithDelay("Fighters enter the ring to test their limits, fueled by dreams of glory and haunted by the fear of defeat.\n");
@@ -25,7 +29,9 @@ public class Story {
    
     public static void printIntro(String name){
         GameLogic.clearConsole();
+        System.out.print(GameLogic.redText);
         System.out.println(GameLogic.centerBox("The Redemption Story", 95));
+        System.out.print(GameLogic.reset);
         String story = "In the shadowy alleys of Tondo Manila, there was a boy named " + name + " who has spent his\n" +
                 "life surviving the harsh streets while studying hard to help his family from poverty.\n" +
                 "He has been bullied all his life and all he wants is to graduate and end his sufferings.\n" +

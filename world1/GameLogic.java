@@ -16,6 +16,10 @@ public class GameLogic{
     public static Scanner scan = new Scanner(System.in);   
     public static DecimalFormat df = new DecimalFormat("#,###.00");   
     public static Player player;
+    public static String redText = "\u001B[31m";
+    public static String greenText = "\u001B[32m";
+    public static String reset = "\u001B[0m";
+    public static String yellowText = "\u001B[33m";
     public static PlayerProgress playerProgress;
     private static Item[] inventoryItems;
     private static Item[] slots;
@@ -216,7 +220,7 @@ public class GameLogic{
         String name;
 
         clearConsole();
-        System.out.println(centerBox("FIST OF FURY\nDEVELOPED BY NWORLD",100));
+        gameLogo();
         pressAnything();
         System.out.println();
         printSeparator(40);
@@ -281,7 +285,9 @@ public class GameLogic{
     static void printMenu(){
         gameData.saveGame();
         clearConsole();
+        System.out.print(greenText);
         System.out.println(centerBox("MENU", 30));
+        System.out.print(reset);
         System.out.print(centerText(20, "Choose an action:"));
         System.out.print(centerText(20, "(0) Exit Game"));
         System.out.print(centerText(20, "(1) Continue on your journey"));
@@ -335,7 +341,9 @@ public class GameLogic{
             if(playerProgress.getShopStage() == 0){
                 if(player.getStage() == 0){
                     String[] worlds = player.getWorlds();
+                    System.out.print(greenText);
                     System.out.print(centerBox("Welcome to the " + worlds[player.getCurrentWorld()], 100));
+                    System.out.print(reset);
                     UrbanStory.printUrban();
                     System.out.print(centerText(20,"Are you ready to start your journey?"));
                     System.out.print(centerText(20,"(1) Yes"));
@@ -374,6 +382,7 @@ public class GameLogic{
     // Checks players stats
     public static void printStats(){
         clearConsole();
+        System.out.print(greenText);
         String statsOutput =
                         centerText("CHARACTER STATS", 50) + "\n" +
                         printCenteredSeparator(30) + "\n" +
@@ -393,6 +402,7 @@ public class GameLogic{
 
         String centeredBox = centerBox(statsOutput, 50);
         System.out.println(centeredBox);
+        System.out.print(reset);
         pressAnything();
     }
 
@@ -592,5 +602,45 @@ public class GameLogic{
             double newMulti = player.getCritMultiplier() + 0.05;
             player.setCritMultiplier(newMulti);
         }
+    }
+
+    public static void gameLogo(){
+        String asciiBorder = redText +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⣠⣶⣿⣿⣿⡿⠓⢀⣠⣴⣶⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⢀⣼⣿⣿⣿⠟⠋⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⣾⣿⣿⣿⣇⣠⣾⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⠇⢰⣶⣶⣤⣀⠀⠀⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣼⣿⣿⣿⣿⣿⡟⢀⣾⣿⣿⣿⣿⣷⡄⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⢸⣿⣿⠛⣿⣿⣿⣿⣿⡟⢠⣾⣿⣿⣿⣿⣿⡟⢀⣾⣿⣿⣿⣿⣿⣿⣿⡄⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠙⠋⠀⣿⣿⣿⣿⣿⠃⢸⣿⣿⣿⣿⡿⠋⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⢻⣿⣿⣿⡿⠀⠘⠿⠿⠟⠋⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠙⢿⣿⡇⢸⣷⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠙⠇⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀⠀\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                reset;
+
+        String mainAscii = redText +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t███████╗██╗███████╗████████╗     ██████╗ ███████╗    ███████╗██╗   ██╗██████╗ ██╗   ██╗\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t██╔════╝██║██╔════╝╚══██╔══╝    ██╔═══██╗██╔════╝    ██╔════╝██║   ██║██╔══██╗╚██╗ ██╔╝\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t█████╗  ██║███████╗   ██║       ██║   ██║█████╗      █████╗  ██║   ██║██████╔╝ ╚████╔╝ \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t██╔══╝  ██║╚════██║   ██║       ██║   ██║██╔══╝      ██╔══╝  ██║   ██║██╔══██╗  ╚██╔╝  \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t██║     ██║███████║   ██║       ╚██████╔╝██║         ██║     ╚██████╔╝██║  ██║   ██║   \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t╚═╝     ╚═╝╚══════╝   ╚═╝        ╚═════╝ ╚═╝         ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                      " +
+                reset;
+
+        String text = redText +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t╔╗ ╦ ╦  ╔╗╔╦ ╦╔═╗╦═╗╦  ╔╦╗\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t╠╩╗╚╦╝  ║║║║║║║ ║╠╦╝║   ║║\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t╚═╝ ╩   ╝╚╝╚╩╝╚═╝╩╚═╩═╝═╩╝" +
+                reset;
+
+        System.out.println(asciiBorder);
+        System.out.println(mainAscii);
+        System.out.println(text);
     }
 }

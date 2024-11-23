@@ -78,7 +78,9 @@ public class UrbanStory {
 
     public static void tutorialMenu() {
         System.out.println("\n");
+        System.out.println(GameLogic.redText);
         System.out.println(GameLogic.centerBox("WELCOME TO THE TUTORIAL!", 60));
+        System.out.println(GameLogic.reset);
         System.out.println();
         System.out.println(GameLogic.centerText(50,
                 "In this tutorial, you'll get a quick overview of the basic mechanics and controls you'll need to succeed.\n" +
@@ -130,7 +132,7 @@ public class UrbanStory {
                 System.out.println(GameLogic.centerBox("( Fred throws a " + array[randomNum] + " )", 50));
             }
 
-            String successMessage = "Success: " + success + " / 5";
+            String successMessage = GameLogic.greenText + "Success: " + success + " / 5" + GameLogic.reset;
             System.out.print(GameLogic.centerText(successMessage, 150));
             System.out.println("\n");
             choice = punch();
@@ -143,19 +145,19 @@ public class UrbanStory {
             System.out.println("\n");
             String responseMessage = "";
             if(countered == 1){
-                responseMessage = "Great job!";
+                responseMessage = GameLogic.greenText + "Great job!" + GameLogic.reset;
                 success++;
             } else if(countered == 2){
-                responseMessage = "No, you should try to counter punch it!";
+                responseMessage = GameLogic.yellowText + "No, you should try to counter punch it!" + GameLogic.reset;
             } else {
-                responseMessage = "Not bad, but I wanna see some counter punches!";
+                responseMessage = GameLogic.yellowText + "Not bad, but I wanna see some counter punches!" + GameLogic.reset;
             }
             System.out.print(GameLogic.centerBox(responseMessage, 50));
 
         } while(success < 5);
 
         System.out.println("\n");
-        String finalMessage = "Congratulations, " + name + "! You've completed the tutorial! " +
+        String finalMessage = GameLogic.greenText + "Congratulations, " + name + GameLogic.reset + "! You've completed the tutorial! " +
                 "Your fundamentals are solid,\nbut remember: there's always more to learn." +
                 "Keep training hard,\nand you'll be unstoppable in no time!";
         System.out.print(GameLogic.centerBox(finalMessage, 100));
@@ -372,6 +374,7 @@ public class UrbanStory {
             System.out.println("\n");
 
             String punchMessage = "";
+            System.out.println(GameLogic.redText);
             if(randomNum == 2){
                 punchMessage = "( Fred " + array[randomNum] + "s )";
             } else if(randomNum == 3){
@@ -379,10 +382,11 @@ public class UrbanStory {
             } else {
                 punchMessage = "( Fred throws a " + array[randomNum] + " ) ";
             }
+            System.out.println(GameLogic.reset);
             System.out.print(GameLogic.centerBox(punchMessage, 50));
 
             System.out.println("\n");
-            String successMessage = "Success: " + success + " / 5";
+            String successMessage = GameLogic.greenText + "Success: " + success + " / 5" + GameLogic.reset;
             System.out.print(GameLogic.centerText(successMessage, 150));
             System.out.println("\n");
             choice = punch();
@@ -549,7 +553,7 @@ public class UrbanStory {
             System.out.println(GameLogic.centerBox(skillMessage, 50));
             System.out.println("\n");
 
-            System.out.println(GameLogic.centerText(150, "Success: " + success + " / 5"));
+            System.out.println(GameLogic.centerText(150, GameLogic.greenText + "Success: " + success + " / 5" + GameLogic.reset));
 
             System.out.println(GameLogic.centerText(150, "Select the counter punch:"));
             for (int i = 1; i <= 3; i++) {
