@@ -38,11 +38,11 @@ public class GameLogic{
                 input = scan.nextInt();
             } catch(Exception e){
                 input = -1;
-                System.out.println(GameLogic.centerBox("Please enter a valid number of choice!", 50));
+                System.out.println(centerBox("Please enter a valid number of choice!", 50));
                 scan.next();
             }
             if(input > max || input < min){
-                System.out.println(GameLogic.centerBox("Please enter valid choice number!", 50));
+                System.out.println(centerBox("Please enter valid choice number!", 50));
             }
             scan.nextLine();
         } while(input < min || input > max);
@@ -127,7 +127,7 @@ public class GameLogic{
 
     public static String centerBox(String text, int width) {
         int boxWidth = width;
-        int terminalWidth = 200;
+        int terminalWidth = 197;
 
         int boxPadding = (terminalWidth - boxWidth) / 2;
         String boxPad = new String(new char[boxPadding]).replace("\0", " ");
@@ -234,7 +234,7 @@ public class GameLogic{
             if (choice == 2) {
                 do {
                     clearConsole();
-                    System.out.println(GameLogic.centerBox("Enter your name:", 50));
+                    System.out.println(centerBox("Enter your name:", 50));
                     System.out.print(centerText("", 97) + "-> ");
                     name = scan.nextLine();
                     System.out.println();
@@ -262,7 +262,7 @@ public class GameLogic{
                 if (player != null) {
                     break; 
                 } else {
-                    System.out.println(GameLogic.centerBox("No player found in the database. Please create a new player.", 70));
+                    System.out.println(centerBox("No player found in the database. Please create a new player.", 70));
                     pressAnything();
                 }
             }
@@ -347,7 +347,7 @@ public class GameLogic{
                     System.out.print(centerText(20,"Are you ready to start your journey?"));
                     System.out.print(centerText(20,"(1) Yes"));
                     System.out.print(centerText(20,"(2) No "));
-                    int choice2 = GameLogic.readInt(centerText("", 97) + "-> ", 1, 2);
+                    int choice2 = readInt(centerText("", 97) + "-> ", 1, 2);
                     if(choice2 == 1){
                         gymTraining();
                     } else {
@@ -359,10 +359,12 @@ public class GameLogic{
             } else {
                 while(true){
                     clearConsole();
+                    System.out.print(centerBox("MENU", 30));
+                    System.out.println();
                     System.out.print(centerText(20,"(1) Train with Fred"));
                     System.out.print(centerText(20,"(2) Enter Tournament"));
                     System.out.print(centerText(20,"(3) Go Back"));
-                    int choice2 = GameLogic.readInt(centerText("", 97) + "-> ", 1, 3);
+                    int choice2 = readInt(centerText("", 97) + "-> ", 1, 3);
                     if(choice2 == 1){
                         gymTraining();
                     } else if(choice2 == 2) {
@@ -415,7 +417,7 @@ public class GameLogic{
                 if(playerProgress.getOpponentWins() == 3 && playerProgress.getAddStats() != 5){
                     if(player.getIsLose() == false){
                         FredGym fred = new FredGym(player);
-                        fred.setPlayer(GameLogic.player);
+                        fred.setPlayer(player);
                         fred.fightLoop();
                         clearConsole();
                         System.out.print(centerBox("Fred: \"Want to train more to gain more stats?\"",50));
@@ -426,14 +428,14 @@ public class GameLogic{
                         if(choice == 1 && playerProgress.getAddStats() == 5){
                             System.out.print(centerBox("Fred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n",110));
                             System.out.println("\n");
-                            GameLogic.pressAnything();
+                            pressAnything();
                         }
                         if(choice == 2) break;
                         continue;
                     } else if(UrbanStory.tournaLoseTraining(player.getName())){
                         while(playerProgress.getAddStats() != 5){
                             FredGym fred = new FredGym(player);
-                            fred.setPlayer(GameLogic.player);
+                            fred.setPlayer(player);
                             fred.fightLoop();
                             clearConsole();
                             System.out.print(centerBox("Fred: \"Want to train more to gain more stats?\"",50));
@@ -444,7 +446,7 @@ public class GameLogic{
                             if(choice == 1 && playerProgress.getAddStats() == 5){
                                 System.out.print(centerBox("\nFred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n",110));
                                 System.out.println("\n");
-                                GameLogic.pressAnything();
+                                pressAnything();
                             }
                             if(choice == 2) break;
                             continue;
@@ -486,7 +488,7 @@ public class GameLogic{
                         else if(player.getStage() == 2){
                             PabloUrbanGym pablo = new PabloUrbanGym(player);
                             player.setStage(2);
-                            pablo.setPlayer(GameLogic.player);
+                            pablo.setPlayer(player);
                             pablo.fightLoop();
                         }
                         if(player.getStage() >= 3){
@@ -608,7 +610,7 @@ public class GameLogic{
     }
 
     public static void gameLogo(){
-        String asciiBorder = redText + GameLogic.centerText(100,
+        String asciiBorder = redText + centerText(100,
                                 "                                    \n" +
                                 " ⠀⠀⠀⠀⠀⠀⠀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                                 "⠀⠀⠀⠀⣠⣶⣿⣿⣿⡿⠓⢀⣠⣴⣶⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
@@ -627,7 +629,7 @@ public class GameLogic{
                         );
 
 
-        String mainAscii = GameLogic.centerText(100,
+        String mainAscii = centerText(100,
                                 "███████╗██╗███████╗████████╗     ██████╗ ███████╗    ███████╗██╗   ██╗██████╗ ██╗   ██╗\n" +
                                 "██╔════╝██║██╔════╝╚══██╔══╝    ██╔═══██╗██╔════╝    ██╔════╝██║   ██║██╔══██╗╚██╗ ██╔╝\n" +
                                 "█████╗  ██║███████╗   ██║       ██║   ██║█████╗      █████╗  ██║   ██║██████╔╝ ╚████╔╝ \n" +
@@ -637,7 +639,7 @@ public class GameLogic{
                                 "                                                                                      "
                         );
         
-        String text = GameLogic.centerText(100, 
+        String text = centerText(100, 
                              "╔╗ ╦ ╦  ╔╗╔╦ ╦╔═╗╦═╗╦  ╔╦╗\n" +
                              "╠╩╗╚╦╝  ║║║║║║║ ║╠╦╝║   ║║\n" +
                              "╚═╝ ╩   ╝╚╝╚╩╝╚═╝╩╚═╩═╝═╩╝" ) + reset;

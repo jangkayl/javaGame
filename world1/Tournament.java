@@ -168,7 +168,7 @@ public class Tournament {
     }
 
     private static void concludeTournament() {
-        System.out.println("\n\n");
+        GameLogic.clearConsole();
         player.setRank(3);
         GameLogic.rankReward();
         System.out.println(GameLogic.centerBox("🥊 Congratulations, Champion of the Ring! 🥊\n" +

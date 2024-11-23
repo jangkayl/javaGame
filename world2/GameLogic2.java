@@ -73,6 +73,8 @@ public class GameLogic2 {
             } else {
                 while (true) {
                     GameLogic.clearConsole();
+                    System.out.print(GameLogic.centerBox("MENU", 30));
+                    System.out.println();
                     if(player.getStage() == 7){
                         System.out.print(GameLogic.centerText(50,"(0) Train with Jakester"));
                     } else if(player.getStage() >= 8){
@@ -106,6 +108,8 @@ public class GameLogic2 {
     private static void journeyMenu(){
         while(true){
             GameLogic.clearConsole();
+            System.out.print(GameLogic.centerBox("MENU", 30));
+            System.out.println();
             System.out.print(GameLogic.centerText(50,"(1) Review Move Hints"));
             System.out.print(GameLogic.centerText(50,"(2) Spar - Earn points and gain stats"));
             System.out.print(GameLogic.centerText(50,"(3) Enter Tournament"));

@@ -31,15 +31,15 @@ public class PassiveSkill {
         this.roundsActive = rounds;
     }
 
-    public void activatePassive(){
-        String message = this.getName() + " activated!";
+    public void activatePassive(String name){
+        String message = name + "'s " + this.getName() + " activated!";
         System.out.println(GameLogic.centerBox(message, 50));
     }
 
-    public void deactivatePassive(){
+    public void deactivatePassive(String name){
         roundsActive--;
         if (roundsActive == 0) {
-            String message = this.getName() + " has worn out!";
+            String message = name + "'s " + this.getName() + " has worn out!";
             System.out.println(GameLogic.centerBox(message, 50));
         }
     }

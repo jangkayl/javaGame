@@ -102,11 +102,12 @@ public class Inventory implements InvetoryInterface{
             GameLogic.clearConsole();
             displayInventory();
             System.out.println(); 
-            System.out.println("What would you like to do?");
-            System.out.println("1. Equip an item");
-            System.out.println("2. Remove an item");
-            System.out.println("0. Go back to Menu");
+            System.out.print(GameLogic.centerText(50,"What would you like to do?"));
+            System.out.print(GameLogic.centerText(50,"1. Equip an item"));
+            System.out.print(GameLogic.centerText(50,"2. Remove an item"));
+            System.out.print(GameLogic.centerText(50,"0. Go back to Menu"));
             System.out.println(); 
+            System.out.print(GameLogic.centerText(" ", 87));
             int actionChoice = GameLogic.readInt("Choose an action (0 to 2): ", 0, 2);
             if (actionChoice == 0) {
                 System.out.println("Returning to the menu...");
@@ -114,13 +115,14 @@ public class Inventory implements InvetoryInterface{
             } else if (actionChoice == 1){
                 if(itemCount == 0){
                     System.out.println();
-                    System.out.println("There is nothing to equip yet."); 
+                    System.out.println(GameLogic.centerBox("There is nothing to equip yet.", 50));
                     GameLogic.pressAnything();
                     continue outerLoop;
                 }
                 while(true){
                     System.out.println(); 
-                    System.out.println("Which item do you want to equip? (Press 0 to go back)");
+                    System.out.print(GameLogic.centerText(50,"Which item do you want to equip? (Press 0 to go back)"));
+                    System.out.print(GameLogic.centerText(" ", 80));
                     choice = GameLogic.readInt("Choose your item by number (1 to " + itemCount + "): ", 0, itemCount);
                     System.out.println();
                     if (choice == 0) {  
@@ -131,7 +133,7 @@ public class Inventory implements InvetoryInterface{
                         inventoryUse(choice-1, inventoryItems[choice-1].body);
                         continue outerLoop;
                     } else {
-                        System.out.println("You have something equipped on your " + inventoryItems[choice-1].body); 
+                        System.out.print(GameLogic.centerText(50, "You have something equipped on your " + inventoryItems[choice-1].body)); 
                         GameLogic.pressAnything();
                         continue outerLoop;
                     }
@@ -139,16 +141,16 @@ public class Inventory implements InvetoryInterface{
             } else if (actionChoice == 2){
                 if(!(slot[0] != null || slot[1] != null || slot[2] != null || slot[3] != null || slot[4] != null)){
                     System.out.println();
-                    System.out.println("There is nothing to remove yet.");
+                    System.out.println(GameLogic.centerBox("There is nothing to remove yet.", 50));
                     GameLogic.pressAnything();
                     continue outerLoop;
                 }
                 while(true){
                     System.out.println(); 
-                    System.out.println("Which item do you want to unequip? (Press 0 to go back or 5 to UNEQUIP ALL)");
-                    System.out.println(); 
-            
+                    System.out.print(GameLogic.centerText(50, "Which item do you want to unequip? (Press 0 to go back or 5 to UNEQUIP ALL)"));
+                    System.out.print(GameLogic.centerText(" ", 80));
                     choice = GameLogic.readInt("Choose your item by number (1 to 4): ", 0, 5);
+                    System.out.println(); 
                     if(choice == 5){
                         removeAllInventory();
                         continue outerLoop;
@@ -162,7 +164,7 @@ public class Inventory implements InvetoryInterface{
                         continue outerLoop;
                     } else {
                         System.out.println();
-                        System.out.println("You don't equipped something on your " + slotName[choice-1]); 
+                        System.out.println(GameLogic.centerBox("You don't equipped something on your " + slotName[choice-1], 50));
                         GameLogic.pressAnything();
                         continue outerLoop;
                     }
@@ -216,23 +218,23 @@ public class Inventory implements InvetoryInterface{
         switch (equipmentSlot.toUpperCase()) {
             case "HEAD":
                 slot[0] = selectedItem;
-                System.out.println(selectedItem.name + " has been equipped to HEAD.");
+                System.out.println(GameLogic.centerBox(selectedItem.name + " has been equipped to HEAD.", 50));
                 break;
             case "BODY":
                 slot[1] = selectedItem;
-                System.out.println(selectedItem.name + " has been equipped to BODY.");
+                System.out.println(GameLogic.centerBox(selectedItem.name + " has been equipped to BODY.", 50));
                 break;
             case "HAND":
                 slot[2] = selectedItem;
-                System.out.println(selectedItem.name + " has been equipped to HAND.");
+                System.out.println(GameLogic.centerBox(selectedItem.name + " has been equipped to HAND.", 50));
                 break;
             case "BOOTS":
                 slot[3] = selectedItem;
-                System.out.println(selectedItem.name + " has been equipped to BOOTS.");
+                System.out.println(GameLogic.centerBox(selectedItem.name + " has been equipped to BOOTS.", 50));
                 break;
             case "FOOD":
                 slot[4] = selectedItem;
-                System.out.println(selectedItem.name + " has been consumed! You feel refreshed.");
+                System.out.print(GameLogic.centerText(50, selectedItem.name + " has been consumed! You feel refreshed."));
                 break;
             default:
                 System.out.println("Invalid slot.");
@@ -272,8 +274,7 @@ public class Inventory implements InvetoryInterface{
             slot[i] = null;
             remove(removedItem);
         }
-        System.out.println();
-        System.out.println("All items has been returned to your inventory.");
+        System.out.print(GameLogic.centerBox("All items has been returned to your inventory.", 50));
         GameLogic.pressAnything();
     }
 
@@ -297,25 +298,25 @@ public class Inventory implements InvetoryInterface{
                 if(noEquip(slot[0])) return;
                 removedItem = slot[0];
                 slot[0] = null;
-                System.out.println(removedItem.name + " have been removed from your HEAD and been returned to your inventory.");
+                System.out.print(GameLogic.centerBox(removedItem.name + " have been removed from your HEAD and been returned to your inventory.", 100));
                 break;
             case "BODY":
                 if(noEquip(slot[1])) return;
                 removedItem = slot[1];
                 slot[1] = null;
-                System.out.println(removedItem.name + " have been removed from your BODY and been returned to your inventory.");
+                System.out.print(GameLogic.centerBox(removedItem.name + " have been removed from your BODY and been returned to your inventory.", 100));
                 break;
             case "HAND":
                 if(noEquip(slot[2])) return;
                 removedItem = slot[2];
                 slot[2] = null;
-                System.out.println(removedItem.name + " have been removed from your HAND and been returned to your inventory.");
+                System.out.print(GameLogic.centerBox(removedItem.name + " have been removed from your HAND and been returned to your inventory.", 100));
                 break;
             case "BOOTS":
                 if(noEquip(slot[3])) return;
                 removedItem = slot[3];
                 slot[3] = null;
-                System.out.println(removedItem.name + " have been removed from your BOOTS and been returned to your inventory.");
+                System.out.print(GameLogic.centerBox(removedItem.name + " have been removed from your BOOTS and been returned to your inventory.", 100));
                 break;
             default:
                 System.out.println("Invalid slot.");
@@ -323,5 +324,22 @@ public class Inventory implements InvetoryInterface{
         }
         remove(removedItem);
         GameLogic.pressAnything();
+    }
+    
+    public boolean checkSlotsValid(){
+        for(int i = 0; i < slot.length; i++){
+            if(slot[i] != null){
+                switch (slot[i].name) {
+                    case "Reinforced Headband":
+                    case "Blood-Forged Knuckles":
+                    case "Shadowrunner Sneakers":
+                    case "Tactical Combat Boots":
+                        return false;
+                    default:
+                        break;
+                }
+            }
+        }
+        return true;
     }
 }

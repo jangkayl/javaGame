@@ -138,19 +138,15 @@ public class Shop implements ShopInterface{
             boolean isSold = false;
     
             System.out.println();
+            System.out.println(GameLogic.greenText);
             if(player.getCurrentWorld() == 0){
-                System.out.println(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("GYM SHOP", 40));
-                System.out.println(GameLogic.reset);
             } else if(player.getCurrentWorld() == 1){
-                System.out.println(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("BLACK MARKET", 40));
-                System.out.println(GameLogic.reset);
             } else if(player.getCurrentWorld() == 2){
-                System.out.println(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("BOXING ARSENAL", 40));
-                System.out.println(GameLogic.reset);
             }
+            System.out.println(GameLogic.reset);
 
             System.out.print(GameLogic.centerBox(" Player Points: " + player.getPlayerPoints() + " ", 25));
             System.out.println("\n");
@@ -189,9 +185,14 @@ public class Shop implements ShopInterface{
             while (!isSold) {
                 choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 4);
 
-                // If player is in World2
+                // If player is in World 2
                 if(player.getCurrentWorld() == 1 && choice != 0){
                     choice += 4;
+                }
+
+                // If player is in World 3
+                if(player.getCurrentWorld() == 2 && choice != 0){
+                    choice += 8;
                 }
 
                 if (choice == 0) {

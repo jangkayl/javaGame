@@ -3,6 +3,7 @@ package world3;
 import java.util.Random;
 
 import world1.GameLogic;
+import world1.Inventory;
 import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
@@ -14,12 +15,12 @@ public class SparringRing {
     private Random rand = new Random();
     private Player player = GameLogic.player;
     private PlayerProgress playerProgress = GameLogic.playerProgress;
+    private Inventory inventory = GameLogic.inventory;
 
     public void start() {
         GameLogic.clearConsole();
         String title = "SPARRING RING";
-        System.out.println(GameLogic.centerBox(title, 130));
-        System.out.println();
+        System.out.println(GameLogic.centerBox(title, 60));
     
         String prompt = "The Sparring Ring is your training ground to refine your skills and build strength for the Champs Arena." +
                         "\nEngage in practice matches to boost your stats, test your strategies, and prepare for tougher challenges." +
@@ -37,6 +38,13 @@ public class SparringRing {
         ArcegaSparring arcega = null;
         MagsilosSparring magsilos = null;
         int choice = 0;
+
+        if(!inventory.checkSlotsValid()){
+            System.out.println();
+            System.out.print(GameLogic.centerBox("✋ Please UNEQUIP all items from Underworld Rumble before fighting", 75));
+            GameLogic.pressAnything();
+            return;
+        }
     
         boolean usePerez = new Random().nextBoolean(); 
         if (usePerez) {

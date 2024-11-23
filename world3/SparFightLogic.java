@@ -1,15 +1,15 @@
 package world3;
 
-import java.util.Random;
-
 import world1.GameLogic;
 import world1.Player;
 import world1.PlayerProgress;
-import world1.StreetFighter;
 import world1.Skill.SkillsRegistry;
+import world1.StreetFighter;
 import world2.BoxerHints;
 import world2.interfaces.SparFightLogicInterface;
 import world3.PassiveSkill.PassiveSkillRegistry;
+
+import java.util.Random;
 
 public abstract class SparFightLogic implements SparFightLogicInterface{
     private Random rand = new Random();
@@ -19,6 +19,8 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
     private SkillsRegistry skills = new SkillsRegistry();
     private PassiveSkillRegistry playerPassiveSkills = new PassiveSkillRegistry();
     private PassiveSkillRegistry opponentPassiveSkills = new PassiveSkillRegistry();
+    private boolean playerLowHp = false;
+    private boolean oppoenentLowHp = false;
     private String playerPassive = "";
     private String opponentPassive = "";
     private boolean playerHasPassive = false;
@@ -123,6 +125,10 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         String input = "";
         boxerHints = new BoxerHints();
 
+        if(opponentHasPassive){
+            opponentActivatePassive();
+        }
+
         // Opponent selects a move
         for (int i = 0; i < 3; i++) {
             // Generate opponentChoices with higher probability for 1 to 10
@@ -217,7 +223,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
                 if(playerHasPassive){
                     playerActivatePassive(input);
                     if(playerPassive == "Sixth Sense"){
-                        System.out.println(GameLogic.centerText(30, ("~ ~ I sense a pattern forming... ~ ~")));
+                        System.out.print(GameLogic.centerText(30, ("~ ~ I sense a pattern forming... ~ ~")));
                         for(int i = 0; i < 3; i++){
                             System.out.print(GameLogic.centerText(20, opponentAttacks[opponentChoices[i]]));
                         }
@@ -282,6 +288,9 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             if(playerPassive == "Flow State") playerDodged = true;
             else playerDodged = false;
 
+            if(opponentPassive == "Flow State") opponentDodged = true;
+            else opponentDodged = false;
+
             int countered = isCounter(opponentAttacks[opponentChoices[i]], playerAttacks[choices[i]]);
             String playerAttack = getPlayer().getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName();
 
@@ -307,35 +316,43 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             if(getPlayer().getHp() <= 0 || getOpponent().getHp() <= 0){
                 return;
             }
+
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         }
 
         System.out.println("Player Streak: " + playerStreak);
         System.out.println("Opponent Streak: " + opponentStreak);
+        System.out.println("Opponent Passive: " + opponentPassive);
 
-        if(playerStreak == 3){
+        if(playerStreak == 3 && playerPassive == ""){
             playerHasPassive = true;
         }
 
-        if(opponentStreak == 3){
+        if(opponentStreak == 3 && opponentPassive == ""){
             opponentHasPassive = true;
         }
         
         if(playerPassive != ""){
             playerDeactivatePassive();
         }
+
+        if(opponentPassive != ""){
+            opponentDeactivatePassive();
+        }
+
+        checkHps();
     }
 
     private void playerActivatePassive(String input){
         int num = Character.getNumericValue(input.charAt(0)); 
         playerPassive = playerAttacks[num + 1];
-        playerPassiveSkills.getSkillByName(playerPassive).activatePassive();
+        playerPassiveSkills.getSkillByName(playerPassive).activatePassive(player.getName());
         playerHasPassive = false;
     }
 
     private void playerDeactivatePassive(){
-        if(playerPassive != ""){
-            playerPassiveSkills.getSkillByName(playerPassive).deactivatePassive();
+        if(!playerHasPassive){
+            playerPassiveSkills.getSkillByName(playerPassive).deactivatePassive(player.getName());
             if(playerPassiveSkills.getSkillByName(playerPassive).getRoundActive() == 0){
                 playerPassiveSkills.getSkillByName(playerPassive).setRoundActive(3);
                 playerPassive = "";
@@ -343,16 +360,17 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         }
     }
 
-    private void opponentActivatePassive(String input){
-        int num = Character.getNumericValue(input.charAt(0)); 
-        opponentPassive = opponentAttacks[num + 1];
-        opponentPassiveSkills.getSkillByName(opponentPassive).activatePassive();
+    private void opponentActivatePassive(){
+        int randomNumber = rand.nextInt(3) + 7;
+        System.out.println("Random Number: " + randomNumber);
+        opponentPassive = opponentAttacks[randomNumber];
+        opponentPassiveSkills.getSkillByName(opponentPassive).activatePassive(opponent.getName());
         opponentHasPassive = false;
     }
 
     private void opponentDeactivatePassive(){
-        if(opponentPassive != ""){
-            opponentPassiveSkills.getSkillByName(opponentPassive).deactivatePassive();
+        if(!opponentHasPassive){
+            opponentPassiveSkills.getSkillByName(opponentPassive).deactivatePassive(opponent.getName());
             if(opponentPassiveSkills.getSkillByName(opponentPassive).getRoundActive() == 0){
                 opponentPassiveSkills.getSkillByName(opponentPassive).setRoundActive(3);
                 opponentPassive = "";
@@ -452,6 +470,9 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         double critChance = rand.nextDouble();
         double dodgeChance = rand.nextDouble();
 
+        if(opponentPassive == "Adrenaline Rush") critChance = 0;
+        else critChance = rand.nextDouble();
+
         if (critChance < opponent.getCritChance() && choice != 2 && !isDraw) {
             opponent.setDamageSetter(opponent.getCritMultiplier());
             System.out.print(GameLogic.centerText(40,opponent.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
@@ -506,6 +527,17 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
         System.out.println();
     }
+
+    private void checkHps(){
+        if(getPlayer().getHp() <= getPlayer().getMaxHp() * .2 && !playerLowHp){
+            playerLowHp = true;
+            playerHasPassive = true;
+        } 
+        if(getOpponent().getHp() <= getOpponent().getMaxHp() * .2 && !oppoenentLowHp){
+            oppoenentLowHp = true;
+            opponentHasPassive = true;
+        }
+    }
     
     protected void winnerReward(){
         if(playerProgress.getPlayerWins() != 3){
@@ -516,9 +548,9 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
 
     protected void winnerRewardPoints(){
         System.out.println();
-        player.setPlayerPoints(player.getPlayerPoints() + 100);
+        player.setPlayerPoints(player.getPlayerPoints() + 300);
         String message = "Congratulations! You've won the match!\n\n" +
-            "You have been given 100 points.\n\n" +
+            "You have been given 300 points.\n\n" +
             "You now have " + player.getPlayerPoints() + " points.\n\n" +
             "Visit the shop and use your points to buy items.\n";
 

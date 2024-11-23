@@ -675,7 +675,7 @@ public class UrbanStory {
                         GameLogic.pressAnything();
                 break;
             case "Ishmael Tetteh":
-                System.out.print(" - The Thunderous Finisher");
+                System.out.println(GameLogic.centerText(20, " - The Thunderous Finisher"));
                 System.out.println(GameLogic.centerText(20, "\n🌟Backstory: Ishmael Tetteh, \"The Thunderous Finisher,\" is a 28-year-old Ghanaian-American middleweight boxer with 28 wins (24 by KO)." +
                         "\nInspired by Canelo Alvarez, he has mastered a signature combo—Right Uppercut, Left Hook, Right Cross—reflecting his journey from Accra to the boxing ring." +
                         "\n After a pivotal early loss, he trained under a retired champion, transforming into a powerful and agile fighter." +

@@ -117,21 +117,21 @@ public class TournamentUnderground {
         switch (opponentIndex) {
             case 0 -> {
                 // The Reaper
-                opponent = new StreetFighter("Julio Navarro", 250, 100, 0.4, 2, 0.25, 4);
+                opponent = new StreetFighter("Julio Navarro", 250, 100, 0.3, 2, 0.25, 4);
                 opponent.setPlayerOpponent(player);
                 StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new NavarroTourna(player, opponent));
             }
             case 1 -> {
                 // The Bullseye
-                opponent = new StreetFighter("Raul Villanueva", 300, 120, 0.45, 2, 0.3, 4);
+                opponent = new StreetFighter("Raul Villanueva", 270, 110, 0.3, 2, 0.3, 4);
                 opponent.setPlayerOpponent(player);
                 StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new RaulTourna(player, opponent));
             }
             case 2 -> {
                 // The Ghost
-                opponent = new StreetFighter("Ralfo Salvahez", 330, 130, 0.5, 2, 0.35, 5);
+                opponent = new StreetFighter("Ralfo Salvahez", 300, 130, 0.4, 2, 0.35, 5);
                 opponent.setPlayerOpponent(player);
                 StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new SalvahezTourna(player, opponent));

@@ -1,11 +1,11 @@
 package world2.BetFight;
 
-import java.util.Random;
-
 import world1.GameLogic;
 import world1.Player;
-import world1.StreetFighter;
 import world1.Skill.SkillsRegistry;
+import world1.StreetFighter;
+
+import java.util.Random;
 
 public class BetFight {
     private StreetFighter fighter1;
@@ -58,17 +58,23 @@ public class BetFight {
         System.out.println(GameLogic.centerText(50,"\nThe fight begins..."));
         GameLogic.pressAnything();
 
-        StreetFighter winner = simulateFight(fighter1, fighter2);
+        String winner = simulateFight(fighter1, fighter2);
 
-        System.out.print(GameLogic.centerText(50,"The winner is: " + winner.getName()));
-        if ((betChoice == 1 && winner == fighter1) || (betChoice == 2 && winner == fighter2)) {
-            System.out.print(GameLogic.centerText(50,"🎉 Congratulations! You've doubled your bet " + betAmount + " and earned " + (2 * betAmount) + " points!"));
-            GameLogic.player.setPlayerPoints(GameLogic.player.getPlayerPoints() + betAmount);
+        System.out.print(GameLogic.centerText(50,"The winner is: " + winner));
+        if(winner == "DRAW"){
+            System.out.print(GameLogic.centerText(50, "😐 It's a draw! You keep your bet of " + betAmount + " points."));
+            GameLogic.player.setPlayerPoints(betAmount);
             System.out.print(GameLogic.centerText(50,"Current Points: " + player.getPlayerPoints()));
         } else {
-            System.out.print(GameLogic.centerText(50,"😢 Tough luck! You lost " + betAmount + " points."));
-            GameLogic.player.setPlayerPoints(GameLogic.player.getPlayerPoints() - betAmount);
-            System.out.print(GameLogic.centerText(50,"Current Points: " + player.getPlayerPoints()));
+            if ((betChoice == 1 && winner == fighter1.getName()) || (betChoice == 2 && winner == fighter2.getName())) {
+                System.out.print(GameLogic.centerText(50,"🎉 Congratulations! You've doubled your bet " + betAmount + " and earned " + (2 * betAmount) + " points!"));
+                GameLogic.player.setPlayerPoints(GameLogic.player.getPlayerPoints() + betAmount);
+                System.out.print(GameLogic.centerText(50,"Current Points: " + player.getPlayerPoints()));
+            } else {
+                System.out.print(GameLogic.centerText(50,"😢 Tough luck! You lost " + betAmount + " points."));
+                GameLogic.player.setPlayerPoints(GameLogic.player.getPlayerPoints() - betAmount);
+                System.out.print(GameLogic.centerText(50,"Current Points: " + player.getPlayerPoints()));
+            }
         }
 
         GameLogic.pressAnything();
@@ -97,7 +103,7 @@ public class BetFight {
     }
 
 
-    private StreetFighter simulateFight(StreetFighter fighter1, StreetFighter fighter2) {
+    private String simulateFight(StreetFighter fighter1, StreetFighter fighter2) {
         int round = 1;
         int[] fighter1Skills = new int[3], fighter2Skills = new int[3];
         printStats();
@@ -120,15 +126,13 @@ public class BetFight {
                 String opponent2Attack = opponentAttacks[fighter2Skills[i]];
     
                 String line =  GameLogic.formatColumns(opponent1Attack, opponent2Attack, 30);
-                System.out.print(GameLogic.centerText(30, line));
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
             }
 
             System.out.println();
             // Display updated stats after each round
             printFight(fighter1Skills, fighter2Skills);
             printStats();
-
-            if(fighter1.getHp() <= 0 || fighter1.getHp() <= 0) break;
     
             System.out.println();
             GameLogic.pressAnything();
@@ -136,13 +140,17 @@ public class BetFight {
 
         // Determine the winner
         System.out.println("\n");
-        if (fighter1.getHp() > 0) {
-            return fighter1;
-        } else if (fighter2.getHp() > 0) {
-            return fighter2;
-        } else {
-            return null;
+        if(fighter1.getHp() == 0 && fighter2.getHp() == 0){
+            return "DRAW";
         }
+
+        if (fighter2.getHp() == 0) {
+            return fighter1.getName();
+        } else if (fighter1.getHp() == 0) {
+            return fighter2.getName();
+        }
+           
+        return null;
     }
 
     private int[] chooseSkill(StreetFighter fighter) {
@@ -197,9 +205,11 @@ public class BetFight {
                 System.out.print(GameLogic.centerText(50, opponentAttack));
                 drawAction(opponent1Choices[i], opponent2Choices[i]);
             }
+
             if(fighter1.getHp() <= 0 || fighter2.getHp() <= 0){
                 return;
             }
+
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         }
     }
@@ -286,7 +296,7 @@ public class BetFight {
     
     private void printStats(){
         System.out.println();
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ fighter1.getName() +"*" , "*"+ fighter2.getName()+"*", 30)));
+        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ fighter1.getName() +"*" , "*" + fighter2.getName()+"*", 30)));
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + fighter1.getHp() + "/" + fighter1.getMaxHp(), "HP       " + fighter2.getHp() + "/" + fighter2.getMaxHp(), 30)));
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + fighter1.getStamina() + "/" + fighter1.getMaxStamina(), "Stamina   " + fighter2.getStamina() + "/" + fighter2.getMaxStamina(), 30)));
         System.out.println();

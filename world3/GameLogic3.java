@@ -76,6 +76,8 @@ public class GameLogic3 {
             } else {
                 while (true) {
                     GameLogic.clearConsole();
+                    System.out.print(GameLogic.centerBox("MENU", 30));
+                    System.out.println();
                     System.out.print(GameLogic.centerText(50,"(1) Sparring Ring"));
                     System.out.print(GameLogic.centerText(50,"(2) Boxing Arsenal"));
                     System.out.print(GameLogic.centerText(50,"(3) Enter Tournament"));

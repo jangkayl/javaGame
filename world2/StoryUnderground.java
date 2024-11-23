@@ -37,10 +37,10 @@ public class StoryUnderground {
         GameLogic.clearConsole();
         System.out.print(GameLogic.centerBox(
                 "Coach Jakester: \"Alright, Kyle, welcome to the underbelly of the fighting world. Down here, \nyou can double your money if you bet smart." +
-                        "The fights are brutal — no rules, no limits. \nIt's all about who's willing to go farther.\"\n\n" +
+                        " The fights are brutal — no rules, no limits. \nIt's all about who's willing to go farther.\"\n\n" +
                         "( You watch as a cage fight unfolds, raw and ruthless, with the crowd roaring as every brutal hit lands. )\n\n" +
                         "Coach Jakester: \"And see that row of stalls over there? That's the black market. Need a boost? \nThey've got all kinds of... enhancers." +
-                        "Illegal, sure, but they'll give you an edge. \nGear, boosters, meds, anything you need to keep you in the game.\"\n\n" +
+                        " Illegal, sure, but they'll give you an edge. \nGear, boosters, meds, anything you need to keep you in the game.\"\n\n" +
                         "( You catch sight of shady vendors and dark exchanges, each promising an advantage for a price. )\n", 110));
         GameLogic.pressAnything();
     }
