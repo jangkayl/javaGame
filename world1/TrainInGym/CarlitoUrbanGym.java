@@ -49,7 +49,6 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
                 opponent.setHp(opponent.getMaxHp());
                 opponent.setStamina(opponent.getMaxStamina());
                 GameLogic.pressAnything();
-                UrbanStory.urbanTrainingLose(getPlayer().getName(), opponent.getName());
                 return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
@@ -60,7 +59,6 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
                 getPlayer().setStamina(getPlayer().getMaxStamina());
                 playerProgress.setRound(1);  
                 playerProgress.setShopStage(2);  
-                UrbanStory.urbanTraining8(getPlayer().getName());    
                 return;
             }
         }
@@ -75,7 +73,6 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
     }
     
     private void selectAttack() {
-        System.out.println();
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
         
         for (int i = 0; i < attack.length; i++) {
@@ -84,7 +81,7 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
         }
         
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
-        System.out.print("-> ");
+        System.out.print(GameLogic.centerText("", 97) + "-> ");
         String input = GameLogic.scan.nextLine();
     
         while (isValidCombo(input, getPlayer().getStamina()) != 0) {
@@ -118,7 +115,7 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
             String opponentAttack = attack[opponentChoices[i]][0];
 
             String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
         }
 
         System.out.println();

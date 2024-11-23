@@ -70,7 +70,7 @@ public class Player extends Boxer implements PlayerInterface {
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(40)));
         }
         
-        int input = GameLogic.readInt("-> ", 1, 3);
+        int input = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 3);
         System.out.print(GameLogic.centerBox("You chose " + traits[input-1] + "!",50));
         if(input == 1){
             int newHp = getMaxHp() + (int)Math.floor(getMaxHp() * 0.5);

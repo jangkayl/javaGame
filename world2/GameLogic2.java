@@ -19,9 +19,9 @@ public class GameLogic2 {
             shop = new Shop(player, playerProgress);
             printMenu();
             if(playerProgress.getShopStage() > 3){
-                input = GameLogic.readInt("-> ", 0, 4);
+                input = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 4);
             } else {
-                input = GameLogic.readInt("-> ", 0, 3);
+                input = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 3);
             }
             if(input == 0){
                 GameLogic.isRunning = false;
@@ -63,8 +63,8 @@ public class GameLogic2 {
                 StoryUnderground.printUnderground();
                 System.out.println("\n");
                 System.out.print(GameLogic.centerText(50,"Are you ready to start your journey?"));
-                System.out.print(GameLogic.centerText(50,"(1) Yes\n(2) No"));
-                int choice2 = GameLogic.readInt("-> ", 1, 2);
+                System.out.print(GameLogic.centerText(50,"(1) Yes\n(2) No "));
+                int choice2 = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
                 if(choice2 == 2){
                     return;
                 }
@@ -81,7 +81,7 @@ public class GameLogic2 {
                     System.out.print(GameLogic.centerText(50,"(1) Bet on Matches"));
                     System.out.print(GameLogic.centerText(50,"(2) Black Market"));
                     System.out.print(GameLogic.centerText(50,"(3) Go back"));
-                    int choice = GameLogic.readInt("-> ", 0, 3);
+                    int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 3);
                     if(choice == 0){
                         if(player.getStage() == 7){
                             TrainWithJakester.teachDirtyBoxingMoves();
@@ -110,7 +110,7 @@ public class GameLogic2 {
             System.out.print(GameLogic.centerText(50,"(2) Spar - Earn points and gain stats"));
             System.out.print(GameLogic.centerText(50,"(3) Enter Tournament"));
             System.out.print(GameLogic.centerText(50,"(4) Go back"));
-            int choice = GameLogic.readInt("-> ", 1, 4);
+            int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4);
             if(choice == 1){
                 BoxerHints.teachHints();
             } else if(choice == 2){

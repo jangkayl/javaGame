@@ -16,11 +16,11 @@ public class TrainWithFred {
         System.out.print(GameLogic.centerBox(prompt, 130));
         System.out.println();
         
-        prompt = "\"Flow State - 100% Dodge Chance, blocks all damage next turn.\"" + 
+        prompt = "\"Flow State - 100% Dodge Chance, blocks all damage next 3 turns.\"" + 
                 "\n*Best used when you're on defensive." + 
-                "\n\n\"Adrenaline Rush - Boost your Crit Chance by 100% next turn.\"" +
+                "\n\n\"Adrenaline Rush - Boost your Crit Chance by 100% next 3 turns.\"" +
                 "\n*Perfect for finishing off your opponent." + 
-                "\n\n\"Sixth Sense - Reveals the opponent's next 3 moves.\"" +
+                "\n\n\"Sixth Sense - Reveals the opponent's next 3 moves for next 2 turns.\"" +
                 "\n*Plan ahead and conserve stamina.";
         System.out.print(GameLogic.centerBox(prompt, 130));
         System.out.println();

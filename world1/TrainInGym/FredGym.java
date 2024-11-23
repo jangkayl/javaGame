@@ -65,7 +65,7 @@ public class FredGym extends PlayerVsOpponent2{
                         "5. Crit Multiplier - Increase by +5%\n" +
                         "\nEnter the number of the stat you'd like to upgrade: "));
 
-        int choice = GameLogic.readInt("", 1, 5);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 5);
         addStats(choice);
         System.out.println(GameLogic.centerBox("Fred: \"Stats added! Remember, you can train up to 5 times!\"",70));
         GameLogic.printCenteredSeparator(50);

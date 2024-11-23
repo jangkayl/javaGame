@@ -145,7 +145,17 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         opponentValid(opponentChoices);
 
         // Player selects a move
-        System.out.println(GameLogic.centerText(30, ("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~")));
+        if(playerPassive == "Sixth Sense"){
+            System.out.print(GameLogic.centerText(30, ("~ ~ I sense a pattern forming... ~ ~")));
+            for(int i = 0; i < 3; i++){
+                System.out.print(GameLogic.centerText(20, opponentAttacks[opponentChoices[i]]));
+            }
+            System.out.println();
+        } else {
+            System.out.println(GameLogic.centerText(30, ("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~")));
+        }
+
+ 
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
 
         for (int i = 0; i < attackOption.length; i++) {
@@ -171,7 +181,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
-        System.out.print("-> ");
+        System.out.print(GameLogic.centerText("", 97) + "-> ");
         while (true) {
             input = GameLogic.scan.nextLine();
 
@@ -206,6 +216,12 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             if (input.equals("6") || input.equals("7") || input.equals("8")) {
                 if(playerHasPassive){
                     playerActivatePassive(input);
+                    if(playerPassive == "Sixth Sense"){
+                        System.out.println(GameLogic.centerText(30, ("~ ~ I sense a pattern forming... ~ ~")));
+                        for(int i = 0; i < 3; i++){
+                            System.out.print(GameLogic.centerText(20, opponentAttacks[opponentChoices[i]]));
+                        }
+                    }
                     continue;
                 } else if(playerPassive != "") {
                     String message = "Your passive skill, " + playerPassive + ", is already active! You must attack first before activating it again.";
@@ -250,7 +266,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             String opponentAttack = opponentAttacks[opponentChoices[i]];
 
             String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
         }
 
         System.out.println();
@@ -308,10 +324,6 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
                 playerPassiveSkills.getSkillByName(playerPassive).setRoundActive(3);
                 playerPassive = "";
             }
-        }
-        System.out.println("Player passive: " + playerPassive);
-        if(playerPassive != ""){
-            System.out.println("Player rounds active " + playerPassiveSkills.getSkillByName(playerPassive).getRoundActive());
         }
     }
 
@@ -504,25 +516,27 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
     }
 
     private void counterInfos(String name){
-        // GameLogic.clearConsole();
-        // if(opponent.getName() == "Joaquin Perez"){
-        //     GameLogic.printHeading("\tJoaquin Perez Combo Counter:");
-        //     System.out.println("(1) Right Uppercut < Block");
-        //     System.out.println("(2) Left Hook < Jab");
-        //     System.out.println("(3) Right Cross < Uppercut");
-        //     System.out.println();
-        //     System.out.println("(4) Elbow Strike < Block");
-        //     System.out.println("(5) Head Butt < Hook");
-        //     System.out.println("(6) Low Blow < Uppercut");
-        // } else if(opponent.getName() == "Lando Pitik"){
-        //     GameLogic.printHeading("\tLando Pitik Combo Counter:");
-        //     System.out.println("(1) Cross < Uppercut");
-        //     System.out.println("(2) Rear Uppercut < Block");
-        //     System.out.println("(3) Lead Hook < Jab");
-        //     System.out.println();
-        //     System.out.println("(4) Elbow Strike < Block");
-        //     System.out.println("(5) Head Butt < Hook");
-        //     System.out.println("(6) Low Blow < Uppercut");
+        GameLogic.clearConsole();
+        if(opponent.getName() == "Junjun Arcega"){
+            System.out.print(GameLogic.centerBox("Junjun Arcega Combo Counter:",50));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(1) Right Uppercut < Block"));
+            System.out.print(GameLogic.centerText(50,"(2) Left Hook < Jab"));
+            System.out.print(GameLogic.centerText(50,"(3) Right Cross < Uppercut"));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(4) Elbow Strike < Block"));
+            System.out.print(GameLogic.centerText(50,"(5) Head Butt < Hook"));
+            System.out.print(GameLogic.centerText(50,"(6) Low Blow < Uppercut"));
+        } else if(opponent.getName() == "Kargado Magsilos"){
+            System.out.print(GameLogic.centerBox("Kargado Magsilos Combo Counter:",50));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(1) Cross < Uppercut"));
+            System.out.print(GameLogic.centerText(50,"(2) Rear Uppercut < Block"));
+            System.out.print(GameLogic.centerText(50,"(3) Lead Hook < Jab"));
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"(4) Elbow Strike < Block"));
+            System.out.print(GameLogic.centerText(50,"(5) Head Butt < Hook"));
+            System.out.print(GameLogic.centerText(50,"(6) Low Blow < Uppercut"));
         // } else if(opponent.getName() == "Julio Navarro"){
         //     GameLogic.printHeading("\tJulio Navarro Combo Counter:");
         //     System.out.println("(1) Right Uppercut < Block");
@@ -550,6 +564,6 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         //     System.out.println("(4) Elbow Strike < Block");
         //     System.out.println("(5) Head Butt < Hook");
         //     System.out.println("(6) Low Blow < Uppercut");
-        // }
+        }
     }
 }

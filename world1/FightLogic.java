@@ -100,7 +100,6 @@ public abstract class FightLogic implements FightLogicInterface{
         int[] choices = new int[3];
         String input = "";
 
-        System.out.println();
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
     
         for (int i = 0; i < attackOption.length; i++) {
@@ -121,7 +120,7 @@ public abstract class FightLogic implements FightLogicInterface{
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
-        System.out.print("-> ");
+        System.out.print(GameLogic.centerText("", 97) + "-> ");
     
         while (true) {
             input = GameLogic.scan.nextLine();
@@ -200,7 +199,7 @@ public abstract class FightLogic implements FightLogicInterface{
             String opponentAttack = opponentAttacks[opponentChoices[i]];
 
             String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
         }
 
         System.out.println();
@@ -428,6 +427,6 @@ public abstract class FightLogic implements FightLogicInterface{
             System.out.print(GameLogic.centerText(50,"(1) Right Uppercut < Block"));
             System.out.print(GameLogic.centerText(50,"(2) Left Hook < Jab"));
             System.out.print(GameLogic.centerText(50,"(3) Right Cross < Uppercut"));
-        }
+        } 
     }
 }

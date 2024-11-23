@@ -18,9 +18,9 @@ public class GameLogic3 {
             shop = new Shop(player, playerProgress);
             printMenu();
             if(playerProgress.getShopStage() > 3){
-                input = GameLogic.readInt("-> ", 0, 4);
+                input = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 4);
             } else {
-                input = GameLogic.readInt("-> ", 0, 3);
+                input = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 3);
             }
             if(input == 0){
                 GameLogic.isRunning = false;
@@ -41,13 +41,13 @@ public class GameLogic3 {
     static void printMenu(){
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
-        GameLogic.printHeading(GameLogic.centerText("MENU", 30));
-        System.out.println("Choose an action:");
-        GameLogic.printSeparator(20);
-        System.out.println("(0) Exit Game");
-        System.out.println("(1) Continue on your journey");
-        System.out.println("(2) Check your Stats");
-        System.out.println("(3) Inventory");
+        System.out.print(GameLogic.centerBox("MENU", 30));
+        System.out.println();
+        System.out.print(GameLogic.centerText(50,"Choose an action:"));
+        System.out.print(GameLogic.centerText(50,"(0) Exit Game"));
+        System.out.print(GameLogic.centerText(50,"(1) Continue on your journey"));
+        System.out.print(GameLogic.centerText(50,"(2) Check your Stats"));
+        System.out.print(GameLogic.centerText(50,"(3) Inventory"));
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
     }
@@ -60,16 +60,13 @@ public class GameLogic3 {
         GameLogic.clearConsole();
         if(player.getCurrentWorld() == 2) {
             if(player.getStage() == 12){
-                GameLogic.printSeparator(40);
                 String[] worlds = player.getWorlds();
-                GameLogic.printHeading("   Welcome to the " + worlds[player.getCurrentWorld()]);
-                GameLogic.printSeparator(40);
+                System.out.print(GameLogic.centerBox("Welcome to the " + worlds[player.getCurrentWorld()],100));
                 StoryChampsArena.printChampsArena();
-                GameLogic.printSeparator(50);
-                System.out.println();
-                System.out.println("Are you ready to start your journey?");
-                System.out.println("(1) Yes\n(2) No");
-                int choice2 = GameLogic.readInt("-> ", 1, 2);
+                System.out.println("\n");
+                System.out.print(GameLogic.centerText(50,"Are you ready to start your journey?"));
+                System.out.print(GameLogic.centerText(50,"(1) Yes\n(2) No "));
+                int choice2 = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
                 if(choice2 == 2){
                     return;
                 }
@@ -80,11 +77,11 @@ public class GameLogic3 {
             } else {
                 while (true) {
                     GameLogic.clearConsole();
-                    System.out.println("(1) Sparring Ring");
-                    System.out.println("(2) Boxing Arsenal");
-                    System.out.println("(3) Enter Tournament");
-                    System.out.println("(4) Go back");
-                    int choice = GameLogic.readInt("-> ", 1, 4);
+                    System.out.print(GameLogic.centerText(50,"(1) Sparring Ring"));
+                    System.out.print(GameLogic.centerText(50,"(2) Boxing Arsenal"));
+                    System.out.print(GameLogic.centerText(50,"(3) Enter Tournament"));
+                    System.out.print(GameLogic.centerText(50,"(4) Go back"));
+                    int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4);
                     if(choice == 1){
                         if(player.getStage() == 13)
                             trainWithFred.teachPassiveSkills();

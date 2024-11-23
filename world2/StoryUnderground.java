@@ -49,26 +49,26 @@ public class StoryUnderground {
         Tournament.showOpStats(opponent);
         switch (opponent.getName()) {
             case "Julio Navarro":
-                System.out.println("\n\t\t🔥Backstory: Introducing Julio \"The Reaper\" Navarro, a ruthless fighter from the streets of Manila." +
-                        "\n\t\tRaised in the underworld and hardened by gang violence, Julio earned his reputation through brutal street brawls." +
-                        "\n\t\tKnown for his dirty tactics and no-mercy approach, he's earned the nickname 'The Reaper' for his devastating fights." +
-                        "\n\t\tNow, he steps into the underground tournament, fighting not just for money, but for vengeance and the chance to rise above his past!" +
-                        "\n\t\tWith every match, Julio fights to prove his strength and claim the top spot in the world of dirty boxing!");
+                System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Introducing Julio \"The Reaper\" Navarro, a ruthless fighter from the streets of Manila." +
+                        "\nRaised in the underworld and hardened by gang violence, Julio earned his reputation through brutal street brawls." +
+                        "\nKnown for his dirty tactics and no-mercy approach, he's earned the nickname 'The Reaper' for his devastating fights." +
+                        "\nNow, he steps into the underground tournament, fighting not just for money, but for vengeance and the chance to rise above his past!" +
+                        "\nWith every match, Julio fights to prove his strength and claim the top spot in the world of dirty boxing!"));
                 GameLogic.pressAnything();
                 break;
             case "Raul Villanueva":
-                System.out.println("\n\t\t🔥Backstory: Meet Raul \"The Bullseye\" Villanueva, a sharpshooter in the underground boxing scene." +
-                        "\n\t\tRaised in the rough neighborhoods of Cebu, Raul earned his moniker for his deadly precision and accuracy in the ring." +
-                        "\n\t\tA former marksman in the military, he brings a calm, calculated approach to his brutal fights, targeting his opponent’s weaknesses." +
-                        "\n\t\tRaul enters the tournament with one goal: to prove that his focus and discipline can take him to the top, no matter the cost!");
+                System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Meet Raul \"The Bullseye\" Villanueva, a sharpshooter in the underground boxing scene." +
+                        "\nRaised in the rough neighborhoods of Cebu, Raul earned his moniker for his deadly precision and accuracy in the ring." +
+                        "\nA former marksman in the military, he brings a calm, calculated approach to his brutal fights, targeting his opponent’s weaknesses." +
+                        "\nRaul enters the tournament with one goal: to prove that his focus and discipline can take him to the top, no matter the cost!"));
                 GameLogic.pressAnything();
                 break;
             case "Ralfo Salvahez":
-                System.out.println("\n\t\t🔥Backstory: Ralfo \"The Ghost\" Salvahez, a feared and infamous fighter in the underground boxing world, is a man with a dark past." +
-                        "\n\t\tOnce a champion in his prime, Ralfo abandoned his family, leaving his young son behind to pursue glory in the ring." +
-                        "\n\t\tYears of betrayal and silence have fueled a burning resentment in the child he left behind — now a rising star in the same brutal world." +
-                        "\n\t\tKnown as \"The Ghost\" for his silent, elusive fighting style, Ralfo’s return to the ring is not just to fight, but to face the consequences of his past." +
-                        "\n\t\tThe child, now grown, has risen through the ranks, and the ultimate showdown awaits: father versus child, in a fight that will either redeem or destroy them both!");
+                System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Ralfo \"The Ghost\" Salvahez, a feared and infamous fighter in the underground boxing world, is a man with a dark past." +
+                        "\nOnce a champion in his prime, Ralfo abandoned his family, leaving his young son behind to pursue glory in the ring." +
+                        "\nYears of betrayal and silence have fueled a burning resentment in the child he left behind — now a rising star in the same brutal world." +
+                        "\nKnown as \"The Ghost\" for his silent, elusive fighting style, Ralfo’s return to the ring is not just to fight, but to face the consequences of his past." +
+                        "\nThe child, now grown, has risen through the ranks, and the ultimate showdown awaits: father versus child, in a fight that will either redeem or destroy them both!"));
                 GameLogic.pressAnything();
                 break;
             default:

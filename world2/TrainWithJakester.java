@@ -36,11 +36,12 @@ public class TrainWithJakester {
     }
 
     static int punch(){
+        System.out.println();
         System.out.print(GameLogic.centerText(50,"Select the counter punch:"));
         for(int i = 1; i <= 3; i++){
-            System.out.print(GameLogic.centerText(50,"\t(" + i + ") \"" + dirtyMoves[i-1] + "\""));
+            System.out.print(GameLogic.centerText(50,"(" + i + ") \"" + dirtyMoves[i-1] + "\""));
         }
-        int choice = GameLogic.readInt("-> ", 1, 3);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 3);
         return choice;
     }
 
@@ -76,11 +77,12 @@ public class TrainWithJakester {
             int randomNum = 0 + (int)(Math.random() * ((2 - 0) + 1));
             System.out.println();
             if(randomNum == 2){
-                System.out.print(GameLogic.centerText(50,"( Jakester " + array[randomNum] + "s )"));
+                System.out.println(GameLogic.centerBox("( Jakester " + array[randomNum] + "s )", 50));
             } else {
-                System.out.print(GameLogic.centerText(50,"( Jakester throws a " + array[randomNum] + " ) "));
+                System.out.println(GameLogic.centerBox("( Jakester throws a " + array[randomNum] + " ) ", 50));
             }
 
+            System.out.println();
             System.out.print(GameLogic.centerText(50,"Success: " + success + " / 5"));
             choice = punch();
             boolean countered = isCounter(randomNum+1, choice);
@@ -107,7 +109,7 @@ public class TrainWithJakester {
         System.out.print(GameLogic.centerBox("Coach Jakester: \"Listen up, " + name + "! In the ring, your opponent's first move reveals their strategy. \nLet me show you how to read them.\"",100));
         System.out.println();
         System.out.print(GameLogic.centerText(50,"(1) Check Hints"));
-        choice = GameLogic.readInt("-> ", 1, 1);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 1);
         System.out.println();
         if(choice == 1){
             BoxerHints.teachHints();

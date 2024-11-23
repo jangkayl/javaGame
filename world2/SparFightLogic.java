@@ -165,7 +165,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
-        System.out.print("-> ");
+        System.out.print(GameLogic.centerText("", 97) + "-> ");
         while (true) {
             input = GameLogic.scan.nextLine();
 
@@ -242,7 +242,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             String opponentAttack = opponentAttacks[opponentChoices[i]];
 
             String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
         }
 
         System.out.println();

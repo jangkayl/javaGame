@@ -1,17 +1,9 @@
 package world1.database;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import world1.*;
+import world1.Inventory.Item;
 
-import world1.GameLogic;
-import world1.Inventory;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.Shop;
-import world1.Inventory.Item; 
+import java.io.*;
 
 public class GameDataManager {
     private Player player;
@@ -35,6 +27,11 @@ public class GameDataManager {
 
     public void setSlots(Item[] slots){
         this.slots = slots;
+    }
+
+    public void deleteAllInventoryItems(){
+        inventoryItems = new Item[0];  
+        slots = new Item[0];
     }
 
     public void loadGameData(String fileName) {

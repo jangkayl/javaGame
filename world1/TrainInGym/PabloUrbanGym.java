@@ -9,7 +9,7 @@ public class PabloUrbanGym extends PlayerVsOpponent2{
     private static PlayerProgress playerProgress = GameLogic.playerProgress;
     private static Player player;
     private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Jab to the Body", "Lead Hook", "Rear Uppercut"};
-    private static StreetFighter opponent = new StreetFighter("Pablo Martínez", 130, 70, 0.2, 2, .30, 2);
+    private static StreetFighter opponent = new StreetFighter("Pablo Martinez", 130, 70, 0.2, 2, .30, 2);
     
     public PabloUrbanGym(Player player) {
         super(player, opponentAttacks, opponent);

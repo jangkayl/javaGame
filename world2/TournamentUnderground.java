@@ -6,6 +6,7 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Tournament;
+import world1.database.GameDataManager;
 import world2.TournaUnderFight.NavarroTourna;
 import world2.TournaUnderFight.RaulTourna;
 import world2.TournaUnderFight.SalvahezTourna;
@@ -17,6 +18,7 @@ public class TournamentUnderground {
     private static String[] opponents = {"The Reaper", "The Bullseye", "The Ghost"};
     private static PlayerProgress playerProgress = GameLogic.playerProgress;
     private static Inventory inventory = GameLogic2.inventory;
+    private static GameDataManager gameDataManager = GameLogic.gameDataManager;
 
     public void setOpponent(StreetFighter enemy){
         opponent = enemy;
@@ -131,7 +133,7 @@ public class TournamentUnderground {
             }
             case 2 -> {
                 // The Ghost
-                opponent = new StreetFighter("Ralfo Salvahez", 350, 140, 0.5, 2, 0.35, 5);
+                opponent = new StreetFighter("Ralfo Salvahez", 330, 130, 0.5, 2, 0.35, 5);
                 opponent.setPlayerOpponent(player);
                 StoryUnderground.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new SalvahezTourna(player, opponent));
@@ -151,7 +153,7 @@ public class TournamentUnderground {
         System.out.println();
         System.out.print(GameLogic.centerText(80,"Enter your choice: "));
         
-        int choice = GameLogic.readInt("", 0, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 2);
         if (choice == 0) {
             return true;  
         } else if(choice == 1){
@@ -184,16 +186,14 @@ public class TournamentUnderground {
 
     private static boolean offerRematch() {
         System.out.println();
-        System.out.print("\t\t\t\t\t\t");
-        GameLogic.printSeparator(100);
+        System.out.print(GameLogic.centerBox("You lost your previous match. Would you like to:", 55));
         System.out.println();
-        System.out.print(GameLogic.centerText(80, "You lost your previous match. Would you like to:"));
-        System.out.print(GameLogic.centerText(80,"1. Try the tournament again?"));
-        System.out.print(GameLogic.centerText(80,"2. Boost your stats by sparring more!"));
+        System.out.print(GameLogic.centerText(20,"1. Try the tournament again?"));
+        System.out.print(GameLogic.centerText(20,"2. Boost your stats by sparring more!"));
         System.out.println();
-        System.out.print(GameLogic.centerText(80, "Enter your choice (1 or 2): "));
+        System.out.print(GameLogic.centerText(20, "Enter your choice (1 or 2): "));
         
-        int choice = GameLogic.readInt("", 1, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if (choice == 1) {
             playerProgress.setPlayerWins(0);
             playerProgress.setOpponentWins(0);
@@ -206,8 +206,8 @@ public class TournamentUnderground {
 
     public void printStanding(){
         System.out.println("\n");
-        System.out.print(GameLogic.centerBox(" ~ ~ ~ BEST OF 3 ~ ~ ~\n" +
-                "      " + player.getName() + " - " + playerProgress.getPlayerWins() + "   ||   " +
+        System.out.print(GameLogic.centerBox("🤼 BEST OF 3 🤼\n\n" +
+                player.getName() + " - " + playerProgress.getPlayerWins() + "\n🤜💥🤛\n" +
                 opponent.getName() + " - " + playerProgress.getOpponentWins(), 50));
         GameLogic.pressAnything();
     }
@@ -233,7 +233,7 @@ public class TournamentUnderground {
         System.out.print(GameLogic.centerText(50, "Choose your path:"));
         System.out.print(GameLogic.centerText(50, "(1) Run and escape the raid."));
         System.out.print(GameLogic.centerText(50, "(2) Stay and hear your father's confession, then fight the police."));
-        int choice = GameLogic.readInt("-> ", 1, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if(choice == 1){
             runAndEscape();
         } else {
@@ -342,6 +342,8 @@ public class TournamentUnderground {
 
         player.setMaxHp(player.getMaxHp() - (int)(player.getMaxHp() * 0.10));
         player.setHp(player.getMaxHp());
+
+        inventory.restoreToNull();
     }
 
     private static void runAndEscape() {

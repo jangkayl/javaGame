@@ -278,7 +278,13 @@ public class Inventory implements InvetoryInterface{
     }
 
     public void deleteAllInventoryItems(){
-        inventoryItems = new Item[MAX_ITEMS];  
+        inventoryItems = new Item[0];
+        slot = new Item[0];
+        itemCount = 0;
+    }
+
+    public void restoreToNull(){
+        inventoryItems = new Item[MAX_ITEMS];
         slot = new Item[5];
     }
 

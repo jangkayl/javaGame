@@ -22,17 +22,18 @@ public class Tournament {
     public static void attemptTournament(int playerStage) {
         GameLogic.clearConsole();
         if (playerStage < 3) {
-            System.out.println("⚔️  Tournament Entry Attempt  ⚔️");
-            GameLogic.printSeparator(40);
-            System.out.println("You step forward, ready to face the toughest challengers...");
+            System.out.print(GameLogic.centerBox(
+                    "⚔️ Tournament Entry Attempt ⚔️", 100));
             System.out.println();
-            GameLogic.printSeparator(40);
-            System.out.println("[ But the tournament official stops with a grin ]");
-            System.out.println("Gatekeeper: \"Hold it right there! You're not ready for this arena yet. Step into the ring now, and one solid hit");
-            System.out.println("\t\t\tHead back to the Train in Gym, build your skills and get stronger will have you on the floor before you even know it!");
-            System.out.println("\t\t\tGo back to Coach Fred at the gym, work those muscles, and test your mettle in sparring. No pulling punches—this is where the real training begins!\"");
-            System.out.println();
-            System.out.println("🏋️ Tip: Train hard, rank up, and grow stronger to unlock the tournament! 🏆");
+            System.out.print(GameLogic.centerText(20, 
+                                            "You step forward, ready to face the toughest challengers...\n\n" +
+                                            "[ But the tournament official stops with a grin ]\n" +
+                                            "\nGatekeeper: \"Hold it right there! You're not ready for this arena yet. \nStep into the ring now, and one solid hit" +
+                                            "will have you on the floor before you even know it!\"\n" +
+                                            "\n\"Head back to the Train in Gym, build your skills and get stronger.\n" +
+                                            "Go back to Coach Fred at the gym, work those muscles, and test your mettle in sparring.\n" +
+                                            "No pulling punches—this is where the real training begins!\"\n\n" +
+                                            "🏋️Tip: Train hard, rank up, and grow stronger to unlock the tournament!"));
             GameLogic.pressAnything();
         } else {
             startTournament();
@@ -148,16 +149,14 @@ public class Tournament {
 
     private static boolean offerRematch() {
         System.out.println();
-        System.out.print("\t\t\t\t\t\t");
-        GameLogic.printSeparator(100);
+        System.out.print(GameLogic.centerBox("You lost your previous match. Would you like to:", 55));
         System.out.println();
-        System.out.print(GameLogic.centerText(80, "You lost your previous match. Would you like to:"));
         System.out.print(GameLogic.centerText(80, "1. Try the tournament again?"));
         System.out.print(GameLogic.centerText(80, "2. Train with Fred or your coach to sharpen your skills and gain more stats!"));
         System.out.println();
         System.out.print(GameLogic.centerText(80, "Enter your choice (1 or 2): "));
         
-        int choice = GameLogic.readInt("", 1, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if (choice == 1) {
             playerProgress.setPlayerWins(0);
             playerProgress.setOpponentWins(0);
@@ -208,24 +207,22 @@ public class Tournament {
     
     public static void showOpStats(StreetFighter opponent){
         System.out.println("\n");
-        System.out.print(GameLogic.centerText(" ", 50));
-        System.out.println(GameLogic.centerText(opponent.getName(), 50));
-        System.out.print(GameLogic.centerText(" ", 50));
-        System.out.println(GameLogic.centerText("* " + opponent.getRank() + " *", 50));
+        System.out.print(GameLogic.centerText(20, opponent.getName()));
+        System.out.print(GameLogic.centerText(20, "* " + opponent.getRank() + " *"));
         System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
-        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.print(GameLogic.centerText(" ", 80));
         System.out.println(GameLogic.formatColumns(" HP:",opponent.getHp() + " / " + opponent.getMaxHp(), 30));
         System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
-        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.print(GameLogic.centerText(" ", 80));
         System.out.println(GameLogic.formatColumns(" Stamina:",opponent.getStamina() + " / " + opponent.getMaxStamina(), 30));
         System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
-        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.print(GameLogic.centerText(" ", 80));
         System.out.println(GameLogic.formatColumns(" Critical Chance:", GameLogic.df.format(opponent.getCritChance() * 100) + "%", 30));
         System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
-        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.print(GameLogic.centerText(" ", 80));
         System.out.println(GameLogic.formatColumns(" Critical Multiplier:", GameLogic.df.format(opponent.getCritMultiplier()) + "x", 30));
         System.out.print(GameLogic.centerText(55, GameLogic.printCenteredSeparator(50)));
-        System.out.print(GameLogic.centerText(" ", 55));
+        System.out.print(GameLogic.centerText(" ", 80));
         System.out.println(GameLogic.formatColumns(" Dodge Chance:", GameLogic.df.format(opponent.getDodgeChance() * 100) + "%", 30));
     }
 
@@ -247,7 +244,7 @@ public class Tournament {
         System.out.println();
         System.out.print(GameLogic.centerText(80,"Enter your choice: "));
         
-        int choice = GameLogic.readInt("", 0, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 2);
         if (choice == 0) {
             if(playerProgress.getOpponentWins() == 3 && player.getIsLose() == false){
                 resetMatchScores();
@@ -268,8 +265,8 @@ public class Tournament {
 
     public void printStanding(){
         System.out.println("\n");
-        System.out.print(GameLogic.centerBox(" ~ ~ ~ BEST OF 3 ~ ~ ~\n" +
-                "      " + player.getName() + " - " + playerProgress.getPlayerWins() + "   ||   " +
+        System.out.print(GameLogic.centerBox("🤼 BEST OF 3 🤼\n\n" +
+                player.getName() + " - " + playerProgress.getPlayerWins() + "\n🤜💥🤛\n" +
                 opponent.getName() + " - " + playerProgress.getOpponentWins(), 50));
         GameLogic.pressAnything();
     }

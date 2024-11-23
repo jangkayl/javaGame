@@ -12,9 +12,9 @@ public class PassiveSkillRegistry {
     }
 
     private void initializeSkills() {
-        registerSkill(new PassiveSkill("Flow State", "100% Dodge Chance, blocks all damage next turn.", 3));
-        registerSkill(new PassiveSkill("Adrenaline Rush", "Boost your Crit Chance by 100% next turn.", 3));
-        registerSkill(new PassiveSkill("Sixth Sense", "Reveals the opponent's next 3 moves.", 3));
+        registerSkill(new PassiveSkill("Flow State", "100% Dodge Chance, blocks all damage next 3 turns.", 3));
+        registerSkill(new PassiveSkill("Adrenaline Rush", "Boost your Crit Chance by 100% next 3 turns.", 3));
+        registerSkill(new PassiveSkill("Sixth Sense", "Reveals the opponent's next 3 moves for next 2 turns.", 2));
     }
 
     public void registerSkill(PassiveSkill passiveSkill) {

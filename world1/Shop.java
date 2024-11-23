@@ -132,6 +132,7 @@ public class Shop implements ShopInterface{
     }
 
     public void showShop(boolean isTraining) {
+        GameLogic.clearConsole();
         while (true) {
             int choice = -1;
             boolean isSold = false;
@@ -179,14 +180,14 @@ public class Shop implements ShopInterface{
     
             // Training check before entering purchase loop
             if (playerProgress.getShopStage() < 1 && isTraining) {
-                choice = GameLogic.readInt("-> ", 0, 8);
+                choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 8);
                 UrbanStory.urbanTraining7();
                 return;
             }
     
             // Purchase loop
             while (!isSold) {
-                choice = GameLogic.readInt("-> ", 0, 4);
+                choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 4);
 
                 // If player is in World2
                 if(player.getCurrentWorld() == 1 && choice != 0){
@@ -200,7 +201,7 @@ public class Shop implements ShopInterface{
                 }
     
                 if (soldChecker(choice)) {
-                    System.out.print(GameLogic.centerText(50,items[choice - 1].name + " is already sold. Choose another item."));
+                    System.out.println(GameLogic.centerBox(items[choice - 1].name + " is already sold. Choose another item.",100));
                 } else if (notEnoughPoints(choice)) {
                     System.out.print(GameLogic.centerBox("You don't have enough points to buy " + items[choice - 1].name + ". \nPlease choose another item or earn more points.",100));
                     System.out.println();

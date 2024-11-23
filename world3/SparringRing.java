@@ -51,14 +51,14 @@ public class SparringRing {
     
         while (true) {
             world1.Tournament.showOpStats(opponent);
+            System.out.println();
+            System.out.print(GameLogic.centerText(50,"Select an option: "));
+            System.out.print(GameLogic.centerText(50,"(1) Fight now"));
+            System.out.print(GameLogic.centerText(50,"(2) Check your Stats"));
+            System.out.print(GameLogic.centerText(50,"(3) Change Opponent Stats"));
+            System.out.print(GameLogic.centerText(50,"(4) Go Back"));
     
-            System.out.println("Select an option: ");
-            System.out.println("\t\t(1) Fight now");
-            System.out.println("\t\t(2) Check your Stats");
-            System.out.println("\t\t(3) Change Opponent & Stats");
-            System.out.println("\t\t(4) Go Back");
-    
-            choice = GameLogic.readInt("-> ", 1, 4); 
+            choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4); 
     
             if (choice == 1) {
                 playerProgress.setRound(1);
@@ -76,7 +76,7 @@ public class SparringRing {
                     magsilos = new MagsilosSparring(player, opponent);
                     arcega = null;
                 }
-                System.out.println("New opponent generated!");
+                System.out.println(GameLogic.centerBox("New opponent generated!", 50));
             } else if(choice == 4){
                 return;
             }
@@ -91,7 +91,7 @@ public class SparringRing {
     
     // Random Stats for Opponent
     private StreetFighter generateRandomOpponent(String name) {
-        int hp = rand.nextInt(51) + player.getMaxHp() - 100; // HP between playersMaxHp
+        int hp = rand.nextInt(51) + player.getMaxHp() - 50; // HP between playersMaxHp
         int stamina = rand.nextInt(21) + player.getMaxStamina() + 10; // Stamina between playersMaxStamina
         double critChance = 0.3 + (rand.nextDouble() * 0.3); // Crit chance between 0.3 and 0.6
         double critMulti = 2 + (rand.nextDouble() * 1); // Crit multi between 2 and 3

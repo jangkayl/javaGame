@@ -25,20 +25,19 @@ addStats=0
 
 
 
-
 [player]
 name=Kyle
-hp=209
-maxHp=209
+hp=241
+maxHp=241
 stamina=70
 maxStamina=70
-critChance=0.65
+critChance=0.7000000000000001
 critMultiplier=2.0
 dodgeChance=0.345
-playerPoints=175
+playerPoints=375
 currentWorld=2
 currentRank=5
-stage=12
+stage=14
 isLose=false
 
 [progress]
@@ -47,7 +46,7 @@ shopStage=6
 done=2
 playerWins=0
 opponentWins=0
-addStats=0
+addStats=2
 
 [inventory]
 HEAD=4

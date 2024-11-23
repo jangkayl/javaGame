@@ -27,7 +27,7 @@ public class GameLogic{
     public static Shop shop = new Shop(player, playerProgress);
     public static boolean isRunning;
     public static GameDatabase gameData = new GameDatabase();
-    static GameDataManager gameDataManager = new GameDataManager();
+    public static GameDataManager gameDataManager = new GameDataManager();
 
     // Read user input
     public static int readInt(String prompt, int min, int max){
@@ -101,7 +101,7 @@ public class GameLogic{
     }
 
     public static String rightBox(String text, int boxWidth) {
-        int terminalWidth = 150;
+        int terminalWidth = 200;
 
         int boxPadding = terminalWidth - boxWidth;
         String boxPad = new String(new char[boxPadding]).replace("\0", " ");
@@ -127,7 +127,7 @@ public class GameLogic{
 
     public static String centerBox(String text, int width) {
         int boxWidth = width;
-        int terminalWidth = 150;
+        int terminalWidth = 200;
 
         int boxPadding = (terminalWidth - boxWidth) / 2;
         String boxPad = new String(new char[boxPadding]).replace("\0", " ");
@@ -169,7 +169,7 @@ public class GameLogic{
 	}
 
     public static String centerText(int size, String text) {
-        int terminalWidth = 150;
+        int terminalWidth = 200;
         StringBuilder sb = new StringBuilder();
 
         for (String line : text.split("\n")) {
@@ -223,25 +223,25 @@ public class GameLogic{
         gameLogo();
         pressAnything();
         System.out.println();
-        printSeparator(40);
 
         while (true) { 
             clearConsole();
             System.out.print(centerText(20,"Have you ever played this game?"));
             System.out.print(centerText(20,"1) Yep!"));
             System.out.print(centerText(20,"2) Not yet"));
-            int choice = readInt("-> ", 1, 2);
+            int choice = readInt(centerText("", 97) + "-> ", 1, 2);
             
             if (choice == 2) {
                 do {
                     clearConsole();
-                    printHeading("Enter your name:");
-                    System.out.print("-> ");
+                    System.out.println(GameLogic.centerBox("Enter your name:", 50));
+                    System.out.print(centerText("", 97) + "-> ");
                     name = scan.nextLine();
+                    System.out.println();
                     System.out.print(centerText(20,"You are " + name + " right?"));
                     System.out.print(centerText(20,"(1) Yes"));
-                    System.out.print(centerText(20,"(2) No"));
-                    int input = readInt("-> ", 1, 2);
+                    System.out.print(centerText(20,"(2) No "));
+                    int input = readInt(centerText("", 97) + "-> ", 1, 2);
                     if (input == 1) nameSet = true;
                 } while (!nameSet);
     
@@ -307,9 +307,9 @@ public class GameLogic{
             shop = new Shop(player, playerProgress);
             printMenu();
             if(playerProgress.getShopStage() > 0){
-                input = GameLogic.readInt("-> ", 0, 5);
+                input = readInt(centerText("", 97) + "-> ", 0, 5);
             } else {
-                input = GameLogic.readInt("-> ", 0, 3);
+                input = readInt(centerText("", 97) + "-> ", 0, 3);
             }
             if(input == 0){
                 isRunning = false;
@@ -346,8 +346,8 @@ public class GameLogic{
                     UrbanStory.printUrban();
                     System.out.print(centerText(20,"Are you ready to start your journey?"));
                     System.out.print(centerText(20,"(1) Yes"));
-                    System.out.print(centerText(19,"(2) No"));
-                    int choice2 = GameLogic.readInt("-> ", 1, 2);
+                    System.out.print(centerText(20,"(2) No "));
+                    int choice2 = GameLogic.readInt(centerText("", 97) + "-> ", 1, 2);
                     if(choice2 == 1){
                         gymTraining();
                     } else {
@@ -362,7 +362,7 @@ public class GameLogic{
                     System.out.print(centerText(20,"(1) Train with Fred"));
                     System.out.print(centerText(20,"(2) Enter Tournament"));
                     System.out.print(centerText(20,"(3) Go Back"));
-                    int choice2 = GameLogic.readInt("-> ", 1, 3);
+                    int choice2 = GameLogic.readInt(centerText("", 97) + "-> ", 1, 3);
                     if(choice2 == 1){
                         gymTraining();
                     } else if(choice2 == 2) {
@@ -422,7 +422,7 @@ public class GameLogic{
                         System.out.println();
                         System.out.print(centerText(50,"(1) Sure, lets go for another round!"));
                         System.out.print(centerText(50,"(2) I'll take a break first."));
-                        choice = readInt("-> ", 1, 2);
+                        choice = readInt(centerText("", 97) + "-> ", 1, 2);
                         if(choice == 1 && playerProgress.getAddStats() == 5){
                             System.out.print(centerBox("Fred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n",110));
                             System.out.println("\n");
@@ -440,7 +440,7 @@ public class GameLogic{
                             System.out.println();
                             System.out.print(centerText(50,"(1) Sure, lets go for another round!"));
                             System.out.print(centerText(50,"(2) I'll take a break first."));
-                            choice = readInt("-> ", 1, 2);
+                            choice = readInt(centerText("", 97) + "-> ", 1, 2);
                             if(choice == 1 && playerProgress.getAddStats() == 5){
                                 System.out.print(centerBox("\nFred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n",110));
                                 System.out.println("\n");
@@ -464,17 +464,21 @@ public class GameLogic{
                     if(playerProgress.getShopStage() < 1){
                         if(player.getIsLose()){
                             CarlitoUrbanGym carlito = new CarlitoUrbanGym(player);
-                            UrbanStory.urbanTrainingLose(player.getName(), carlito.getOpponentName());
+                            if(!UrbanStory.urbanTrainingLose(player.getName(), carlito.getOpponentName())){
+                                break;
+                            }
                         } else {
                             UrbanStory.urbanTraining6(player.getName());
-                            choice = readInt("-> ", 1, 1);
+                            choice = readInt(centerText("", 97) + "-> ", 1, 1);
                             if(choice == 1) shop.shop();
                         }
                     } else {
                         if(player.getStage() == 1){ 
                             if(player.getIsLose()){
                                 PabloUrbanGym pablo = new PabloUrbanGym(player);
-                                UrbanStory.urbanTrainingLose(player.getName(), pablo.getOpponentName());
+                                if(!UrbanStory.urbanTrainingLose(player.getName(), pablo.getOpponentName())){
+                                    break;
+                                }
                             } else {
                                 UrbanStory.urbanTraining8(player.getName());    
                             }
@@ -548,7 +552,7 @@ public class GameLogic{
                         "4. Dodge Chance - Increase by +5%\n" +
                         "5. Crit Multiplier - Increase by +5%\n" +
                         "\nEnter the number of the stat you'd like to upgrade: "));
-        int choice = readInt("", 1, 5);
+        int choice = readInt(centerText("", 97) + "-> ", 1, 5);
 
         addStats(choice);
 
@@ -574,7 +578,7 @@ public class GameLogic{
         }
 
         System.out.println(); 
-        System.out.print(centerBox(prompt1, 70));
+        System.out.print(centerBox(prompt1, 97));
         printCenteredSeparator(50);
         pressAnything();
         gameData.saveGame();
@@ -604,39 +608,40 @@ public class GameLogic{
     }
 
     public static void gameLogo(){
-        String asciiBorder = redText +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⣠⣶⣿⣿⣿⡿⠓⢀⣠⣴⣶⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⢀⣼⣿⣿⣿⠟⠋⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⣾⣿⣿⣿⣇⣠⣾⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⠇⢰⣶⣶⣤⣀⠀⠀⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣼⣿⣿⣿⣿⣿⡟⢀⣾⣿⣿⣿⣿⣷⡄⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⢸⣿⣿⠛⣿⣿⣿⣿⣿⡟⢠⣾⣿⣿⣿⣿⣿⡟⢀⣾⣿⣿⣿⣿⣿⣿⣿⡄⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠙⠋⠀⣿⣿⣿⣿⣿⠃⢸⣿⣿⣿⣿⡿⠋⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⢻⣿⣿⣿⡿⠀⠘⠿⠿⠟⠋⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠙⢿⣿⡇⢸⣷⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠙⠇⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀⠀\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                reset;
+        String asciiBorder = redText + GameLogic.centerText(100,
+                                "                                    \n" +
+                                " ⠀⠀⠀⠀⠀⠀⠀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⠀⠀⣠⣶⣿⣿⣿⡿⠓⢀⣠⣴⣶⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⢀⣼⣿⣿⣿⠟⠋⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
+                                "⠀⠀⣾⣿⣿⣿⣇⣠⣾⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⠇⢰⣶⣶⣤⣀⠀⠀⠀⠀\n" +
+                                "⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣼⣿⣿⣿⣿⣿⡟⢀⣾⣿⣿⣿⣿⣷⡄⠀⠀\n" +
+                                "⠀⢸⣿⣿⠛⣿⣿⣿⣿⣿⡟⢠⣾⣿⣿⣿⣿⣿⡟⢀⣾⣿⣿⣿⣿⣿⣿⣿⡄⠀\n" +
+                                "⠀⠀⠙⠋⠀⣿⣿⣿⣿⣿⠃⢸⣿⣿⣿⣿⡿⠋⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀\n" +
+                                "⠀⠀⠀⠀⠀⢻⣿⣿⣿⡿⠀⠘⠿⠿⠟⠋⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀\n" +
+                                "⠀⠀⠀⠀⠀⠀⠙⢿⣿⡇⢸⣷⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀\n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠙⠇⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀\n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀\n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀\n" +
+                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⡿⠟⠉⠀⠀⠀⠀⠀\n" +
+                                "                  ⠉⠙⠛⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀\n"
+                        );
 
-        String mainAscii = redText +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t███████╗██╗███████╗████████╗     ██████╗ ███████╗    ███████╗██╗   ██╗██████╗ ██╗   ██╗\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t██╔════╝██║██╔════╝╚══██╔══╝    ██╔═══██╗██╔════╝    ██╔════╝██║   ██║██╔══██╗╚██╗ ██╔╝\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t█████╗  ██║███████╗   ██║       ██║   ██║█████╗      █████╗  ██║   ██║██████╔╝ ╚████╔╝ \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t██╔══╝  ██║╚════██║   ██║       ██║   ██║██╔══╝      ██╔══╝  ██║   ██║██╔══██╗  ╚██╔╝  \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t██║     ██║███████║   ██║       ╚██████╔╝██║         ██║     ╚██████╔╝██║  ██║   ██║   \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t╚═╝     ╚═╝╚══════╝   ╚═╝        ╚═════╝ ╚═╝         ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   \n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                      " +
-                reset;
 
-        String text = redText +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t╔╗ ╦ ╦  ╔╗╔╦ ╦╔═╗╦═╗╦  ╔╦╗\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t╠╩╗╚╦╝  ║║║║║║║ ║╠╦╝║   ║║\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t╚═╝ ╩   ╝╚╝╚╩╝╚═╝╩╚═╩═╝═╩╝" +
-                reset;
+        String mainAscii = GameLogic.centerText(100,
+                                "███████╗██╗███████╗████████╗     ██████╗ ███████╗    ███████╗██╗   ██╗██████╗ ██╗   ██╗\n" +
+                                "██╔════╝██║██╔════╝╚══██╔══╝    ██╔═══██╗██╔════╝    ██╔════╝██║   ██║██╔══██╗╚██╗ ██╔╝\n" +
+                                "█████╗  ██║███████╗   ██║       ██║   ██║█████╗      █████╗  ██║   ██║██████╔╝ ╚████╔╝ \n" +
+                                "██╔══╝  ██║╚════██║   ██║       ██║   ██║██╔══╝      ██╔══╝  ██║   ██║██╔══██╗  ╚██╔╝  \n" +
+                                "██║     ██║███████║   ██║       ╚██████╔╝██║         ██║     ╚██████╔╝██║  ██║   ██║   \n" +
+                                "╚═╝     ╚═╝╚══════╝   ╚═╝        ╚═════╝ ╚═╝         ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   \n" +
+                                "                                                                                      "
+                        );
+        
+        String text = GameLogic.centerText(100, 
+                             "╔╗ ╦ ╦  ╔╗╔╦ ╦╔═╗╦═╗╦  ╔╦╗\n" +
+                             "╠╩╗╚╦╝  ║║║║║║║ ║╠╦╝║   ║║\n" +
+                             "╚═╝ ╩   ╝╚╝╚╩╝╚═╝╩╚═╩═╝═╩╝" ) + reset;
+
 
         System.out.println(asciiBorder);
         System.out.println(mainAscii);

@@ -66,13 +66,12 @@ public class UrbanStory {
 
     static int punch(){
         String prompt = "Select the counter punch:";
-        System.out.print(GameLogic.centerText(prompt, 150));
-        System.out.println();
+        System.out.print(GameLogic.centerText(20, prompt));
         for(int i = 1; i <= 4; i++){
             String option = " (" + i + ")\"" + array[i-1] + "\"";
-            System.out.println(GameLogic.centerText(option, 150));
+            System.out.print(GameLogic.centerText(20, option));
         }
-        int choice = GameLogic.readInt("-> ", 1, 4);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4);
         return choice;
     }
 
@@ -94,23 +93,23 @@ public class UrbanStory {
         System.out.println("Are you ready to begin?");
         System.out.println("(1) Yes, let's get started!\n(2) No, I'd like to explore more options first.");
         GameLogic.printSeparator(50);
-        int choice = GameLogic.readInt("-> ", 1, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if(choice == 2) return;
         tutorialStart(GameLogic.player.getName(), choice);
     }
 
     public static void tutorialStart(String name, int choice){
         urbanTraining4();
-        choice = GameLogic.readInt("-> ", 1, 1);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 1);
         if(choice == 1) response5();
 
-        choice = GameLogic.readInt("-> ", 2, 2);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 2, 2);
         if(choice == 2) response6();
 
-        choice = GameLogic.readInt("-> ", 3, 3);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 3, 3);
         if(choice == 3) response7();
 
-        choice = GameLogic.readInt("-> ", 4, 4);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 4, 4);
         if(choice == 4){
             response8(name);
         }
@@ -132,9 +131,11 @@ public class UrbanStory {
                 System.out.println(GameLogic.centerBox("( Fred throws a " + array[randomNum] + " )", 50));
             }
 
-            String successMessage = GameLogic.greenText + "Success: " + success + " / 5" + GameLogic.reset;
-            System.out.print(GameLogic.centerText(successMessage, 150));
-            System.out.println("\n");
+            System.out.print(GameLogic.reset);
+            String successMessage = "Success: " + success + " / 5";
+            System.out.print(GameLogic.greenText);
+            System.out.print(GameLogic.centerText(20, successMessage));
+            System.out.println();
             choice = punch();
             int countered = isCounter(randomNum+1, choice);
 
@@ -183,29 +184,29 @@ public class UrbanStory {
         int choice = 0;
 
         urbanTraining1(name);
-        choice = GameLogic.readInt("-> ", 1, 2);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if(choice == 1) response(name);
         else if(choice == 2) response2(name);
         GameLogic.pressAnything();
 
         urbanTraining2();
-        choice = GameLogic.readInt("-> ", 1, 2);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if(choice == 1) response3();
         else response4();
 
         GameLogic.pressAnything();
         urbanTraining3(name);
         urbanTraining4();
-        choice = GameLogic.readInt("-> ", 1, 1);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 1);
         if(choice == 1) response5();
 
-        choice = GameLogic.readInt("-> ", 2, 2);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 2, 2);
         if(choice == 2) response6();
 
-        choice = GameLogic.readInt("-> ", 3, 3);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 3, 3);
         if(choice == 3) response7();
 
-        choice = GameLogic.readInt("-> ", 4, 4);
+        choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 4, 4);
         if(choice == 4){
             response8(name);
         }
@@ -225,7 +226,7 @@ public class UrbanStory {
 
         System.out.println("\n");
         reply("I'm ready. Let's do this!", "Not sure... Never trained in a real gym.");
-        System.out.println("\n");
+        System.out.println();
     }
 
     static void response(String name) {
@@ -238,7 +239,7 @@ public class UrbanStory {
         System.out.println("\n");
         String playerResponse = name + ": \"Let's go!\"";
         System.out.println(GameLogic.rightBox(playerResponse, 40));
-        System.out.println("\n");
+        System.out.println();
     }
 
     static void response2(String name) {
@@ -252,7 +253,7 @@ public class UrbanStory {
         System.out.println("\n");
         String playerResponse = name + ": \"Thanks, Fred. I'll give it my all.\"\n";
         System.out.println(GameLogic.rightBox(playerResponse, 60));
-        System.out.println("\n");
+        System.out.println();
     }
 
     static void urbanTraining2(){
@@ -265,7 +266,7 @@ public class UrbanStory {
 
         System.out.println("\n");
         reply("Got it. Let's do this!", "This feels a little awkward...");
-        System.out.println("\n");
+        System.out.println();
     }
 
     static void response3() {
@@ -307,7 +308,7 @@ public class UrbanStory {
         System.out.print(GameLogic.centerBox(message, 100));
         System.out.println("\n");
         reply(1, "Jab");
-        System.out.println("\n");
+        System.out.println();
     }
     
     static void response5() {
@@ -318,7 +319,7 @@ public class UrbanStory {
         System.out.print(GameLogic.centerBox(message, 100));
         System.out.println("\n");
         reply(2, "Hook");
-        System.out.println("\n");
+        System.out.println();
     }
 
     static void response6() {
@@ -329,7 +330,7 @@ public class UrbanStory {
         System.out.print(GameLogic.centerBox(message, 105));
         System.out.println("\n");
         reply(3, "Block");
-        System.out.println("\n");
+        System.out.println();
     }
 
     static void response7() {
@@ -340,7 +341,7 @@ public class UrbanStory {
         System.out.print(GameLogic.centerBox(message, 110));
         System.out.println("\n");
         reply(4, "Uppercut");
-        System.out.println("\n");
+        System.out.println();
     }
 
     static void response8(String name) {
@@ -386,9 +387,12 @@ public class UrbanStory {
             System.out.print(GameLogic.centerBox(punchMessage, 50));
 
             System.out.println("\n");
-            String successMessage = GameLogic.greenText + "Success: " + success + " / 5" + GameLogic.reset;
-            System.out.print(GameLogic.centerText(successMessage, 150));
-            System.out.println("\n");
+            String successMessage = "Success: " + success + " / 5";
+            
+            System.out.print(GameLogic.greenText);
+            System.out.print(GameLogic.centerText(20, successMessage));
+            System.out.print(GameLogic.reset);
+            System.out.println();
             choice = punch();
             int countered = isCounter(randomNum + 1, choice); // Check if the punch was countered
 
@@ -412,7 +416,7 @@ public class UrbanStory {
 
         System.out.println("\n");
         String finalMessage = "Fred: \"Good work, " + name + "! You've got some real potential. Remember, practice makes perfect.\n"
-                + "\tI hope to see you again tomorrow for another session. Keep your guard up and stay sharp!\"";
+                + "I hope to see you again tomorrow for another session. Keep your guard up and stay sharp!\"";
         System.out.print(GameLogic.centerBox(finalMessage, 100));
         System.out.println("\n");
 
@@ -429,7 +433,7 @@ public class UrbanStory {
         System.out.println("\n");
         String shopMessage = "Select 1 to go to Shop\n"
                             + "\t(1) - Shop\n";
-        System.out.print(GameLogic.centerText(150, shopMessage));
+        System.out.print(GameLogic.centerText(20, shopMessage));
     }
 
     public static void urbanTraining7() {
@@ -452,7 +456,7 @@ public class UrbanStory {
         shop.showMenu();
     }
 
-    public static void urbanTrainingLose(String name, String opponent) {
+    public static boolean urbanTrainingLose(String name, String opponent) {
         System.out.println("\n");
         String message =
                 "Fred: \"Ahhh, tough break there, " + name + ". " + opponent + " is a beast in the ring.\"\n\n" +
@@ -466,9 +470,9 @@ public class UrbanStory {
 
         System.out.println(GameLogic.centerBox(message, 110));
         System.out.print(GameLogic.centerText(20,"Select what to reply:"));
-        System.out.print(GameLogic.centerText(20,"\t(1) Sure, im just warming up!"));
-        System.out.print(GameLogic.centerText(20,"\t(2) Let me take a break first."));
-        int choice = GameLogic.readInt("", 1, 2);
+        System.out.print(GameLogic.centerText(20,"(1) Sure, im just warming up! "));
+        System.out.print(GameLogic.centerText(20,"(2) Let me take a break first."));
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if(choice == 1){
             if(playerProgress.getShopStage() < 1){
                 GameLogic.shop.showMenu();
@@ -477,8 +481,9 @@ public class UrbanStory {
                 pablo.setPlayer(GameLogic.player);
                 pablo.fightLoop();
             }
+            return true;
         } else {
-            return;
+            return false;
         }
     }
 
@@ -498,7 +503,7 @@ public class UrbanStory {
         System.out.print(GameLogic.centerText(20,"Select what to do:"));
         System.out.print(GameLogic.centerText(20,"1) Yes, I wanna keep training!"));
         System.out.print(GameLogic.centerText(20,"2) I'll take a break first and check the Shop."));
-        int choice = GameLogic.readInt("-> ", 1, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if(choice == 1) {
             urbanTrainingCombo(name);
         } else {
@@ -551,16 +556,18 @@ public class UrbanStory {
             }
 
             System.out.println(GameLogic.centerBox(skillMessage, 50));
-            System.out.println("\n");
+            System.out.println();
 
-            System.out.println(GameLogic.centerText(150, GameLogic.greenText + "Success: " + success + " / 5" + GameLogic.reset));
+            System.out.print(GameLogic.greenText);
+            System.out.println(GameLogic.centerText(20, "Success: " + success + " / 5"));
+            System.out.print(GameLogic.reset);
 
-            System.out.println(GameLogic.centerText(150, "Select the counter punch:"));
+            System.out.print(GameLogic.centerText(20, "Select the counter punch:"));
             for (int i = 1; i <= 3; i++) {
-                System.out.print(GameLogic.centerText(150, "(" + i + ") \"" + combo[i-1] + "\""));
+                System.out.print(GameLogic.centerText(20, "(" + i + ") \"" + combo[i-1] + "\""));
             }
 
-            choice = GameLogic.readInt("-> ", 1, 3);
+            choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 3);
 
             System.out.println();
             GameLogic.printCenteredSeparator(30);
@@ -614,6 +621,7 @@ public class UrbanStory {
     }
 
     public static boolean inviteToTournament(String name) {
+        GameLogic.clearConsole();
         System.out.println(GameLogic.centerBox(
                 "Fred: \"Great work, " + name + "! Your progress is impressive, but there's a big tournament coming up.\n" +
                         "It's a tough challenge, but it could be your time to shine. If you're not ready, you can\n" +
@@ -621,12 +629,13 @@ public class UrbanStory {
         ,100));
 
         reply("I'm ready for the tournament.", "I want to train more first.");
-        int choice = GameLogic.readInt("-> ", 1, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if (choice == 1) {
             GameLogic.enterTournament();
             return true;
         } else {
-            System.out.print(GameLogic.centerBox("\nFred: \"No sweat! Let's keep working on your skills.\"",60));
+            GameLogic.clearConsole();
+            System.out.print(GameLogic.centerBox("Fred: \"No sweat! Let's keep working on your skills.\"",60));
             playerProgress.setOpponentWins(3);
             GameLogic.pressAnything();
             return false;
@@ -641,7 +650,7 @@ public class UrbanStory {
 
         System.out.println(GameLogic.centerBox(message, 100));
         reply("I'm in! Let's do this.", "I'll think about it, Fred. Not sure if I'm ready yet.");
-        int choice = GameLogic.readInt("-> ", 1, 2);
+        int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if(choice == 1){
             return true;
         } 
@@ -652,25 +661,25 @@ public class UrbanStory {
         Tournament.showOpStats(opponent);
         switch (opponent.getName()) {
             case "Rico Ramirez":
-                System.out.println("\n\t\t🔥Backstory: Introducing Rico \"El Tigre\" Ramirez, a fierce contender from Manila, inspired by his father's legacy as a former champion." +
-                        "\n\t\tKnown for his explosive style and powerful uppercuts, Rico has quickly climbed the ranks of boxing, embodying resilience and determination." +
-                        "\n\t\tAs he steps into the ring for this tournament, he carries the hopes of his community, ready to unleash the spirit of the tiger and claim" +
-                        "\n\t\this place among the greats! Now, they seek to prove their strength in the tournament!");
+                System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Introducing Rico \"El Tigre\" Ramirez, a fierce contender from Manila, inspired by his father's legacy as a former champion." +
+                        "\nKnown for his explosive style and powerful uppercuts, Rico has quickly climbed the ranks of boxing, embodying resilience and determination." +
+                        "\nAs he steps into the ring for this tournament, he carries the hopes of his community, ready to unleash the spirit of the tiger and claim" +
+                        "\nhis place among the greats! Now, they seek to prove their strength in the tournament!"));
                 GameLogic.pressAnything();
                 break;
             case "Oscar Lopez":
-                System.out.println("\n\t\t💪Backstory: Oscar \"El Jablo\" Lopez, from Cebu City, grew up in a hardworking family as the youngest of five. Inspired by local boxing matches," +
-                        "\n\t\the honed his skills in underground fights, earning a reputation for his lightning-fast jabs and explosive combos. Driven by a desire to uplift" +
-                        "\n\t\t his community and motivated by a friend's injury in the ring, Oscar turned pro. Now, as he enters the tournament, he's determined to prove" +
-                        "\n\t\thimself as a champion, ready to unleash his quick jab, powerful cross, and knockout power punch.");
+                System.out.println(GameLogic.centerText(20, "\n💪Backstory: Oscar \"El Jablo\" Lopez, from Cebu City, grew up in a hardworking family as the youngest of five. Inspired by local boxing matches," +
+                        "\nhe honed his skills in underground fights, earning a reputation for his lightning-fast jabs and explosive combos. Driven by a desire to uplift" +
+                        "\n his community and motivated by a friend's injury in the ring, Oscar turned pro. Now, as he enters the tournament, he's determined to prove" +
+                        "\nhimself as a champion, ready to unleash his quick jab, powerful cross, and knockout power punch."));
                         GameLogic.pressAnything();
                 break;
             case "Ishmael Tetteh":
                 System.out.print(" - The Thunderous Finisher");
-                System.out.println("\n\t\t🌟Backstory: Ishmael Tetteh, \"The Thunderous Finisher,\" is a 28-year-old Ghanaian-American middleweight boxer with 28 wins (24 by KO)." +
-                        "\n\t\tInspired by Canelo Alvarez, he has mastered a signature combo—Right Uppercut, Left Hook, Right Cross—reflecting his journey from Accra to the boxing ring." +
-                        "\n\t\t After a pivotal early loss, he trained under a retired champion, transforming into a powerful and agile fighter." +
-                        "\n\t\tNow, as he prepares for a major tournament, Ishmael fights for victory and his community, ready to make his mark in the boxing world.");
+                System.out.println(GameLogic.centerText(20, "\n🌟Backstory: Ishmael Tetteh, \"The Thunderous Finisher,\" is a 28-year-old Ghanaian-American middleweight boxer with 28 wins (24 by KO)." +
+                        "\nInspired by Canelo Alvarez, he has mastered a signature combo—Right Uppercut, Left Hook, Right Cross—reflecting his journey from Accra to the boxing ring." +
+                        "\n After a pivotal early loss, he trained under a retired champion, transforming into a powerful and agile fighter." +
+                        "\nNow, as he prepares for a major tournament, Ishmael fights for victory and his community, ready to make his mark in the boxing world."));
                 GameLogic.pressAnything();
                 break;
             default:

@@ -78,7 +78,7 @@ public class Sparring {
             System.out.print(GameLogic.centerText(50,"(3) Change Opponent Stats"));
             System.out.print(GameLogic.centerText(50,"(4) Go Back"));
     
-            choice = GameLogic.readInt("-> ", 1, 4); 
+            choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4); 
     
             if (choice == 1) {
                 playerProgress.setRound(1);

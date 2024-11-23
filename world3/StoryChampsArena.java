@@ -5,17 +5,16 @@ import world1.GameLogic;
 public class StoryChampsArena {
     public static void printChampsArena() {
         System.out.println();
-        System.out.println("Welcome to the Champs Arena, the grand stage where legends are forged and the spotlight never dims.");
-        System.out.println("No longer fighting in the shadows, you now face the best of the best, where skill, strategy, and determination reign supreme.");
-        System.out.println();
-        System.out.println("Under Coach Fred's expert guidance, you'll push your limits, refining your abilities and unlocking advanced techniques.");
-        System.out.println("This is where you'll learn unique passive skills that can shift the momentum of any fight, rewarding precision, timing, and mastery.");
-        System.out.println();
-        System.out.println("Every match brings new challenges, but also the opportunity to prove your worth to the roaring crowds.");
-        System.out.println("Victory here isn't just a title - it's your ticket to glory and the ultimate recognition as a champion.");
-        System.out.println();
-        System.out.println("Prepare yourself, step into the ring, and show the world what you're made of!");
-        System.out.println();
+        System.out.print(GameLogic.centerBox(
+                "Welcome to the Champs Arena, the grand stage where legends are forged and the spotlight never dims.\n" +
+                "No longer fighting in the shadows, you now face the best of the best, where skill, strategy, and determination\n" +
+                "reign supreme.\n\n" + 
+                "Under Coach Fred's expert guidance, you'll push your limits, refining your abilities and unlocking advanced techniques.\n" +
+                "This is where you'll learn unique passive skills that can shift the momentum of any fight, rewarding precision,\n" +
+                " timing, and mastery.\n\n" +
+                "Every match brings new challenges, but also the opportunity to prove your worth to the roaring crowds.\n" +
+                "Victory here isn't just a title - it's your ticket to glory and the ultimate recognition as a champion.\n\n" +
+                "Prepare yourself, step into the ring, and show the world what you're made of!\n", 125));
     }
 
     public static void printIntroduction(String name) {

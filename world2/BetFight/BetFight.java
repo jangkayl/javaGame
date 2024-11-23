@@ -39,19 +39,19 @@ public class BetFight {
         System.out.println();
 
         System.out.print(GameLogic.centerText(50,"Place your bet! (1) " + fighter1.getName() + " or (2) " + fighter2.getName() + " | (0) Go Back:"));
-        int betChoice = GameLogic.readInt("-> ", 0, 2);
+        int betChoice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 2);
         if(betChoice == 0) return;
         int betAmount = 0;
         do {
             System.out.print(GameLogic.centerText(50,"\nEnter your bet amount (minimum 100 points) | (0) Go Back:"));
             System.out.print(GameLogic.centerText(50,"Available Points: " + player.getPlayerPoints()));
-            betAmount = GameLogic.readInt("-> ", 0, Integer.MAX_VALUE);
+            betAmount = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, Integer.MAX_VALUE);
             if(betAmount == 0) return;
         
             if (betAmount < 100){
-                System.out.print(GameLogic.centerText(50,"\nMinimum bet is 100 points. Please try again."));
+                System.out.println(GameLogic.centerBox("Minimum bet is 100 points. Please try again.", 60));
             } else if (betAmount > player.getPlayerPoints()) {
-                System.out.print(GameLogic.centerText(50,"\nYou don't have enough points to place this bet. Please try again."));
+                System.out.println(GameLogic.centerBox("You don't have enough points to place this bet. Please try again.", 80));
             }
         } while (betAmount > player.getPlayerPoints() || betAmount < 100);
 

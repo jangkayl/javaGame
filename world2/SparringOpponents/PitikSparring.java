@@ -34,13 +34,16 @@ public class PitikSparring extends SparFightLogic{
                             "4. Dodge Chance - Increase by +5%\n" +
                             "5. Crit Multiplier - Increase by +5%\n" +
                             "\nEnter the number of the stat you'd like to upgrade: "));
-            int choice = GameLogic.readInt("", 1, 5);
+            int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 5);
             addStats(choice);
             System.out.println();
             System.out.print(GameLogic.centerBox("Stats added! Remember, you can gain stats up to 5 times!",70));
             if(getPlayerProgress().getAddStats() == 3){
                 getPlayer().setRank(4);
                 GameLogic.rankReward();
+                resetFighterStats();
+                getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);
+                return;
             }
         }
 

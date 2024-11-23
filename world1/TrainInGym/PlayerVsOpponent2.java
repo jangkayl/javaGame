@@ -100,7 +100,6 @@ public abstract class PlayerVsOpponent2 {
     private void selectAttack() {
         int[] choices = new int[3];
 
-        System.out.println();
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
     
         for (int i = 0; i < attackOption.length; i++) {
@@ -120,7 +119,7 @@ public abstract class PlayerVsOpponent2 {
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
-        System.out.print("-> ");
+        System.out.print(GameLogic.centerText("", 97) + "-> ");
         String input;
         
         while (true) {
@@ -200,7 +199,7 @@ public abstract class PlayerVsOpponent2 {
             String opponentAttack = opponentAttacks[opponentChoices[i]];
 
             String line =  GameLogic.formatColumns(playerAttack, opponentAttack, 30);
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + line);
         }
 
         System.out.println();
@@ -380,24 +379,18 @@ public abstract class PlayerVsOpponent2 {
 
     private void counterInfos(String name){
         GameLogic.clearConsole();
-        if(opponent.getName() == "Rico Ramirez"){
-            System.out.print(GameLogic.centerBox("Rico Ramirez Combo Counter:",60));
+        if(opponent.getName() == "Pablo Martinez"){
+            System.out.print(GameLogic.centerBox("Pablo Martinez Combo Counter:",50));
             System.out.println();
-            System.out.print(GameLogic.centerText(30,"(1) Cross < Uppercut"));
-            System.out.print(GameLogic.centerText(30,"(2) Rear Uppercut < Block"));
-            System.out.print(GameLogic.centerText(30,"(3) Lead Hook < Jab"));
-        } else if(opponent.getName() == "Oscar Lopez"){
-            System.out.print(GameLogic.centerBox("Oscar Lopez Combo Counter:",60));
+            System.out.print(GameLogic.centerText(50,"(1) Jab to the Body < Uppercut"));
+            System.out.print(GameLogic.centerText(50,"(2) Lead Hook < Jab"));
+            System.out.print(GameLogic.centerText(50,"(3) Rear Uppercut < Block"));
+        } else if(opponent.getName() == "Fred"){
+            System.out.print(GameLogic.centerBox("Fred Combo Counter:",50));
             System.out.println();
-            System.out.print(GameLogic.centerText(30,"(1) Quick Jab < Uppercut"));
-            System.out.print(GameLogic.centerText(30,"(2) Cross < Uppercut"));
-            System.out.print(GameLogic.centerText(30,"(3) Power Punch < Block"));
-        } else if(opponent.getName() == "Ishmael Tetteh"){
-            System.out.print(GameLogic.centerBox("Ishmael Tetteh Combo Counter:",60));
-            System.out.println();
-            System.out.print(GameLogic.centerText(30,"(1) Right Uppercut < Block"));
-            System.out.print(GameLogic.centerText(30,"(2) Left Hook < Jab"));
-            System.out.print(GameLogic.centerText(30,"(3) Right Cross < Uppercut"));
+            System.out.print(GameLogic.centerText(50,"(1) Jab to the Body < Uppercut"));
+            System.out.print(GameLogic.centerText(50,"(2) Lead Hook < Jab"));
+            System.out.print(GameLogic.centerText(50,"(3) Rear Uppercut < Block"));
         }
     }
 }
