@@ -7,7 +7,6 @@ public class Player extends Boxer implements PlayerInterface {
     private String[] worlds = {"Urban Gym", "Underworld Rumble ", "Champs Arena"};
     private SkillsRegistry skills = new SkillsRegistry();
     private int currentWorld;
-    private int currentRank;
     private int playerPoints;
     private boolean isLose;
     private int stage;
@@ -17,7 +16,6 @@ public class Player extends Boxer implements PlayerInterface {
         super(name, hp, stamina, critChance, critMultiplier, dodgeChance, rank);
         this.playerPoints = playerPoints;
         this.currentWorld = currentWorld;
-        this.currentRank = currentRank;
         this.stage = stage;
         this.isLose = isLose;
     }
@@ -107,18 +105,6 @@ public class Player extends Boxer implements PlayerInterface {
 
     public boolean hasEnoughStamina(int requiredStamina) {
         return this.getStamina() >= requiredStamina;
-    }
-
-    public void setCurrentRank(int currentRank){
-        this.currentRank = currentRank;
-    }
-
-    public int getPlayerRank(){
-        return currentRank;
-    }
-    
-    public String getCurrentRank() {
-        return ranking[currentRank];
     }
     
     public int getCurrentWorld(){

@@ -170,6 +170,8 @@ public class Tournament {
 
     private static void concludeTournament() {
         System.out.println("\n\n");
+        player.setRank(3);
+        GameLogic.rankReward();
         System.out.println(GameLogic.centerBox("🥊 Congratulations, Champion of the Ring! 🥊\n" +
                 "You've conquered the tournament, delivering knockout blows and proving you have the heart of a true fighter!\n" +
                 "The crowd roars, and your name is now legend. \nBut the journey isn't over...\n\n" +

@@ -7,7 +7,6 @@ public class Inventory implements InvetoryInterface{
     private static Item[] inventoryItems = new Item[MAX_ITEMS];  
     private static int itemCount = 0;
     private static Shop shop; 
-    private static boolean isEmpty = true;
     private static String[] slotName = {"HEAD","BODY","HAND","BOOTS","FOOD"};
     private static Item[] slot = new Item[5];
 
@@ -52,7 +51,6 @@ public class Inventory implements InvetoryInterface{
                     inventoryItems[i] = items[i];
                 }
                 itemCount = items.length;
-                isEmpty = false;
             } else {
                 System.out.println("Not enough space in the inventodry!");
             }
@@ -63,7 +61,6 @@ public class Inventory implements InvetoryInterface{
         if (itemCount < MAX_ITEMS) {
             inventoryItems[itemCount] = new Item(item, description, body, effect);
             itemCount++;
-            isEmpty = false;
         } else {
             System.out.println("Inventory is full!");
         }
@@ -248,9 +245,6 @@ public class Inventory implements InvetoryInterface{
 
         inventoryItems[itemCount - 1] = null;
         itemCount--;
-        if (itemCount == 0) {
-            isEmpty = true; 
-        }
         
         GameLogic.pressAnything();
     }

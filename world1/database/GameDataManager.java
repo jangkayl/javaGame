@@ -109,7 +109,7 @@ public class GameDataManager {
                 player.setCurrentWorld(Integer.parseInt(value));
                 break;
             case "currentRank":
-                player.setCurrentRank(Integer.parseInt(value));
+                player.setRank(Integer.parseInt(value));
                 break;
             case "stage":
                 player.setStage(Integer.parseInt(value));
@@ -199,7 +199,7 @@ public class GameDataManager {
                 bw.write("dodgeChance=" + player.getDodgeChance() + "\n");
                 bw.write("playerPoints=" + player.getPlayerPoints() + "\n");
                 bw.write("currentWorld=" + player.getCurrentWorld() + "\n");
-                bw.write("currentRank=" + player.getPlayerRank() + "\n");
+                bw.write("currentRank=" + player.getRankInt() + "\n");
                 bw.write("stage=" + player.getStage() + "\n");
                 bw.write("isLose=" + player.getIsLose() + "\n");
             }

@@ -378,7 +378,7 @@ public class GameLogic{
                         centerText("CHARACTER STATS", 50) + "\n" +
                         printCenteredSeparator(30) + "\n" +
                         centerText(player.getName(), 30) + "\n" +
-                        centerText("* " + player.getCurrentRank() + " *",30) + "\n" +
+                        centerText("* " + player.getRank() + " *",30) + "\n" +
                         printCenteredSeparator(30) + "\n" + "\n" +
 
                         formatColumns("HP:", player.getHp() + " / " + player.getMaxHp(), 27) + "\n" +
@@ -522,5 +522,75 @@ public class GameLogic{
         int currentPoints = player.getPlayerPoints();
         currentPoints += points;
         player.setPlayerPoints(currentPoints);
+    }
+
+    public static void rankReward() {
+        System.out.println();
+        String prompt1 ;
+        String congrats = "Congratulations! You've ranked UP!\n"+
+                            "You are now a " + player.getRank();
+        System.out.print(centerBox(congrats, 90));
+        System.out.println();
+        System.out.print(centerText(50,
+                "Here are your choices: ( Select one only )\n" +
+                        "1. HP - Increase by +20%\n" +
+                        "2. Stamina - Increase by +20%\n" +
+                        "3. Crit Chance - Increase by +5%\n" +
+                        "4. Dodge Chance - Increase by +5%\n" +
+                        "5. Crit Multiplier - Increase by +5%\n" +
+                        "\nEnter the number of the stat you'd like to upgrade: "));
+        int choice = readInt("", 1, 5);
+
+        addStats(choice);
+
+        switch (choice) {
+            case 1:
+                prompt1 = "Your HP has been increased by 20%!";
+                break;
+            case 2:
+                prompt1 = "Your Stamina has been increased by 20%!";
+                break;
+            case 3:
+                prompt1 = "Your Critical Hit Chance has been increased by 5%!";
+                break;
+            case 4:
+                prompt1 = "Your Crit Multiplier has been increased by 5%!";
+                break;
+            case 5:
+                prompt1 = "Your Dodge Chance has been increased by 5%!";
+                break;
+            default:
+                prompt1 = "Invalid choice. No stat was upgraded.";
+                break;
+        }
+
+        System.out.println(); 
+        System.out.print(centerBox(prompt1, 70));
+        printCenteredSeparator(50);
+        pressAnything();
+        gameData.saveGame();
+    }
+
+    private static void addStats(int choice){
+        if(choice == 1){
+            double hpMultiplier = 1 + 0.20;
+            int maxHp = (int)Math.ceil(player.getMaxHp() * hpMultiplier);
+            player.setHp(maxHp);
+            player.setMaxHp(maxHp);
+        } else if(choice == 2){
+            double staminaMultiplier = 1 + 0.20;
+            int maxStamina = (int)Math.ceil(player.getMaxStamina() * staminaMultiplier);
+            player.setStamina(maxStamina);
+            player.setMaxStamina(maxStamina);
+        } else if(choice == 3){
+            double newCrit = player.getCritChance() + 0.05;
+            player.setCritChance(newCrit);
+        } else if(choice == 4){
+            double newDodge = player.getDodgeChance() + 0.05;
+            player.setDodgeChance(newDodge);
+        } else if(choice == 5){
+            double newMulti = player.getCritMultiplier() + 0.05;
+            player.setCritMultiplier(newMulti);
+        }
     }
 }

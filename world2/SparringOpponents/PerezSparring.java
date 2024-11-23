@@ -38,6 +38,10 @@ public class PerezSparring extends SparFightLogic{
             addStats(choice);
             System.out.println();
             System.out.print(GameLogic.centerBox("Stats added! Remember, you can gain stats up to 5 times!",70));
+            if(getPlayerProgress().getAddStats() == 3){
+                getPlayer().setRank(4);
+                GameLogic.rankReward();
+            }
         }
 
         resetFighterStats();

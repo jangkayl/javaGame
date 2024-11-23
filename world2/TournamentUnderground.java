@@ -6,7 +6,6 @@ import world1.Player;
 import world1.PlayerProgress;
 import world1.StreetFighter;
 import world1.Tournament;
-import world1.Inventory.Item;
 import world2.TournaUnderFight.NavarroTourna;
 import world2.TournaUnderFight.RaulTourna;
 import world2.TournaUnderFight.SalvahezTourna;
@@ -221,6 +220,8 @@ public class TournamentUnderground {
                         "Your name strikes fear in the underground, but the chaos never ends...", 110));
 
         GameLogic.pressAnything();
+        player.setRank(5);
+        GameLogic.rankReward();
         System.out.println("\n");
         System.out.println(GameLogic.centerBox(
                 "As you stand victorious, your father steps forward, his face filled with regret.\n" +

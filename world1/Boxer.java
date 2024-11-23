@@ -95,8 +95,16 @@ public abstract class Boxer implements BoxerInterface{
         this.damageSetter = damageSetter;
     }
 
+    public void setRank(int rank){
+        this.rank = rank;
+    }
+
     public String getRank(){
         return ranking[rank];
+    } 
+
+    public int getRankInt(){
+        return rank;
     }
 
     public String[] getAllRankings(){

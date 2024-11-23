@@ -381,6 +381,7 @@ public abstract class FightLogic implements FightLogicInterface{
     private void winnerReward(){
         if(playerProgress.getPlayerWins() != 3){
             System.out.println();
+            player.setRank(1);
             System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
         }
     }
