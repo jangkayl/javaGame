@@ -1,6 +1,6 @@
 package world1;
 
-import world1.interfaces.PlayerProgressInterface;
+import interfaces.PlayerProgressInterface;
 
 public class PlayerProgress implements PlayerProgressInterface {
     private int round;

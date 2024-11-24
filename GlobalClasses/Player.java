@@ -1,6 +1,6 @@
 package world1;
-import world1.Skill.SkillsRegistry;
-import world1.interfaces.PlayerInterface;
+import Skill.SkillsRegistry;
+import interfaces.PlayerInterface;
 
 public class Player extends Boxer implements PlayerInterface {
     private String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};

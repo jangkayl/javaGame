@@ -1,6 +1,6 @@
 package world1;
 
-import world1.interfaces.InvetoryInterface;
+import interfaces.InvetoryInterface;
 
 public class Inventory implements InvetoryInterface{
     private static final int MAX_ITEMS = 10;  

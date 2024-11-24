@@ -1,6 +1,6 @@
 package world1;
 
-import world1.interfaces.BoxerInterface;
+import interfaces.BoxerInterface;
 
 public abstract class Boxer implements BoxerInterface{
     private String name;
