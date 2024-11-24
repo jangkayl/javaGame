@@ -138,7 +138,7 @@ public class Shop implements ShopInterface{
             boolean isSold = false;
     
             System.out.println();
-            System.out.println(GameLogic.greenText);
+            System.out.print(GameLogic.greenText);
             if(player.getCurrentWorld() == 0){
                 System.out.println(GameLogic.centerBox("GYM SHOP", 40));
             } else if(player.getCurrentWorld() == 1){
@@ -146,10 +146,11 @@ public class Shop implements ShopInterface{
             } else if(player.getCurrentWorld() == 2){
                 System.out.println(GameLogic.centerBox("BOXING ARSENAL", 40));
             }
-            System.out.println(GameLogic.reset);
 
+            System.out.print(GameLogic.blueText);
             System.out.print(GameLogic.centerBox(" Player Points: " + player.getPlayerPoints() + " ", 25));
             System.out.println("\n");
+            System.out.print(GameLogic.orangeText);
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
             // Display items for sale
             if(player.getCurrentWorld() == 0){
@@ -172,6 +173,7 @@ public class Shop implements ShopInterface{
                 }
             }
 
+            System.out.println(GameLogic.greenText);
             System.out.println(GameLogic.centerBox("Enter the number of the item you wish to buy or 0 to exit.",100));
     
             // Training check before entering purchase loop
@@ -228,11 +230,11 @@ public class Shop implements ShopInterface{
 
     public void shop() {
         GameLogic.clearConsole();
-        System.out.println(GameLogic.greenText);
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox("GYM SHOP", 40));
-        System.out.println(GameLogic.reset);
-        System.out.println();
+        System.out.print(GameLogic.reset);
 
+        System.out.print(GameLogic.orangeText);
         String message = "Fred: \"Welcome to the shop. Here, you can buy all sorts of gear and items that'll\n"
                 + "help boost your stats. You want more stamina? We've got special protein shakes for that.\n"
                 + "Need a better chance to land critical hits? Try out our precision wraps. These items can\n"

@@ -249,45 +249,100 @@ public class ChampTournament {
 
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 3);
         if (choice == 1) {
-            gameEndingLogo();
+            continueReign();
         } else if (choice == 2) {
-            gameEndingLogo();
+            retire();
         } else {
-            gameEndingLogo();
+            disappear();
         }
+        sharedEnding();
+        gameEndingLogo();
+    }
+
+    private void continueReign(){
+        GameLogic.clearConsole();
+        String prompt = "You choose to stay in the spotlight, defending your title with the grit and determination that brought\n" +
+                        "you here. Fight after fight, your victories stack up, but so does the weight of responsibility. The roar\n" +
+                        "of the crowd shifts in tone—not just cheering for your triumphs but marveling at the inspiration you've become.\n" +
+                        "Young fighters flock to your corner, their eyes filled with dreams you once had.\n\n" + 
+                        "One day, as you raise your championship belt high, you see a child in the crowd shadowboxing with wild enthusiasm.\n" +
+                        "A spark ignites in your heart: your greatest legacy isn't in the ring but in what you leave behind.\n\n" +
+                        "Years later, the gym you built hums with activity. Sweat-drenched mats, clinking chains from heavy bags, and\n" +
+                        "shouts of \"One more round!\" echo in the air. You train the next generation to fight with their fists and\n" + 
+                        "their hearts, knowing their victories will be yours too.";
+        GameLogic.printWithDelay(GameLogic.centerText(20, prompt));
+        GameLogic.pressAnything();
+    }
+
+    private void retire(){
+        GameLogic.clearConsole();
+        String prompt = "At your peak, you make the bold decision to step away from the ring. Your fame becomes a powerful tool for change.\n" +
+                        "You start initiatives that transform lives: scholarships for underprivileged youths, programs to keep kids off the\n" +
+                        "streets, and motivational speeches that spark hope where despair once loomed.\n\n" +
+                        "But something tugs at you. As you meet young fighters chasing the same dreams you once pursued, a longing grows.\n" + 
+                        "They don't just need opportunities; they need a mentor. One fateful night, you step into an old, worn-down gym and\n" +
+                        "lace up your gloves again—not to fight but to teach.\n\n" +
+                        "The small gym you open becomes a sanctuary. Fighters come not for glory but for guidance. The lessons you share\n" +
+                        "hard-won in the ring and beyond—forge champions who carry your torch forward.";
+        GameLogic.printWithDelay(GameLogic.centerText(20, prompt));
+        GameLogic.pressAnything();
+    }
+
+    private void disappear(){
+        GameLogic.clearConsole();
+        String prompt = "Without fanfare, you disappear. The world speculates: did you retire? Were you injured? Did the thrill of\n" +
+                        "victory finally fade? The mystery deepens as time passes, your name becoming a legend whispered in gyms and\n" +
+                        "fight clubs across the globe.\n\n" +
+                        "Years later, in a small, unassuming gym on the edge of town, a new crop of fighters begins their journey.\n" + 
+                        "They train under a coach who moves with a precision and power that only the greatest could possess.\n" +
+                        "Whispers swirl among the students: Could this be... the Champion?\n" +
+                        "You never confirm or deny it. Instead, you focus on shaping your fighters into warriors—not just in the ring\n" +
+                        "but in life. They may never know the truth about you, but your legacy burns brighter with each jab, each block,\n" +
+                        "each hard-won victory they achieve.\n";
+        GameLogic.printWithDelay(GameLogic.centerText(20, prompt));
+        GameLogic.pressAnything();
+    }
+
+    private void sharedEnding(){
+        GameLogic.clearConsole();
+        String prompt = "As you lean against the ropes, the gym alive with the sounds of determination, your gaze falls on the\n" +
+                        "trophies that line the walls. They're not just relics of your past; they're reminders of how far you've come\n" +
+                        "and how far your students will go.\n\n" +
+                        "You hear a loud thud as a young fighter lands their first perfect hook. The sound reverberates, filling\n" + 
+                        "you with pride. The crowds may no longer chant your name, but in this moment, you know your\n" +
+                        "impact is greater than ever.\n\n\n" +
+                        "🥊 The End of a Fighter... The Start of a Legacy 🥊\n";
+        GameLogic.printWithDelay(GameLogic.centerText(20, prompt));
+        GameLogic.pressAnything();
     }
 
     public void gameEndingLogo(){
         GameLogic.clearConsole();
-
         player.setCurrentWorld(3);
+
+        GameLogic.gameLogo();
+        // String mainAscii = GameLogic.greenText + GameLogic.centerText(100,
+        // "████████╗██╗  ██╗ █████╗ ███╗   ██╗██╗  ██╗███████╗    ███████╗ ██████╗ ██████╗     ██████╗ ██╗      █████╗ ██╗   ██╗██╗███╗   ██╗ ██████╗ \n" +
+        // "╚══██╔══╝██║  ██║██╔══██╗████╗  ██║██║ ██╔╝██╔════╝    ██╔════╝██╔═══██╗██╔══██╗    ██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██║████╗  ██║██╔════╝ \n" +
+        // "   ██║   ███████║███████║██╔██╗ ██║█████╔╝ ███████╗    █████╗  ██║   ██║██████╔╝    ██████╔╝██║     ███████║ ╚████╔╝ ██║██╔██╗ ██║██║  ███╗\n" +
+        // "   ██║   ██╔══██║██╔══██║██║╚██╗██║██╔═██╗ ╚════██║    ██╔══╝  ██║   ██║██╔══██╗    ██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██║██║╚██╗██║██║   ██║\n" +
+        // "   ██║   ██║  ██║██║  ██║██║ ╚████║██║  ██╗███████║    ██║     ╚██████╔╝██║  ██║    ██║     ███████╗██║  ██║   ██║   ██║██║ ╚████║╚██████╔╝\n" +
+        // "   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ \n"
+        // ) + GameLogic.reset;
+
         String mainAscii = GameLogic.greenText + GameLogic.centerText(100,
-"████████╗██╗  ██╗ █████╗ ███╗   ██╗██╗  ██╗███████╗    ███████╗ ██████╗ ██████╗     ██████╗ ██╗      █████╗ ██╗   ██╗██╗███╗   ██╗ ██████╗ \n" +
-"╚══██╔══╝██║  ██║██╔══██╗████╗  ██║██║ ██╔╝██╔════╝    ██╔════╝██╔═══██╗██╔══██╗    ██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██║████╗  ██║██╔════╝ \n" +
-"   ██║   ███████║███████║██╔██╗ ██║█████╔╝ ███████╗    █████╗  ██║   ██║██████╔╝    ██████╔╝██║     ███████║ ╚████╔╝ ██║██╔██╗ ██║██║  ███╗\n" +
-"   ██║   ██╔══██║██╔══██║██║╚██╗██║██╔═██╗ ╚════██║    ██╔══╝  ██║   ██║██╔══██╗    ██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██║██║╚██╗██║██║   ██║\n" +
-"   ██║   ██║  ██║██║  ██║██║ ╚████║██║  ██╗███████║    ██║     ╚██████╔╝██║  ██║    ██║     ███████╗██║  ██║   ██║   ██║██║ ╚████║╚██████╔╝\n" +
-"   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ \n"
-) + GameLogic.reset;
+        "        ███        ▄█    █▄       ▄████████ ███▄▄▄▄      ▄█   ▄█▄    ▄████████         ▄████████  ▄██████▄     ▄████████         ▄███████▄  ▄█          ▄████████ ▄██   ▄    ▄█  ███▄▄▄▄      ▄██████▄  \n" +
+        "    ▀█████████▄   ███    ███     ███    ███ ███▀▀▀██▄   ███ ▄███▀   ███    ███        ███    ███ ███    ███   ███    ███        ███    ███ ███         ███    ███ ███   ██▄ ███  ███▀▀▀██▄   ███    ███ \n" +
+        "       ▀███▀▀██   ███    ███     ███    ███ ███   ███   ███▐██▀     ███    █▀         ███    █▀  ███    ███   ███    ███        ███    ███ ███         ███    ███ ███▄▄▄███ ███▌ ███   ███   ███    █▀  \n" +
+        "        ███   ▀  ▄███▄▄▄▄███▄▄   ███    ███ ███   ███  ▄█████▀      ███              ▄███▄▄▄     ███    ███  ▄███▄▄▄▄██▀        ███    ███ ███         ███    ███ ▀▀▀▀▀▀███ ███▌ ███   ███  ▄███        \n" +
+        "        ███     ▀▀███▀▀▀▀███▀  ▀███████████ ███   ███ ▀▀█████▄    ▀███████████      ▀▀███▀▀▀     ███    ███ ▀▀███▀▀▀▀▀        ▀█████████▀  ███       ▀███████████ ▄██   ███ ███▌ ███   ███ ▀▀███ ████▄  \n" +
+        "        ███       ███    ███     ███    ███ ███   ███   ███▐██▄            ███        ███        ███    ███ ▀███████████        ███        ███         ███    ███ ███   ███ ███  ███   ███   ███    ███ \n" +
+        "        ███       ███    ███     ███    ███ ███   ███   ███ ▀███▄    ▄█    ███        ███        ███    ███   ███    ███        ███        ███▌    ▄   ███    ███ ███   ███ ███  ███   ███   ███    ███ \n" +
+        "       ▄████▀     ███    █▀      ███    █▀   ▀█   █▀    ███   ▀█▀  ▄████████▀         ███         ▀██████▀    ███    ███       ▄████▀      █████▄▄██   ███    █▀   ▀█████▀  █▀    ▀█   █▀    ████████▀  \n" +
+        "                                                        ▀                                                     ███    ███                   ▀                                                            \n"
+        ) + GameLogic.reset;
 
-        String mainAscii2 = GameLogic.redText + GameLogic.centerText(100,
-
-                        "███▄    █  ██▓  ▄████   ▄████  ▄▄▄        ██████  \n" +
-                        "██ ▀█   █ ▓██▒ ██▒ ▀█▒ ██▒ ▀█▒▒████▄    ▒██    ▒  \n" +
-                        "▓██  ▀█ ██▒▒██▒▒██░▄▄▄░▒██░▄▄▄░▒██  ▀█▄  ░ ▓██▄   \n" +
-                        "▓██▒  ▐▌██▒░██░░▓█  ██▓░▓█  ██▓░██▄▄▄▄██   ▒   ██▒\n" +
-                        "▒██░   ▓██░░██░░▒▓███▀▒░▒▓███▀▒ ▓█   ▓██▒▒██████▒▒\n" +
-                        "░ ▒░   ▒ ▒ ░▓   ░▒   ▒  ░▒   ▒  ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░\n" +
-                        "░ ░░   ░ ▒░ ▒ ░  ░   ░   ░   ░   ▒   ▒▒ ░░ ░▒  ░ ░\n" +
-                        "  ░   ░ ░  ▒ ░░ ░   ░ ░ ░   ░   ░   ▒   ░  ░  ░   \n" +
-                        "        ░  ░        ░       ░       ░  ░      ░   \n"
-                        ) + GameLogic.reset;
-
-
-        System.out.println(mainAscii);
-        System.out.println();
-        System.out.println(mainAscii2);
-
+        System.out.print(mainAscii);
         GameLogic.pressAnything();
         GameLogic.gameData.saveGame();
 

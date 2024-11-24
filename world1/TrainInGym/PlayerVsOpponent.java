@@ -48,7 +48,9 @@ public abstract class PlayerVsOpponent {
 
         if (critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged) {
             player.setDamageSetter(player.getCritMultiplier());
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + "'s " + playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw) {
@@ -57,7 +59,9 @@ public abstract class PlayerVsOpponent {
 
         if (opponentDodged) {
             player.setDamageSetter(0);
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + " dodges " + player.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         player.useSkill(playerAttacks[choice]);
@@ -76,7 +80,9 @@ public abstract class PlayerVsOpponent {
 
         if (critChance < opponent.getCritChance() && choice != 2 && !isDraw) {
             opponent.setDamageSetter(opponent.getCritMultiplier());
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw) {
@@ -85,7 +91,9 @@ public abstract class PlayerVsOpponent {
 
         if (playerDodged) {
             opponent.setDamageSetter(0);
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + " dodges " + opponent.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         opponentPerformAction(opponentAttacks[choice]);

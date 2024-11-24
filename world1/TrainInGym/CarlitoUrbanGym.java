@@ -32,8 +32,14 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
 
     public void fightLoop() {
         GameLogic.clearConsole();
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+        System.out.print(GameLogic.reset);
+
+        System.out.print(GameLogic.redText);
         System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
+        System.out.print(GameLogic.reset);
+
         getPlayer().setOpponent(opponent);
         printStats();
         while (getPlayer().getHp() > 0 && opponent.getHp() > 0) {
@@ -41,7 +47,9 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
             printStats();
             if (getPlayer().getHp() <= 0) {
                 System.out.println();
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox(getPlayer().getName() + " is knocked out! " + opponent.getName() + " wins!", 60));
+                System.out.print(GameLogic.reset);
                 getPlayer().setIsLose(true);
                 playerProgress.setRound(playerProgress.getRound() + 1);
                 getPlayer().setHp(getPlayer().getMaxHp());
@@ -52,7 +60,9 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
                 return;
             } else if(opponent.getHp() <= 0){
                 System.out.println();
+                System.out.print(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + getPlayer().getName() + " wins!", 60));
+                System.out.print(GameLogic.reset);
                 getPlayer().setIsLose(false);
                 winnerReward();
                 getPlayer().setHp(getPlayer().getMaxHp());
@@ -74,6 +84,7 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
     }
     
     private void selectAttack() {
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
         
         for (int i = 0; i < attack.length; i++) {
@@ -81,9 +92,13 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
             System.out.print(GameLogic.centerText(40, attackInfo));
         }
         
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
+        System.out.print(GameLogic.reset);
+
         String input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
     
+        System.out.print(GameLogic.orangeText);
         while (isValidCombo(input, getPlayer().getStamina()) != 0) {
             if(isValidCombo(input, getPlayer().getStamina()) == 1){
                 System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 60));
@@ -106,6 +121,7 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
 
         opponentValid(opponentChoices);
 
+        System.out.print(GameLogic.reset);
         System.out.println();
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("You've selected:", "Opponent selected:", 30)));
@@ -120,6 +136,7 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
 
         System.out.println();
         printFight(choices, opponentChoices);
+        System.out.print(GameLogic.reset);
     }
 
     private int isValidCombo(String input, int stamina) {
@@ -177,17 +194,25 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
             String playerAttack = getPlayer().getName() + " throws a " + attack[choices[i]][0] + " to " + opponent.getName();
             
             if(countered == 1){
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 playerSuccessAction(choices[i], opponentChoices[i], false);
                 opponentFailedAction(attack[opponentChoices[i]][0]);
             } else if(countered == 2){
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 opponentSuccessAction(opponentChoices[i], choices[i], false);
                 playerFailedAction(attack[choices[i]][0]);
             } else {
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
+                System.out.print(GameLogic.redText);
                 String opponentAttack = opponent.getName() + " draws " + getPlayer().getName() + " with " + attack[opponentChoices[i]][0];
                 System.out.print(GameLogic.centerText(50, opponentAttack));
+                System.out.print(GameLogic.reset);
                 drawAction(choices[i], opponentChoices[i]);
             }
             if(getPlayer().getHp() <= 0 || opponent.getHp() <= 0){
@@ -204,7 +229,9 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
                         "Fred is giving you 100 points as a starter pack to get you started.\n" +
                         "You now have " + getPlayer().getPlayerPoints() + " points.\n" +
                         "You can now visit the shop and use your points to buy items.";
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox(rewardMessage, 90));
+        System.out.print(GameLogic.reset);
         GameLogic.pressAnything();
     }
 }

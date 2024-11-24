@@ -27,7 +27,9 @@ public class FredGym extends PlayerVsOpponent2{
     @Override
     protected void handleWin() {
         System.out.println();
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + player.getName() + " wins!",60));
+        System.out.print(GameLogic.reset);
         winnerReward();
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
@@ -41,7 +43,9 @@ public class FredGym extends PlayerVsOpponent2{
     @Override
     protected void handleLoss() {
         System.out.println();
+        System.out.print(GameLogic.redText);
         System.out.println(GameLogic.centerBox(player.getName() + " is knocked out! " + opponent.getName() + " wins!",60));
+        System.out.print(GameLogic.reset);
         playerProgress.setRound(playerProgress.getRound() + 1);
         opponent.setHp(opponent.getMaxHp());
         opponent.setStamina(opponent.getMaxStamina());
@@ -53,9 +57,12 @@ public class FredGym extends PlayerVsOpponent2{
     @Override
     protected void winnerReward() {
         playerProgress.setAddStats(playerProgress.getAddStats() + 1);
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox("* Congratulations! You've won " + playerProgress.getAddStats() + " / 5 matches. *\n\n" +
                         "Fred: \"Great job! Now, choose what stats you want to upgrade.\"",90));
+        System.out.print(GameLogic.reset);
 
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(50,
                 "Here are your choices: ( Select one only )\n" +
                         "1. HP - Increase by +10%\n" +
@@ -67,7 +74,10 @@ public class FredGym extends PlayerVsOpponent2{
 
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 5);
         addStats(choice);
+        System.out.print(GameLogic.reset);
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox("Fred: \"Stats added! Remember, you can train up to 5 times!\"",70));
+        System.out.print(GameLogic.reset);
         GameLogic.printCenteredSeparator(50);
         GameLogic.pressAnything();
     }

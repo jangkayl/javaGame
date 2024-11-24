@@ -27,7 +27,9 @@ public class PabloUrbanGym extends PlayerVsOpponent2{
     @Override
     protected void handleWin() {
         System.out.println();
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + player.getName() + " wins!",60));
+        System.out.print(GameLogic.reset);
         player.setIsLose(false);
         player.setRank(2);
         GameLogic.rankNotif();
@@ -41,7 +43,9 @@ public class PabloUrbanGym extends PlayerVsOpponent2{
     @Override
     protected void handleLoss() {
         System.out.println();
+        System.out.print(GameLogic.redText);
         System.out.println(GameLogic.centerBox(player.getName() + " is knocked out! " + opponent.getName() + " wins!",60));
+        System.out.print(GameLogic.reset);
         player.setIsLose(true);
         playerProgress.setRound(playerProgress.getRound() + 1);
         resetFighterStats();
@@ -56,7 +60,9 @@ public class PabloUrbanGym extends PlayerVsOpponent2{
                 "You now have " + player.getPlayerPoints() + " points.\n\n" +
                 "Visit the shop and use your points to buy items.\n";
 
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox(message, 90));
+        System.out.print(GameLogic.reset);
         GameLogic.pressAnything();
     }
 }

@@ -29,6 +29,7 @@ public class Player extends Boxer implements PlayerInterface {
     }
 
     public void useSkill(String skillName){
+        System.out.print(GameLogic.greenText);
         if(skillName == "Block"){
             int newStamina = this.getStamina() + 5;
             if (newStamina > this.getMaxStamina()) {
@@ -57,8 +58,10 @@ public class Player extends Boxer implements PlayerInterface {
                 { "-10% Stamina", "-5% Dodge Chance", "20% Critical Hit Chance", "+50% Crit Damage Multiplier"}};
 
         GameLogic.clearConsole();
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerBox("CHOOSE A TRAIT", 50));
         System.out.println();
+        System.out.print(GameLogic.orangeText);
         for(int i = 0; i < traits.length; i++){
             System.out.print(GameLogic.centerText(50,"(" + (i+1) + ") " + traits[i]));
             if(i == 2) System.out.print(GameLogic.centerText(50, bonus[i][0]));
@@ -71,6 +74,7 @@ public class Player extends Boxer implements PlayerInterface {
         }
         
         int input = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 3);
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerBox("You chose " + traits[input-1] + "!",50));
         if(input == 1){
             int newHp = getMaxHp() + (int)Math.floor(getMaxHp() * 0.5);

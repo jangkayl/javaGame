@@ -8,8 +8,8 @@ critChance=0.65
 critMultiplier=2.0
 dodgeChance=0.24500000000000005
 playerPoints=1300
-currentWorld=3
-currentRank=6
+currentWorld=2
+currentRank=5
 stage=22
 isLose=false
 

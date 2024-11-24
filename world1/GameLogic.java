@@ -20,7 +20,10 @@ public class GameLogic{
     public static String redText = "\u001B[31m";
     public static String greenText = "\u001B[32m";
     public static String reset = "\u001B[0m";
-    public static String yellowText = "\u001B[33m";
+    public static String orangeText = "\u001B[38;2;255;165;0m";
+    public static String lightRed = "\u001B[91m";
+    public static String purpleText = "\u001B[35m";
+    public static String blueText = "\u001B[34m";
     public static PlayerProgress playerProgress;
     private static Item[] inventoryItems;
     private static Item[] slots;
@@ -58,7 +61,7 @@ public class GameLogic{
             try {
                 input = scan.nextLine();
             } catch(Exception e){
-                System.out.println(GameLogic.centerBox("Please enter a valid input!", 50));
+                System.out.println(centerBox("Please enter a valid input!", 50));
                 scan.next();
             }
         } while(input == "" || input == null);
@@ -242,6 +245,7 @@ public class GameLogic{
 
         while (true) { 
             clearConsole();
+            System.out.print(GameLogic.orangeText);
             System.out.print(centerText(20,"Have you ever played this game?"));
             System.out.print(centerText(20,"1) Yep!"));
             System.out.print(centerText(20,"2) Not yet"));
@@ -250,13 +254,17 @@ public class GameLogic{
             if (choice == 2) {
                 do {
                     clearConsole();
+                    System.out.print(greenText);
                     System.out.println(centerBox("Enter your name:", 50));
-                    name = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
+                    name = readString(centerText("", 97) + "-> ");
+                    System.out.print(reset);
                     System.out.println();
+                    System.out.print(orangeText);
                     System.out.print(centerText(20,"You are " + name + " right?"));
                     System.out.print(centerText(20,"(1) Yes"));
                     System.out.print(centerText(20,"(2) No "));
                     int input = readInt(centerText("", 97) + "-> ", 1, 2);
+                    System.out.print(reset);
                     if (input == 1) nameSet = true;
                 } while (!nameSet);
     
@@ -283,7 +291,7 @@ public class GameLogic{
             }
         }
     
-        Story.printIntro(player.getName());
+        // Story.printIntro(player.getName());
         isRunning = true;
         
         if(player.getCurrentWorld() == 1){
@@ -304,15 +312,14 @@ public class GameLogic{
         clearConsole();
         System.out.print(greenText);
         System.out.println(centerBox("MENU", 30));
-        System.out.print(reset);
+        System.out.print(orangeText);
         System.out.print(centerText(20, "Choose an action:"));
         System.out.print(centerText(20, "(0) Exit Game"));
         System.out.print(centerText(20, "(1) Continue on your journey"));
         System.out.print(centerText(20, "(2) Check your Stats"));
-        System.out.print(centerText(20, "(3) Tutorial"));
         if(playerProgress.getShopStage() > 0){
-            System.out.println(centerText(20, "(4) Inventory"));
-            System.out.println(centerText(20, "(5) Shop"));
+            System.out.print(centerText(20, "(3) Inventory"));
+            System.out.print(centerText(20, "(4) Shop"));
         }
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
@@ -321,13 +328,14 @@ public class GameLogic{
     // Loops the menu options
     static void gameLoop(){
         int input;
+
         while(isRunning){
             shop = new Shop(player, playerProgress);
             printMenu();
             if(playerProgress.getShopStage() > 0){
-                input = readInt(centerText("", 97) + "-> ", 0, 5);
+                input = readInt(centerText("", 97) + "-> ", 0, 4);
             } else {
-                input = readInt(centerText("", 97) + "-> ", 0, 3);
+                input = readInt(centerText("", 97) + "-> ", 0, 2);
             }
             if(input == 0){
                 isRunning = false;
@@ -335,15 +343,13 @@ public class GameLogic{
                 continueJourney();
             } else if(input == 2){
                 printStats();
-            } else if(input == 3){
-                UrbanStory.tutorialMenu();
             } else if(playerProgress.getShopStage() > 0){
-                if(input == 4){
+                if(input == 3){
                     gameData.getGameDataManager().getInventory();
                     gameData.getGameDataManager().getSlots();
                     inventory.inventoryMenu();
                     gameData.inputSlots(inventory.getSlots());
-                } else if(input == 5){
+                } else if(input == 4){
                     shop.showShop(false);
                     gameData.inputInventory(inventory.getInventoryItems());
                 }
@@ -362,10 +368,12 @@ public class GameLogic{
                     System.out.print(centerBox("Welcome to the " + worlds[player.getCurrentWorld()], 100));
                     System.out.print(reset);
                     UrbanStory.printUrban();
+                    System.out.print(orangeText);
                     System.out.print(centerText(20,"Are you ready to start your journey?"));
                     System.out.print(centerText(20,"(1) Yes"));
                     System.out.print(centerText(20,"(2) No "));
                     int choice2 = readInt(centerText("", 97) + "-> ", 1, 2);
+                    System.out.print(reset);
                     if(choice2 == 1){
                         gymTraining();
                     } else {
@@ -377,12 +385,15 @@ public class GameLogic{
             } else {
                 while(true){
                     clearConsole();
+                    System.out.print(greenText);
                     System.out.print(centerBox("MENU", 30));
+                    System.out.print(orangeText);
                     System.out.println();
                     System.out.print(centerText(20,"(1) Train with Fred"));
                     System.out.print(centerText(20,"(2) Enter Tournament"));
                     System.out.print(centerText(20,"(3) Go Back"));
                     int choice2 = readInt(centerText("", 97) + "-> ", 1, 3);
+                    System.out.print(reset);
                     if(choice2 == 1){
                         gymTraining();
                     } else if(choice2 == 2) {
@@ -438,14 +449,20 @@ public class GameLogic{
                         fred.setPlayer(player);
                         fred.fightLoop();
                         clearConsole();
+                        System.out.print(GameLogic.greenText);
                         System.out.print(centerBox("Fred: \"Want to train more to gain more stats?\"",50));
+                        System.out.print(GameLogic.reset);
                         System.out.println();
+                        System.out.print(GameLogic.orangeText);
                         System.out.print(centerText(50,"(1) Sure, lets go for another round!"));
                         System.out.print(centerText(50,"(2) I'll take a break first."));
                         choice = readInt(centerText("", 97) + "-> ", 1, 2);
+                        System.out.print(GameLogic.reset);
                         if(choice == 1 && playerProgress.getAddStats() == 5){
+                            System.out.print(GameLogic.greenText);
                             System.out.print(centerBox("Fred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n",110));
                             System.out.println("\n");
+                            System.out.print(GameLogic.reset);
                             pressAnything();
                         }
                         if(choice == 2) break;
@@ -456,14 +473,20 @@ public class GameLogic{
                             fred.setPlayer(player);
                             fred.fightLoop();
                             clearConsole();
+                            System.out.print(GameLogic.greenText);
                             System.out.print(centerBox("Fred: \"Want to train more to gain more stats?\"",50));
+                            System.out.print(GameLogic.reset);
                             System.out.println();
+                            System.out.print(GameLogic.orangeText);
                             System.out.print(centerText(50,"(1) Sure, lets go for another round!"));
                             System.out.print(centerText(50,"(2) I'll take a break first."));
                             choice = readInt(centerText("", 97) + "-> ", 1, 2);
+                            System.out.print(GameLogic.reset);
                             if(choice == 1 && playerProgress.getAddStats() == 5){
+                                System.out.print(GameLogic.greenText);
                                 System.out.print(centerBox("\nFred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"\n",110));
                                 System.out.println("\n");
+                                System.out.print(GameLogic.reset);
                                 pressAnything();
                             }
                             if(choice == 2) break;
@@ -603,9 +626,12 @@ public class GameLogic{
     }
 
     public static void rankNotif(){
+        System.out.print(purpleText);
         String congrats = "Congratulations! You've ranked UP!\n"+
                             "You are now a " + player.getRank();
         System.out.print(centerBox(congrats, 90));
+        System.out.print(reset);
+        System.out.println();
     }
 
     private static void addStats(int choice){

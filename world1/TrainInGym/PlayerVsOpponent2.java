@@ -80,8 +80,12 @@ public abstract class PlayerVsOpponent2 {
         GameLogic.gameData.saveGame();
         player.setOpponent(opponent);
         GameLogic.clearConsole();
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+        System.out.print(GameLogic.reset);
+        System.out.print(GameLogic.redText);
         System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
+        System.out.print(GameLogic.reset);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
             selectAttack();
@@ -100,6 +104,7 @@ public abstract class PlayerVsOpponent2 {
     private void selectAttack() {
         int[] choices = new int[3];
 
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
     
         for (int i = 0; i < attackOption.length; i++) {
@@ -118,9 +123,11 @@ public abstract class PlayerVsOpponent2 {
         }
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
         String input;
         
+        System.out.print(GameLogic.orangeText);
         while (true) {
             input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
 
@@ -128,8 +135,12 @@ public abstract class PlayerVsOpponent2 {
                 counterInfos(opponent.getName());
                 GameLogic.pressAnything();
                 GameLogic.clearConsole();
+                System.out.print(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+                System.out.print(GameLogic.reset);
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
+                System.out.print(GameLogic.reset);
                 return;
             }
 
@@ -188,7 +199,8 @@ public abstract class PlayerVsOpponent2 {
         }
 
         opponentValid(opponentChoices);
-        
+
+        System.out.print(GameLogic.reset);
         System.out.println();
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("You've selected:", "Opponent selected:", 30)));
@@ -212,17 +224,24 @@ public abstract class PlayerVsOpponent2 {
             String playerAttack = getPlayer().getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName();
 
             if(countered == 1){
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 playerSuccessAction(choices[i], opponentChoices[i], false);
                 opponentFailedAction(opponentAttacks[opponentChoices[i]]);
             } else if(countered == 2){
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 opponentSuccessAction(opponentChoices[i], choices[i], false);
                 playerFailedAction(playerAttacks[choices[i]]);
             } else {
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.redText);
                 String opponentAttack = opponent.getName() + " draws " + getPlayer().getName() + " with " + opponentAttacks[opponentChoices[i]];
                 System.out.print(GameLogic.centerText(50, opponentAttack));
+                System.out.print(GameLogic.reset);
                 drawAction(choices[i], opponentChoices[i]);
             }
             if(getPlayer().getHp() <= 0 || getOpponent().getHp() <= 0){
@@ -295,6 +314,7 @@ public abstract class PlayerVsOpponent2 {
 
         if (critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged) {
             player.setDamageSetter(player.getCritMultiplier());
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + "'s " + playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
         }
 
@@ -304,6 +324,7 @@ public abstract class PlayerVsOpponent2 {
 
         if (opponentDodged) {
             player.setDamageSetter(0);
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + " dodges " + player.getName() + "'s punch!"));
         }
 
@@ -323,6 +344,7 @@ public abstract class PlayerVsOpponent2 {
 
         if (critChance < opponent.getCritChance() && choice != 2 && !isDraw) {
             opponent.setDamageSetter(opponent.getCritMultiplier());
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
         }
 
@@ -332,6 +354,7 @@ public abstract class PlayerVsOpponent2 {
 
         if (playerDodged) {
             opponent.setDamageSetter(0);
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + " dodges " + opponent.getName() + "'s punch!"));
         }
 
@@ -369,10 +392,11 @@ public abstract class PlayerVsOpponent2 {
     }
 
     private void printStats(){
-        System.out.println();
+        System.out.println();        
+        System.out.print(GameLogic.reset);
         String prompt = GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)
                         + "\n" + GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)
-                         + "\n" + GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30);
+                         + "\n" + GameLogic.formatColumns("Stamina    " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina    " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30);
         System.out.print(GameLogic.centerBox(prompt, 55));
         System.out.println("\n");
     }

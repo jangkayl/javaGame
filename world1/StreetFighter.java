@@ -22,7 +22,11 @@ public class StreetFighter extends Boxer implements StreetFighterInterface{
             if (newStamina > this.getMaxStamina()) {
                 newStamina = this.getMaxStamina();
             }
+
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " and gains 5 stamina!"));
+            System.out.print(GameLogic.reset);
+            
             this.setStamina(newStamina);
         } else {
             int damage = (int)Math.floor(skills.getSkillByName(skillName).getHpDamage() * getDamageSetter());
@@ -35,7 +39,11 @@ public class StreetFighter extends Boxer implements StreetFighterInterface{
                 player.setStamina(player.getStamina() - staminaMinus);
             player.setHp(player.getHp() - damage);
             this.setStamina(this.getStamina() - staminaReduced);
+
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " " + player.getName() + " for " + damage + (staminaMinus != 0 ? " damage and drains " + staminaMinus + " stamina!" : " damage!")));
+            System.out.print(GameLogic.reset);
+            
         }
     }
 
@@ -45,7 +53,11 @@ public class StreetFighter extends Boxer implements StreetFighterInterface{
             if (newStamina > this.getMaxStamina()) {
                 newStamina = this.getMaxStamina();
             }
+
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40, this.getName() + " blocks and gains 5 stamina!"));
+            System.out.print(GameLogic.reset);
+            
             this.setStamina(newStamina);
         } else {
             int damage = (int) Math.floor(skills.getSkillByName(skillName).getHpDamage() * this.getDamageSetter());
@@ -62,9 +74,11 @@ public class StreetFighter extends Boxer implements StreetFighterInterface{
             target.setHp(target.getHp() - damage);
             this.setStamina(this.getStamina() - staminaReduced);
     
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40, this.getName() + " uses " + skills.getSkillByName(skillName).getAttackName() +
                     " on " + target.getName() + " for " + damage +
                     (staminaMinus != 0 ? " damage and drains " + staminaMinus + " stamina!" : " damage!")));
+            System.out.print(GameLogic.reset);
         }
     }
 

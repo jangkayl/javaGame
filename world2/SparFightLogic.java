@@ -230,7 +230,8 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
                 choices[i] = 9;
             }
         }
-
+        
+        System.out.print(GameLogic.reset);
         System.out.println();
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("You've selected:", "Opponent selected:", 30)));

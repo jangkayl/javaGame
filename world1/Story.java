@@ -32,6 +32,7 @@ public class Story {
         System.out.print(GameLogic.redText);
         System.out.println(GameLogic.centerBox("The Redemption Story", 95));
         System.out.print(GameLogic.reset);
+        System.out.print(GameLogic.orangeText);
         String story = "In the shadowy alleys of Tondo Manila, there was a boy named " + name + " who has spent his\n" +
                 "life surviving the harsh streets while studying hard to help his family from poverty.\n" +
                 "He has been bullied all his life and all he wants is to graduate and end his sufferings.\n" +
@@ -43,7 +44,8 @@ public class Story {
                 name + "'s journey has just begun, with battles ahead that go beyond the streets and the ring.";
 
         String centeredStory = GameLogic.centerText(100, story);
-        System.out.println(centeredStory);
+        GameLogic.printWithDelay(centeredStory);
+        System.out.print(GameLogic.reset);
         GameLogic.pressAnything();
     }
 }
