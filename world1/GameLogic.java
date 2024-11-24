@@ -7,6 +7,7 @@ import world1.TrainInGym.PabloUrbanGym;
 import world1.database.GameDataManager;
 import world1.database.GameDatabase;
 import world2.GameLogic2;
+import world3.ChampTournament;
 import world3.GameLogic3;
 
 import java.text.DecimalFormat;
@@ -46,6 +47,21 @@ public class GameLogic{
             }
             scan.nextLine();
         } while(input < min || input > max);
+        return input;
+    }
+
+    // Read user string input
+    public static String readString(String prompt){
+        String input = "";
+        do {
+            System.out.print(prompt);
+            try {
+                input = scan.nextLine();
+            } catch(Exception e){
+                System.out.println(GameLogic.centerBox("Please enter a valid input!", 50));
+                scan.next();
+            }
+        } while(input == "" || input == null);
         return input;
     }
 
@@ -235,8 +251,7 @@ public class GameLogic{
                 do {
                     clearConsole();
                     System.out.println(centerBox("Enter your name:", 50));
-                    System.out.print(centerText("", 97) + "-> ");
-                    name = scan.nextLine();
+                    name = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
                     System.out.println();
                     System.out.print(centerText(20,"You are " + name + " right?"));
                     System.out.print(centerText(20,"(1) Yes"));
@@ -275,6 +290,9 @@ public class GameLogic{
             GameLogic2.gameLoop();
         } else if(player.getCurrentWorld() == 2){
             GameLogic3.gameLoop();
+        } else if(player.getCurrentWorld() == 3){
+            ChampTournament champTour = new ChampTournament();
+            champTour.gameEndingLogo();
         } else {
             gameLoop();
         }
@@ -541,10 +559,8 @@ public class GameLogic{
 
     public static void rankReward() {
         System.out.println();
-        String prompt1 ;
-        String congrats = "Congratulations! You've ranked UP!\n"+
-                            "You are now a " + player.getRank();
-        System.out.print(centerBox(congrats, 90));
+        String prompt1;
+        rankNotif();
         System.out.println();
         System.out.print(centerText(50,
                 "Here are your choices: ( Select one only )\n" +
@@ -584,6 +600,12 @@ public class GameLogic{
         printCenteredSeparator(50);
         pressAnything();
         gameData.saveGame();
+    }
+
+    public static void rankNotif(){
+        String congrats = "Congratulations! You've ranked UP!\n"+
+                            "You are now a " + player.getRank();
+        System.out.print(centerBox(congrats, 90));
     }
 
     private static void addStats(int choice){

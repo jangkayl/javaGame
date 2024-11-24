@@ -19,18 +19,17 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
     private boolean opponentDodged = false;
     protected static BoxerHints boxerHints;
     private int[] opponentChoices = new int[3];
-    protected static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
-                                {"Hook", "Damage: 15 | Stamina: -7"}, 
-                                {"Block", "Stamina: +5"}, 
-                                {"Uppercut", "Damage: 20 | Stamina: -10"},
-                                {"The Body Breaker", ""},
-                                {"Elbow Strike", "Damage: 40 | Stamina: -25 | HP: -10"},
-                                {"Head Butt", "Damage: 30 | Stamina: -20 | HP: -15"},
-                                {"Low Blow", "Damage: 40 | Stamina: -25 | HP: -20"},
-                            };
-    protected static String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
-                                    {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
-                                    {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
+    protected static String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5      "}, 
+                                                {"Hook", "Damage: 15 | Stamina: -7     "}, 
+                                                {"Block", "Stamina: +5                 "}, 
+                                                {"Uppercut", "Damage: 20 | Stamina: -10"},
+                                                {"The Body Breaker", ""},
+                                                {"Elbow Strike", "Damage: 40 | Stamina: -25 | HP: -10"},
+                                                {"Head Butt", "Damage: 30 | Stamina: -20 | HP: -15   "},
+                                                {"Low Blow", "Damage: 40 | Stamina: -25 | HP: -20    "}};
+    protected static String[][] comboOption = { {"Lead Body Shot", "Damage: 15 | Stamina: -7     "},
+                                                {"Cross to the Ribs", "Damage: 20 | Stamina: -9  "},
+                                                {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
     public static String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut", "Elbow Strike", "Head Butt", "Low Blow"};
     private String[] opponentAttacks;
 
@@ -165,9 +164,8 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
-        System.out.print(GameLogic.centerText("", 97) + "-> ");
         while (true) {
-            input = GameLogic.scan.nextLine();
+            input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
 
             if(input.equals("0")){
                 counterInfos(opponent.getName());
@@ -414,10 +412,11 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
     
     private void printStats(){
         System.out.println();
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
-        System.out.println();
+        String prompt = GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)
+                        + "\n" + GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)
+                         + "\n" + GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30);
+        System.out.print(GameLogic.centerBox(prompt, 55));
+        System.out.println("\n");
     }
     
     protected void winnerReward(){
@@ -508,7 +507,7 @@ public abstract class SparFightLogic implements SparFightLogicInterface{
             System.out.println();
             System.out.print(GameLogic.centerText(50,"1) Quick Jab < Uppercut"));
             System.out.print(GameLogic.centerText(50, "(2) Cross < Uppercut"));
-            System.out.print(GameLogic.centerText(50,"(3) Power Punch < Block"));
+            System.out.print(GameLogic.centerText(50,"(3) Power Punch < Hook"));
             System.out.println();
             System.out.print(GameLogic.centerText(50,"(4) Elbow Strike < Block"));
             System.out.print(GameLogic.centerText(50,"(5) Head Butt < Hook"));

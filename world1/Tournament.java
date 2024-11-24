@@ -228,7 +228,8 @@ public class Tournament {
 
     public static void printTournament() {
         System.out.print(GameLogic.centerBox("Tournament Rules", 50));
-        System.out.print(GameLogic.centerText(80, "\n1. You will face 3 opponents in this tournament."));
+        System.out.println();
+        System.out.print(GameLogic.centerText(80, "1. You will face 3 opponents in this tournament."));
         System.out.print(GameLogic.centerText(80, "2. Each opponent match is a best-of-3 rounds."));
         System.out.print(GameLogic.centerText(80, "3. Win 3 rounds against each opponent to proceed."));
         System.out.print(GameLogic.centerText(80, "4. If you lose a best-of-3 match, you are out of the tournament \nand must return to training."));

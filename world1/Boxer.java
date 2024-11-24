@@ -4,7 +4,7 @@ import world1.interfaces.BoxerInterface;
 
 public abstract class Boxer implements BoxerInterface{
     private String name;
-    protected String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION", "LEGEND", "HALL OF FAMER"};
+    protected String[] ranking = {"ROOKIE", "AMATEUR", "CONTENDER", "CHALLENGER", "PRO FIGHTER", "CHAMPION", "WORLD CHAMPION"};
     private int maxHp, hp, stamina, maxStamina, rank;
     private double critChance, critMultiplier, dodgeChance, damageSetter;
 

@@ -296,10 +296,11 @@ public class BetFight {
     
     private void printStats(){
         System.out.println();
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ fighter1.getName() +"*" , "*" + fighter2.getName()+"*", 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + fighter1.getHp() + "/" + fighter1.getMaxHp(), "HP       " + fighter2.getHp() + "/" + fighter2.getMaxHp(), 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + fighter1.getStamina() + "/" + fighter1.getMaxStamina(), "Stamina   " + fighter2.getStamina() + "/" + fighter2.getMaxStamina(), 30)));
-        System.out.println();
+        String prompt = GameLogic.formatColumns("*"+ fighter1.getName() +"*" , "*"+ fighter2.getName()+"*", 30)
+                        + "\n" + GameLogic.formatColumns("HP       " + fighter1.getHp() + "/" + fighter1.getMaxHp(), "HP       " + fighter2.getHp() + "/" + fighter2.getMaxHp(), 30)
+                         + "\n" + GameLogic.formatColumns("Stamina   " + fighter1.getStamina() + "/" + fighter1.getMaxStamina(), "Stamina   " + fighter2.getStamina() + "/" + fighter2.getMaxStamina(), 30);
+        System.out.print(GameLogic.centerBox(prompt, 55));
+        System.out.println("\n");
     }
     
 }

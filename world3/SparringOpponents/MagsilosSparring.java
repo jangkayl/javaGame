@@ -19,6 +19,8 @@ public class MagsilosSparring extends SparFightLogic{
 
     @Override
     protected void handleWin() {
+        getPlayer().setStage(getPlayer().getStage() + 1);
+
         winnerRewardPoints();
         System.out.println(); 
         

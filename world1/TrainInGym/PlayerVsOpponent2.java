@@ -17,14 +17,14 @@ public abstract class PlayerVsOpponent2 {
     private boolean playerDodged = false;
     private boolean opponentDodged = false;
     private int[] opponentChoices = new int[3];
-    private String[][] attackOption = {{"Jab", "Damage: 10 | Stamina: -5"}, 
-                                    {"Hook", "Damage: 15 | Stamina: -7"}, 
-                                    {"Block", "Stamina: +5"}, 
-                                    {"Uppercut", "Damage: 20 | Stamina: -10"},
-                                    {"The Body Breaker", ""}};
-    private String[][] comboOption = {{"Lead Body Shot", "Damage: 15 | Stamina: -7"},
-                                    {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
-                                    {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
+    private String[][] attackOption = { {"Jab", "Damage: 10 | Stamina: -5      "}, 
+                                        {"Hook", "Damage: 15 | Stamina: -7     "}, 
+                                        {"Block", "Stamina: +5                 "}, 
+                                        {"Uppercut", "Damage: 20 | Stamina: -10"},
+                                        {"The Body Breaker", ""}};
+    private String[][] comboOption = {  {"Lead Body Shot", "Damage: 15 | Stamina: -7     "},
+                                        {"Cross to the Ribs", "Damage: 20 | Stamina: -9  "},
+                                        {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}};
     private String[] playerAttacks = {"Jab", "Hook", "Block", "Uppercut", "Lead Body Shot", "Cross to the Ribs", "Finishing Uppercut"};
     private String[] opponentAttacks;
 
@@ -119,11 +119,10 @@ public abstract class PlayerVsOpponent2 {
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
-        System.out.print(GameLogic.centerText("", 97) + "-> ");
         String input;
         
         while (true) {
-            input = GameLogic.scan.nextLine();
+            input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
 
             if(input.equals("0")){
                 counterInfos(opponent.getName());
@@ -189,9 +188,9 @@ public abstract class PlayerVsOpponent2 {
         }
 
         opponentValid(opponentChoices);
+        
         System.out.println();
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
-
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("You've selected:", "Opponent selected:", 30)));
 
         for(int i = 0; i < 3; i++){
@@ -371,10 +370,11 @@ public abstract class PlayerVsOpponent2 {
 
     private void printStats(){
         System.out.println();
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
-        System.out.println();
+        String prompt = GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)
+                        + "\n" + GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)
+                         + "\n" + GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30);
+        System.out.print(GameLogic.centerBox(prompt, 55));
+        System.out.println("\n");
     }
 
     private void counterInfos(String name){

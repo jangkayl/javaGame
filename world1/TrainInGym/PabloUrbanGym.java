@@ -30,6 +30,7 @@ public class PabloUrbanGym extends PlayerVsOpponent2{
         System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + player.getName() + " wins!",60));
         player.setIsLose(false);
         player.setRank(2);
+        GameLogic.rankNotif();
         winnerReward();
         resetFighterStats();
         playerProgress.setRound(1);  

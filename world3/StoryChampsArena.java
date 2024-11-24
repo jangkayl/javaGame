@@ -1,6 +1,7 @@
 package world3;
 
 import world1.GameLogic;
+import world1.StreetFighter;
 
 public class StoryChampsArena {
     public static void printChampsArena() {
@@ -39,5 +40,33 @@ public class StoryChampsArena {
         // champsArenaPrompt(name);
     }
 
+    public static void champTournaBackstory(StreetFighter opponent){
+        switch (opponent.getName()) {
+            case "May Welder":
+                System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Meet May \"Money\" Welder, a slick and undefeated fighter known for his defense and precision." +
+                        "\nBorn in the heart of Detroit, May rose from nothing to become a legend in underground boxing." +
+                        "\nA master of counterattacks, he plays the long game, outlasting his opponents until they fall to his calculated blows." +
+                        "\nMay enters the tournament with one goal: to cement his legacy as the greatest to ever step into the ring!"));
+                GameLogic.pressAnything();
+                break;
+            case "Manual Macuez":
+                System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Introducing Manual \"El Matador\" Macuez, a relentless and tactical fighter from Mexico City." +
+                        "\nRaised on a ranch, Manual honed his skills fighting in local arenas, earning his nickname for his sharp and decisive strikes." +
+                        "\nKnown for his unwavering stamina and ability to take down bigger opponents, he’s a force to be reckoned with." +
+                        "\nNow, he joins the tournament with the dream of proving Mexican fighters are the kings of the ring!"));
+                GameLogic.pressAnything();
+                break;
+            case "Mani Pakyaw":
+                System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Enter Mani \"Pacman\" Pakyaw, the pride of the Philippines and a lightning-fast fighter." +
+                        "\nHailing from General Santos City, Mani's rise from poverty to global fame is legendary." +
+                        "\nHis quick footwork and relentless flurry of punches leave opponents dazed and defeated." +
+                        "\nMani steps into the tournament, not for glory or riches, but to inspire and prove that the heart of a champion knows no bounds!"));
+                GameLogic.pressAnything();
+                break;
+            default:
+                System.out.println("No backstory available for this opponent.");
+        }
+        
+    }
     
 }

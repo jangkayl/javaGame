@@ -7,10 +7,10 @@ import java.util.Random;
 public class CarlitoUrbanGym extends PlayerVsOpponent{
     private static Random rand = new Random();
     private static PlayerProgress playerProgress = GameLogic.playerProgress;
-    private static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -5"}, 
-                                {"Hook", "Damage: 15 | Stamina: -7"}, 
-                                {"Block", "Stamina: +5"}, 
-                                {"Uppercut", "Damage: 20 | Stamina: -10"}};
+    private static String[][] attack = {{"Jab", "Damage: 10 | Stamina: -5      "}, 
+                                        {"Hook", "Damage: 15 | Stamina: -7     "}, 
+                                        {"Block", "Stamina: +5                 "}, 
+                                        {"Uppercut", "Damage: 20 | Stamina: -10"}};
     private static StreetFighter opponent = new StreetFighter("Carlito Cortez", 120, 80, 0.2, 2, .20, 1);
 
     public CarlitoUrbanGym(Player player){
@@ -66,10 +66,11 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
 
     private void printStats(){
         System.out.println();
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)));
-        System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30)));
-        System.out.println();
+        String prompt = GameLogic.formatColumns("*"+ getPlayer().getName() +"*" , "*"+ opponent.getName()+"*", 30)
+                        + "\n" + GameLogic.formatColumns("HP       " + getPlayer().getHp() + "/" + getPlayer().getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)
+                         + "\n" + GameLogic.formatColumns("Stamina   " + getPlayer().getStamina() + "/" + getPlayer().getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30);
+        System.out.print(GameLogic.centerBox(prompt, 55));
+        System.out.println("\n");
     }
     
     private void selectAttack() {
@@ -81,8 +82,7 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
         }
         
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
-        System.out.print(GameLogic.centerText("", 97) + "-> ");
-        String input = GameLogic.scan.nextLine();
+        String input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
     
         while (isValidCombo(input, getPlayer().getStamina()) != 0) {
             if(isValidCombo(input, getPlayer().getStamina()) == 1){
@@ -92,7 +92,8 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
                         "You may use 3 Blocks as your combo to regain stamina";
                 System.out.println(GameLogic.centerBox(message, 60));
             }
-            input = GameLogic.scan.nextLine();
+
+            input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
         }
 
         int[] choices = new int[3];
@@ -107,7 +108,6 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
 
         System.out.println();
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(50)));
-
         System.out.print(GameLogic.centerText(30, GameLogic.formatColumns("You've selected:", "Opponent selected:", 30)));
 
         for(int i = 0; i < 3; i++){

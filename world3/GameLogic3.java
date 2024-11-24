@@ -14,6 +14,7 @@ public class GameLogic3 {
     
     public static void gameLoop(){
         int input;
+
         while(GameLogic.isRunning){
             shop = new Shop(player, playerProgress);
             printMenu();
@@ -93,7 +94,8 @@ public class GameLogic3 {
                         GameLogic.gameData.inputInventory(inventory.getInventoryItems());
                         GameLogic.gameData.saveGame();
                     } else if(choice == 3){
-
+                        ChampTournament champTourna = new ChampTournament();
+                        champTourna.attemptTournament(player.getStage());
                     } else if(choice == 4){
                         break;
                     } 

@@ -4,68 +4,116 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="">
+    <list default="true" id="20a605cd-9d14-4b1a-b3d1-bd4f5f591396" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Main.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gameData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/runConfigurations/Main.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/gameData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/gameData.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GAME/temp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/temp.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Boxer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Boxer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/FightLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/FightLogic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/GameLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/GameLogic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Inventory$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Inventory$Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Inventory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/PlayerProgress.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/PlayerProgress.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Shop$Item.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Shop.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Skill/Skill.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Skill/Skill.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Skill/SkillsRegistry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Skill/SkillsRegistry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Story.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Story.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/StreetFighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/StreetFighter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/Tournament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/LopezTourna.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/LopezTourna.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/RamirezTourna.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/RamirezTourna.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/TettehTourna.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TournamentFight/TettehTourna.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/CarlitoUrbanGym.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/CarlitoUrbanGym.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/FredGym.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/FredGym.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PabloUrbanGym.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PabloUrbanGym.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PlayerVsOpponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PlayerVsOpponent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PlayerVsOpponent2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/PlayerVsOpponent2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/UrbanGymFight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/TrainInGym/UrbanGymFight.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/UrbanStory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/UrbanStory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/database/GameDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/BoxerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/BoxerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/FightLogicInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/FightLogicInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/InvetoryInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/InvetoryInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/PlayerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/PlayerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/PlayerProgressInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/PlayerProgressInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/ShopInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/ShopInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/SkillInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/SkillInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/SkillsRegistryInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/SkillsRegistryInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/StreetFighterInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world1/interfaces/StreetFighterInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/BetFight/BetFight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/BetFight/BetFight.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/BoxerHints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/BoxerHints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/GameLogic2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/GameLogic2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparFightLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/SparFightLogic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/Sparring.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/Sparring.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PerezSparring.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PerezSparring.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PitikSparring.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/SparringOpponents/PitikSparring.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/StoryUnderground.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/StoryUnderground.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TournaUnderFight/NavarroTourna.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/TournaUnderFight/NavarroTourna.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TournaUnderFight/RaulTourna.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/TournaUnderFight/RaulTourna.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TournaUnderFight/SalvahezTourna.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/TournaUnderFight/SalvahezTourna.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TournamentUnderground.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/TournamentUnderground.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/TrainWithJakester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/TrainWithJakester.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world2/interfaces/SparFightLogicInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world2/interfaces/SparFightLogicInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/GameLogic3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/GameLogic3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/PassiveSkill/PassiveSkill.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/PassiveSkill/PassiveSkill.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/PassiveSkill/PassiveSkillRegistry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/PassiveSkill/PassiveSkillRegistry.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/SparFightLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/SparFightLogic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/SparringOpponents/ArcegaSparring.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/SparringOpponents/ArcegaSparring.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/SparringOpponents/MagsilosSparring.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/SparringOpponents/MagsilosSparring.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/SparringRing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/SparringRing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/temp.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/StoryChampsArena.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/StoryChampsArena.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GAME/world3/TrainWithFred.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GAME/world3/TrainWithFred.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/Boxer.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Boxer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/FightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/FightLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/GameLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Shop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world1/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/Tournament.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world1/UrbanStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/UrbanStory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/CarlitoUrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/CarlitoUrbanGym.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/PabloUrbanGym.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/PlayerVsOpponent2.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/PlayerVsOpponent2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world1/TrainInGym/UrbanGymFight.java" beforeDir="false" afterPath="$PROJECT_DIR$/world1/TrainInGym/UrbanGymFight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world2/BetFight/BetFight.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/BetFight/BetFight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/StoryUnderground.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/StoryUnderground.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/TournamentUnderground.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TournamentUnderground.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world2/TrainWithJakester.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/TrainWithJakester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world2/SparFightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world2/SparFightLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world3/GameLogic3.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/GameLogic3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world3/PassiveSkill/PassiveSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/PassiveSkill/PassiveSkill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/world3/SparFightLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/SparFightLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world3/SparringRing.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/SparringRing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world3/SparringOpponents/ArcegaSparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/SparringOpponents/ArcegaSparring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world3/SparringOpponents/MagsilosSparring.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/SparringOpponents/MagsilosSparring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world3/StoryChampsArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/world3/StoryChampsArena.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;jangkayl&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "jangkayl"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/jangkayl/javaGame.git&quot;,
-    &quot;accountId&quot;: &quot;4821c9bb-2cf6-4ce1-959c-5fbb6f256c1f&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/jangkayl/javaGame.git",
+    "accountId": "4821c9bb-2cf6-4ce1-959c-5fbb6f256c1f"
   }
-}</component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="autoscrollToSource" value="true" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2nhplsy296x5yAiK99eOR5w6kCw" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2pHKHyTJzNAuEXt801P0xGF9KEn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -73,43 +121,29 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ToolWindow.Run.ShowToolbar": "false",
-    "full.screen.before.presentation.mode": "false",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Downloads/GAME",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "kotlin-language-version-configured": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="GAME" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="95fbccc0-1712-495e-9604-57916a147f23" name="Changes" comment="" />
-      <created>1729435315649</created>
+      <changelist id="20a605cd-9d14-4b1a-b3d1-bd4f5f591396" name="Changes" comment="" />
+      <created>1732417477439</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1729435315649</updated>
+      <updated>1732417477439</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/GAME$Main.ic" NAME="Main Coverage Results" MODIFIED="1729473651394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>

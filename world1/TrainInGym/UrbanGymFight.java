@@ -18,16 +18,16 @@ public abstract class UrbanGymFight {
     protected abstract void winnerReward();
 
     protected String[][] attackOption = {
-        {"Jab", "Damage: 10 | Stamina: -5"},
-        {"Hook", "Damage: 15 | Stamina: -7"},
-        {"Block", "Stamina: +5"},
+        {"Jab", "Damage: 10 | Stamina: -5      "},
+        {"Hook", "Damage: 15 | Stamina: -7     "},
+        {"Block", "Stamina: +5                 "},
         {"Uppercut", "Damage: 20 | Stamina: -10"},
         {"The Body Breaker", ""}
     };
 
     protected String[][] comboOption = {
-        {"Lead Body Shot", "Damage: 15 | Stamina: -7"},
-        {"Cross to the Ribs", "Damage: 20 | Stamina: -9"},
+        {"Lead Body Shot", "Damage: 15 | Stamina: -7     "},
+        {"Cross to the Ribs", "Damage: 20 | Stamina: -9  "},
         {"Finishing Uppercut", "Damage: 25 | Stamina: -14"}
     };
 
@@ -81,9 +81,10 @@ public abstract class UrbanGymFight {
 
     protected void printStats() {
         System.out.println();
-        System.out.println(GameLogic.formatColumns(player.getName(), opponent.getName(), 30));
-        System.out.println(GameLogic.formatColumns("HP        " + player.getHp() + "/" + player.getMaxHp(), "HP        " + opponent.getHp() + "/" + opponent.getMaxHp(), 30));
-        System.out.println(GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30));
-        System.out.println();
+        String prompt = GameLogic.formatColumns("*"+ player.getName() +"*" , "*"+ opponent.getName()+"*", 30)
+                        + "\n" + GameLogic.formatColumns("HP       " + player.getHp() + "/" + player.getMaxHp(), "HP       " + opponent.getHp() + "/" + opponent.getMaxHp(), 30)
+                         + "\n" + GameLogic.formatColumns("Stamina   " + player.getStamina() + "/" + player.getMaxStamina(), "Stamina   " + opponent.getStamina() + "/" + opponent.getMaxStamina(), 30);
+        System.out.print(GameLogic.centerBox(prompt, 55));
+        System.out.println("\n");
     }
 }

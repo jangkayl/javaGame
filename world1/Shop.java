@@ -166,7 +166,7 @@ public class Shop implements ShopInterface{
                 }
             } else if(player.getCurrentWorld() == 2){
                 for (int i = 8; i < items.length; i++) {
-                    String line = "(" + (i - 6) + ") " + items[i].name;
+                    String line = "(" + (i - 7) + ") " + items[i].name;
                     System.out.print(GameLogic.centerText(50, line));
                     items[i].displayItem();
                 }
