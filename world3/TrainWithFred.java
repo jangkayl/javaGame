@@ -5,17 +5,15 @@ import world1.Player;
 import world2.GameLogic2;
 
 public class TrainWithFred {
-    private Player player = GameLogic.player;
+    private Player player = GameLogic2.player;
 
     public void teachPassiveSkills() {
         GameLogic.clearConsole();
-        String prompt = "Coach Fred: \"Alright, " + GameLogic2.player.getName() + ", listen up. In the Champs Arena, it's not just about power. Timing is everything." + 
-                        "\nLand three consecutive successful hits, and you'll unlock the ability to activate one of these skills. But choose wisely" + 
-                        "\nonce activated, each skill lasts for the next two turns. And don't worry, none of these skills cost mana," + 
-                        "\nso you can use them without draining yourself.";
-        System.out.print(GameLogic.centerBox(prompt, 130));
+        String prompt = "Coach Fred: \"Alright, " + player.getName() + ", listen up. In the Champs Arena, it's not just about power—timing is everything.\n" +
+                "Land 3 consecutive successful hits, blocks, or survive with 20% of your max HP, and you'll unlock the ability to activate one of these skills.\n" +
+                "Choose wisely—each skill lasts 2-3 turns. The best part? They don't cost mana, so it's all about your strategy and heart.\"";
+        System.out.print(GameLogic.centerBox(prompt, 150));
         System.out.println();
-        
         prompt = "\"Flow State - 100% Dodge Chance, blocks all damage next 3 turns.\"" + 
                 "\n*Best used when you're on defensive." + 
                 "\n\n\"Adrenaline Rush - Boost your Crit Chance by 100% next 3 turns.\"" +
