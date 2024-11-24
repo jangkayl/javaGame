@@ -1,4 +1,4 @@
-package world1.interfaces;
+package interfaces;
 
 import java.util.List;
 

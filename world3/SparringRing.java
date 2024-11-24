@@ -3,10 +3,10 @@ package world3;
 import java.util.Random;
 
 import world1.GameLogic;
-import world1.Inventory;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.StreetFighter;
+import GlobalClasses.Inventory;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
 import world3.SparringOpponents.ArcegaSparring;
 import world3.SparringOpponents.MagsilosSparring;
 

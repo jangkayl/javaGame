@@ -1,6 +1,7 @@
-package world1;
+package GlobalClasses;
 
 import interfaces.InvetoryInterface;
+import world1.GameLogic;
 
 public class Inventory implements InvetoryInterface{
     private static final int MAX_ITEMS = 10;  

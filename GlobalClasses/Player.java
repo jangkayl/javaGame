@@ -1,6 +1,7 @@
-package world1;
+package GlobalClasses;
 import Skill.SkillsRegistry;
 import interfaces.PlayerInterface;
+import world1.GameLogic;
 
 public class Player extends Boxer implements PlayerInterface {
     private String[] traits = {"Immovable Fury (High HP)", "Phantom Boxer (Agility)", "Bonecrusher Brawl (Strength)"};
@@ -76,6 +77,7 @@ public class Player extends Boxer implements PlayerInterface {
         int input = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 3);
         System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerBox("You chose " + traits[input-1] + "!",50));
+        System.out.print(GameLogic.reset);
         if(input == 1){
             int newHp = getMaxHp() + (int)Math.floor(getMaxHp() * 0.5);
             int newStamina = getStamina() - (int)Math.floor(getStamina() * 0.1);

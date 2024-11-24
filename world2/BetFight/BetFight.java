@@ -1,9 +1,9 @@
 package world2.BetFight;
 
 import world1.GameLogic;
-import world1.Player;
-import world1.Skill.SkillsRegistry;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import Skill.SkillsRegistry;
+import GlobalClasses.StreetFighter;
 
 import java.util.Random;
 
@@ -21,7 +21,18 @@ public class BetFight {
     public void betFight() {
         System.out.println();
         GameLogic.clearConsole();
-        System.out.print(GameLogic.centerBox("🎲 Welcome to the Underground BetFight Arena 🎲\n", 100));
+        String text = GameLogic.redText + GameLogic.centerText(100,
+                   "▒█  ▒█ █▀▀ █░░ █▀▀ █▀▀█ █▀▄▀█ █▀▀ 　 ▀▀█▀▀ █▀▀█ 　 ▀▀█▀▀ █░░█ █▀▀ \n" +
+                        "▒█▒█▒█ █▀▀ █░░ █░░ █░░█ █░▀░█ █▀▀ 　 ░░█░░ █░░█ 　 ░░█░░ █▀▀█ █▀▀ \n" +
+                        "▒█▄▀▄█ ▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀▀ ▀░░░▀ ▀▀▀ 　 ░░▀░░ ▀▀▀▀ 　 ░░▀░░ ▀░░▀ ▀▀▀ \n" +
+                        "▒█ ▒█ █▀▀▄ █▀▀▄ █▀▀ █▀▀█ █▀▀▀ █▀▀█ █▀▀█ █░░█ █▀▀▄ █▀▀▄ 　 ▒█▀▀█ █▀▀ ▀▀█▀▀ ▒█▀▀▀ ░▀░ █▀▀▀ █░░█ ▀▀█▀▀ \n" +
+                        "▒█ ▒█ █░░█ █░░█ █▀▀ █▄▄▀ █░▀█ █▄▄▀ █░░█ █░░█ █░░█ █░░█ 　 ▒█▀▀▄ █▀▀ ░░█░░ ▒█▀▀▀ ▀█▀ █░▀█ █▀▀█ ░░█░░ \n" +
+                        "░▀▄▄▀ ▀  ▀ ▀▀▀░ ▀▀▀ ▀░▀▀ ▀▀▀▀ ▀░▀▀ ▀▀▀▀ ░▀▀▀ ▀░░▀ ▀▀▀░ 　 ▒█▄▄█ ▀▀▀ ░░▀░░ ▒█░░░ ▀▀▀ ▀▀▀▀ ▀░░▀ ░░▀░░ \n" +
+                        "              ░█▀▀█ █▀▀█ █▀▀ █▀▀▄ █▀▀█          \n" +
+                        "⚅⚄⚃⚂⚁⚀  ▒█▄▄█ █▄▄▀ █▀▀ █░░█ █▄▄█  ⚅⚄⚃⚂⚁⚀\n" +
+                        "              ▒█ ▒█ ▀ ▀▀ ▀▀▀ ▀  ▀ ▀  ▀          ") + GameLogic.reset;
+
+        System.out.print(text);
         System.out.println("\n");
         System.out.println(GameLogic.centerText(50,
                 "The dim glow of flickering neon lights illuminates the smoky hall. The crowd's cheers and jeers create a chaotic symphony of excitement.\n" + "[ A shadowy figure approaches, cloaked in mystery, their voice a raspy growl. ]\n" +
@@ -55,7 +66,15 @@ public class BetFight {
             }
         } while (betAmount > player.getPlayerPoints() || betAmount < 100);
 
-        System.out.println(GameLogic.centerText(50,"\nThe fight begins..."));
+        System.out.println("\n");
+        String fightBegins = GameLogic.redText + GameLogic.centerText(100,
+        "▀▀█▀▀ █░░█ █▀▀ 　 █▀▀ ░▀░ █▀▀▀ █░░█ ▀▀█▀▀ 　 █▀▀▄ █▀▀ █▀▀▀ ░▀░ █▀▀▄ █▀▀\n" +
+             "░▒█░░ █▀▀█ █▀▀ 　 █▀▀ ▀█▀ █░▀█ █▀▀█ ░░█░░ 　 █▀▀▄ █▀▀ █░▀█ ▀█▀ █░░█ ▀▀█\n" +
+             "░▒█░░ ▀░░▀ ▀▀▀ 　 ▀░░ ▀▀▀ ▀▀▀▀ ▀░░▀ ░░▀░░ 　 ▀▀▀░ ▀▀▀ ▀▀▀▀ ▀▀▀ ▀░░▀ ▀▀▀\n" )+ GameLogic.reset;
+
+        System.out.print(fightBegins);
+        System.out.println();
+        
         GameLogic.pressAnything();
 
         String winner = simulateFight(fighter1, fighter2);

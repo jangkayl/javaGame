@@ -1,4 +1,4 @@
-package world1.interfaces;
+package interfaces;
 
 public interface BoxerInterface {
     String getName();

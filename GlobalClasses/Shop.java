@@ -1,7 +1,9 @@
-package world1;
+package GlobalClasses;
 
+import world1.GameLogic;
 import world1.TrainInGym.CarlitoUrbanGym;
 import interfaces.ShopInterface;
+import world1.UrbanStory;
 
 public class Shop implements ShopInterface{
     private static Player player;
@@ -150,7 +152,7 @@ public class Shop implements ShopInterface{
             System.out.print(GameLogic.blueText);
             System.out.print(GameLogic.centerBox(" Player Points: " + player.getPlayerPoints() + " ", 25));
             System.out.println("\n");
-            System.out.print(GameLogic.orangeText);
+            System.out.print(GameLogic.reset);
             System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
             // Display items for sale
             if(player.getCurrentWorld() == 0){
@@ -203,6 +205,7 @@ public class Shop implements ShopInterface{
                     return;
                 }
     
+                System.out.print(GameLogic.redText);
                 if (soldChecker(choice)) {
                     System.out.println(GameLogic.centerBox(items[choice - 1].name + " is already sold. Choose another item.",100));
                 } else if (notEnoughPoints(choice)) {
@@ -210,6 +213,7 @@ public class Shop implements ShopInterface{
                     System.out.println();
                 } else {
                     // Successful purchase
+                    System.out.print(GameLogic.greenText);
                     System.out.println();
                     player.setPlayerPoints(player.getPlayerPoints() - items[choice - 1].cost);
                     System.out.print(GameLogic.centerBox("You've purchased " + items[choice - 1].name,80));
@@ -222,6 +226,7 @@ public class Shop implements ShopInterface{
                     items[choice - 1].setSoldOut();
                     isSold = true;
                 }
+                System.out.print(GameLogic.reset);
             }
     
             GameLogic.pressAnything(); 
@@ -240,6 +245,7 @@ public class Shop implements ShopInterface{
                 + "Need a better chance to land critical hits? Try out our precision wraps. These items can\n"
                 + "be real game-changers if you use them right.\"\n";
 
+        System.out.print(GameLogic.reset);
         System.out.println(GameLogic.centerText(50, message));
 
         GameLogic.pressAnything();

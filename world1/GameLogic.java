@@ -1,11 +1,15 @@
 package world1;
 
-import world1.Inventory.Item;
+import GlobalClasses.Inventory;
+import GlobalClasses.Inventory.Item;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.Shop;
 import world1.TrainInGym.CarlitoUrbanGym;
 import world1.TrainInGym.FredGym;
 import world1.TrainInGym.PabloUrbanGym;
-import world1.database.GameDataManager;
-import world1.database.GameDatabase;
+import database.GameDataManager;
+import database.GameDatabase;
 import world2.GameLogic2;
 import world3.ChampTournament;
 import world3.GameLogic3;
@@ -36,8 +40,11 @@ public class GameLogic{
     // Read user input
     public static int readInt(String prompt, int min, int max){
         int input;
+        System.out.print(orangeText);
         do {
             System.out.print(prompt);
+            System.out.print(reset);
+            System.out.print(redText);
             try {
                 input = scan.nextInt();
             } catch(Exception e){
@@ -50,21 +57,31 @@ public class GameLogic{
             }
             scan.nextLine();
         } while(input < min || input > max);
+
+        System.out.print(reset);
         return input;
     }
 
     // Read user string input
     public static String readString(String prompt){
         String input = "";
+        System.out.print(orangeText);
         do {
             System.out.print(prompt);
+            System.out.print(reset);
+            System.out.print(redText);
             try {
-                input = scan.nextLine();
+                input = scan.nextLine().trim();
+                if (input.isEmpty()) { 
+                    System.out.println(centerBox("Input cannot be empty or spaces only. Please try again!", 80));
+                }
             } catch(Exception e){
                 System.out.println(centerBox("Please enter a valid input!", 50));
                 scan.next();
             }
-        } while(input == "" || input == null);
+        } while(input.isEmpty());
+        
+        System.out.print(reset);
         return input;
     }
 
@@ -98,18 +115,22 @@ public class GameLogic{
     }
 
     public static String leftBox(String text, int boxWidth) {
-        String boxPad = "";
-        String horizontalBorder = "\u2554" + new String(new char[boxWidth]).replace("\0", "\u2550") + "\u2557";
+        int terminalWidth = 100;
 
+        boxWidth = Math.min(boxWidth, terminalWidth);
+        String horizontalBorder = "\u2554" + new String(new char[boxWidth]).replace("\0", "\u2550") + "\u2557";
+        int boxPadding = terminalWidth - boxWidth;
+
+        String boxPad = new String(new char[boxPadding]).replace("\0", " ");
         String[] lines = text.split("\n");
         StringBuilder sb = new StringBuilder();
-
         sb.append(boxPad).append(horizontalBorder).append("\n");
 
         for (String line : lines) {
             int paddingSizeText = (boxWidth - line.length()) / 2;
             String paddingText = new String(new char[Math.max(0, paddingSizeText)]).replace("\0", " ");
             sb.append(boxPad).append("\u2551").append(paddingText).append(line).append(paddingText);
+
             if ((line.length() % 2) != (boxWidth % 2)) {
                 sb.append(" ");
             }
@@ -120,7 +141,7 @@ public class GameLogic{
     }
 
     public static String rightBox(String text, int boxWidth) {
-        int terminalWidth = 200;
+        int terminalWidth = 150;
 
         int boxPadding = terminalWidth - boxWidth;
         String boxPad = new String(new char[boxPadding]).replace("\0", " ");
@@ -247,6 +268,7 @@ public class GameLogic{
             clearConsole();
             System.out.print(GameLogic.orangeText);
             System.out.print(centerText(20,"Have you ever played this game?"));
+            System.out.print(GameLogic.reset);
             System.out.print(centerText(20,"1) Yep!"));
             System.out.print(centerText(20,"2) Not yet"));
             int choice = readInt(centerText("", 97) + "-> ", 1, 2);
@@ -261,10 +283,10 @@ public class GameLogic{
                     System.out.println();
                     System.out.print(orangeText);
                     System.out.print(centerText(20,"You are " + name + " right?"));
+                    System.out.print(reset);
                     System.out.print(centerText(20,"(1) Yes"));
                     System.out.print(centerText(20,"(2) No "));
                     int input = readInt(centerText("", 97) + "-> ", 1, 2);
-                    System.out.print(reset);
                     if (input == 1) nameSet = true;
                 } while (!nameSet);
     
@@ -321,6 +343,7 @@ public class GameLogic{
             System.out.print(centerText(20, "(3) Inventory"));
             System.out.print(centerText(20, "(4) Shop"));
         }
+        System.out.print(reset);
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
     }
@@ -412,7 +435,7 @@ public class GameLogic{
     // Checks players stats
     public static void printStats(){
         clearConsole();
-        System.out.print(greenText);
+        System.out.print(blueText);
         String statsOutput =
                         centerText("CHARACTER STATS", 50) + "\n" +
                         printCenteredSeparator(30) + "\n" +

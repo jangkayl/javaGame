@@ -1,5 +1,8 @@
 package world1;
 
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
 import world1.TournamentFight.LopezTourna;
 import world1.TournamentFight.RamirezTourna;
 import world1.TournamentFight.TettehTourna;
@@ -22,9 +25,14 @@ public class Tournament {
     public static void attemptTournament(int playerStage) {
         GameLogic.clearConsole();
         if (playerStage < 3) {
-            System.out.print(GameLogic.centerBox(
-                    "⚔️ Tournament Entry Attempt ⚔️", 100));
+            String text = GameLogic.redText + GameLogic.centerText(100,
+                    "▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ 　 ▒█▀▀▀ █▀▀▄ ▀▀█▀▀ █▀▀█ █░░█ 　 ░█▀▀█ ▀▀█▀▀ ▀▀█▀▀ █▀▀ █▀▄▀█ █▀▀█ ▀▀█▀▀\n" +
+                         "░▒█░░ █░░█ █░░█ █▄▄▀ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ 　 ▒█▀▀▀ █░░█ ░░█░░ █▄▄▀ █▄▄█ 　 ▒█▄▄█ ░░█░░ ░░█░░ █▀▀ █░▀░█ █░░█ ░░█░░\n" +
+                         "░▒█░░ ▀▀▀▀ ░▀▀▀ ▀░▀▀ ▀░░▀ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░ 　 ▒█▄▄▄ ▀░░▀ ░░▀░░ ▀░▀▀ ▄▄▄█ 　 ▒█░▒█ ░░▀░░ ░░▀░░ ▀▀▀ ▀░░░▀ █▀▀▀ ░░▀░░\n\n") + GameLogic.reset;
+
+            System.out.print(text);
             System.out.println();
+            
             System.out.print(GameLogic.centerText(20, 
                                             "You step forward, ready to face the toughest challengers...\n\n" +
                                             "[ But the tournament official stops with a grin ]\n" +
@@ -42,7 +50,12 @@ public class Tournament {
 
     public static void startTournament() {
         GameLogic.clearConsole();
-        System.out.print(GameLogic.centerBox("🏆 Champ Arena Tournament 🏆",60));
+        String text = GameLogic.redText + GameLogic.centerText(100,
+                "▒█▀▀█ █░░█ █▀▀█ █▀▄▀█ █▀▀█ 　 ░█▀▀█ █▀▀█ █▀▀ █▀▀▄ █▀▀█ 　 ▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ \n" +
+                     "▒█░░░ █▀▀█ █▄▄█ █░▀░█ █░░█ 　 ▒█▄▄█ █▄▄▀ █▀▀ █░░█ █▄▄█ 　 ░▒█░░ █░░█ █░░█ █▄▄▀ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ \n" +
+                     "▒█▄▄█ ▀░░▀ ▀░░▀ ▀░░░▀ █▀▀▀ 　 ▒█░▒█ ▀░▀▀ ▀▀▀ ▀░░▀ ▀░░▀ 　 ░▒█░░ ▀▀▀▀ ░▀▀▀ ▀░▀▀ ▀░░▀ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░" ) + GameLogic.reset;
+
+        System.out.print(text);
 
         if(player.getStage() < 6){
             System.out.println();
@@ -227,7 +240,9 @@ public class Tournament {
     }
 
     public static void printTournament() {
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerBox("Tournament Rules", 50));
+        System.out.print(GameLogic.reset);
         System.out.println();
         System.out.print(GameLogic.centerText(80, "1. You will face 3 opponents in this tournament."));
         System.out.print(GameLogic.centerText(80, "2. Each opponent match is a best-of-3 rounds."));
@@ -238,6 +253,7 @@ public class Tournament {
 
     private static boolean visitShopOrInventory() {
         System.out.println();
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(80,"Before continuing, would you like to visit the shop or check your inventory?"));
         System.out.print(GameLogic.centerText(80,"1. Visit Shop"));
         System.out.print(GameLogic.centerText(80,"2. Check Inventory"));
@@ -246,6 +262,7 @@ public class Tournament {
         System.out.print(GameLogic.centerText(80,"Enter your choice: "));
         
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 2);
+        System.out.print(GameLogic.reset);
         if (choice == 0) {
             if(playerProgress.getOpponentWins() == 3 && player.getIsLose() == false){
                 resetMatchScores();
@@ -266,9 +283,15 @@ public class Tournament {
 
     public void printStanding(){
         System.out.println("\n");
-        System.out.print(GameLogic.centerBox("🤼 BEST OF 3 🤼\n\n" +
-                player.getName() + " - " + playerProgress.getPlayerWins() + "\n🤜💥🤛\n" +
-                opponent.getName() + " - " + playerProgress.getOpponentWins(), 50));
+        String text = GameLogic.redText + GameLogic.centerText(100,
+                   "▒█▀▀█ █▀▀ █▀▀ ▀▀█▀▀ 　 █▀▀█ █▀▀ 　 █▀▀█   \n" +
+                        "▒█▀▀▄ █▀▀ ▀▀█ ░░█░░ 　 █░░█ █▀▀ 　 ░░▀▄   \n" +
+                        "▒█▄▄█ ▀▀▀ ▀▀▀ ░░▀░░ 　 ▀▀▀▀ ▀   　 █▄▄█   \n\n" ) + GameLogic.reset;
+
+        System.out.print(text);
+
+        System.out.print(GameLogic.centerBox( player.getName() + " - " + playerProgress.getPlayerWins() + "\n" +
+                GameLogic.printCenteredSeparator(30) + "\n" + opponent.getName() + " - " + playerProgress.getOpponentWins(), 40));
         GameLogic.pressAnything();
     }
 }

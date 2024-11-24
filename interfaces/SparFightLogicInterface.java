@@ -1,9 +1,9 @@
-package world2.interfaces;
+package interfaces;
 
-import world1.Player;
-import world1.PlayerProgress;
-import world1.Skill.SkillsRegistry;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import Skill.SkillsRegistry;
+import GlobalClasses.StreetFighter;
 
 public interface SparFightLogicInterface {
      Player getPlayer();

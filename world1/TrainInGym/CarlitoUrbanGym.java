@@ -1,5 +1,8 @@
 package world1.TrainInGym;
 
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
 import world1.*;
 
 import java.util.Random;
@@ -98,7 +101,7 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
 
         String input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
     
-        System.out.print(GameLogic.orangeText);
+        System.out.print(GameLogic.redText);
         while (isValidCombo(input, getPlayer().getStamina()) != 0) {
             if(isValidCombo(input, getPlayer().getStamina()) == 1){
                 System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 60));

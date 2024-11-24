@@ -1,7 +1,11 @@
-package world1.database;
+package database;
 
+import GlobalClasses.Inventory;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.Shop;
 import world1.*;
-import world1.Inventory.Item;
+import GlobalClasses.Inventory.Item;
 
 import java.io.*;
 

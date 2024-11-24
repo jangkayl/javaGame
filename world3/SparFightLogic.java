@@ -1,10 +1,10 @@
 package world3;
 
 import world1.GameLogic;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.Skill.SkillsRegistry;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import Skill.SkillsRegistry;
+import GlobalClasses.StreetFighter;
 import world2.BoxerHints;
 import world3.PassiveSkill.PassiveSkillRegistry;
 
@@ -197,15 +197,18 @@ public abstract class SparFightLogic{
                 return;
             }
 
+            System.out.print(GameLogic.redText);
             if (input.equals("5")) {
                 if(player.getStamina() - 30 >= 0){
                     input = "567";
                     choices = new int[]{5, 6, 7}; 
+                    System.out.print(GameLogic.reset);
                     break;
                 } else {
                     String message = getPlayer().getName() + " doesn't have enough stamina for this combo!\n" +
                         "You may use 3 Blocks as your combo to regain stamina";
                     System.out.println(GameLogic.centerBox(message, 60));
+                    System.out.print(GameLogic.reset);
                     continue;
                 }
             } else if (input.contains("5")) {
@@ -213,27 +216,33 @@ public abstract class SparFightLogic{
                 String message = "You can use your special combo by entering '5'!\n" +
                         "If you want to proceed with the combo, just enter '5'.";
                 System.out.println(GameLogic.centerBox(message, 60));
+                System.out.print(GameLogic.reset);
                 continue; 
             }
             
+            System.out.print(GameLogic.redText);
             if (input.equals("6") || input.equals("7") || input.equals("8")) {
                 if(playerHasPassive){
                     playerActivatePassive(input);
+                    System.out.print(GameLogic.blueText);
                     if(playerPassive == "Sixth Sense" && opponentPassive != "Sixth Sense"){
                         System.out.print(GameLogic.centerText(30, ("~ ~ I sense a pattern forming... ~ ~")));
                         for(int i = 0; i < 3; i++){
                             System.out.print(GameLogic.centerText(20, opponentAttacks[opponentChoices[i]]));
                         }
                     }
+                    System.out.print(GameLogic.reset);
                     continue;
                 } else if(playerPassive != "") {
                     String message = "Your passive skill, " + playerPassive + ", is already active! You must attack first before activating it again.";
                     System.out.println(GameLogic.centerBox(message, 110));
+                    System.out.print(GameLogic.reset);
                     continue;
                 } else {
                     String message = getPlayer().getName() + " needs 3 successful consecutive hits to activate this combo!\n" +
                         "Try to land more hits before using your passive skill.";
                     System.out.println(GameLogic.centerBox(message, 70));
+                    System.out.print(GameLogic.reset);
                     continue;
                 }
             } else if (input.contains("6") || input.contains("7") || input.contains("8")) {
@@ -241,16 +250,19 @@ public abstract class SparFightLogic{
                 String message = "You can use your passive skill by entering '6' | '7' | '8'!\n" +
                         "If you want to proceed, just enter '6' | '7' | '8'.";
                 System.out.println(GameLogic.centerBox(message, 65));
+                System.out.print(GameLogic.reset);
                 continue; 
             }
 
             if(isValidCombo(input, player.getStamina()) == 1){
                 System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 50));
+                System.out.print(GameLogic.reset);
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
                 String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
                                                 "You may use 3 Blocks as your combo to regain stamina";
                 System.out.println(GameLogic.centerBox(message, 60));
+                System.out.print(GameLogic.reset);
                 continue;
             }
             break;
@@ -585,6 +597,7 @@ public abstract class SparFightLogic{
 
     private void counterInfos(String name){
         GameLogic.clearConsole();
+        System.out.print(GameLogic.blueText);
         if(opponent.getName() == "Junjun Arcega"){
             System.out.print(GameLogic.centerBox("Junjun Arcega Combo Counter:",50));
             System.out.println();
@@ -616,6 +629,6 @@ public abstract class SparFightLogic{
             System.out.print(GameLogic.centerText(50,"(2) Left Hook < Jab"));
             System.out.print(GameLogic.centerText(50,"(3) Right Cross < Uppercut"));
         }
-            
+        System.out.print(GameLogic.reset);
     }
 }

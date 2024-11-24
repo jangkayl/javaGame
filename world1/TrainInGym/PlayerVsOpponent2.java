@@ -3,10 +3,10 @@ package world1.TrainInGym;
 import java.util.Random;
 
 import world1.GameLogic;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.StreetFighter;
-import world1.Skill.SkillsRegistry;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
+import Skill.SkillsRegistry;
 
 public abstract class PlayerVsOpponent2 {
     protected Random rand = new Random();
@@ -144,15 +144,18 @@ public abstract class PlayerVsOpponent2 {
                 return;
             }
 
+            System.out.print(GameLogic.redText);
             if (input.equals("5")) {
                 if(player.getStamina() - 30 >= 0){
                     input = "567";
                     choices = new int[]{5, 6, 7}; 
+                    System.out.print(GameLogic.reset);
                     break;
                 } else {
                     String message = getPlayer().getName() + " doesn't have enough stamina for this combo!\n" +
                         "You may use 3 Blocks as your combo to regain stamina";
                     System.out.println(GameLogic.centerBox(message, 60));
+                    System.out.print(GameLogic.reset);
                     continue;
                 }
             } else if (input.contains("5") || input.contains("6") || input.contains("7")) {
@@ -160,6 +163,7 @@ public abstract class PlayerVsOpponent2 {
                 String message = "You can use your special combo by entering '5'!\n" +
                         "If you want to proceed with the combo, just enter '5'.";
                 System.out.println(GameLogic.centerBox(message, 60));
+                System.out.print(GameLogic.reset);
                 continue; 
             }
 
@@ -170,6 +174,7 @@ public abstract class PlayerVsOpponent2 {
                 String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
                                                 "You may use 3 Blocks as your combo to regain stamina";
                 System.out.println(GameLogic.centerBox(message, 60));
+                System.out.print(GameLogic.reset);
                 continue;
             }
             break;
@@ -403,6 +408,7 @@ public abstract class PlayerVsOpponent2 {
 
     private void counterInfos(String name){
         GameLogic.clearConsole();
+        System.out.print(GameLogic.blueText);
         if(opponent.getName() == "Pablo Martinez"){
             System.out.print(GameLogic.centerBox("Pablo Martinez Combo Counter:",50));
             System.out.println();
@@ -416,5 +422,6 @@ public abstract class PlayerVsOpponent2 {
             System.out.print(GameLogic.centerText(50,"(2) Lead Hook < Jab"));
             System.out.print(GameLogic.centerText(50,"(3) Rear Uppercut < Block"));
         }
+        System.out.print(GameLogic.reset);
     }
 }

@@ -1,7 +1,7 @@
-package world1.interfaces;
+package interfaces;
 
-import world1.Player;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.StreetFighter;
 
 public interface StreetFighterInterface {
     void setPlayerOpponent(Player play);

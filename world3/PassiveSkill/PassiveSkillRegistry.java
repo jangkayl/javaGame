@@ -3,7 +3,9 @@ package world3.PassiveSkill;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PassiveSkillRegistry {
+import interfaces.PassiveSkillRegistryInterface;
+
+public class PassiveSkillRegistry implements PassiveSkillRegistryInterface{
     private final Map<String, PassiveSkill> passiveSkills;
 
     public PassiveSkillRegistry() {

@@ -1,8 +1,8 @@
-package world1.Skill;
+package Skill;
 
 import java.util.List;
 
-import world1.interfaces.SkillInterface;
+import interfaces.SkillInterface;
 
 public class Skill implements SkillInterface {
     private final String name;                 

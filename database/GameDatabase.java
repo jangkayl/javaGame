@@ -1,8 +1,8 @@
-package world1.database;
+package database;
 
-import world1.Player;
-import world1.PlayerProgress;
-import world1.Inventory.Item;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.Inventory.Item;
 
 public class GameDatabase {
     private static final String FILE_NAME = "gameData.txt";

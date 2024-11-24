@@ -3,9 +3,9 @@ package world2;
 import java.util.Random;
 
 import world1.GameLogic;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
 import world2.SparringOpponents.PerezSparring;
 import world2.SparringOpponents.PitikSparring;
 

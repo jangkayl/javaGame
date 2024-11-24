@@ -2,9 +2,9 @@ package world1.TrainInGym;
 
 import java.util.Random;
 import world1.GameLogic;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
 
 public abstract class UrbanGymFight {
     protected Random rand = new Random();

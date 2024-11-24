@@ -1,7 +1,7 @@
 package world3;
 
 import world1.GameLogic;
-import world1.StreetFighter;
+import GlobalClasses.StreetFighter;
 
 public class StoryChampsArena {
     public static void printChampsArena() {

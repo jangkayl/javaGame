@@ -1,8 +1,9 @@
 package world3.PassiveSkill;
 
+import interfaces.PassiveSkillInterface;
 import world1.GameLogic;
 
-public class PassiveSkill {
+public class PassiveSkill implements PassiveSkillInterface{
     private String name;
     private String description;
     private int roundsActive;

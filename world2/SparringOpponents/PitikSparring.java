@@ -1,8 +1,8 @@
 package world2.SparringOpponents;
 
 import world1.GameLogic;
-import world1.Player;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.StreetFighter;
 import world2.SparFightLogic;
 
 public class PitikSparring extends SparFightLogic{

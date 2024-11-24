@@ -1,8 +1,8 @@
 package world3.SparringOpponents;
 
 import world1.GameLogic;
-import world1.Player;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.StreetFighter;
 import world3.SparFightLogic;
 
 public class ArcegaSparring extends SparFightLogic{

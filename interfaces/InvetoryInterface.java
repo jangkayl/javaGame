@@ -1,6 +1,6 @@
-package world1.interfaces;
+package interfaces;
 
-import world1.Inventory;
+import GlobalClasses.Inventory;
 
 public interface InvetoryInterface {
      int getItemCount();

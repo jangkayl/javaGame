@@ -1,6 +1,6 @@
-package world1.interfaces;
+package interfaces;
 
-import world1.Skill.Skill;
+import Skill.Skill;
 
 public interface SkillsRegistryInterface {
     void registerSkill(Skill skill) ;

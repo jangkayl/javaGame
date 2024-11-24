@@ -1,10 +1,10 @@
 package world2;
 
 import world1.GameLogic;
-import world1.Inventory;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.Shop;
+import GlobalClasses.Inventory;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.Shop;
 import world2.BetFight.BetFight;
 
 public class GameLogic2 {

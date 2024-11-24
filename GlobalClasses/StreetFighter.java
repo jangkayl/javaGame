@@ -1,7 +1,8 @@
-package world1;
+package GlobalClasses;
 
 import Skill.SkillsRegistry;
 import interfaces.StreetFighterInterface;
+import world1.GameLogic;
 
 public class StreetFighter extends Boxer implements StreetFighterInterface{
     private static Player player = GameLogic.player;

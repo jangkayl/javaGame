@@ -2,8 +2,11 @@ package world1;
 
 import java.util.Random;
 
-import world1.Skill.SkillsRegistry;
-import world1.interfaces.FightLogicInterface;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
+import Skill.SkillsRegistry;
+import interfaces.FightLogicInterface;
 
 public abstract class FightLogic implements FightLogicInterface{
     protected Random rand = new Random();
@@ -132,15 +135,18 @@ public abstract class FightLogic implements FightLogicInterface{
                 return;
             }
 
+            System.out.print(GameLogic.redText);
             if (input.equals("5")) {
                 if(player.getStamina() - 30 >= 0){
                     input = "567";
                     choices = new int[]{5, 6, 7}; 
+                    System.out.print(GameLogic.reset);
                     break;
                 } else {
                     String message = getPlayer().getName() + " doesn't have enough stamina for this combo!\n" +
                         "You may use 3 Blocks as your combo to regain stamina";
                     System.out.println(GameLogic.centerBox(message, 60));
+                    System.out.print(GameLogic.reset);
                     continue;
                 }
             } else if (input.contains("5") || input.contains("6") || input.contains("7")) {
@@ -148,16 +154,19 @@ public abstract class FightLogic implements FightLogicInterface{
                 String message = "You can use your special combo by entering '5'!\n" +
                         "If you want to proceed with the combo, just enter '5'.";
                 System.out.println(GameLogic.centerBox(message, 60));
+                System.out.print(GameLogic.reset);
                 continue; 
             }
 
             if(isValidCombo(input, player.getStamina()) == 1){
                 System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 50));
+                System.out.print(GameLogic.reset);
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
                 String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
                                                 "You may use 3 Blocks as your combo to regain stamina";
                 System.out.println(GameLogic.centerBox(message, 60));
+                System.out.print(GameLogic.reset);
                 continue;
             }
             break;
@@ -410,6 +419,7 @@ public abstract class FightLogic implements FightLogicInterface{
 
     private void counterInfos(String name){
         GameLogic.clearConsole();
+        System.out.print(GameLogic.blueText);
         if(opponent.getName() == "Rico Ramirez"){
             System.out.print(GameLogic.centerBox("Rico Ramirez Combo Counter:",50));
             System.out.println();
@@ -429,5 +439,6 @@ public abstract class FightLogic implements FightLogicInterface{
             System.out.print(GameLogic.centerText(50,"(2) Left Hook < Jab"));
             System.out.print(GameLogic.centerText(50,"(3) Right Cross < Uppercut"));
         } 
+        System.out.print(GameLogic.reset);
     }
 }

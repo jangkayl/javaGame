@@ -1,10 +1,10 @@
 package world2;
 
 import world1.GameLogic;
-import world1.Inventory;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.StreetFighter;
+import GlobalClasses.Inventory;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
 import world1.Tournament;
 import world2.TournaUnderFight.NavarroTourna;
 import world2.TournaUnderFight.RaulTourna;
@@ -204,9 +204,15 @@ public class TournamentUnderground {
 
     public void printStanding(){
         System.out.println("\n");
-        System.out.print(GameLogic.centerBox("🤼 BEST OF 3 🤼\n\n" +
-                player.getName() + " - " + playerProgress.getPlayerWins() + "\n🤜💥🤛\n" +
-                opponent.getName() + " - " + playerProgress.getOpponentWins(), 50));
+        String text = GameLogic.redText + GameLogic.centerText(100,
+                   "▒█▀▀█ █▀▀ █▀▀ ▀▀█▀▀ 　 █▀▀█ █▀▀ 　 █▀▀█   \n" +
+                        "▒█▀▀▄ █▀▀ ▀▀█ ░░█░░ 　 █░░█ █▀▀ 　 ░░▀▄   \n" +
+                        "▒█▄▄█ ▀▀▀ ▀▀▀ ░░▀░░ 　 ▀▀▀▀ ▀   　 █▄▄█   \n\n" ) + GameLogic.reset;
+
+        System.out.print(text);
+
+        System.out.print(GameLogic.centerBox( player.getName() + " - " + playerProgress.getPlayerWins() + "\n" +
+                GameLogic.printCenteredSeparator(30) + "\n" + opponent.getName() + " - " + playerProgress.getOpponentWins(), 40));
         GameLogic.pressAnything();
     }
 

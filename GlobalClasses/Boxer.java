@@ -1,4 +1,4 @@
-package world1;
+package GlobalClasses;
 
 import interfaces.BoxerInterface;
 

@@ -1,10 +1,10 @@
-package world1.Skill;
+package Skill;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import world1.interfaces.SkillsRegistryInterface;
+import interfaces.SkillsRegistryInterface;
 
 public class SkillsRegistry implements SkillsRegistryInterface{
     private final Map<String, Skill> skills;

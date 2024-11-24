@@ -1,7 +1,7 @@
 package world3;
 
 import world1.GameLogic;
-import world1.Player;
+import GlobalClasses.Player;
 import world2.GameLogic2;
 
 public class TrainWithFred {

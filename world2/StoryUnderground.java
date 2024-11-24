@@ -1,7 +1,7 @@
 package world2;
 
 import world1.GameLogic;
-import world1.StreetFighter;
+import GlobalClasses.StreetFighter;
 import world1.Tournament;
 
 public class StoryUnderground {

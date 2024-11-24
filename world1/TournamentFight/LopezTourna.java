@@ -1,8 +1,8 @@
 package world1.TournamentFight;
 
 import world1.FightLogic;
-import world1.Player;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.StreetFighter;
 
 public class LopezTourna extends FightLogic{
     private static String[] opponentAttacks = {"Jab", "Hook", "Block", "Uppercut", "Quick Jab", "Cross", "Power Punch"};

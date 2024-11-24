@@ -1,9 +1,9 @@
 package world1.TrainInGym;
 
 import world1.GameLogic;
-import world1.Player;
-import world1.PlayerProgress;
-import world1.StreetFighter;
+import GlobalClasses.Player;
+import GlobalClasses.PlayerProgress;
+import GlobalClasses.StreetFighter;
 
 public class FredGym extends PlayerVsOpponent2{
     private static PlayerProgress playerProgress = GameLogic.playerProgress;
