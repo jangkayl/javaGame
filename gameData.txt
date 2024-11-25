@@ -1,5 +1,5 @@
 [player]
-name=Kyle
+name=asdasdasd
 hp=191
 maxHp=191
 stamina=71

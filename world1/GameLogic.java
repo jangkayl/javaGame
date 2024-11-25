@@ -323,7 +323,7 @@ public class GameLogic{
     
         Story.printIntro(player.getName());
         isRunning = true;
-        
+
         if(player.getCurrentWorld() == 1){
             GameLogic2.gameLoop();
         } else if(player.getCurrentWorld() == 2){

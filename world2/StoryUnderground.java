@@ -36,7 +36,7 @@ public class StoryUnderground {
     public static void undergroundPrompt1(String name){
         GameLogic.clearConsole();
         System.out.print(GameLogic.centerBox(
-                "Coach Jakester: \"Alright, Kyle, welcome to the underbelly of the fighting world. Down here, \nyou can double your money if you bet smart." +
+                "Coach Jakester: \"Alright, " + name + ", welcome to the underbelly of the fighting world. Down here, \nyou can double your money if you bet smart." +
                         " The fights are brutal — no rules, no limits. \nIt's all about who's willing to go farther.\"\n\n" +
                         "( You watch as a cage fight unfolds, raw and ruthless, with the crowd roaring as every brutal hit lands. )\n\n" +
                         "Coach Jakester: \"And see that row of stalls over there? That's the black market. Need a boost? \nThey've got all kinds of... enhancers." +

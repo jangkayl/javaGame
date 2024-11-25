@@ -136,7 +136,7 @@ public class Tournament {
                 fightWithOpponent(new LopezTourna(player, opponent));
             }
             case 2 -> {
-                opponent = new StreetFighter("Ishmael Tetteh", 200, 120, 0.3, 2.5, 0.40, 3);
+                opponent = new StreetFighter("Ishmael Tetteh", 200, 120, 0.25, 2, 0.30, 3);
                 opponent.setPlayerOpponent(player);
                 UrbanStory.tournaOpponentBackstory(opponent);
                 fightWithOpponent(new TettehTourna(player, opponent));

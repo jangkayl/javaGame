@@ -9,7 +9,7 @@ public class TrainWithJakester {
     public static void teachDirtyBoxingMoves() {
         GameLogic.clearConsole();
         System.out.println(GameLogic.centerBox(
-                "Coach Jakester: \"Listen up, Kyle. Down here, you need more than just jabs and hooks. \nI'm gonna teach you a few moves that break the rules but win fights.\"\n" +
+                "Coach Jakester: \"Listen up, " + GameLogic2.player.getName() + ". Down here, you need more than just jabs and hooks. \nI'm gonna teach you a few moves that break the rules but win fights.\"\n" +
                         "\n" +
                         "Coach Jakester: \"Elbow Strike - Fast and brutal, it dazes them but is countered by a solid block.\"\n" +
                         "*Effective Against: Jab & Hook - Quickly closes distance, disrupting their attacks.\n" +
