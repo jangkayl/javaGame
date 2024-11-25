@@ -19,16 +19,17 @@ public class MagsilosSparring extends SparFightLogic{
 
     @Override
     protected void handleWin() {
-        getPlayer().setStage(getPlayer().getStage() + 1);
-
         winnerRewardPoints();
         System.out.println(); 
         
         if(getPlayerProgress().getAddStats() < 5){
+            getPlayer().setStage(19);   
             System.out.println(); 
             getPlayerProgress().setAddStats(getPlayerProgress().getAddStats() + 1);
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerBox("Congratulations! You've won " + getPlayerProgress().getAddStats() + " / 5 matches", 90));
             System.out.println(); 
+            System.out.print(GameLogic.orangeText);
             System.out.print(GameLogic.centerText(50,
                     "Here are your choices: ( Select one only )\n" +
                             "1. HP - Increase by +15%\n" +
@@ -39,8 +40,11 @@ public class MagsilosSparring extends SparFightLogic{
                             "\nEnter the number of the stat you'd like to upgrade: "));
             int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 5);
             addStats(choice);
+            System.out.print(GameLogic.reset);
             System.out.println();
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerBox("Stats added! Remember, you can gain stats up to 5 times!",70));
+            System.out.print(GameLogic.reset);
             GameLogic.printCenteredSeparator(50);
         }
 
@@ -55,7 +59,9 @@ public class MagsilosSparring extends SparFightLogic{
         resetFighterStats();
         getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);
         System.out.println(); 
+        System.out.print(GameLogic.redText);
         System.out.print(GameLogic.centerBox("You have been defeated!", 70));
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
         GameLogic.gameData.saveGame();

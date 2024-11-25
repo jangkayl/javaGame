@@ -4,7 +4,7 @@ import interfaces.InvetoryInterface;
 import world1.GameLogic;
 
 public class Inventory implements InvetoryInterface{
-    private static final int MAX_ITEMS = 10;  
+    private static final int MAX_ITEMS = 20;  
     private static Item[] inventoryItems = new Item[MAX_ITEMS];  
     private static int itemCount = 0;
     private static Shop shop; 
@@ -111,8 +111,7 @@ public class Inventory implements InvetoryInterface{
             System.out.print(GameLogic.centerText(50,"2. Remove an item"));
             System.out.print(GameLogic.centerText(50,"0. Go back to Menu"));
             System.out.println(); 
-            System.out.print(GameLogic.centerText(" ", 87));
-            int actionChoice = GameLogic.readInt("Choose an action (0 to 2): ", 0, 2);
+            int actionChoice = GameLogic.readInt(GameLogic.centerText("", 87) + "Choose an action (0 to 2): ", 0, 2);
             System.out.print(GameLogic.reset);
             if (actionChoice == 0) {
                 System.out.println("Returning to the menu...");
@@ -130,8 +129,7 @@ public class Inventory implements InvetoryInterface{
                     System.out.println(); 
                     System.out.print(GameLogic.orangeText);
                     System.out.print(GameLogic.centerText(50,"Which item do you want to equip? (Press 0 to go back)"));
-                    System.out.print(GameLogic.centerText(" ", 80));
-                    choice = GameLogic.readInt("Choose your item by number (1 to " + itemCount + "): ", 0, itemCount);
+                    choice = GameLogic.readInt(GameLogic.centerText("", 87) + "Choose your item by number (1 to " + itemCount + "): ", 0, itemCount);
                     System.out.print(GameLogic.reset);
                     System.out.println();
                     if (choice == 0) {  
@@ -143,7 +141,7 @@ public class Inventory implements InvetoryInterface{
                         continue outerLoop;
                     } else {
                         System.out.print(GameLogic.redText);
-                        System.out.print(GameLogic.centerText(50, "You have something equipped on your " + inventoryItems[choice-1].body)); 
+                        System.out.print(GameLogic.centerBox("You have something equipped on your " + inventoryItems[choice-1].body, 50)); 
                         System.out.print(GameLogic.reset);
                         GameLogic.pressAnything();
                         continue outerLoop;

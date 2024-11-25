@@ -473,7 +473,9 @@ public class UrbanStory {
                 "Fred: \"Got it? Now, give it a try! Afterward, let's spar and put those moves to the test!\"\n" +
                 "\n";
 
+        System.out.print(GameLogic.blueText);
         System.out.println(GameLogic.centerBox(message, 95));
+        System.out.print(GameLogic.reset);
         System.out.println("\n");
         GameLogic.pressAnything();
         train2(name);
@@ -615,12 +617,14 @@ public class UrbanStory {
     
     public static void tournaOpponentBackstory(StreetFighter opponent) {
         Tournament.showOpStats(opponent);
+        System.out.print(GameLogic.orangeText);
         switch (opponent.getName()) {
             case "Rico Ramirez":
                 System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Introducing Rico \"El Tigre\" Ramirez, a fierce contender from Manila, inspired by his father's legacy as a former champion." +
                         "\nKnown for his explosive style and powerful uppercuts, Rico has quickly climbed the ranks of boxing, embodying resilience and determination." +
                         "\nAs he steps into the ring for this tournament, he carries the hopes of his community, ready to unleash the spirit of the tiger and claim" +
                         "\nhis place among the greats! Now, they seek to prove their strength in the tournament!"));
+                System.out.print(GameLogic.reset);
                 GameLogic.pressAnything();
                 break;
             case "Oscar Lopez":
@@ -628,15 +632,18 @@ public class UrbanStory {
                         "\nhe honed his skills in underground fights, earning a reputation for his lightning-fast jabs and explosive combos. Driven by a desire to uplift" +
                         "\n his community and motivated by a friend's injury in the ring, Oscar turned pro. Now, as he enters the tournament, he's determined to prove" +
                         "\nhimself as a champion, ready to unleash his quick jab, powerful cross, and knockout power punch."));
-                        GameLogic.pressAnything();
+                    System.out.print(GameLogic.reset);
+                    GameLogic.pressAnything();
                 break;
             case "Ishmael Tetteh":
-                System.out.println(GameLogic.centerText(20, " - The Thunderous Finisher"));
-                System.out.println(GameLogic.centerText(20, "\n🌟Backstory: Ishmael Tetteh, \"The Thunderous Finisher,\" is a 28-year-old Ghanaian-American middleweight boxer with 28 wins (24 by KO)." +
+                System.out.println();
+                System.out.print(GameLogic.centerText(20, " - The Thunderous Finisher"));
+                System.out.print(GameLogic.centerText(20, "🌟Backstory: Ishmael Tetteh, \"The Thunderous Finisher,\" is a 28-year-old Ghanaian-American middleweight boxer with 28 wins (24 by KO)." +
                         "\nInspired by Canelo Alvarez, he has mastered a signature combo—Right Uppercut, Left Hook, Right Cross—reflecting his journey from Accra to the boxing ring." +
                         "\n After a pivotal early loss, he trained under a retired champion, transforming into a powerful and agile fighter." +
                         "\nNow, as he prepares for a major tournament, Ishmael fights for victory and his community, ready to make his mark in the boxing world."));
-                GameLogic.pressAnything();
+                        System.out.print(GameLogic.reset);
+                        GameLogic.pressAnything();
                 break;
             default:
                 System.out.println("No backstory available for this opponent.");

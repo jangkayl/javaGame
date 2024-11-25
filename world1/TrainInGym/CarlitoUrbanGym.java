@@ -101,18 +101,20 @@ public class CarlitoUrbanGym extends PlayerVsOpponent{
 
         String input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
     
-        System.out.print(GameLogic.redText);
         while (isValidCombo(input, getPlayer().getStamina()) != 0) {
             if(isValidCombo(input, getPlayer().getStamina()) == 1){
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 60));
             } else if(isValidCombo(input, getPlayer().getStamina()) == 2) {
                 String message = getPlayer().getName() + " doesn't have enough stamina for this combo!\n" +
                         "You may use 3 Blocks as your combo to regain stamina";
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox(message, 60));
             }
 
             input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
         }
+        System.out.print(GameLogic.reset);
 
         int[] choices = new int[3];
         int[] opponentChoices = new int[3];

@@ -26,7 +26,7 @@ public class Tournament {
         GameLogic.clearConsole();
         if (playerStage < 3) {
             String text = GameLogic.redText + GameLogic.centerText(100,
-                    "▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ 　 ▒█▀▀▀ █▀▀▄ ▀▀█▀▀ █▀▀█ █░░█ 　 ░█▀▀█ ▀▀█▀▀ ▀▀█▀▀ █▀▀ █▀▄▀█ █▀▀█ ▀▀█▀▀\n" +
+                         "▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ 　 ▒█▀▀▀ █▀▀▄ ▀▀█▀▀ █▀▀█ █░░█ 　 ░█▀▀█ ▀▀█▀▀ ▀▀█▀▀ █▀▀ █▀▄▀█ █▀▀█ ▀▀█▀▀\n" +
                          "░▒█░░ █░░█ █░░█ █▄▄▀ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ 　 ▒█▀▀▀ █░░█ ░░█░░ █▄▄▀ █▄▄█ 　 ▒█▄▄█ ░░█░░ ░░█░░ █▀▀ █░▀░█ █░░█ ░░█░░\n" +
                          "░▒█░░ ▀▀▀▀ ░▀▀▀ ▀░▀▀ ▀░░▀ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░ 　 ▒█▄▄▄ ▀░░▀ ░░▀░░ ▀░▀▀ ▄▄▄█ 　 ▒█░▒█ ░░▀░░ ░░▀░░ ▀▀▀ ▀░░░▀ █▀▀▀ ░░▀░░\n\n") + GameLogic.reset;
 
@@ -51,7 +51,7 @@ public class Tournament {
     public static void startTournament() {
         GameLogic.clearConsole();
         String text = GameLogic.redText + GameLogic.centerText(100,
-                "▒█▀▀█ █░░█ █▀▀█ █▀▄▀█ █▀▀█ 　 ░█▀▀█ █▀▀█ █▀▀ █▀▀▄ █▀▀█ 　 ▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ \n" +
+                     "▒█▀▀█ █░░█ █▀▀█ █▀▄▀█ █▀▀█ 　 ░█▀▀█ █▀▀█ █▀▀ █▀▀▄ █▀▀█ 　 ▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ \n" +
                      "▒█░░░ █▀▀█ █▄▄█ █░▀░█ █░░█ 　 ▒█▄▄█ █▄▄▀ █▀▀ █░░█ █▄▄█ 　 ░▒█░░ █░░█ █░░█ █▄▄▀ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ \n" +
                      "▒█▄▄█ ▀░░▀ ▀░░▀ ▀░░░▀ █▀▀▀ 　 ▒█░▒█ ▀░▀▀ ▀▀▀ ▀░░▀ ▀░░▀ 　 ░▒█░░ ▀▀▀▀ ░▀▀▀ ▀░▀▀ ▀░░▀ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░" ) + GameLogic.reset;
 
@@ -117,8 +117,9 @@ public class Tournament {
         System.out.println();
     
         String opponentName = opponents[opponentIndex];
+        System.out.print(GameLogic.redText);
         System.out.print(GameLogic.centerBox((opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: ") + opponentName, 50));
-    
+        System.out.print(GameLogic.reset);
         
         // Initialize opponent based on the index
         switch (opponentIndex) {
@@ -162,13 +163,17 @@ public class Tournament {
 
     private static boolean offerRematch() {
         System.out.println();
+        System.out.print(GameLogic.redText);
         System.out.print(GameLogic.centerBox("You lost your previous match. Would you like to:", 55));
+        System.out.print(GameLogic.reset);
         System.out.println();
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(80, "1. Try the tournament again?"));
         System.out.print(GameLogic.centerText(80, "2. Train with Fred or your coach to sharpen your skills and gain more stats!"));
         System.out.println();
         System.out.print(GameLogic.centerText(80, "Enter your choice (1 or 2): "));
         
+        System.out.print(GameLogic.reset);
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if (choice == 1) {
             playerProgress.setPlayerWins(0);
@@ -184,11 +189,13 @@ public class Tournament {
         GameLogic.clearConsole();
         player.setRank(3);
         GameLogic.rankReward();
+        System.out.print(GameLogic.blueText);
         System.out.println(GameLogic.centerBox("🥊 Congratulations, Champion of the Ring! 🥊\n" +
                 "You've conquered the tournament, delivering knockout blows and proving you have the heart of a true fighter!\n" +
                 "The crowd roars, and your name is now legend. \nBut the journey isn't over...\n\n" +
                 "As you return home, you can still hear the echoes of cheering fans, the thrill of victory fresh in your mind.\n" +
                 "But your celebration is cut short when you see your childhood friend, \nNiko, waiting anxiously outside your door.", 115));
+        System.out.print(GameLogic.reset);
         GameLogic.pressAnything();
 
         System.out.println("\n\n");
@@ -240,7 +247,7 @@ public class Tournament {
     }
 
     public static void printTournament() {
-        System.out.print(GameLogic.greenText);
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox("Tournament Rules", 50));
         System.out.print(GameLogic.reset);
         System.out.println();
@@ -250,7 +257,7 @@ public class Tournament {
         System.out.print(GameLogic.centerText(80, "4. If you lose a best-of-3 match, you are out of the tournament \nand must return to training."));
         System.out.print(GameLogic.centerText(80, "5. Defeat all 3 opponents to claim victory in the tournament."));
     }
-
+    
     private static boolean visitShopOrInventory() {
         System.out.println();
         System.out.print(GameLogic.orangeText);

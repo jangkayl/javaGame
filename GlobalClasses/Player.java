@@ -51,6 +51,7 @@ public class Player extends Boxer implements PlayerInterface {
             this.setStamina(this.getStamina() - staminaReduced);
             System.out.print(GameLogic.centerText(40, getName() + " " + skills.getSkillByName(skillName).getAttackName() + " " + getOpponent().getName() + " for " + damage + (staminaMinus != 0 ? " damage and drains " + staminaMinus + " stamina!" : " damage!")));
         }
+        System.out.print(GameLogic.reset);
     }
     
     public void chooseTrait(){

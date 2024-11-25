@@ -19,14 +19,21 @@ public class SparringRing {
 
     public void start() {
         GameLogic.clearConsole();
-        String title = "SPARRING RING";
-        System.out.println(GameLogic.centerBox(title, 60));
+        System.out.print(GameLogic.blueText);
+        String title = 
+        
+        "▒█▀▀▀█ ▒█▀▀█ ░█▀▀█ ▒█▀▀█ ▒█▀▀█ ▀█▀ ▒█▄░▒█ ▒█▀▀█ 　 ▒█▀▀█ ▀█▀ ▒█▄░▒█ ▒█▀▀█ \n" + 
+        "░▀▀▀▄▄ ▒█▄▄█ ▒█▄▄█ ▒█▄▄▀ ▒█▄▄▀ ▒█░ ▒█▒█▒█ ▒█░▄▄ 　 ▒█▄▄▀ ▒█░ ▒█▒█▒█ ▒█░▄▄ \n" + 
+        "▒█▄▄▄█ ▒█░░░ ▒█░▒█ ▒█░▒█ ▒█░▒█ ▄█▄ ▒█░░▀█ ▒█▄▄█ 　 ▒█░▒█ ▄█▄ ▒█░░▀█ ▒█▄▄█ \n" ;
+
+        System.out.println(GameLogic.centerText(20, title));
+        System.out.print(GameLogic.reset);
     
         String prompt = "The Sparring Ring is your training ground to refine your skills and build strength for the Champs Arena." +
                         "\nEngage in practice matches to boost your stats, test your strategies, and prepare for tougher challenges." +
                         "\nWinning matches not only hones your abilities but also rewards you with cash - greater risks mean greater rewards." +
                         "\nStep into the ring, face opponents of varying difficulty, and emerge stronger and ready to conquer!";
-        System.out.print(GameLogic.centerBox(prompt, 130));
+        System.out.print(GameLogic.centerText(20, prompt));
         System.out.println();
         GameLogic.pressAnything();
     
@@ -41,7 +48,9 @@ public class SparringRing {
 
         if(!inventory.checkSlotsValid()){
             System.out.println();
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerBox("✋ Please UNEQUIP all items from Underworld Rumble before fighting", 75));
+            System.out.print(GameLogic.reset);
             GameLogic.pressAnything();
             return;
         }
@@ -60,11 +69,13 @@ public class SparringRing {
         while (true) {
             world1.Tournament.showOpStats(opponent);
             System.out.println();
+            System.out.print(GameLogic.orangeText);
             System.out.print(GameLogic.centerText(50,"Select an option: "));
             System.out.print(GameLogic.centerText(50,"(1) Fight now"));
             System.out.print(GameLogic.centerText(50,"(2) Check your Stats"));
             System.out.print(GameLogic.centerText(50,"(3) Change Opponent Stats"));
             System.out.print(GameLogic.centerText(50,"(4) Go Back"));
+            System.out.print(GameLogic.reset);
     
             choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4); 
     
@@ -84,7 +95,9 @@ public class SparringRing {
                     magsilos = new MagsilosSparring(player, opponent);
                     arcega = null;
                 }
+                System.out.print(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("New opponent generated!", 50));
+                System.out.print(GameLogic.reset);
             } else if(choice == 4){
                 return;
             }

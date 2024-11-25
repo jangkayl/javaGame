@@ -40,8 +40,10 @@ public class BoxerHints {
     public static void teachHints() {
         BoxerHints boxerHints = new BoxerHints(); 
         GameLogic.clearConsole();
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox("*** Read Opponent's First Move Hints ***",50));
         System.out.println();
+        System.out.print(GameLogic.reset);
         for (String[] skillWithHints : boxerHints.skillsWithHints) {
             System.out.println();
             System.out.print(GameLogic.centerText(50, "✊🏿 " + skillWithHints[0] + " ✊🏿"));
@@ -49,7 +51,9 @@ public class BoxerHints {
             System.out.print(GameLogic.centerText(50, skillWithHints[2]));
         }
         System.out.println();
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox("( You take in the lessons, ready to outsmart your opponents. )",80));
+        System.out.print(GameLogic.reset);
         GameLogic.pressAnything();
     }
 

@@ -42,7 +42,9 @@ public class GameLogic2 {
     private static void printMenu(){
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerBox("MENU", 30));
+        System.out.print(GameLogic.orangeText);
         System.out.println();
         System.out.print(GameLogic.centerText(50,"Choose an action:"));
         System.out.print(GameLogic.centerText(50,"(0) Exit Game"));
@@ -51,6 +53,7 @@ public class GameLogic2 {
         System.out.print(GameLogic.centerText(50,"(3) Inventory"));
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
+        System.out.print(GameLogic.reset);
     }
 
     // Continues players journey
@@ -59,11 +62,15 @@ public class GameLogic2 {
         if(player.getCurrentWorld() == 1) {
             if(player.getStage() == 6){
                 String[] worlds = player.getWorlds();
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerBox("Welcome to the " + worlds[player.getCurrentWorld()],100));
+                System.out.print(GameLogic.reset);
                 StoryUnderground.printUnderground();
                 System.out.println("\n");
+                System.out.print(GameLogic.orangeText);
                 System.out.print(GameLogic.centerText(50,"Are you ready to start your journey?"));
                 System.out.print(GameLogic.centerText(50,"(1) Yes\n(2) No "));
+                System.out.print(GameLogic.reset);
                 int choice2 = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
                 if(choice2 == 2){
                     return;
@@ -73,7 +80,9 @@ public class GameLogic2 {
             } else {
                 while (true) {
                     GameLogic.clearConsole();
+                    System.out.print(GameLogic.greenText);
                     System.out.print(GameLogic.centerBox("MENU", 30));
+                    System.out.print(GameLogic.orangeText);
                     System.out.println();
                     if(player.getStage() == 7){
                         System.out.print(GameLogic.centerText(50,"(0) Train with Jakester"));
@@ -83,6 +92,7 @@ public class GameLogic2 {
                     System.out.print(GameLogic.centerText(50,"(1) Bet on Matches"));
                     System.out.print(GameLogic.centerText(50,"(2) Black Market"));
                     System.out.print(GameLogic.centerText(50,"(3) Go back"));
+                    System.out.print(GameLogic.reset);
                     int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 3);
                     if(choice == 0){
                         if(player.getStage() == 7){
@@ -108,12 +118,15 @@ public class GameLogic2 {
     private static void journeyMenu(){
         while(true){
             GameLogic.clearConsole();
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerBox("MENU", 30));
             System.out.println();
+            System.out.print(GameLogic.orangeText);
             System.out.print(GameLogic.centerText(50,"(1) Review Move Hints"));
             System.out.print(GameLogic.centerText(50,"(2) Spar - Earn points and gain stats"));
             System.out.print(GameLogic.centerText(50,"(3) Enter Tournament"));
             System.out.print(GameLogic.centerText(50,"(4) Go back"));
+            System.out.print(GameLogic.reset);
             int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4);
             if(choice == 1){
                 BoxerHints.teachHints();

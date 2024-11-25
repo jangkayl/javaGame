@@ -169,6 +169,7 @@ public abstract class PlayerVsOpponent2 {
 
             if(isValidCombo(input, player.getStamina()) == 1){
                 System.out.println(GameLogic.centerBox("Please enter a valid combo (e.g., 123):", 50));
+                System.out.print(GameLogic.reset);
                 continue;
             } else if(isValidCombo(input, player.getStamina()) == 2) {
                 String message = player.getName() + " doesn't have enough stamina for this combo!\n" +
@@ -321,6 +322,7 @@ public abstract class PlayerVsOpponent2 {
             player.setDamageSetter(player.getCritMultiplier());
             System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + "'s " + playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw) {
@@ -331,6 +333,7 @@ public abstract class PlayerVsOpponent2 {
             player.setDamageSetter(0);
             System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + " dodges " + player.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         player.useSkill(playerAttacks[choice]);
@@ -351,6 +354,7 @@ public abstract class PlayerVsOpponent2 {
             opponent.setDamageSetter(opponent.getCritMultiplier());
             System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw) {
@@ -361,6 +365,7 @@ public abstract class PlayerVsOpponent2 {
             opponent.setDamageSetter(0);
             System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + " dodges " + opponent.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         opponentPerformAction(opponentAttacks[choice]);

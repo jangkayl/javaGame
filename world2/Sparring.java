@@ -20,7 +20,9 @@ public class Sparring {
             playerProgress.setAddStats(0);
             player.setStage(9);
             GameLogic.clearConsole();
+            System.out.print(GameLogic.blueText);
             System.out.print(GameLogic.centerBox("🥊  SPARRING ARENA - DIRTY BOXING FIGHT 🥊",70));
+            System.out.print(GameLogic.reset);
             System.out.println("\n");
             System.out.print(GameLogic.centerText(50,
                     "You step into the gritty sparring arena, the atmosphere thick with tension and excitement...\n\n" +
@@ -39,7 +41,9 @@ public class Sparring {
 
     private static void sparRules() {
         GameLogic.clearConsole();
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox("🥊  SPARRING ARENA - DIRTY BOXING FIGHT 🥊",70));
+        System.out.print(GameLogic.reset);
         System.out.println();
         System.out.print(GameLogic.centerText(50,
                 "Mechanics: \n" +
@@ -72,11 +76,13 @@ public class Sparring {
         while (true) {
             world1.Tournament.showOpStats(opponent);
             System.out.println();
+            System.out.print(GameLogic.orangeText);
             System.out.print(GameLogic.centerText(50,"Select an option: "));
             System.out.print(GameLogic.centerText(50,"(1) Fight now"));
             System.out.print(GameLogic.centerText(50,"(2) Check your Stats"));
             System.out.print(GameLogic.centerText(50,"(3) Change Opponent Stats"));
             System.out.print(GameLogic.centerText(50,"(4) Go Back"));
+            System.out.print(GameLogic.reset);
     
             choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4); 
     
@@ -99,7 +105,9 @@ public class Sparring {
                     pitik = new PitikSparring(player, opponent);
                     perez = null;
                 }
+                System.out.print(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("New opponent generated!", 50));
+                System.out.print(GameLogic.reset);
             } else if(choice == 4){
                 return;
             }
@@ -114,7 +122,7 @@ public class Sparring {
     
     // Random Stats for Opponent
     private StreetFighter generateRandomOpponent(String name) {
-        int hp = rand.nextInt(51) + player.getMaxHp() - 100; // HP between playersMaxHp
+        int hp = rand.nextInt(51) + player.getMaxHp() - 50; // HP between playersMaxHp
         int stamina = rand.nextInt(21) + player.getMaxStamina() + 10; // Stamina between playersMaxStamina
         double critChance = 0.3 + (rand.nextDouble() * 0.3); // Crit chance between 0.3 and 0.6
         double critMulti = 2 + (rand.nextDouble() * 1); // Crit multi between 2 and 3

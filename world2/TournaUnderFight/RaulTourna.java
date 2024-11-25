@@ -24,7 +24,9 @@ public class RaulTourna extends SparFightLogic{
         getPlayer().setIsLose(false);
         if(getPlayerProgress().getPlayerWins() != 3){
             System.out.println();
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
+            System.out.print(GameLogic.reset);
         }
         resetFighterStats();
         getPlayerProgress().setRound(getPlayerProgress().getRound() + 1);

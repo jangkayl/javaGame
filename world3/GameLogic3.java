@@ -42,7 +42,9 @@ public class GameLogic3 {
     static void printMenu(){
         GameLogic.gameData.saveGame();
         GameLogic.clearConsole();
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerBox("MENU", 30));
+        System.out.print(GameLogic.orangeText);
         System.out.println();
         System.out.print(GameLogic.centerText(50,"Choose an action:"));
         System.out.print(GameLogic.centerText(50,"(0) Exit Game"));
@@ -51,6 +53,7 @@ public class GameLogic3 {
         System.out.print(GameLogic.centerText(50,"(3) Inventory"));
         player.setHp(player.getMaxHp());
         player.setStamina(player.getMaxStamina());
+        System.out.print(GameLogic.reset);
     }
 
     // Continues players journey
@@ -62,11 +65,15 @@ public class GameLogic3 {
         if(player.getCurrentWorld() == 2) {
             if(player.getStage() == 12){
                 String[] worlds = player.getWorlds();
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerBox("Welcome to the " + worlds[player.getCurrentWorld()],100));
+                System.out.print(GameLogic.reset);
                 StoryChampsArena.printChampsArena();
+                System.out.print(GameLogic.orangeText);
                 System.out.println("\n");
                 System.out.print(GameLogic.centerText(50,"Are you ready to start your journey?"));
                 System.out.print(GameLogic.centerText(50,"(1) Yes\n(2) No "));
+                System.out.print(GameLogic.reset);
                 int choice2 = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
                 if(choice2 == 2){
                     return;
@@ -77,13 +84,16 @@ public class GameLogic3 {
             } else {
                 while (true) {
                     GameLogic.clearConsole();
+                    System.out.print(GameLogic.greenText);
                     System.out.print(GameLogic.centerBox("MENU", 30));
                     System.out.println();
+                    System.out.print(GameLogic.orangeText);
                     System.out.print(GameLogic.centerText(50,"(1) Sparring Ring"));
                     System.out.print(GameLogic.centerText(50,"(2) Boxing Arsenal"));
                     System.out.print(GameLogic.centerText(50,"(3) Enter Tournament"));
                     System.out.print(GameLogic.centerText(50,"(4) Go back"));
                     int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 4);
+                    System.out.print(GameLogic.reset);
                     if(choice == 1){
                         if(player.getStage() == 13)
                             trainWithFred.teachPassiveSkills();

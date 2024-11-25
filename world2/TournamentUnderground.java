@@ -25,7 +25,15 @@ public class TournamentUnderground {
     public static void attemptTournament(int playerAddStats) {
         GameLogic.clearConsole();
         if (playerAddStats < 5) {
-            System.out.println(GameLogic.centerBox(
+            String text = GameLogic.redText + GameLogic.centerText(100,
+                         "▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ 　 ▒█▀▀▀ █▀▀▄ ▀▀█▀▀ █▀▀█ █░░█ 　 ░█▀▀█ ▀▀█▀▀ ▀▀█▀▀ █▀▀ █▀▄▀█ █▀▀█ ▀▀█▀▀\n" +
+                         "░▒█░░ █░░█ █░░█ █▄▄▀ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ 　 ▒█▀▀▀ █░░█ ░░█░░ █▄▄▀ █▄▄█ 　 ▒█▄▄█ ░░█░░ ░░█░░ █▀▀ █░▀░█ █░░█ ░░█░░\n" +
+                         "░▒█░░ ▀▀▀▀ ░▀▀▀ ▀░▀▀ ▀░░▀ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░ 　 ▒█▄▄▄ ▀░░▀ ░░▀░░ ▀░▀▀ ▄▄▄█ 　 ▒█░▒█ ░░▀░░ ░░▀░░ ▀▀▀ ▀░░░▀ █▀▀▀ ░░▀░░\n\n") + GameLogic.reset;
+
+            System.out.print(text);
+            System.out.println();
+
+            System.out.println(GameLogic.centerText(20, 
                     "⚔️ UNDERGROUND TOURNAMENT ENTRY ⚔️\n" +
                             "You enter a dimly lit arena, the air thick with sweat and smoke...\n\n" +
                             "[ A grizzled official glares at you, a crooked grin forming ]\n" +
@@ -33,7 +41,7 @@ public class TournamentUnderground {
                             "One hit and you'll be begging for mercy. You need to spar harder and toughen up! \n" 
                             + "Earn your stripes before stepping into this ring!\"\n\n" +
                             "🏋️ Tip: Train hard, spar fiercely, and build your strength to earn a shot at the underground brawls! 🏆\n" +
-                            "🔥 Prove your worth in 5 sparring matches before stepping into the ring of legends! 🔥", 110));
+                            "🔥 Prove your worth in 5 sparring matches before stepping into the ring of legends! 🔥"));
 
             resetMatchScores();
             GameLogic.pressAnything();
@@ -45,7 +53,12 @@ public class TournamentUnderground {
 
     public static void startTournament() {
         GameLogic.clearConsole();
-        System.out.print(GameLogic.centerBox("🏆 Underground Brawl Tournament 🏆",60));
+        String text = GameLogic.redText + GameLogic.centerText(100,
+                     "█░░█ █▀▀▄ █▀▀▄ █▀▀ █▀▀█ █▀▀▀ █▀▀█ █▀▀█ █░░█ █▀▀▄ █▀▀▄ 　 ▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ \n" +
+                     "█░░█ █░░█ █░░█ █▀▀ █▄▄▀ █░▀█ █▄▄▀ █░░█ █░░█ █░░█ █░░█ 　 ░▒█░░ █░░█ █░░█ █▄▄▀ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ \n" +
+                     "░▀▀▀ ▀░░▀ ▀▀▀░ ▀▀▀ ▀░▀▀ ▀▀▀▀ ▀░▀▀ ▀▀▀▀ ░▀▀▀ ▀░░▀ ▀▀▀░ 　 ░▒█░░ ▀▀▀▀ ░▀▀▀ ▀░▀▀ ▀░░▀ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░" ) + GameLogic.reset;
+
+        System.out.print(text);
         System.out.println();
 
         if(playerProgress.getPlayerWins() == 0 && playerProgress.getOpponentWins() == 0){
@@ -110,8 +123,9 @@ public class TournamentUnderground {
         System.out.println();
     
         String opponentName = opponents[opponentIndex];
+        System.out.print(GameLogic.redText);
         System.out.print(GameLogic.centerBox(opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: " + opponentName, 50));
-    
+        System.out.print(GameLogic.reset);
         
         // Initialize opponent based on the index
         switch (opponentIndex) {
@@ -144,6 +158,7 @@ public class TournamentUnderground {
         System.out.println();
         System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(80)));
         System.out.println();
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(80,"Before continuing, would you like to visit the shop or check your inventory?"));
         System.out.print(GameLogic.centerText(80,"1. Visit Shop"));
         System.out.print(GameLogic.centerText(80,"2. Check Inventory"));
@@ -151,6 +166,7 @@ public class TournamentUnderground {
         System.out.println();
         System.out.print(GameLogic.centerText(80,"Enter your choice: "));
         
+        System.out.print(GameLogic.reset);
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 2);
         if (choice == 0) {
             return true;  
@@ -184,13 +200,17 @@ public class TournamentUnderground {
 
     private static boolean offerRematch() {
         System.out.println();
+        System.out.print(GameLogic.redText);
         System.out.print(GameLogic.centerBox("You lost your previous match. Would you like to:", 55));
         System.out.println();
+        System.out.print(GameLogic.reset);
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(20,"1. Try the tournament again?"));
         System.out.print(GameLogic.centerText(20,"2. Boost your stats by sparring more!"));
         System.out.println();
         System.out.print(GameLogic.centerText(20, "Enter your choice (1 or 2): "));
-        
+        System.out.print(GameLogic.orangeText);
+
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if (choice == 1) {
             playerProgress.setPlayerWins(0);
@@ -205,7 +225,7 @@ public class TournamentUnderground {
     public void printStanding(){
         System.out.println("\n");
         String text = GameLogic.redText + GameLogic.centerText(100,
-                   "▒█▀▀█ █▀▀ █▀▀ ▀▀█▀▀ 　 █▀▀█ █▀▀ 　 █▀▀█   \n" +
+                        "▒█▀▀█ █▀▀ █▀▀ ▀▀█▀▀ 　 █▀▀█ █▀▀ 　 █▀▀█   \n" +
                         "▒█▀▀▄ █▀▀ ▀▀█ ░░█░░ 　 █░░█ █▀▀ 　 ░░▀▄   \n" +
                         "▒█▄▄█ ▀▀▀ ▀▀▀ ░░▀░░ 　 ▀▀▀▀ ▀   　 █▄▄█   \n\n" ) + GameLogic.reset;
 
@@ -218,25 +238,31 @@ public class TournamentUnderground {
 
     private static void concludeTournament() {
         System.out.println("\n\n");
+        System.out.print(GameLogic.blueText);
         System.out.println(GameLogic.centerBox(
                 "🥊 Champion of the Underground! 🥊\n" +
                         "You've dominated the Dirty Boxing Tournament, emerging as the fiercest fighter in the shadows.\n" +
                         "Your name strikes fear in the underground, but the chaos never ends...", 110));
 
+        System.out.print(GameLogic.reset);
         GameLogic.pressAnything();
         player.setRank(5);
         GameLogic.rankReward();
         System.out.println("\n");
+        System.out.print(GameLogic.blueText);
         System.out.println(GameLogic.centerBox(
                 "As you stand victorious, your father steps forward, his face filled with regret.\n" +
                         "He opens his mouth to confess why he abandoned you... but suddenly, chaos erupts.\n" +
                         "Gunshots echo, and you hear the shout: 'Police raid! Everybody down!' The room is thrown into chaos!", 110));
 
+        System.out.print(GameLogic.reset);
         System.out.println();
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(50, "Choose your path:"));
         System.out.print(GameLogic.centerText(50, "(1) Run and escape the raid."));
         System.out.print(GameLogic.centerText(50, "(2) Stay and hear your father's confession, then fight the police."));
+        System.out.print(GameLogic.reset);
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if(choice == 1){
             runAndEscape();
@@ -255,11 +281,13 @@ public class TournamentUnderground {
     private static void stayAndHearConfession() {
         GameLogic.clearConsole();
         String message = "You choose to stay, ignoring the chaos around you, as your father begins to speak." + 
-                        "\n\nSalvahez: \"Son\"" + "\n\n[ He says, his voice trembling. ]" + 
-                        "\n\nSalvahez: \"Your mother was sick for a long time... longer than you ever knew." +
-                        "\nI couldn't bear to see her like that, and I knew I had to do something. The underground world was my escape." +
-                        "\nIt gave me the money to take care of her, but it came at a cost.\"";
+        "\n\nSalvahez: \"Son\"" + "\n\n[ He says, his voice trembling. ]" + 
+        "\n\nSalvahez: \"Your mother was sick for a long time... longer than you ever knew." +
+        "\nI couldn't bear to see her like that, and I knew I had to do something. The underground world was my escape." +
+        "\nIt gave me the money to take care of her, but it came at a cost.\"";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 110));        
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
@@ -267,7 +295,9 @@ public class TournamentUnderground {
         message = "[ He looks away, ashamed, as tears well up in his eyes. ]" + 
                         "\n\nSalvahez: \"I was blinded by greed. The money was too much, and... I got lost in it." +
                         "\nIllegal substances numbed the pain, but they also made me forget about her... about you.\"";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 110));        
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
@@ -277,7 +307,9 @@ public class TournamentUnderground {
                   "\ndon't make the same mistakes I did.\"" + 
                   "\n\n[ As he finishes, you hear the police shouting orders. Your father grabs your arm. ]" + 
                   "\n\nSalvahez: \"We have to get out of here!\" he says, pulling you toward the exit.";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 110));        
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
@@ -285,14 +317,18 @@ public class TournamentUnderground {
         message = "[ You both run, dodging through the chaos, but suddenly... A gunshot rings out." +
                 "\nYou feel your father's grip loosen as he collapses to the ground, clutching his side. ]" +
                 "\n\nSalvahez: \"Go! You have to live! Don't waste it like I did!\"";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 110));
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
         GameLogic.clearConsole();
+        System.out.print(GameLogic.blueText);
         message = "[ But you can't leave him. Tears streaming down your face, you stay by his side." +
                     "\nThe police close in, and you surrender, knowing there's no other way out. ]";
         System.out.print(GameLogic.centerBox(message, 110));
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
@@ -300,7 +336,9 @@ public class TournamentUnderground {
         message = "[ The next five years pass slowly in prison. You reflect on your father's words, " + 
                     "\nvowing to rise above the darkness that consumed him. When you finally walk free, you're not" +
                     "\nthe same person anymore. You carry his legacy, his mistakes, and a burning desire to forge a better path. ]";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 110));
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
 
@@ -311,7 +349,9 @@ public class TournamentUnderground {
         GameLogic.clearConsole();
         String message = "[ As you step out of the prison gates, a familiar voice calls out. ]" +
                         "\n\nCoach Fred: \"Hey, kid. Been a while.\"";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 110));
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
@@ -320,7 +360,9 @@ public class TournamentUnderground {
                   "\nbut I know you've still got that fire. The Champs Arena is looking for fighters, and I know you belong there.\"" +
                   "\n\n[ He places a hand on your shoulder. ]" +
                   "\n\nCoach Fred: \"This is your shot at a fresh start.\"";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 115));
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
@@ -328,14 +370,19 @@ public class TournamentUnderground {
         message = "[ With a nod, you accept the offer, determination burning in your eyes. ]" +
                   "\n\n" + player.getName() + ": \"I'm ready, Coach. Let's do this.\"" +
                   "\n\nCoach Fred: \"That's my fighter. Welcome back.\"";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 110));
+        System.out.print(GameLogic.reset);
         System.out.println();
+        GameLogic.pressAnything();
 
         GameLogic.clearConsole();
-        message = "[ After spending 5 long years in prison, the toll it took on your body is undeniable." +
+        message = "[ After spending 5 long years in prison, the toll it took on your body is undeniable. ]" +
                         "\nYou've lost 10% of your health and stamina and lost all your belongings and points." + 
                         "\nThe harsh reality of confinement has left its mark.";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 115));
+        System.out.print(GameLogic.reset);
         System.out.println();
 
         inventory.deleteAllInventoryItems();
@@ -355,7 +402,9 @@ public class TournamentUnderground {
         String message = "[ After escaping the chaos of the raid, you try to live quietly, but life doesn't get any easier." +
                          "\nYour mother's illness worsens, and the hospital bills keep piling up. You feel the weight of it all." +
                          "\nThe next morning, a knock at the door startles you. ]";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 115));
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
@@ -365,7 +414,9 @@ public class TournamentUnderground {
                   "\n\n[ He pauses, then places a hand on your shoulder. ]" +
                   "\n\nCoach Fred: \"But I also know your potential. The Champs Arena is where you belong." + 
                   "\nIt's your shot at real money, real recognition and a chance to make things right.\"";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 120));
+        System.out.print(GameLogic.reset);
         System.out.println();
         GameLogic.pressAnything();
     
@@ -373,7 +424,9 @@ public class TournamentUnderground {
         message = "[ You think of your mother, her struggle, and the path ahead. With a deep breath, you nod. ]" +
                   "\n\n" + player.getName() + ": \"Alright, Coach. Let's do this for her.\"" +
                   "\n\nCoach Fred: \"That's the fighter I know. Let's get to work.\"";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(message, 110));
+        System.out.print(GameLogic.reset);
         System.out.println();
     }
     

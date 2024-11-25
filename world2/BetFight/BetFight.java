@@ -41,29 +41,39 @@ public class BetFight {
         fighter1 = generateRandomOpponent(null);
         fighter2 = generateRandomOpponent(fighter1.getName());
 
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerText(50,"Meet the fighters:"));
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerText(50,"Fighter 1: " + fighter1.getName()));
         world1.Tournament.showOpStats(fighter1);
         System.out.println();
+        System.out.print(GameLogic.redText);
         System.out.print(GameLogic.centerText(50,"Fighter 2: " + fighter2.getName()));
         world1.Tournament.showOpStats(fighter2);
         System.out.println();
+        System.out.print(GameLogic.reset);
 
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(50,"Place your bet! (1) " + fighter1.getName() + " or (2) " + fighter2.getName() + " | (0) Go Back:"));
+        System.out.print(GameLogic.reset);
         int betChoice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 2);
         if(betChoice == 0) return;
         int betAmount = 0;
         do {
+            System.out.print(GameLogic.orangeText);
             System.out.print(GameLogic.centerText(50,"\nEnter your bet amount (minimum 100 points) | (0) Go Back:"));
             System.out.print(GameLogic.centerText(50,"Available Points: " + player.getPlayerPoints()));
+            System.out.print(GameLogic.reset);
             betAmount = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, Integer.MAX_VALUE);
             if(betAmount == 0) return;
         
+            System.out.print(GameLogic.redText);
             if (betAmount < 100){
                 System.out.println(GameLogic.centerBox("Minimum bet is 100 points. Please try again.", 60));
             } else if (betAmount > player.getPlayerPoints()) {
                 System.out.println(GameLogic.centerBox("You don't have enough points to place this bet. Please try again.", 80));
             }
+            System.out.print(GameLogic.reset);
         } while (betAmount > player.getPlayerPoints() || betAmount < 100);
 
         System.out.println("\n");
@@ -211,17 +221,23 @@ public class BetFight {
             String fighter1Attack = fighter1.getName() + " throws a " + opponentAttacks[opponent1Choices[i]] + " to " + fighter2.getName();
 
             if(countered == 1){
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, fighter1Attack));
+                System.out.print(GameLogic.reset);
                 opponent1SuccessAction(opponent1Choices[i], opponent2Choices[i], false);
                 opponent2FailedAction(opponentAttacks[opponent2Choices[i]]);
             } else if(countered == 2){
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, fighter1Attack));
+                System.out.print(GameLogic.reset);
                 opponent2SuccessAction(opponent2Choices[i], opponent1Choices[i], false);
                 opponent1FailedAction(opponentAttacks[opponent1Choices[i]]);
             } else {
                 System.out.print(GameLogic.centerText(50, fighter1Attack));
                 String opponentAttack = fighter2.getName() + " draws " + fighter1.getName() + " with " + opponentAttacks[opponent2Choices[i]];
+                System.out.print(GameLogic.redText);
                 System.out.print(GameLogic.centerText(50, opponentAttack));
+                System.out.print(GameLogic.reset);
                 drawAction(opponent1Choices[i], opponent2Choices[i]);
             }
 
@@ -247,7 +263,9 @@ public class BetFight {
 
         if (critChance < fighter1.getCritChance() && choice != 2 && !isDraw && !opponent2Dodged) {
             fighter1.setDamageSetter(fighter1.getCritMultiplier());
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,fighter1.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < fighter1.getDodgeChance() && opponentChoice != 2 && !isDraw) {
@@ -256,7 +274,9 @@ public class BetFight {
 
         if (opponent2Dodged) {
             fighter1.setDamageSetter(0);
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40, fighter2.getName() + " dodges " + fighter1.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         fighter1.useSkill(opponentAttacks[choice], fighter2);
@@ -275,7 +295,9 @@ public class BetFight {
         
         if (critChance < fighter2.getCritChance() && choice != 2 && !isDraw) {
             fighter2.setDamageSetter(fighter2.getCritMultiplier());
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,fighter2.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
         
         if (dodgeChance < fighter2.getDodgeChance() && choice != 2 && !isDraw) {
@@ -284,7 +306,9 @@ public class BetFight {
         
         if (opponent1Dodged) {
             fighter2.setDamageSetter(0);
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40, fighter1.getName() + " dodges " + fighter2.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
         
         opponentPerformAction(opponentAttacks[choice]);

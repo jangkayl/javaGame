@@ -20,7 +20,9 @@ public class TrainWithFred {
                 "\n*Perfect for finishing off your opponent." + 
                 "\n\n\"Sixth Sense - Reveals the opponent's next 3 moves for next 2 turns.\"" +
                 "\n*Plan ahead and conserve stamina.";
+        System.out.print(GameLogic.blueText);
         System.out.print(GameLogic.centerBox(prompt, 130));
+        System.out.print(GameLogic.reset);
         System.out.println();
         
         prompt = "Coach Fred: \"You can only activate one of these skills at a time, so choose wisely and make those three hits count." + 

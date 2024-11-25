@@ -78,20 +78,28 @@ public abstract class FightLogic implements FightLogicInterface{
         GameLogic.gameData.saveGame();
         player.setOpponent(opponent);
         GameLogic.clearConsole();
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+        System.out.print(GameLogic.reset);
+        System.out.print(GameLogic.redText);
         System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
+        System.out.print(GameLogic.reset);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
             selectAttack();
             printStats();
             if (player.getHp() <= 0) {
                 System.out.println();
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox(getPlayer().getName() + " is knocked out! " + opponent.getName() + " wins!", 60));
+                System.out.print(GameLogic.reset);
                 handleLoss();
                 return;
             } else if (opponent.getHp() <= 0) {
                 System.out.println();
+                System.out.print(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + getPlayer().getName() + " wins!", 60));
+                System.out.print(GameLogic.reset);
                 handleWin();
                 return;
             }
@@ -103,6 +111,7 @@ public abstract class FightLogic implements FightLogicInterface{
         int[] choices = new int[3];
         String input = "";
 
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
     
         for (int i = 0; i < attackOption.length; i++) {
@@ -121,7 +130,9 @@ public abstract class FightLogic implements FightLogicInterface{
         }
         
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
+        System.out.print(GameLogic.reset);
     
         while (true) {
             input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
@@ -130,8 +141,12 @@ public abstract class FightLogic implements FightLogicInterface{
                 counterInfos(opponent.getName());
                 GameLogic.pressAnything();
                 GameLogic.clearConsole();
+                System.out.print(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+                System.out.print(GameLogic.reset);
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
+                System.out.print(GameLogic.reset);
                 return;
             }
 
@@ -221,17 +236,25 @@ public abstract class FightLogic implements FightLogicInterface{
             String playerAttack = getPlayer().getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName();
 
             if(countered == 1){
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 playerSuccessAction(choices[i], opponentChoices[i], false);
                 opponentFailedAction(opponentAttacks[opponentChoices[i]]);
             } else if(countered == 2){
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 opponentSuccessAction(opponentChoices[i], choices[i], false);
                 playerFailedAction(playerAttacks[choices[i]]);
             } else {
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 String opponentAttack = opponent.getName() + " draws " + getPlayer().getName() + " with " + opponentAttacks[opponentChoices[i]];
+                System.out.print(GameLogic.redText);
                 System.out.print(GameLogic.centerText(50, opponentAttack));
+                System.out.print(GameLogic.reset);
                 drawAction(choices[i], opponentChoices[i]);
             }
             if(getPlayer().getHp() <= 0 || getOpponent().getHp() <= 0){
@@ -304,7 +327,9 @@ public abstract class FightLogic implements FightLogicInterface{
 
         if (critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged) {
             player.setDamageSetter(player.getCritMultiplier());
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + "'s " + playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw) {
@@ -313,7 +338,9 @@ public abstract class FightLogic implements FightLogicInterface{
 
         if (opponentDodged) {
             player.setDamageSetter(0);
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + " dodges " + player.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         player.useSkill(playerAttacks[choice]);
@@ -332,7 +359,9 @@ public abstract class FightLogic implements FightLogicInterface{
 
         if (critChance < opponent.getCritChance() && choice != 2 && !isDraw) {
             opponent.setDamageSetter(opponent.getCritMultiplier());
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw) {
@@ -341,7 +370,9 @@ public abstract class FightLogic implements FightLogicInterface{
 
         if (playerDodged) {
             opponent.setDamageSetter(0);
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + " dodges " + opponent.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         opponentPerformAction(opponentAttacks[choice]);
@@ -389,9 +420,13 @@ public abstract class FightLogic implements FightLogicInterface{
     private void winnerReward(){
         if(playerProgress.getPlayerWins() != 3){
             System.out.println();
+            System.out.print(GameLogic.greenText);
+            System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
+            System.out.print(GameLogic.reset);
+        }
+        if(player.getStage() == 3 && playerProgress.getPlayerWins() == 3){
             player.setRank(1);
             GameLogic.rankNotif();
-            System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
         }
     }
     

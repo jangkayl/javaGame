@@ -144,6 +144,7 @@ public class Shop implements ShopInterface{
             if(player.getCurrentWorld() == 0){
                 System.out.println(GameLogic.centerBox("GYM SHOP", 40));
             } else if(player.getCurrentWorld() == 1){
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox("BLACK MARKET", 40));
             } else if(player.getCurrentWorld() == 2){
                 System.out.println(GameLogic.centerBox("BOXING ARSENAL", 40));

@@ -40,8 +40,8 @@ public class GameLogic{
     // Read user input
     public static int readInt(String prompt, int min, int max){
         int input;
-        System.out.print(orangeText);
         do {
+            System.out.print(orangeText);
             System.out.print(prompt);
             System.out.print(reset);
             System.out.print(redText);
@@ -56,6 +56,7 @@ public class GameLogic{
                 System.out.println(centerBox("Please enter valid choice number!", 50));
             }
             scan.nextLine();
+            System.out.print(reset);
         } while(input < min || input > max);
 
         System.out.print(reset);
@@ -73,7 +74,12 @@ public class GameLogic{
             try {
                 input = scan.nextLine().trim();
                 if (input.isEmpty()) { 
+                    System.out.println();
                     System.out.println(centerBox("Input cannot be empty or spaces only. Please try again!", 80));
+                } else if (!input.matches("[a-zA-Z0-9]+")) {
+                    System.out.println();
+                    System.out.println(centerBox("Input cannot contain special characters. Please try again!", 80));
+                    input = ""; 
                 }
             } catch(Exception e){
                 System.out.println(centerBox("Please enter a valid input!", 50));
@@ -167,7 +173,7 @@ public class GameLogic{
 
     public static String centerBox(String text, int width) {
         int boxWidth = width;
-        int terminalWidth = 197;
+        int terminalWidth = 198;
 
         int boxPadding = (terminalWidth - boxWidth) / 2;
         String boxPad = new String(new char[boxPadding]).replace("\0", " ");
@@ -268,9 +274,9 @@ public class GameLogic{
             clearConsole();
             System.out.print(GameLogic.orangeText);
             System.out.print(centerText(20,"Have you ever played this game?"));
-            System.out.print(GameLogic.reset);
             System.out.print(centerText(20,"1) Yep!"));
             System.out.print(centerText(20,"2) Not yet"));
+            System.out.print(GameLogic.reset);
             int choice = readInt(centerText("", 97) + "-> ", 1, 2);
             
             if (choice == 2) {
@@ -307,13 +313,15 @@ public class GameLogic{
                 if (player != null) {
                     break; 
                 } else {
+                    System.out.print(redText);
                     System.out.println(centerBox("No player found in the database. Please create a new player.", 70));
+                    System.out.print(reset);
                     pressAnything();
                 }
             }
         }
     
-        // Story.printIntro(player.getName());
+        Story.printIntro(player.getName());
         isRunning = true;
         
         if(player.getCurrentWorld() == 1){
@@ -562,8 +570,10 @@ public class GameLogic{
                                 }
                             } else {
                                 if(playerProgress.getAddStats() == 5){
+                                    System.out.print(GameLogic.greenText);
                                     System.out.print(centerBox("Fred: \"You've reached your training limit 5 sessions max! Time to put those skills to the test!\"",110));
                                     System.out.println("\n");
+                                    System.out.print(GameLogic.reset);
                                     pressAnything();
                                     return;
                                 }
@@ -608,15 +618,17 @@ public class GameLogic{
         String prompt1;
         rankNotif();
         System.out.println();
+        System.out.print(GameLogic.orangeText);
         System.out.print(centerText(50,
                 "Here are your choices: ( Select one only )\n" +
                         "1. HP - Increase by +10%\n" +
                         "2. Stamina - Increase by +10%\n" +
-                        "3. Crit Chance - Increase by +5%\n" +
-                        "4. Dodge Chance - Increase by +5%\n" +
-                        "5. Crit Multiplier - Increase by +5%\n" +
+                        "3. Crit Chance - Increase by +3%\n" +
+                        "4. Dodge Chance - Increase by +3%\n" +
+                        "5. Crit Multiplier - Increase by +3%\n" +
                         "\nEnter the number of the stat you'd like to upgrade: "));
         int choice = readInt(centerText("", 97) + "-> ", 1, 5);
+        System.out.print(GameLogic.reset);
 
         addStats(choice);
 
@@ -628,13 +640,13 @@ public class GameLogic{
                 prompt1 = "Your Stamina has been increased by 10%!";
                 break;
             case 3:
-                prompt1 = "Your Critical Hit Chance has been increased by 5%!";
+                prompt1 = "Your Critical Hit Chance has been increased by 3%!";
                 break;
             case 4:
-                prompt1 = "Your Crit Multiplier has been increased by 5%!";
+                prompt1 = "Your Crit Multiplier has been increased by 3%!";
                 break;
             case 5:
-                prompt1 = "Your Dodge Chance has been increased by 5%!";
+                prompt1 = "Your Dodge Chance has been increased by 3%!";
                 break;
             default:
                 prompt1 = "Invalid choice. No stat was upgraded.";
@@ -642,7 +654,9 @@ public class GameLogic{
         }
 
         System.out.println(); 
+        System.out.print(GameLogic.greenText);
         System.out.print(centerBox(prompt1, 97));
+        System.out.print(GameLogic.reset);
         printCenteredSeparator(50);
         pressAnything();
         gameData.saveGame();
@@ -669,13 +683,13 @@ public class GameLogic{
             player.setStamina(maxStamina);
             player.setMaxStamina(maxStamina);
         } else if(choice == 3){
-            double newCrit = player.getCritChance() + 0.05;
+            double newCrit = player.getCritChance() + 0.03;
             player.setCritChance(newCrit);
         } else if(choice == 4){
-            double newDodge = player.getDodgeChance() + 0.05;
+            double newDodge = player.getDodgeChance() + 0.03;
             player.setDodgeChance(newDodge);
         } else if(choice == 5){
-            double newMulti = player.getCritMultiplier() + 0.05;
+            double newMulti = player.getCritMultiplier() + 0.03;
             player.setCritMultiplier(newMulti);
         }
     }

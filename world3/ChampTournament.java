@@ -24,15 +24,22 @@ public class ChampTournament {
     public void attemptTournament(int playerAddStats) {
         GameLogic.clearConsole();
         if (player.getStage() < 19) {
-            System.out.print(GameLogic.centerBox(
-                    "⚔️ Tournament Entry Attempt ⚔️", 100));
+            String text = GameLogic.redText + GameLogic.centerText(100,
+                         "▀▀█▀▀ █▀▀█ █░░█ █▀▀█ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ 　 ▒█▀▀▀ █▀▀▄ ▀▀█▀▀ █▀▀█ █░░█ 　 ░█▀▀█ ▀▀█▀▀ ▀▀█▀▀ █▀▀ █▀▄▀█ █▀▀█ ▀▀█▀▀\n" +
+                         "░▒█░░ █░░█ █░░█ █▄▄▀ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ 　 ▒█▀▀▀ █░░█ ░░█░░ █▄▄▀ █▄▄█ 　 ▒█▄▄█ ░░█░░ ░░█░░ █▀▀ █░▀░█ █░░█ ░░█░░\n" +
+                         "░▒█░░ ▀▀▀▀ ░▀▀▀ ▀░▀▀ ▀░░▀ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░ 　 ▒█▄▄▄ ▀░░▀ ░░▀░░ ▀░▀▀ ▄▄▄█ 　 ▒█░▒█ ░░▀░░ ░░▀░░ ▀▀▀ ▀░░░▀ █▀▀▀ ░░▀░░\n\n") + GameLogic.reset;
+
+            System.out.print(text);
             System.out.println();
+
+
             System.out.print(GameLogic.centerText(20, 
                                 "You stand before the legendary arena, but the gatekeeper blocks your path.\n\n" +
                                 "Gatekeeper: \"Hold it, rookie! You're not ready for the Champion's Tournament.\n" +
                                 "Get back to the gym, spar harder, and prove you're no pushover.\n" +
                                 "Only the strongest warriors earn their place here!\"\n\n" +
-                                "🏋️ Tip: Spar relentlessly and rank up to unlock the tournament."));
+                                "🏋️ Tip: Spar relentlessly and rank up to unlock the tournament.\n" +
+                                "🔥 Prove your worth in 5 sparring matches before stepping into the ring of legends! 🔥"));
             GameLogic.pressAnything();
         } else {
             startTournament();
@@ -41,7 +48,12 @@ public class ChampTournament {
 
     public void startTournament() {
         GameLogic.clearConsole();
-        System.out.print(GameLogic.centerBox("🏆 Underground Brawl Tournament 🏆",60));
+        String text = GameLogic.redText + GameLogic.centerText(100,
+                     "▒█▀▀█ ▒█░▒█ ░█▀▀█ ▒█▀▄▀█ ▒█▀▀█ ▀█▀ ▒█▀▀▀█ ▒█▄░▒█ ▒█▀▀▀█ 　 ▀▀█▀▀ ▒█▀▀▀█ ▒█░▒█ ▒█▀▀█ ▒█▄░▒█ ░█▀▀█ ▒█▀▄▀█ ▒█▀▀▀ ▒█▄░▒█ ▀▀█▀▀ \n" +
+                     "▒█░░░ ▒█▀▀█ ▒█▄▄█ ▒█▒█▒█ ▒█▄▄█ ▒█░ ▒█░░▒█ ▒█▒█▒█ ░▀▀▀▄▄ 　 ░▒█░░ ▒█░░▒█ ▒█░▒█ ▒█▄▄▀ ▒█▒█▒█ ▒█▄▄█ ▒█▒█▒█ ▒█▀▀▀ ▒█▒█▒█ ░▒█░░ \n" +
+                     "▒█▄▄█ ▒█░▒█ ▒█░▒█ ▒█░░▒█ ▒█░░░ ▄█▄ ▒█▄▄▄█ ▒█░░▀█ ▒█▄▄▄█ 　 ░▒█░░ ▒█▄▄▄█ ░▀▄▄▀ ▒█░▒█ ▒█░░▀█ ▒█░▒█ ▒█░░▒█ ▒█▄▄▄ ▒█░░▀█ ░▒█░░" ) + GameLogic.reset;
+
+        System.out.print(text);
         System.out.println();
 
         if(playerProgress.getPlayerWins() == 0 && playerProgress.getOpponentWins() == 0){
@@ -109,9 +121,10 @@ public class ChampTournament {
         System.out.println();
     
         String opponentName = opponents[opponentIndex];
+        System.out.print(GameLogic.redText);
         System.out.print(GameLogic.centerBox(opponentIndex == 2 ? "FINAL OPPONENT: " : "You will face: " + opponentName, 50));
-    
-        
+        System.out.print(GameLogic.reset);
+
         // Initialize opponent based on the index
         switch (opponentIndex) {
             case 0 -> {
@@ -130,7 +143,7 @@ public class ChampTournament {
             }
             case 2 -> {
                 // The Ghost
-                opponent = new StreetFighter("Mani Pakyaw", 500, 130, 0.5, 2, 0.5, 5);
+                opponent = new StreetFighter("Mani Pakyaw", 410, 150, 0.5, 2, 0.5, 5);
                 opponent.setPlayerOpponent(player);
                 StoryChampsArena.champTournaBackstory(opponent);
                 fightWithOpponent(new Pakyaw(player, opponent));
@@ -143,6 +156,7 @@ public class ChampTournament {
         System.out.println();
         System.out.print(GameLogic.centerText(50, GameLogic.printCenteredSeparator(80)));
         System.out.println();
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(80,"Before continuing, would you like to visit the shop or check your inventory?"));
         System.out.print(GameLogic.centerText(80,"1. Visit Shop"));
         System.out.print(GameLogic.centerText(80,"2. Check Inventory"));
@@ -150,11 +164,14 @@ public class ChampTournament {
         System.out.println();
         System.out.print(GameLogic.centerText(80,"Enter your choice: "));
         
+        System.out.print(GameLogic.reset);
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 0, 2);
         if (choice == 0) {
             if(!inventory.checkSlotsValid()){
                 System.out.println();
+                System.out.print(GameLogic.redText);
                 System.out.print(GameLogic.centerBox("✋ Please UNEQUIP all items from Underworld Rumble before fighting", 75));
+                System.out.print(GameLogic.reset);
                 GameLogic.pressAnything();
                 return false;
             }
@@ -189,12 +206,16 @@ public class ChampTournament {
 
     private static boolean offerRematch() {
         System.out.println();
+        System.out.print(GameLogic.redText);
         System.out.print(GameLogic.centerBox("You lost your previous match. Would you like to:", 55));
+        System.out.print(GameLogic.reset);
         System.out.println();
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(20,"1. Try the tournament again?"));
         System.out.print(GameLogic.centerText(20,"2. Boost your stats by sparring more!"));
         System.out.println();
         System.out.print(GameLogic.centerText(20, "Enter your choice (1 or 2): "));
+        System.out.print(GameLogic.reset);
         
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 2);
         if (choice == 1) {
@@ -210,7 +231,7 @@ public class ChampTournament {
     public void printStanding(){
         System.out.println("\n");
         String text = GameLogic.redText + GameLogic.centerText(100,
-                   "▒█▀▀█ █▀▀ █▀▀ ▀▀█▀▀ 　 █▀▀█ █▀▀ 　 █▀▀█   \n" +
+                        "▒█▀▀█ █▀▀ █▀▀ ▀▀█▀▀ 　 █▀▀█ █▀▀ 　 █▀▀█   \n" +
                         "▒█▀▀▄ █▀▀ ▀▀█ ░░█░░ 　 █░░█ █▀▀ 　 ░░▀▄   \n" +
                         "▒█▄▄█ ▀▀▀ ▀▀▀ ░░▀░░ 　 ▀▀▀▀ ▀   　 █▄▄█   \n\n" ) + GameLogic.reset;
 
@@ -223,10 +244,12 @@ public class ChampTournament {
 
     private void concludeTournament() {
         System.out.println("\n\n");
+        System.out.print(GameLogic.blueText);
         System.out.println(GameLogic.centerBox(
                 "🏆 Champion of the World! 🏆\n" +
                 "You've conquered the legendary Champion's Tournament, outlasting the fiercest fighters the world has ever known.\n" +
                 "Your name will be etched in history as the ultimate warrior, the one who overcame every challenge to claim the title of Champion!", 140));
+        System.out.print(GameLogic.reset);
         GameLogic.pressAnything();
 
         player.setRank(6); 
@@ -248,11 +271,12 @@ public class ChampTournament {
     
         System.out.println();
         System.out.println(GameLogic.centerText(50, GameLogic.printCenteredSeparator(90)));
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(50, "Choose your path:"));
         System.out.print(GameLogic.centerText(50, "(1) Continue as the reigning Champion, inspiring future fighters."));
         System.out.print(GameLogic.centerText(50, "(2) Retire and use your fame to bring change to the world."));
         System.out.print(GameLogic.centerText(50, "(3) Disappear into legend, leaving behind a mystery for the ages."));
-
+        System.out.print(GameLogic.reset);
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 3);
         if (choice == 1) {
             continueReign();
@@ -327,14 +351,6 @@ public class ChampTournament {
         player.setCurrentWorld(3);
 
         GameLogic.gameLogo();
-        // String mainAscii = GameLogic.greenText + GameLogic.centerText(100,
-        // "████████╗██╗  ██╗ █████╗ ███╗   ██╗██╗  ██╗███████╗    ███████╗ ██████╗ ██████╗     ██████╗ ██╗      █████╗ ██╗   ██╗██╗███╗   ██╗ ██████╗ \n" +
-        // "╚══██╔══╝██║  ██║██╔══██╗████╗  ██║██║ ██╔╝██╔════╝    ██╔════╝██╔═══██╗██╔══██╗    ██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██║████╗  ██║██╔════╝ \n" +
-        // "   ██║   ███████║███████║██╔██╗ ██║█████╔╝ ███████╗    █████╗  ██║   ██║██████╔╝    ██████╔╝██║     ███████║ ╚████╔╝ ██║██╔██╗ ██║██║  ███╗\n" +
-        // "   ██║   ██╔══██║██╔══██║██║╚██╗██║██╔═██╗ ╚════██║    ██╔══╝  ██║   ██║██╔══██╗    ██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██║██║╚██╗██║██║   ██║\n" +
-        // "   ██║   ██║  ██║██║  ██║██║ ╚████║██║  ██╗███████║    ██║     ╚██████╔╝██║  ██║    ██║     ███████╗██║  ██║   ██║   ██║██║ ╚████║╚██████╔╝\n" +
-        // "   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ \n"
-        // ) + GameLogic.reset;
 
         String mainAscii = GameLogic.greenText + GameLogic.centerText(100,
         "        ███        ▄█    █▄       ▄████████ ███▄▄▄▄      ▄█   ▄█▄    ▄████████         ▄████████  ▄██████▄     ▄████████         ▄███████▄  ▄█          ▄████████ ▄██   ▄    ▄█  ███▄▄▄▄      ▄██████▄  \n" +

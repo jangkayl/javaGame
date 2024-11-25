@@ -47,6 +47,7 @@ public class StoryUnderground {
 
     public static void tournaOpponentBackstory(StreetFighter opponent) {
         Tournament.showOpStats(opponent);
+        System.out.print(GameLogic.orangeText);
         switch (opponent.getName()) {
             case "Julio Navarro":
                 System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Introducing Julio \"The Reaper\" Navarro, a ruthless fighter from the streets of Manila." +
@@ -54,14 +55,16 @@ public class StoryUnderground {
                         "\nKnown for his dirty tactics and no-mercy approach, he's earned the nickname 'The Reaper' for his devastating fights." +
                         "\nNow, he steps into the underground tournament, fighting not just for money, but for vengeance and the chance to rise above his past!" +
                         "\nWith every match, Julio fights to prove his strength and claim the top spot in the world of dirty boxing!"));
-                GameLogic.pressAnything();
+                        System.out.print(GameLogic.reset);
+                        GameLogic.pressAnything();
                 break;
             case "Raul Villanueva":
                 System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Meet Raul \"The Bullseye\" Villanueva, a sharpshooter in the underground boxing scene." +
                         "\nRaised in the rough neighborhoods of Cebu, Raul earned his moniker for his deadly precision and accuracy in the ring." +
                         "\nA former marksman in the military, he brings a calm, calculated approach to his brutal fights, targeting his opponent’s weaknesses." +
                         "\nRaul enters the tournament with one goal: to prove that his focus and discipline can take him to the top, no matter the cost!"));
-                GameLogic.pressAnything();
+                        System.out.print(GameLogic.reset);
+                        GameLogic.pressAnything();
                 break;
             case "Ralfo Salvahez":
                 System.out.println(GameLogic.centerText(20, "\n🔥Backstory: Ralfo \"The Ghost\" Salvahez, a feared and infamous fighter in the underground boxing world, is a man with a dark past." +
@@ -69,7 +72,8 @@ public class StoryUnderground {
                         "\nYears of betrayal and silence have fueled a burning resentment in the child he left behind — now a rising star in the same brutal world." +
                         "\nKnown as \"The Ghost\" for his silent, elusive fighting style, Ralfo’s return to the ring is not just to fight, but to face the consequences of his past." +
                         "\nThe child, now grown, has risen through the ranks, and the ultimate showdown awaits: father versus child, in a fight that will either redeem or destroy them both!"));
-                GameLogic.pressAnything();
+                        System.out.print(GameLogic.reset);
+                        GameLogic.pressAnything();
                 break;
             default:
                 System.out.println("No backstory available for this opponent.");

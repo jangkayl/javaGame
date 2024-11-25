@@ -67,9 +67,9 @@ public class FredGym extends PlayerVsOpponent2{
                 "Here are your choices: ( Select one only )\n" +
                         "1. HP - Increase by +10%\n" +
                         "2. Stamina - Increase by +10%\n" +
-                        "3. Crit Chance - Increase by +5%\n" +
-                        "4. Dodge Chance - Increase by +5%\n" +
-                        "5. Crit Multiplier - Increase by +5%\n" +
+                        "3. Crit Chance - Increase by +3%\n" +
+                        "4. Dodge Chance - Increase by +3%\n" +
+                        "5. Crit Multiplier - Increase by +3%\n" +
                         "\nEnter the number of the stat you'd like to upgrade: "));
 
         int choice = GameLogic.readInt(GameLogic.centerText("", 97) + "-> ", 1, 5);
@@ -94,13 +94,13 @@ public class FredGym extends PlayerVsOpponent2{
             player.setStamina(maxStamina);
             player.setMaxStamina(maxStamina);
         } else if(choice == 3){
-            double newCrit = player.getCritChance() + 0.05;
+            double newCrit = player.getCritChance() + 0.03;
             player.setCritChance(newCrit);
         } else if(choice == 4){
-            double newDodge = player.getDodgeChance() + 0.05;
+            double newDodge = player.getDodgeChance() + 0.03;
             player.setDodgeChance(newDodge);
         } else if(choice == 5){
-            double newMulti = player.getCritMultiplier() + 0.05;
+            double newMulti = player.getCritMultiplier() + 0.03;
             player.setCritMultiplier(newMulti);
         }
     }

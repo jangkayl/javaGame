@@ -97,20 +97,28 @@ public abstract class SparFightLogic{
         GameLogic.gameData.saveGame();
         player.setOpponent(opponent);
         GameLogic.clearConsole();
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+        System.out.print(GameLogic.reset);
+        System.out.print(GameLogic.redText);
         System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
+        System.out.print(GameLogic.reset);
         printStats();
         while (player.getHp() > 0 && opponent.getHp() > 0) {
             selectAttack();
             printStats();
             if (player.getHp() <= 0) {
                 System.out.println();
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox(getPlayer().getName() + " is knocked out! " + opponent.getName() + " wins!", 60));
+                System.out.print(GameLogic.reset);
                 handleLoss();
                 return;
             } else if (opponent.getHp() <= 0) {
                 System.out.println();
+                System.out.print(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox(opponent.getName() + " is knocked out! " + getPlayer().getName() + " wins!", 60));
+                System.out.print(GameLogic.reset);
                 handleWin();
                 return;
             }
@@ -150,16 +158,21 @@ public abstract class SparFightLogic{
         opponentValid(opponentChoices);
 
         // Player selects a move
+        System.out.print(GameLogic.blueText);
         if(playerPassive == "Sixth Sense"){
+            System.out.print(GameLogic.blueText);
             System.out.print(GameLogic.centerText(30, ("~ ~ I sense a pattern forming... ~ ~")));
             for(int i = 0; i < 3; i++){
                 System.out.print(GameLogic.centerText(20, opponentAttacks[opponentChoices[i]]));
             }
+            System.out.print(GameLogic.reset);
             System.out.println();
         } else {
             System.out.println(GameLogic.centerText(30, ("~ ~ " + boxerHints.getRandomHint(opponentAttacks[opponentChoices[0]]) + " ~ ~")));
         }
- 
+        System.out.print(GameLogic.reset);
+
+        System.out.print(GameLogic.orangeText);
         System.out.print(GameLogic.centerText(30,"You're the first one to attack!"));
 
         for (int i = 0; i < attackOption.length; i++) {
@@ -184,7 +197,9 @@ public abstract class SparFightLogic{
         
         System.out.print(GameLogic.centerText(30,"\n(0) Check " + opponent.getName() + "'s combo counters"));
 
+        System.out.print(GameLogic.greenText);
         System.out.print(GameLogic.centerText(30,"\nSelect 3 combos:"));
+        System.out.print(GameLogic.reset);
         while (true) {
             input = GameLogic.readString(GameLogic.centerText("", 97) + "-> ");
 
@@ -192,8 +207,12 @@ public abstract class SparFightLogic{
                 counterInfos(opponent.getName());
                 GameLogic.pressAnything();
                 GameLogic.clearConsole();
+                System.out.print(GameLogic.greenText);
                 System.out.println(GameLogic.centerBox("Round " + playerProgress.getRound(), 40));
+                System.out.print(GameLogic.reset);
+                System.out.print(GameLogic.redText);
                 System.out.println(GameLogic.centerBox("You are fighting " + opponent.getName() + "!", 40));
+                System.out.print(GameLogic.reset);
                 return;
             }
 
@@ -223,8 +242,8 @@ public abstract class SparFightLogic{
             System.out.print(GameLogic.redText);
             if (input.equals("6") || input.equals("7") || input.equals("8")) {
                 if(playerHasPassive){
-                    playerActivatePassive(input);
                     System.out.print(GameLogic.blueText);
+                    playerActivatePassive(input);
                     if(playerPassive == "Sixth Sense" && opponentPassive != "Sixth Sense"){
                         System.out.print(GameLogic.centerText(30, ("~ ~ I sense a pattern forming... ~ ~")));
                         for(int i = 0; i < 3; i++){
@@ -311,24 +330,34 @@ public abstract class SparFightLogic{
             else opponentDodged = false;
 
             int countered = isCounter(opponentAttacks[opponentChoices[i]], playerAttacks[choices[i]]);
+            System.out.print(GameLogic.greenText);
             String playerAttack = getPlayer().getName() + " throws a " + playerAttacks[choices[i]] + " to " + opponent.getName();
+            System.out.print(GameLogic.reset);
 
             if(countered == 1){
                 if(playerPassive != "Sixth Sense"){
                     playerStreak++;
                 }
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 playerSuccessAction(choices[i], opponentChoices[i], false);
                 opponentFailedAction(opponentAttacks[opponentChoices[i]]);
             } else if(countered == 2){
                 opponentStreak++;
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 opponentSuccessAction(opponentChoices[i], choices[i], false);
                 playerFailedAction(playerAttacks[choices[i]]);
             } else {
+                System.out.print(GameLogic.greenText);
                 System.out.print(GameLogic.centerText(50, playerAttack));
+                System.out.print(GameLogic.reset);
                 String opponentAttack = opponent.getName() + " draws " + getPlayer().getName() + " with " + opponentAttacks[opponentChoices[i]];
+                System.out.print(GameLogic.redText);
                 System.out.print(GameLogic.centerText(50, opponentAttack));
+                System.out.print(GameLogic.reset);
                 drawAction(choices[i], opponentChoices[i]);
             }
 
@@ -361,13 +390,17 @@ public abstract class SparFightLogic{
     private void playerActivatePassive(String input){
         int num = Character.getNumericValue(input.charAt(0)); 
         playerPassive = playerAttacks[num + 1];
+        System.out.print(GameLogic.greenText);
         playerPassiveSkills.getSkillByName(playerPassive).activatePassive(player.getName());
+        System.out.print(GameLogic.reset);
         playerHasPassive = false;
     }
 
     private void playerDeactivatePassive(){
         if(!playerHasPassive){
+            System.out.print(GameLogic.greenText);
             playerPassiveSkills.getSkillByName(playerPassive).deactivatePassive(player.getName());
+            System.out.print(GameLogic.reset);
             if(playerPassiveSkills.getSkillByName(playerPassive).getRoundActive() == 0){
                 playerPassiveSkills.getSkillByName(playerPassive).setRoundActive(3);
                 playerPassive = "";
@@ -378,13 +411,18 @@ public abstract class SparFightLogic{
     private void opponentActivatePassive(){
         int randomNumber = rand.nextInt(3) + 7;
         opponentPassive = opponentAttacks[randomNumber];
+        System.out.print(GameLogic.redText);
         opponentPassiveSkills.getSkillByName(opponentPassive).activatePassive(opponent.getName());
+        System.out.print(GameLogic.reset);
         opponentHasPassive = false;
     }
 
     private void opponentDeactivatePassive(){
         if(!opponentHasPassive){
+        System.out.print(GameLogic.redText);
+            System.out.print(GameLogic.redText);
             opponentPassiveSkills.getSkillByName(opponentPassive).deactivatePassive(opponent.getName());
+            System.out.print(GameLogic.reset);
             if(opponentPassiveSkills.getSkillByName(opponentPassive).getRoundActive() == 0){
                 opponentPassiveSkills.getSkillByName(opponentPassive).setRoundActive(3);
                 opponentPassive = "";
@@ -458,7 +496,9 @@ public abstract class SparFightLogic{
 
         if (critChance < player.getCritChance() && choice != 2 && !isDraw && !opponentDodged) {
             player.setDamageSetter(player.getCritMultiplier());
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + "'s " + playerAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < player.getDodgeChance() && opponentChoice != 2 && !isDraw) {
@@ -467,7 +507,9 @@ public abstract class SparFightLogic{
 
         if (opponentDodged) {
             player.setDamageSetter(0);
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + " dodges " + player.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         player.useSkill(playerAttacks[choice]);
@@ -489,7 +531,9 @@ public abstract class SparFightLogic{
 
         if (critChance < opponent.getCritChance() && choice != 2 && !isDraw) {
             opponent.setDamageSetter(opponent.getCritMultiplier());
+            System.out.print(GameLogic.redText);
             System.out.print(GameLogic.centerText(40,opponent.getName() + "'s " + opponentAttacks[choice] + " hit the weak spot! CRITICAL HIT!"));
+            System.out.print(GameLogic.reset);
         }
 
         if (dodgeChance < opponent.getDodgeChance() && playerChoice != 2 && !isDraw) {
@@ -498,7 +542,9 @@ public abstract class SparFightLogic{
 
         if (playerDodged) {
             opponent.setDamageSetter(0);
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerText(40,player.getName() + " dodges " + opponent.getName() + "'s punch!"));
+            System.out.print(GameLogic.reset);
         }
 
         opponentPerformAction(opponentAttacks[choice]);
@@ -544,11 +590,11 @@ public abstract class SparFightLogic{
     }
 
     private void checkHps(){
-        if(getPlayer().getHp() <= getPlayer().getMaxHp() * .2 && !playerLowHp){
+        if(getPlayer().getHp() <= getPlayer().getMaxHp() * .2 && !playerLowHp && playerPassive == ""){
             playerLowHp = true;
             playerHasPassive = true;
         } 
-        if(getOpponent().getHp() <= getOpponent().getMaxHp() * .2 && !oppoenentLowHp){
+        if(getOpponent().getHp() <= getOpponent().getMaxHp() * .2 && !oppoenentLowHp && opponentPassive == ""){
             oppoenentLowHp = true;
             opponentHasPassive = true;
         }
@@ -557,7 +603,9 @@ public abstract class SparFightLogic{
     protected void winnerReward(){
         if(playerProgress.getPlayerWins() != 3){
             System.out.println();
+            System.out.print(GameLogic.greenText);
             System.out.print(GameLogic.centerBox("Congratulations! You've won the match!", 50));
+            System.out.print(GameLogic.reset);
         }
     }
 
@@ -569,7 +617,9 @@ public abstract class SparFightLogic{
             "You now have " + player.getPlayerPoints() + " points.\n\n" +
             "Visit the shop and use your points to buy items.\n";
 
+        System.out.print(GameLogic.greenText);
         System.out.println(GameLogic.centerBox(message, 90));
+        System.out.print(GameLogic.reset);
     }
 
     protected void addStats(int choice){
